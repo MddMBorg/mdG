@@ -23,11 +23,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Title>Vsxmd</Title>
     <Version>0.0.0</Version>
-    <Authors>Junle Li, Sales Lessa Lopes</Authors>
+    <Authors>MddMBorg</Authors>
     <Description>VS XML documentation -&gt; Markdown syntax.</Description>
-    <Copyright>Copyright 2018</Copyright>
+    <Copyright></Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/lijunle/Vsxmd</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/MddMBorg/mdG</PackageProjectUrl>
     <PackageTags>Vsxmd VS XML document Markdown</PackageTags>
     <BuildOutputTargetFolder>tools</BuildOutputTargetFolder>
     <DevelopmentDependency>true</DevelopmentDependency>
@@ -35,6 +35,8 @@
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
     <GenerateNuspecDependsOn>ExcludeDocumentationFile</GenerateNuspecDependsOn>
+    <Company />
+    <PackageId>mdG</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
