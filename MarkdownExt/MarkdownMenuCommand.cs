@@ -12,7 +12,7 @@ namespace MarkdownExt
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class Command1
+    internal sealed class MarkdownMenuCommand
     {
         /// <summary>
         /// Command ID.
@@ -22,7 +22,7 @@ namespace MarkdownExt
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("c1d63abe-180a-4c62-a95a-6b7f411a91f1");
+        public static readonly Guid CommandSet = new Guid("91bbac19-5431-4fff-8141-00dbd9b088ac");
 
         /// <summary>
         /// VS Package that provides this command, not null.
@@ -30,12 +30,12 @@ namespace MarkdownExt
         private readonly AsyncPackage package;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Command1"/> class.
+        /// Initializes a new instance of the <see cref="MarkdownMenuCommand"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private Command1(AsyncPackage package, OleMenuCommandService commandService)
+        private MarkdownMenuCommand(AsyncPackage package, OleMenuCommandService commandService)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
@@ -48,7 +48,7 @@ namespace MarkdownExt
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static Command1 Instance
+        public static MarkdownMenuCommand Instance
         {
             get;
             private set;
@@ -71,12 +71,12 @@ namespace MarkdownExt
         /// <param name="package">Owner package, not null.</param>
         public static async Task InitializeAsync(AsyncPackage package)
         {
-            // Switch to the main thread - the call to AddCommand in Command1's constructor requires
+            // Switch to the main thread - the call to AddCommand in MarkdownMenuCommand's constructor requires
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
             OleMenuCommandService commandService = await package.GetServiceAsync((typeof(IMenuCommandService))) as OleMenuCommandService;
-            Instance = new Command1(package, commandService);
+            Instance = new MarkdownMenuCommand(package, commandService);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace MarkdownExt
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "Command1";
+            string title = "MarkdownMenuCommand";
 
             // Show a message box to prove we were here
             VsShellUtilities.ShowMessageBox(

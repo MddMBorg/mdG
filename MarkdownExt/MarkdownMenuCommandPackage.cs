@@ -35,19 +35,19 @@ namespace MarkdownExt
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)] // Info on this package for Help/About
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(Command1Package.PackageGuidString)]
+    [Guid(MarkdownMenuCommandPackage.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
-    public sealed class Command1Package : AsyncPackage
+    public sealed class MarkdownMenuCommandPackage : AsyncPackage
     {
         /// <summary>
-        /// Command1Package GUID string.
+        /// MarkdownMenuCommandPackage GUID string.
         /// </summary>
-        public const string PackageGuidString = "00528070-4c7e-4453-80ff-0bc9f648448f";
+        public const string PackageGuidString = "36bacc25-97d8-4448-9c33-7e0c2831033d";
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Command1Package"/> class.
+        /// Initializes a new instance of the <see cref="MarkdownMenuCommandPackage"/> class.
         /// </summary>
-        public Command1Package()
+        public MarkdownMenuCommandPackage()
         {
             // Inside this method you can place any initialization code that does not require
             // any Visual Studio service because at this point the package object is created but
@@ -69,7 +69,7 @@ namespace MarkdownExt
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            await Command1.InitializeAsync(this);
+            await MarkdownMenuCommand.InitializeAsync(this);
         }
 
         #endregion

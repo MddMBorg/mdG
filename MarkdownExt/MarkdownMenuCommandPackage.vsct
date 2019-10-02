@@ -22,7 +22,7 @@
 
   <!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidCommand1Package">
+  <Commands package="guidMarkdownMenuCommandPackage">
     <!-- Inside this section we have different sub-sections: one for the menus, another
     for the menu groups, one for the buttons (the actual commands), one for the combos
     and the last one for the bitmaps used. Each element is identified by a command id that
@@ -31,13 +31,23 @@
     group; your package should define its own command set in order to avoid collisions
     with command ids defined by other packages. -->
 
+    <Menus>
+      <Menu guid="guidMarkdownMenuCommandPackageCmdSet" id="MarkdownMenu" priority="0x700" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS"/>
+        <Strings>
+          <ButtonText>MarkdownMenu</ButtonText>
+          <CommandName>MarkdownMenu</CommandName>
+        </Strings>
+      </Menu>
+    </Menus>
+    
     <!-- In this section you can define new menu groups. A menu group is a container for
          other menus or buttons (commands); from a visual point of view you can see the
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidCommand1PackageCmdSet" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+      <Group guid="guidMarkdownMenuCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidMarkdownMenuCommandPackageCmdSet" id="MarkdownMenu"/>
       </Group>
     </Groups>
 
@@ -52,11 +62,10 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidCommand1PackageCmdSet" id="Command1Id" priority="0x0100" type="Button">
-        <Parent guid="guidCommand1PackageCmdSet" id="MyMenuGroup" />
-        <Icon guid="guidImages" id="bmpPic1" />
+      <Button guid="guidMarkdownMenuCommandPackageCmdSet" id="MarkdownMenuCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidMarkdownMenuCommandPackageCmdSet" id="MyMenuGroup" />
         <Strings>
-          <ButtonText>Invoke Command1</ButtonText>
+          <ButtonText>Invoke MarkdownMenuCommand</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -68,21 +77,22 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\Command1.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
+      <Bitmap guid="guidImages" href="Resources\MarkdownMenuCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
     </Bitmaps>
   </Commands>
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidCommand1Package" value="{00528070-4c7e-4453-80ff-0bc9f648448f}" />
+    <GuidSymbol name="guidMarkdownMenuCommandPackage" value="{36bacc25-97d8-4448-9c33-7e0c2831033d}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidCommand1PackageCmdSet" value="{c1d63abe-180a-4c62-a95a-6b7f411a91f1}">
+    <GuidSymbol name="guidMarkdownMenuCommandPackageCmdSet" value="{91bbac19-5431-4fff-8141-00dbd9b088ac}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
-      <IDSymbol name="Command1Id" value="0x0100" />
+      <IDSymbol name="MarkdownMenuCommandId" value="0x0100" />
+      <IDSymbol name="MarkdownMenu" value="0x1021"/>
     </GuidSymbol>
 
-    <GuidSymbol name="guidImages" value="{b6bc6e66-a5b7-4b8f-9b4d-4b4240ffb8f3}" >
+    <GuidSymbol name="guidImages" value="{8f6d63ad-5f85-4512-8b2f-8117973f5b47}" >
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />
