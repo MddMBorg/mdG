@@ -13,13 +13,6 @@
             </summary>
             <param name="document">The XML document.</param>
         </member>
-        <member name="M:Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)">
-            <summary>
-            Convert VS XML document to Markdown syntax.
-            </summary>
-            <param name="document">The XML document.</param>
-            <returns>The generated Markdown content.</returns>
-        </member>
         <member name="M:Vsxmd.Converter.ToMarkdown">
             <inheritdoc/>
         </member>
@@ -33,6 +26,24 @@
             Convert to Markdown syntax.
             </summary>
             <returns>The generated Markdown content.</returns>
+        </member>
+        <member name="M:Vsxmd.MarkdownWriter.#ctor(System.Xml.Linq.XDocument,System.String)">
+            <summary>
+            Ctor for Markdown Writer
+            </summary>
+            <param name="document">The XDocument to be converted to Markdown and output.</param>
+            <param name="outputPath">Path to output Markdown to.</param>
+        </member>
+        <member name="M:Vsxmd.MarkdownWriter.WriteSingleFile">
+            <summary>
+            Converts the XML to one Markdown file and writes to the output file
+            </summary>
+        </member>
+        <member name="M:Vsxmd.MarkdownWriter.WriteMultipleFiles(System.Boolean)">
+            <summary>
+            Converts the XML to multiple Markdown files (one per type) and writes to the output directory
+            </summary>
+            <param name="useSubDirectories">Use subdirectories for each namespace.</param>
         </member>
         <member name="T:Vsxmd.Program">
             <summary>

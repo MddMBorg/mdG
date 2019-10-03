@@ -79,6 +79,8 @@ namespace Vsxmd.Units
                 $"{this.name.Namespace}",
             };
 
+        public string TypeNamespace => name.Namespace;
+
         private IEnumerable<string> Summary =>
             SummaryUnit.ToMarkdown(this.GetChild("summary"));
 

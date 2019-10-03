@@ -12,6 +12,7 @@ namespace Vsxmd
     using System.Linq;
     using System.Linq.Expressions;
     using System.Xml.Linq;
+    using Vsxmd.Units;
 
     /// <summary>
     /// Program entry.
@@ -34,9 +35,7 @@ namespace Vsxmd
             try
             {
                 if (args == null || args.Length < 1)
-                {
                     return;
-                }
 
                 string xmlPath = args[0];
                 string markdownPath = args.ElementAtOrDefault(1);
@@ -48,22 +47,17 @@ namespace Vsxmd
                 }
 
                 var document = XDocument.Load(xmlPath);
-                var converter = new Converter(document);
-                var markdown = converter.ToMarkdown();
 
-                File.WriteAllText(markdownPath, markdown);
+                MarkdownWriter writer = new MarkdownWriter(document, markdownPath);
+                writer.WriteSingleFile();
 
                 string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
                 if (string.IsNullOrWhiteSpace(vsxmdAutoDeleteXml))
-                {
                     return;
-                }
 
                 var shouldDelete = Convert.ToBoolean(vsxmdAutoDeleteXml, CultureInfo.InvariantCulture);
                 if (shouldDelete)
-                {
                     File.Delete(xmlPath);
-                }
             }
             catch (Exception e)
             {
@@ -172,5 +166,7 @@ namespace Vsxmd
             /// <returns>Nothing.</returns>
             internal string TestGenericMethod<T3, T4>() => null;
         }
+
     }
+
 }

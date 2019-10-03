@@ -7,6 +7,7 @@
 namespace Vsxmd
 {
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Xml.Linq;
     using Vsxmd.Units;
@@ -14,7 +15,7 @@ namespace Vsxmd
     /// <inheritdoc/>
     public class Converter : IConverter
     {
-        private readonly XDocument document;
+        private readonly XElement _Document;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Converter"/> class.
@@ -22,31 +23,35 @@ namespace Vsxmd
         /// <param name="document">The XML document.</param>
         public Converter(XDocument document)
         {
-            this.document = document;
+            _Document = document.Root;
         }
-
-        /// <summary>
-        /// Convert VS XML document to Markdown syntax.
-        /// </summary>
-        /// <param name="document">The XML document.</param>
-        /// <returns>The generated Markdown content.</returns>
-        public static string ToMarkdown(XDocument document) =>
-            new Converter(document).ToMarkdown();
 
         /// <inheritdoc/>
         public string ToMarkdown() =>
-            ToUnits(this.document.Root)
+            ToUnits()
                 .SelectMany(x => x.ToMarkdown())
                 .Join("\n\n")
                 .Suffix("\n");
 
-        private static IEnumerable<IUnit> ToUnits(XElement docElement)
+        internal IEnumerable<IUnit> ToUnits()
         {
             // assembly unit
-            var assemblyUnit = new AssemblyUnit(docElement.Element("assembly"));
+            var assemblyUnit = Assembly();
 
             // member units
-            var memberUnits = docElement
+            var memberUnits = MemberUnits();
+            
+            // table of contents
+            var tableOfContents = new TableOfContents(memberUnits);
+
+            return new IUnit[] { assemblyUnit }
+                .Concat(new[] { tableOfContents })
+                .Concat(memberUnits);
+        }
+
+        internal IOrderedEnumerable<MemberUnit> MemberUnits()
+        {
+            return _Document
                 .Element("members")
                 .Elements("member")
                 .Select(element => new MemberUnit(element))
@@ -55,13 +60,13 @@ namespace Vsxmd
                 .Select(MemberUnit.ComplementType)
                 .SelectMany(group => group)
                 .OrderBy(member => member, MemberUnit.Comparer);
-
-            // table of contents
-            var tableOfContents = new TableOfContents(memberUnits);
-
-            return new IUnit[] { assemblyUnit }
-                .Concat(new[] { tableOfContents })
-                .Concat(memberUnits);
         }
+        
+        internal AssemblyUnit Assembly()
+        {
+            return new AssemblyUnit(_Document.Element("assembly"));
+        }
+
     }
+
 }
