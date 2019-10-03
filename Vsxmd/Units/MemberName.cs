@@ -16,6 +16,10 @@ namespace Vsxmd.Units
     /// </summary>
     internal class MemberName : IComparable<MemberName>
     {
+        internal static bool SubFolder { get; set; }
+
+        internal static bool SplitFiles { get; set; } 
+
         private readonly string name;
 
         private readonly char type;
@@ -68,10 +72,10 @@ namespace Vsxmd.Units
             this.Kind == MemberKind.Type ||
             this.Kind == MemberKind.Constants ||
             this.Kind == MemberKind.Property
-            ? $"[{this.FriendlyName.Escape()}](#{this.Href} '{this.StrippedName}')"
+            ? $"[{this.FriendlyName.Escape()}]({this.FormattedHyperLink})"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(",")})](#{this.Href} '{this.StrippedName}')"
+            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(", ")})]({this.FormattedHyperLink})"
             : string.Empty;
 
         /// <summary>
@@ -126,11 +130,7 @@ namespace Vsxmd.Units
             ? this.NameSegments.NthLast(2)
             : string.Empty;
 
-        private string Href => this.name
-            .Replace('.', '-')
-            .Replace(':', '-')
-            .Replace('(', '-')
-            .Replace(')', '-');
+        private string Href => this.name.ToMarkdownRef();
 
         private string StrippedName =>
             this.name.Substring(2);
@@ -215,8 +215,19 @@ namespace Vsxmd.Units
         /// <returns>The generated Markdown reference link.</returns>
         internal string ToReferenceLink(bool useShortName) =>
             $"{this.Namespace}.".StartsWith("System.", StringComparison.Ordinal)
-            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName} '{this.StrippedName}')"
-            : $"[{this.GetReferenceName(useShortName).Escape()}](#{this.Href} '{this.StrippedName}')";
+            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName})"
+            : $"[{this.GetReferenceName(useShortName).Escape()}]({this.FormattedHyperLink})";
+
+        internal string FormattedHyperLink =>
+            !SplitFiles
+            ? $"#{this.Href}"
+            : !SubFolder
+                ? $"/{this.FormattedFileName}/#{this.Href}"
+                : $"/{this.Namespace.ToMarkdownRef()}/{this.FormattedFileName}/#{this.Href}";
+
+        internal string FileName => $"{this.TypeName}.md";
+
+        internal string FormattedFileName => $"{this.TypeName.ToMarkdownRef()}.md";
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName
@@ -230,5 +241,7 @@ namespace Vsxmd.Units
             : this.Kind == MemberKind.Constructor
             ? $"{this.TypeShortName}.{this.FriendlyName}"
             : string.Empty;
+
     }
+
 }

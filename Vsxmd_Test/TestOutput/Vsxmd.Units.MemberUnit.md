@@ -14,19 +14,19 @@ Member unit.
 
 ##### Summary
 
-Initializes a new instance of the [MemberUnit](#T-Vsxmd-Units-MemberUnit 'Vsxmd.Units.MemberUnit') class.
+Initializes a new instance of the [MemberUnit](/Vsxmd-Units-MemberUnit.md/#T-Vsxmd-Units-MemberUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The member XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The member XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `member`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `member`. |
 
 <a name='P-Vsxmd-Units-MemberUnit-Comparer'></a>
 ### Comparer `property`
@@ -40,7 +40,7 @@ Gets the member unit comparer.
 
 ##### Summary
 
-Gets the member kind, one of [MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind').
+Gets the member kind, one of [MemberKind](/Vsxmd-Units-MemberKind.md/#T-Vsxmd-Units-MemberKind).
 
 <a name='P-Vsxmd-Units-MemberUnit-Link'></a>
 ### Link `property`
@@ -66,7 +66,7 @@ Gets the type name.
 ##### Summary
 
 Complement a type unit if the member unit `group` does not have one.
-One member unit group has the same [TypeName](#P-Vsxmd-Units-MemberUnit-TypeName 'Vsxmd.Units.MemberUnit.TypeName').
+One member unit group has the same [TypeName](/Vsxmd-Units-MemberUnit.md/#P-Vsxmd-Units-MemberUnit-TypeName).
 
 ##### Returns
 
@@ -76,7 +76,7 @@ The complemented member unit group.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| group | [System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit}') | The member unit group. |
+| group | [System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The member unit group. |
 
 <a name='M-Vsxmd-Units-MemberUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`

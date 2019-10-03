@@ -14,27 +14,27 @@ Member name.
 
 ##### Summary
 
-Initializes a new instance of the [MemberName](#T-Vsxmd-Units-MemberName 'Vsxmd.Units.MemberName') class.
+Initializes a new instance of the [MemberName](/Vsxmd-Units-MemberName.md/#T-Vsxmd-Units-MemberName) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
-| paramNames | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}') | The parameter names. It is only used when member kind is [Constructor](#F-Vsxmd-Units-MemberKind-Constructor 'Vsxmd.Units.MemberKind.Constructor') or [Method](#F-Vsxmd-Units-MemberKind-Method 'Vsxmd.Units.MemberKind.Method'). |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
+| paramNames | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The parameter names. It is only used when member kind is [Constructor](/Vsxmd-Units-MemberKind.md/#F-Vsxmd-Units-MemberKind-Constructor) or [Method](/Vsxmd-Units-MemberKind.md/#F-Vsxmd-Units-MemberKind-Method). |
 
 <a name='M-Vsxmd-Units-MemberName-#ctor-System-String-'></a>
 ### #ctor(name) `constructor`
 
 ##### Summary
 
-Initializes a new instance of the [MemberName](#T-Vsxmd-Units-MemberName 'Vsxmd.Units.MemberName') class.
+Initializes a new instance of the [MemberName](/Vsxmd-Units-MemberName.md/#T-Vsxmd-Units-MemberName) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
 
 <a name='P-Vsxmd-Units-MemberName-Caption'></a>
 ### Caption `property`
@@ -45,7 +45,7 @@ Gets the caption representation for this member name.
 
 ##### Example
 
-For [Type](#F-Vsxmd-Units-MemberKind-Type 'Vsxmd.Units.MemberKind.Type'), show as `## Vsxmd.Units.MemberName [#](#here) [^](#contents)`.
+For [Type](/Vsxmd-Units-MemberKind.md/#F-Vsxmd-Units-MemberKind-Type), show as `## Vsxmd.Units.MemberName [#](#here) [^](#contents)`.
 
 For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)`.
 
@@ -54,7 +54,7 @@ For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#con
 
 ##### Summary
 
-Gets the member kind, one of [MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind').
+Gets the member kind, one of [MemberKind](/Vsxmd-Units-MemberKind.md/#T-Vsxmd-Units-MemberKind).
 
 <a name='P-Vsxmd-Units-MemberName-Link'></a>
 ### Link `property`
@@ -140,4 +140,4 @@ The generated Markdown reference link.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| useShortName | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Indicate if use short type name. |
+| useShortName | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean) | Indicate if use short type name. |

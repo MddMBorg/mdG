@@ -3,119 +3,119 @@
 
 ## Contents
 
-- [AssemblyUnit](#T-Vsxmd-Units-AssemblyUnit 'Vsxmd.Units.AssemblyUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-AssemblyUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.AssemblyUnit.#ctor(System.Xml.Linq.XElement)')
-  - [ToMarkdown()](#M-Vsxmd-Units-AssemblyUnit-ToMarkdown 'Vsxmd.Units.AssemblyUnit.ToMarkdown')
-- [BaseUnit](#T-Vsxmd-Units-BaseUnit 'Vsxmd.Units.BaseUnit')
-  - [#ctor(element,elementName)](#M-Vsxmd-Units-BaseUnit-#ctor-System-Xml-Linq-XElement,System-String- 'Vsxmd.Units.BaseUnit.#ctor(System.Xml.Linq.XElement,System.String)')
-  - [Element](#P-Vsxmd-Units-BaseUnit-Element 'Vsxmd.Units.BaseUnit.Element')
-  - [ElementContent](#P-Vsxmd-Units-BaseUnit-ElementContent 'Vsxmd.Units.BaseUnit.ElementContent')
-  - [GetAttribute(name)](#M-Vsxmd-Units-BaseUnit-GetAttribute-System-Xml-Linq-XName- 'Vsxmd.Units.BaseUnit.GetAttribute(System.Xml.Linq.XName)')
-  - [GetChild(name)](#M-Vsxmd-Units-BaseUnit-GetChild-System-Xml-Linq-XName- 'Vsxmd.Units.BaseUnit.GetChild(System.Xml.Linq.XName)')
-  - [GetChildren(name)](#M-Vsxmd-Units-BaseUnit-GetChildren-System-Xml-Linq-XName- 'Vsxmd.Units.BaseUnit.GetChildren(System.Xml.Linq.XName)')
-  - [ToMarkdown()](#M-Vsxmd-Units-BaseUnit-ToMarkdown 'Vsxmd.Units.BaseUnit.ToMarkdown')
-- [Converter](#T-Vsxmd-Converter 'Vsxmd.Converter')
-  - [#ctor(document)](#M-Vsxmd-Converter-#ctor-System-Xml-Linq-XDocument- 'Vsxmd.Converter.#ctor(System.Xml.Linq.XDocument)')
-  - [ToMarkdown(document)](#M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument- 'Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)')
-  - [ToMarkdown()](#M-Vsxmd-Converter-ToMarkdown 'Vsxmd.Converter.ToMarkdown')
-- [ExampleUnit](#T-Vsxmd-Units-ExampleUnit 'Vsxmd.Units.ExampleUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-ExampleUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.ExampleUnit.#ctor(System.Xml.Linq.XElement)')
-  - [ToMarkdown()](#M-Vsxmd-Units-ExampleUnit-ToMarkdown 'Vsxmd.Units.ExampleUnit.ToMarkdown')
-  - [ToMarkdown(element)](#M-Vsxmd-Units-ExampleUnit-ToMarkdown-System-Xml-Linq-XElement- 'Vsxmd.Units.ExampleUnit.ToMarkdown(System.Xml.Linq.XElement)')
-- [ExceptionUnit](#T-Vsxmd-Units-ExceptionUnit 'Vsxmd.Units.ExceptionUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-ExceptionUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.ExceptionUnit.#ctor(System.Xml.Linq.XElement)')
-  - [ToMarkdown()](#M-Vsxmd-Units-ExceptionUnit-ToMarkdown 'Vsxmd.Units.ExceptionUnit.ToMarkdown')
-  - [ToMarkdown(elements)](#M-Vsxmd-Units-ExceptionUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}- 'Vsxmd.Units.ExceptionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})')
-- [Extensions](#T-Vsxmd-Units-Extensions 'Vsxmd.Units.Extensions')
-  - [AsCode(code)](#M-Vsxmd-Units-Extensions-AsCode-System-String- 'Vsxmd.Units.Extensions.AsCode(System.String)')
-  - [Escape(content)](#M-Vsxmd-Units-Extensions-Escape-System-String- 'Vsxmd.Units.Extensions.Escape(System.String)')
-  - [Join(value,separator)](#M-Vsxmd-Units-Extensions-Join-System-Collections-Generic-IEnumerable{System-String},System-String- 'Vsxmd.Units.Extensions.Join(System.Collections.Generic.IEnumerable{System.String},System.String)')
-  - [NthLast\`\`1(source,index)](#M-Vsxmd-Units-Extensions-NthLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32- 'Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)')
-  - [Suffix(value,suffix)](#M-Vsxmd-Units-Extensions-Suffix-System-String,System-String- 'Vsxmd.Units.Extensions.Suffix(System.String,System.String)')
-  - [TakeAllButLast\`\`1(source,count)](#M-Vsxmd-Units-Extensions-TakeAllButLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32- 'Vsxmd.Units.Extensions.TakeAllButLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)')
-  - [ToAnchor(href)](#M-Vsxmd-Units-Extensions-ToAnchor-System-String- 'Vsxmd.Units.Extensions.ToAnchor(System.String)')
-  - [ToHereLink(href)](#M-Vsxmd-Units-Extensions-ToHereLink-System-String- 'Vsxmd.Units.Extensions.ToHereLink(System.String)')
-  - [ToLowerString(memberKind)](#M-Vsxmd-Units-Extensions-ToLowerString-Vsxmd-Units-MemberKind- 'Vsxmd.Units.Extensions.ToLowerString(Vsxmd.Units.MemberKind)')
-  - [ToMarkdownText(element)](#M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement- 'Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)')
-  - [ToReferenceLink(memberName,useShortName)](#M-Vsxmd-Units-Extensions-ToReferenceLink-System-String,System-Boolean- 'Vsxmd.Units.Extensions.ToReferenceLink(System.String,System.Boolean)')
-- [IConverter](#T-Vsxmd-IConverter 'Vsxmd.IConverter')
-  - [ToMarkdown()](#M-Vsxmd-IConverter-ToMarkdown 'Vsxmd.IConverter.ToMarkdown')
-- [IUnit](#T-Vsxmd-Units-IUnit 'Vsxmd.Units.IUnit')
-  - [ToMarkdown()](#M-Vsxmd-Units-IUnit-ToMarkdown 'Vsxmd.Units.IUnit.ToMarkdown')
-- [MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind')
-  - [Constants](#F-Vsxmd-Units-MemberKind-Constants 'Vsxmd.Units.MemberKind.Constants')
-  - [Constructor](#F-Vsxmd-Units-MemberKind-Constructor 'Vsxmd.Units.MemberKind.Constructor')
-  - [Method](#F-Vsxmd-Units-MemberKind-Method 'Vsxmd.Units.MemberKind.Method')
-  - [NotSupported](#F-Vsxmd-Units-MemberKind-NotSupported 'Vsxmd.Units.MemberKind.NotSupported')
-  - [Property](#F-Vsxmd-Units-MemberKind-Property 'Vsxmd.Units.MemberKind.Property')
-  - [Type](#F-Vsxmd-Units-MemberKind-Type 'Vsxmd.Units.MemberKind.Type')
-- [MemberName](#T-Vsxmd-Units-MemberName 'Vsxmd.Units.MemberName')
-  - [#ctor(name,paramNames)](#M-Vsxmd-Units-MemberName-#ctor-System-String,System-Collections-Generic-IEnumerable{System-String}- 'Vsxmd.Units.MemberName.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String})')
-  - [#ctor(name)](#M-Vsxmd-Units-MemberName-#ctor-System-String- 'Vsxmd.Units.MemberName.#ctor(System.String)')
-  - [Caption](#P-Vsxmd-Units-MemberName-Caption 'Vsxmd.Units.MemberName.Caption')
-  - [Kind](#P-Vsxmd-Units-MemberName-Kind 'Vsxmd.Units.MemberName.Kind')
-  - [Link](#P-Vsxmd-Units-MemberName-Link 'Vsxmd.Units.MemberName.Link')
-  - [Namespace](#P-Vsxmd-Units-MemberName-Namespace 'Vsxmd.Units.MemberName.Namespace')
-  - [TypeName](#P-Vsxmd-Units-MemberName-TypeName 'Vsxmd.Units.MemberName.TypeName')
-  - [CompareTo()](#M-Vsxmd-Units-MemberName-CompareTo-Vsxmd-Units-MemberName- 'Vsxmd.Units.MemberName.CompareTo(Vsxmd.Units.MemberName)')
-  - [GetParamTypes()](#M-Vsxmd-Units-MemberName-GetParamTypes 'Vsxmd.Units.MemberName.GetParamTypes')
-  - [ToReferenceLink(useShortName)](#M-Vsxmd-Units-MemberName-ToReferenceLink-System-Boolean- 'Vsxmd.Units.MemberName.ToReferenceLink(System.Boolean)')
-- [MemberUnit](#T-Vsxmd-Units-MemberUnit 'Vsxmd.Units.MemberUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-MemberUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement)')
-  - [Comparer](#P-Vsxmd-Units-MemberUnit-Comparer 'Vsxmd.Units.MemberUnit.Comparer')
-  - [Kind](#P-Vsxmd-Units-MemberUnit-Kind 'Vsxmd.Units.MemberUnit.Kind')
-  - [Link](#P-Vsxmd-Units-MemberUnit-Link 'Vsxmd.Units.MemberUnit.Link')
-  - [TypeName](#P-Vsxmd-Units-MemberUnit-TypeName 'Vsxmd.Units.MemberUnit.TypeName')
-  - [ComplementType(group)](#M-Vsxmd-Units-MemberUnit-ComplementType-System-Collections-Generic-IEnumerable{Vsxmd-Units-MemberUnit}- 'Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})')
-  - [ToMarkdown()](#M-Vsxmd-Units-MemberUnit-ToMarkdown 'Vsxmd.Units.MemberUnit.ToMarkdown')
-- [MemberUnitComparer](#T-Vsxmd-Units-MemberUnit-MemberUnitComparer 'Vsxmd.Units.MemberUnit.MemberUnitComparer')
-  - [Compare()](#M-Vsxmd-Units-MemberUnit-MemberUnitComparer-Compare-Vsxmd-Units-MemberUnit,Vsxmd-Units-MemberUnit- 'Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)')
-- [ParamUnit](#T-Vsxmd-Units-ParamUnit 'Vsxmd.Units.ParamUnit')
-  - [#ctor(element,paramType)](#M-Vsxmd-Units-ParamUnit-#ctor-System-Xml-Linq-XElement,System-String- 'Vsxmd.Units.ParamUnit.#ctor(System.Xml.Linq.XElement,System.String)')
-  - [ToMarkdown()](#M-Vsxmd-Units-ParamUnit-ToMarkdown 'Vsxmd.Units.ParamUnit.ToMarkdown')
-  - [ToMarkdown(elements,paramTypes,memberKind)](#M-Vsxmd-Units-ParamUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement},System-Collections-Generic-IEnumerable{System-String},Vsxmd-Units-MemberKind- 'Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberKind)')
-- [PermissionUnit](#T-Vsxmd-Units-PermissionUnit 'Vsxmd.Units.PermissionUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-PermissionUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.PermissionUnit.#ctor(System.Xml.Linq.XElement)')
-  - [ToMarkdown()](#M-Vsxmd-Units-PermissionUnit-ToMarkdown 'Vsxmd.Units.PermissionUnit.ToMarkdown')
-  - [ToMarkdown(elements)](#M-Vsxmd-Units-PermissionUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}- 'Vsxmd.Units.PermissionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})')
-- [Program](#T-Vsxmd-Program 'Vsxmd.Program')
-  - [Main(args)](#M-Vsxmd-Program-Main-System-String[]- 'Vsxmd.Program.Main(System.String[])')
-- [RemarksUnit](#T-Vsxmd-Units-RemarksUnit 'Vsxmd.Units.RemarksUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-RemarksUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.RemarksUnit.#ctor(System.Xml.Linq.XElement)')
-  - [ToMarkdown()](#M-Vsxmd-Units-RemarksUnit-ToMarkdown 'Vsxmd.Units.RemarksUnit.ToMarkdown')
-  - [ToMarkdown(element)](#M-Vsxmd-Units-RemarksUnit-ToMarkdown-System-Xml-Linq-XElement- 'Vsxmd.Units.RemarksUnit.ToMarkdown(System.Xml.Linq.XElement)')
-- [ReturnsUnit](#T-Vsxmd-Units-ReturnsUnit 'Vsxmd.Units.ReturnsUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-ReturnsUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.ReturnsUnit.#ctor(System.Xml.Linq.XElement)')
-  - [ToMarkdown()](#M-Vsxmd-Units-ReturnsUnit-ToMarkdown 'Vsxmd.Units.ReturnsUnit.ToMarkdown')
-  - [ToMarkdown(element)](#M-Vsxmd-Units-ReturnsUnit-ToMarkdown-System-Xml-Linq-XElement- 'Vsxmd.Units.ReturnsUnit.ToMarkdown(System.Xml.Linq.XElement)')
-- [SeealsoUnit](#T-Vsxmd-Units-SeealsoUnit 'Vsxmd.Units.SeealsoUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-SeealsoUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.SeealsoUnit.#ctor(System.Xml.Linq.XElement)')
-  - [ToMarkdown()](#M-Vsxmd-Units-SeealsoUnit-ToMarkdown 'Vsxmd.Units.SeealsoUnit.ToMarkdown')
-  - [ToMarkdown(elements)](#M-Vsxmd-Units-SeealsoUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}- 'Vsxmd.Units.SeealsoUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})')
-- [SummaryUnit](#T-Vsxmd-Units-SummaryUnit 'Vsxmd.Units.SummaryUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-SummaryUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.SummaryUnit.#ctor(System.Xml.Linq.XElement)')
-  - [ToMarkdown()](#M-Vsxmd-Units-SummaryUnit-ToMarkdown 'Vsxmd.Units.SummaryUnit.ToMarkdown')
-  - [ToMarkdown(element)](#M-Vsxmd-Units-SummaryUnit-ToMarkdown-System-Xml-Linq-XElement- 'Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement)')
-- [TableOfContents](#T-Vsxmd-TableOfContents 'Vsxmd.TableOfContents')
-  - [#ctor(memberUnits)](#M-Vsxmd-TableOfContents-#ctor-System-Linq-IOrderedEnumerable{Vsxmd-Units-MemberUnit}- 'Vsxmd.TableOfContents.#ctor(System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit})')
-  - [Link](#P-Vsxmd-TableOfContents-Link 'Vsxmd.TableOfContents.Link')
-  - [ToMarkdown()](#M-Vsxmd-TableOfContents-ToMarkdown 'Vsxmd.TableOfContents.ToMarkdown')
-- [Test](#T-Vsxmd-Program-Test 'Vsxmd.Program.Test')
-  - [#ctor()](#M-Vsxmd-Program-Test-#ctor 'Vsxmd.Program.Test.#ctor')
-  - [TestBacktickInSummary()](#M-Vsxmd-Program-Test-TestBacktickInSummary 'Vsxmd.Program.Test.TestBacktickInSummary')
-  - [TestGenericException()](#M-Vsxmd-Program-Test-TestGenericException 'Vsxmd.Program.Test.TestGenericException')
-  - [TestGenericParameter\`\`2(expression)](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}- 'Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})')
-  - [TestGenericPermission()](#M-Vsxmd-Program-Test-TestGenericPermission 'Vsxmd.Program.Test.TestGenericPermission')
-  - [TestGenericReference()](#M-Vsxmd-Program-Test-TestGenericReference 'Vsxmd.Program.Test.TestGenericReference')
-  - [TestParamWithoutDescription(p)](#M-Vsxmd-Program-Test-TestParamWithoutDescription-System-String- 'Vsxmd.Program.Test.TestParamWithoutDescription(System.String)')
-  - [TestSeeLangword()](#M-Vsxmd-Program-Test-TestSeeLangword 'Vsxmd.Program.Test.TestSeeLangword')
-  - [TestSpaceAfterInlineElements\`\`1()](#M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean- 'Vsxmd.Program.Test.TestSpaceAfterInlineElements``1(System.Boolean)')
-- [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestGenericType`2')
-  - [TestGenericMethod\`\`2()](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2 'Vsxmd.Program.TestGenericType`2.TestGenericMethod``2')
-- [TypeparamUnit](#T-Vsxmd-Units-TypeparamUnit 'Vsxmd.Units.TypeparamUnit')
-  - [#ctor(element)](#M-Vsxmd-Units-TypeparamUnit-#ctor-System-Xml-Linq-XElement- 'Vsxmd.Units.TypeparamUnit.#ctor(System.Xml.Linq.XElement)')
-  - [ToMarkdown()](#M-Vsxmd-Units-TypeparamUnit-ToMarkdown 'Vsxmd.Units.TypeparamUnit.ToMarkdown')
-  - [ToMarkdown(elements)](#M-Vsxmd-Units-TypeparamUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}- 'Vsxmd.Units.TypeparamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})')
+- [AssemblyUnit](#T-Vsxmd-Units-AssemblyUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-AssemblyUnit-#ctor-System-Xml-Linq-XElement-)
+  - [ToMarkdown()](#M-Vsxmd-Units-AssemblyUnit-ToMarkdown)
+- [BaseUnit](#T-Vsxmd-Units-BaseUnit)
+  - [#ctor(element, elementName)](#M-Vsxmd-Units-BaseUnit-#ctor-System-Xml-Linq-XElement,System-String-)
+  - [Element](#P-Vsxmd-Units-BaseUnit-Element)
+  - [ElementContent](#P-Vsxmd-Units-BaseUnit-ElementContent)
+  - [GetAttribute(name)](#M-Vsxmd-Units-BaseUnit-GetAttribute-System-Xml-Linq-XName-)
+  - [GetChild(name)](#M-Vsxmd-Units-BaseUnit-GetChild-System-Xml-Linq-XName-)
+  - [GetChildren(name)](#M-Vsxmd-Units-BaseUnit-GetChildren-System-Xml-Linq-XName-)
+  - [ToMarkdown()](#M-Vsxmd-Units-BaseUnit-ToMarkdown)
+- [Converter](#T-Vsxmd-Converter)
+  - [#ctor(document)](#M-Vsxmd-Converter-#ctor-System-Xml-Linq-XDocument-)
+  - [ToMarkdown(document)](#M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-)
+  - [ToMarkdown()](#M-Vsxmd-Converter-ToMarkdown)
+- [ExampleUnit](#T-Vsxmd-Units-ExampleUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-ExampleUnit-#ctor-System-Xml-Linq-XElement-)
+  - [ToMarkdown()](#M-Vsxmd-Units-ExampleUnit-ToMarkdown)
+  - [ToMarkdown(element)](#M-Vsxmd-Units-ExampleUnit-ToMarkdown-System-Xml-Linq-XElement-)
+- [ExceptionUnit](#T-Vsxmd-Units-ExceptionUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-ExceptionUnit-#ctor-System-Xml-Linq-XElement-)
+  - [ToMarkdown()](#M-Vsxmd-Units-ExceptionUnit-ToMarkdown)
+  - [ToMarkdown(elements)](#M-Vsxmd-Units-ExceptionUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-)
+- [Extensions](#T-Vsxmd-Units-Extensions)
+  - [AsCode(code)](#M-Vsxmd-Units-Extensions-AsCode-System-String-)
+  - [Escape(content)](#M-Vsxmd-Units-Extensions-Escape-System-String-)
+  - [Join(value, separator)](#M-Vsxmd-Units-Extensions-Join-System-Collections-Generic-IEnumerable{System-String},System-String-)
+  - [NthLast\`\`1(source, index)](#M-Vsxmd-Units-Extensions-NthLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32-)
+  - [Suffix(value, suffix)](#M-Vsxmd-Units-Extensions-Suffix-System-String,System-String-)
+  - [TakeAllButLast\`\`1(source, count)](#M-Vsxmd-Units-Extensions-TakeAllButLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32-)
+  - [ToAnchor(href)](#M-Vsxmd-Units-Extensions-ToAnchor-System-String-)
+  - [ToHereLink(href)](#M-Vsxmd-Units-Extensions-ToHereLink-System-String-)
+  - [ToLowerString(memberKind)](#M-Vsxmd-Units-Extensions-ToLowerString-Vsxmd-Units-MemberKind-)
+  - [ToMarkdownText(element)](#M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement-)
+  - [ToReferenceLink(memberName, useShortName)](#M-Vsxmd-Units-Extensions-ToReferenceLink-System-String,System-Boolean-)
+- [IConverter](#T-Vsxmd-IConverter)
+  - [ToMarkdown()](#M-Vsxmd-IConverter-ToMarkdown)
+- [IUnit](#T-Vsxmd-Units-IUnit)
+  - [ToMarkdown()](#M-Vsxmd-Units-IUnit-ToMarkdown)
+- [MemberKind](#T-Vsxmd-Units-MemberKind)
+  - [Constants](#F-Vsxmd-Units-MemberKind-Constants)
+  - [Constructor](#F-Vsxmd-Units-MemberKind-Constructor)
+  - [Method](#F-Vsxmd-Units-MemberKind-Method)
+  - [NotSupported](#F-Vsxmd-Units-MemberKind-NotSupported)
+  - [Property](#F-Vsxmd-Units-MemberKind-Property)
+  - [Type](#F-Vsxmd-Units-MemberKind-Type)
+- [MemberName](#T-Vsxmd-Units-MemberName)
+  - [#ctor(name, paramNames)](#M-Vsxmd-Units-MemberName-#ctor-System-String,System-Collections-Generic-IEnumerable{System-String}-)
+  - [#ctor(name)](#M-Vsxmd-Units-MemberName-#ctor-System-String-)
+  - [Caption](#P-Vsxmd-Units-MemberName-Caption)
+  - [Kind](#P-Vsxmd-Units-MemberName-Kind)
+  - [Link](#P-Vsxmd-Units-MemberName-Link)
+  - [Namespace](#P-Vsxmd-Units-MemberName-Namespace)
+  - [TypeName](#P-Vsxmd-Units-MemberName-TypeName)
+  - [CompareTo()](#M-Vsxmd-Units-MemberName-CompareTo-Vsxmd-Units-MemberName-)
+  - [GetParamTypes()](#M-Vsxmd-Units-MemberName-GetParamTypes)
+  - [ToReferenceLink(useShortName)](#M-Vsxmd-Units-MemberName-ToReferenceLink-System-Boolean-)
+- [MemberUnit](#T-Vsxmd-Units-MemberUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-MemberUnit-#ctor-System-Xml-Linq-XElement-)
+  - [Comparer](#P-Vsxmd-Units-MemberUnit-Comparer)
+  - [Kind](#P-Vsxmd-Units-MemberUnit-Kind)
+  - [Link](#P-Vsxmd-Units-MemberUnit-Link)
+  - [TypeName](#P-Vsxmd-Units-MemberUnit-TypeName)
+  - [ComplementType(group)](#M-Vsxmd-Units-MemberUnit-ComplementType-System-Collections-Generic-IEnumerable{Vsxmd-Units-MemberUnit}-)
+  - [ToMarkdown()](#M-Vsxmd-Units-MemberUnit-ToMarkdown)
+- [MemberUnitComparer](#T-Vsxmd-Units-MemberUnit-MemberUnitComparer)
+  - [Compare()](#M-Vsxmd-Units-MemberUnit-MemberUnitComparer-Compare-Vsxmd-Units-MemberUnit,Vsxmd-Units-MemberUnit-)
+- [ParamUnit](#T-Vsxmd-Units-ParamUnit)
+  - [#ctor(element, paramType)](#M-Vsxmd-Units-ParamUnit-#ctor-System-Xml-Linq-XElement,System-String-)
+  - [ToMarkdown()](#M-Vsxmd-Units-ParamUnit-ToMarkdown)
+  - [ToMarkdown(elements, paramTypes, memberKind)](#M-Vsxmd-Units-ParamUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement},System-Collections-Generic-IEnumerable{System-String},Vsxmd-Units-MemberKind-)
+- [PermissionUnit](#T-Vsxmd-Units-PermissionUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-PermissionUnit-#ctor-System-Xml-Linq-XElement-)
+  - [ToMarkdown()](#M-Vsxmd-Units-PermissionUnit-ToMarkdown)
+  - [ToMarkdown(elements)](#M-Vsxmd-Units-PermissionUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-)
+- [Program](#T-Vsxmd-Program)
+  - [Main(args)](#M-Vsxmd-Program-Main-System-String[]-)
+- [RemarksUnit](#T-Vsxmd-Units-RemarksUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-RemarksUnit-#ctor-System-Xml-Linq-XElement-)
+  - [ToMarkdown()](#M-Vsxmd-Units-RemarksUnit-ToMarkdown)
+  - [ToMarkdown(element)](#M-Vsxmd-Units-RemarksUnit-ToMarkdown-System-Xml-Linq-XElement-)
+- [ReturnsUnit](#T-Vsxmd-Units-ReturnsUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-ReturnsUnit-#ctor-System-Xml-Linq-XElement-)
+  - [ToMarkdown()](#M-Vsxmd-Units-ReturnsUnit-ToMarkdown)
+  - [ToMarkdown(element)](#M-Vsxmd-Units-ReturnsUnit-ToMarkdown-System-Xml-Linq-XElement-)
+- [SeealsoUnit](#T-Vsxmd-Units-SeealsoUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-SeealsoUnit-#ctor-System-Xml-Linq-XElement-)
+  - [ToMarkdown()](#M-Vsxmd-Units-SeealsoUnit-ToMarkdown)
+  - [ToMarkdown(elements)](#M-Vsxmd-Units-SeealsoUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-)
+- [SummaryUnit](#T-Vsxmd-Units-SummaryUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-SummaryUnit-#ctor-System-Xml-Linq-XElement-)
+  - [ToMarkdown()](#M-Vsxmd-Units-SummaryUnit-ToMarkdown)
+  - [ToMarkdown(element)](#M-Vsxmd-Units-SummaryUnit-ToMarkdown-System-Xml-Linq-XElement-)
+- [TableOfContents](#T-Vsxmd-TableOfContents)
+  - [#ctor(memberUnits)](#M-Vsxmd-TableOfContents-#ctor-System-Linq-IOrderedEnumerable{Vsxmd-Units-MemberUnit}-)
+  - [Link](#P-Vsxmd-TableOfContents-Link)
+  - [ToMarkdown()](#M-Vsxmd-TableOfContents-ToMarkdown)
+- [Test](#T-Vsxmd-Program-Test)
+  - [#ctor()](#M-Vsxmd-Program-Test-#ctor)
+  - [TestBacktickInSummary()](#M-Vsxmd-Program-Test-TestBacktickInSummary)
+  - [TestGenericException()](#M-Vsxmd-Program-Test-TestGenericException)
+  - [TestGenericParameter\`\`2(expression)](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-)
+  - [TestGenericPermission()](#M-Vsxmd-Program-Test-TestGenericPermission)
+  - [TestGenericReference()](#M-Vsxmd-Program-Test-TestGenericReference)
+  - [TestParamWithoutDescription(p)](#M-Vsxmd-Program-Test-TestParamWithoutDescription-System-String-)
+  - [TestSeeLangword()](#M-Vsxmd-Program-Test-TestSeeLangword)
+  - [TestSpaceAfterInlineElements\`\`1()](#M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean-)
+- [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2)
+  - [TestGenericMethod\`\`2()](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2)
+- [TypeparamUnit](#T-Vsxmd-Units-TypeparamUnit)
+  - [#ctor(element)](#M-Vsxmd-Units-TypeparamUnit-#ctor-System-Xml-Linq-XElement-)
+  - [ToMarkdown()](#M-Vsxmd-Units-TypeparamUnit-ToMarkdown)
+  - [ToMarkdown(elements)](#M-Vsxmd-Units-TypeparamUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-)
 
 <a name='T-Vsxmd-Units-AssemblyUnit'></a>
 ## AssemblyUnit `type`
@@ -133,19 +133,19 @@ Assembly unit.
 
 ##### Summary
 
-Initializes a new instance of the [AssemblyUnit](#T-Vsxmd-Units-AssemblyUnit 'Vsxmd.Units.AssemblyUnit') class.
+Initializes a new instance of the [AssemblyUnit](#T-Vsxmd-Units-AssemblyUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The assembly XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The assembly XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `assembly`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `assembly`. |
 
 <a name='M-Vsxmd-Units-AssemblyUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -174,20 +174,20 @@ The base unit.
 
 ##### Summary
 
-Initializes a new instance of the [BaseUnit](#T-Vsxmd-Units-BaseUnit 'Vsxmd.Units.BaseUnit') class.
+Initializes a new instance of the [BaseUnit](#T-Vsxmd-Units-BaseUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The XML element. |
-| elementName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The expected XML element name. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The XML element. |
+| elementName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The expected XML element name. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML `element` name not matches the expected `elementName`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML `element` name not matches the expected `elementName`. |
 
 <a name='P-Vsxmd-Units-BaseUnit-Element'></a>
 ### Element `property`
@@ -208,17 +208,17 @@ Gets the Markdown content representing the element.
 
 ##### Summary
 
-Returns the [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute 'System.Xml.Linq.XAttribute') value of this [XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') that has the specified `name`.
+Returns the [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute) value of this [XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) that has the specified `name`.
 
 ##### Returns
 
-An [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute 'System.Xml.Linq.XAttribute') value that has the specified `name`; `null` if there is no attribute with the specified `name`.
+An [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute) value that has the specified `name`; `null` if there is no attribute with the specified `name`.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName 'System.Xml.Linq.XName') | The [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName 'System.Xml.Linq.XName') of the [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute 'System.Xml.Linq.XAttribute') to get. |
+| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) | The [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) of the [XAttribute](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XAttribute) to get. |
 
 <a name='M-Vsxmd-Units-BaseUnit-GetChild-System-Xml-Linq-XName-'></a>
 ### GetChild(name) `method`
@@ -229,13 +229,13 @@ Gets the first (in document order) child element with the specified `name`.
 
 ##### Returns
 
-A [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName 'System.Xml.Linq.XName') that matches the specified `name`, or `null`.
+A [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) that matches the specified `name`, or `null`.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName 'System.Xml.Linq.XName') | The [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName 'System.Xml.Linq.XName') to match. |
+| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) | The [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) to match. |
 
 <a name='M-Vsxmd-Units-BaseUnit-GetChildren-System-Xml-Linq-XName-'></a>
 ### GetChildren(name) `method`
@@ -243,17 +243,17 @@ A [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k
 ##### Summary
 
 Returns a collection of the child elements of this element or document, in document order.
-Only elements that have a matching [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName 'System.Xml.Linq.XName') are included in the collection.
+Only elements that have a matching [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) are included in the collection.
 
 ##### Returns
 
-An [IEnumerable\`1](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable`1 'System.Collections.Generic.IEnumerable`1') of [XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') containing the children that have a matching [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName 'System.Xml.Linq.XName'), in document order.
+An [IEnumerable\`1](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable`1) of [XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) containing the children that have a matching [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName), in document order.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName 'System.Xml.Linq.XName') | The [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName 'System.Xml.Linq.XName') to match. |
+| name | [System.Xml.Linq.XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) | The [XName](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XName) to match. |
 
 <a name='M-Vsxmd-Units-BaseUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -282,13 +282,13 @@ Vsxmd
 
 ##### Summary
 
-Initializes a new instance of the [Converter](#T-Vsxmd-Converter 'Vsxmd.Converter') class.
+Initializes a new instance of the [Converter](#T-Vsxmd-Converter) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument 'System.Xml.Linq.XDocument') | The XML document. |
+| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument) | The XML document. |
 
 <a name='M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-'></a>
 ### ToMarkdown(document) `method`
@@ -305,7 +305,7 @@ The generated Markdown content.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument 'System.Xml.Linq.XDocument') | The XML document. |
+| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument) | The XML document. |
 
 <a name='M-Vsxmd-Converter-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -334,19 +334,19 @@ Example unit.
 
 ##### Summary
 
-Initializes a new instance of the [ExampleUnit](#T-Vsxmd-Units-ExampleUnit 'Vsxmd.Units.ExampleUnit') class.
+Initializes a new instance of the [ExampleUnit](#T-Vsxmd-Units-ExampleUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The example XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The example XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `example`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `example`. |
 
 <a name='M-Vsxmd-Units-ExampleUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -375,7 +375,7 @@ The generated Markdown.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The example XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The example XML element. |
 
 <a name='T-Vsxmd-Units-ExceptionUnit'></a>
 ## ExceptionUnit `type`
@@ -393,19 +393,19 @@ Exception unit.
 
 ##### Summary
 
-Initializes a new instance of the [ExceptionUnit](#T-Vsxmd-Units-ExceptionUnit 'Vsxmd.Units.ExceptionUnit') class.
+Initializes a new instance of the [ExceptionUnit](#T-Vsxmd-Units-ExceptionUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The exception XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The exception XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `exception`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `exception`. |
 
 <a name='M-Vsxmd-Units-ExceptionUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -434,7 +434,7 @@ The generated Markdown.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}') | The exception XML element list. |
+| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The exception XML element list. |
 
 <a name='T-Vsxmd-Units-Extensions'></a>
 ## Extensions `type`
@@ -464,7 +464,7 @@ The Markdown code span.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| code | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The code span. |
+| code | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The code span. |
 
 ##### Remarks
 
@@ -485,7 +485,7 @@ The escaped content.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| content | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The content. |
+| content | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The content. |
 
 <a name='M-Vsxmd-Units-Extensions-Join-System-Collections-Generic-IEnumerable{System-String},System-String-'></a>
 ### Join(value,separator) `method`
@@ -502,8 +502,8 @@ The concatenated string.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| value | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}') | The string values. |
-| separator | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The separator. |
+| value | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The string values. |
+| separator | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The separator. |
 
 <a name='M-Vsxmd-Units-Extensions-NthLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32-'></a>
 ### NthLast\`\`1(source,index) `method`
@@ -520,8 +520,8 @@ The element at the specified position in the `source` sequence.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| source | [System.Collections.Generic.IEnumerable{\`\`0}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{``0}') | The source enumerable. |
-| index | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | The index for the n-th last. |
+| source | [System.Collections.Generic.IEnumerable{\`\`0}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The source enumerable. |
+| index | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32) | The index for the n-th last. |
 
 ##### Generic Types
 
@@ -544,8 +544,8 @@ The new string.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The original string value. |
-| suffix | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The suffix string. |
+| value | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The original string value. |
+| suffix | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The suffix string. |
 
 <a name='M-Vsxmd-Units-Extensions-TakeAllButLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32-'></a>
 ### TakeAllButLast\`\`1(source,count) `method`
@@ -562,8 +562,8 @@ The generated enumerable.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| source | [System.Collections.Generic.IEnumerable{\`\`0}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{``0}') | The source enumerable. |
-| count | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | The number to except. |
+| source | [System.Collections.Generic.IEnumerable{\`\`0}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The source enumerable. |
+| count | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32) | The number to except. |
 
 ##### Generic Types
 
@@ -586,7 +586,7 @@ The anchor for the `href`.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| href | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The href. |
+| href | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The href. |
 
 <a name='M-Vsxmd-Units-Extensions-ToHereLink-System-String-'></a>
 ### ToHereLink(href) `method`
@@ -603,14 +603,14 @@ The "to here" link for the `href`.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| href | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The href. |
+| href | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The href. |
 
 <a name='M-Vsxmd-Units-Extensions-ToLowerString-Vsxmd-Units-MemberKind-'></a>
 ### ToLowerString(memberKind) `method`
 
 ##### Summary
 
-Convert the [MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind') to its lowercase name.
+Convert the [MemberKind](#T-Vsxmd-Units-MemberKind) to its lowercase name.
 
 ##### Returns
 
@@ -620,7 +620,7 @@ The member kind's lowercase name.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| memberKind | [Vsxmd.Units.MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind') | The member kind. |
+| memberKind | [Vsxmd.Units.MemberKind](#T-Vsxmd-Units-MemberKind) | The member kind. |
 
 <a name='M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement-'></a>
 ### ToMarkdownText(element) `method`
@@ -638,7 +638,7 @@ The generated Markdown content.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The XML element. |
 
 ##### Example
 
@@ -669,8 +669,8 @@ The generated reference link.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| memberName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The member name. |
-| useShortName | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Indicate if use short type name. |
+| memberName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The member name. |
+| useShortName | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean) | Indicate if use short type name. |
 
 ##### Example
 
@@ -713,7 +713,7 @@ Vsxmd.Units
 
 ##### Summary
 
-[IUnit](#T-Vsxmd-Units-IUnit 'Vsxmd.Units.IUnit') is wrapper to handle XML elements.
+[IUnit](#T-Vsxmd-Units-IUnit) is wrapper to handle XML elements.
 
 <a name='M-Vsxmd-Units-IUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -799,27 +799,27 @@ Member name.
 
 ##### Summary
 
-Initializes a new instance of the [MemberName](#T-Vsxmd-Units-MemberName 'Vsxmd.Units.MemberName') class.
+Initializes a new instance of the [MemberName](#T-Vsxmd-Units-MemberName) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
-| paramNames | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}') | The parameter names. It is only used when member kind is [Constructor](#F-Vsxmd-Units-MemberKind-Constructor 'Vsxmd.Units.MemberKind.Constructor') or [Method](#F-Vsxmd-Units-MemberKind-Method 'Vsxmd.Units.MemberKind.Method'). |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
+| paramNames | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The parameter names. It is only used when member kind is [Constructor](#F-Vsxmd-Units-MemberKind-Constructor) or [Method](#F-Vsxmd-Units-MemberKind-Method). |
 
 <a name='M-Vsxmd-Units-MemberName-#ctor-System-String-'></a>
 ### #ctor(name) `constructor`
 
 ##### Summary
 
-Initializes a new instance of the [MemberName](#T-Vsxmd-Units-MemberName 'Vsxmd.Units.MemberName') class.
+Initializes a new instance of the [MemberName](#T-Vsxmd-Units-MemberName) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
+| name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
 
 <a name='P-Vsxmd-Units-MemberName-Caption'></a>
 ### Caption `property`
@@ -830,7 +830,7 @@ Gets the caption representation for this member name.
 
 ##### Example
 
-For [Type](#F-Vsxmd-Units-MemberKind-Type 'Vsxmd.Units.MemberKind.Type'), show as `## Vsxmd.Units.MemberName [#](#here) [^](#contents)`.
+For [Type](#F-Vsxmd-Units-MemberKind-Type), show as `## Vsxmd.Units.MemberName [#](#here) [^](#contents)`.
 
 For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)`.
 
@@ -839,7 +839,7 @@ For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#con
 
 ##### Summary
 
-Gets the member kind, one of [MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind').
+Gets the member kind, one of [MemberKind](#T-Vsxmd-Units-MemberKind).
 
 <a name='P-Vsxmd-Units-MemberName-Link'></a>
 ### Link `property`
@@ -925,7 +925,7 @@ The generated Markdown reference link.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| useShortName | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Indicate if use short type name. |
+| useShortName | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean) | Indicate if use short type name. |
 
 <a name='T-Vsxmd-Units-MemberUnit'></a>
 ## MemberUnit `type`
@@ -943,19 +943,19 @@ Member unit.
 
 ##### Summary
 
-Initializes a new instance of the [MemberUnit](#T-Vsxmd-Units-MemberUnit 'Vsxmd.Units.MemberUnit') class.
+Initializes a new instance of the [MemberUnit](#T-Vsxmd-Units-MemberUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The member XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The member XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `member`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `member`. |
 
 <a name='P-Vsxmd-Units-MemberUnit-Comparer'></a>
 ### Comparer `property`
@@ -969,7 +969,7 @@ Gets the member unit comparer.
 
 ##### Summary
 
-Gets the member kind, one of [MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind').
+Gets the member kind, one of [MemberKind](#T-Vsxmd-Units-MemberKind).
 
 <a name='P-Vsxmd-Units-MemberUnit-Link'></a>
 ### Link `property`
@@ -995,7 +995,7 @@ Gets the type name.
 ##### Summary
 
 Complement a type unit if the member unit `group` does not have one.
-One member unit group has the same [TypeName](#P-Vsxmd-Units-MemberUnit-TypeName 'Vsxmd.Units.MemberUnit.TypeName').
+One member unit group has the same [TypeName](#P-Vsxmd-Units-MemberUnit-TypeName).
 
 ##### Returns
 
@@ -1005,7 +1005,7 @@ The complemented member unit group.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| group | [System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit}') | The member unit group. |
+| group | [System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The member unit group. |
 
 <a name='M-Vsxmd-Units-MemberUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1052,20 +1052,20 @@ Param unit.
 
 ##### Summary
 
-Initializes a new instance of the [ParamUnit](#T-Vsxmd-Units-ParamUnit 'Vsxmd.Units.ParamUnit') class.
+Initializes a new instance of the [ParamUnit](#T-Vsxmd-Units-ParamUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The param XML element. |
-| paramType | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The parameter type corresponding to the param XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The param XML element. |
+| paramType | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The parameter type corresponding to the param XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `param`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `param`. |
 
 <a name='M-Vsxmd-Units-ParamUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1093,15 +1093,15 @@ The generated Markdown.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}') | The param XML element list. |
-| paramTypes | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.String}') | The paramater type names. |
-| memberKind | [Vsxmd.Units.MemberKind](#T-Vsxmd-Units-MemberKind 'Vsxmd.Units.MemberKind') | The member kind of the parent element. |
+| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The param XML element list. |
+| paramTypes | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The paramater type names. |
+| memberKind | [Vsxmd.Units.MemberKind](#T-Vsxmd-Units-MemberKind) | The member kind of the parent element. |
 
 ##### Remarks
 
 When the parameter (a.k.a `elements`) list is empty:
 
-If parent element kind is [Constructor](#F-Vsxmd-Units-MemberKind-Constructor 'Vsxmd.Units.MemberKind.Constructor') or [Method](#F-Vsxmd-Units-MemberKind-Method 'Vsxmd.Units.MemberKind.Method'), it returns a hint about "no parameters".
+If parent element kind is [Constructor](#F-Vsxmd-Units-MemberKind-Constructor) or [Method](#F-Vsxmd-Units-MemberKind-Method), it returns a hint about "no parameters".
 
 If parent element kind is not the value mentioned above, it returns an empty string.
 
@@ -1121,19 +1121,19 @@ Permission unit.
 
 ##### Summary
 
-Initializes a new instance of the [PermissionUnit](#T-Vsxmd-Units-PermissionUnit 'Vsxmd.Units.PermissionUnit') class.
+Initializes a new instance of the [PermissionUnit](#T-Vsxmd-Units-PermissionUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The permission XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The permission XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `permission`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `permission`. |
 
 <a name='M-Vsxmd-Units-PermissionUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1162,7 +1162,7 @@ The generated Markdown.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}') | The permission XML element list. |
+| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The permission XML element list. |
 
 <a name='T-Vsxmd-Program'></a>
 ## Program `type`
@@ -1198,11 +1198,11 @@ Program main function entry.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | Program arguments. |
+| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[]) | Program arguments. |
 
 ##### See Also
 
-- [Vsxmd.Program](#T-Vsxmd-Program 'Vsxmd.Program')
+- [Vsxmd.Program](#T-Vsxmd-Program)
 
 <a name='T-Vsxmd-Units-RemarksUnit'></a>
 ## RemarksUnit `type`
@@ -1220,19 +1220,19 @@ Remarks unit.
 
 ##### Summary
 
-Initializes a new instance of the [RemarksUnit](#T-Vsxmd-Units-RemarksUnit 'Vsxmd.Units.RemarksUnit') class.
+Initializes a new instance of the [RemarksUnit](#T-Vsxmd-Units-RemarksUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The remarks XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The remarks XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `remarks`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `remarks`. |
 
 <a name='M-Vsxmd-Units-RemarksUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1261,7 +1261,7 @@ The generated Markdown.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The remarks XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The remarks XML element. |
 
 <a name='T-Vsxmd-Units-ReturnsUnit'></a>
 ## ReturnsUnit `type`
@@ -1279,19 +1279,19 @@ Returns unit.
 
 ##### Summary
 
-Initializes a new instance of the [ReturnsUnit](#T-Vsxmd-Units-ReturnsUnit 'Vsxmd.Units.ReturnsUnit') class.
+Initializes a new instance of the [ReturnsUnit](#T-Vsxmd-Units-ReturnsUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The returns XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The returns XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `returns`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `returns`. |
 
 <a name='M-Vsxmd-Units-ReturnsUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1320,7 +1320,7 @@ The generated Markdown.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The returns XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The returns XML element. |
 
 <a name='T-Vsxmd-Units-SeealsoUnit'></a>
 ## SeealsoUnit `type`
@@ -1338,19 +1338,19 @@ Seealso unit.
 
 ##### Summary
 
-Initializes a new instance of the [SeealsoUnit](#T-Vsxmd-Units-SeealsoUnit 'Vsxmd.Units.SeealsoUnit') class.
+Initializes a new instance of the [SeealsoUnit](#T-Vsxmd-Units-SeealsoUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The seealso XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The seealso XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `seealso`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `seealso`. |
 
 <a name='M-Vsxmd-Units-SeealsoUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1379,7 +1379,7 @@ The generated Markdown.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}') | The seealso XML element list. |
+| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The seealso XML element list. |
 
 <a name='T-Vsxmd-Units-SummaryUnit'></a>
 ## SummaryUnit `type`
@@ -1397,19 +1397,19 @@ Summary unit.
 
 ##### Summary
 
-Initializes a new instance of the [SummaryUnit](#T-Vsxmd-Units-SummaryUnit 'Vsxmd.Units.SummaryUnit') class.
+Initializes a new instance of the [SummaryUnit](#T-Vsxmd-Units-SummaryUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The summary XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The summary XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `summary`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `summary`. |
 
 <a name='M-Vsxmd-Units-SummaryUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1438,7 +1438,7 @@ The generated Markdown.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The summary XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The summary XML element. |
 
 <a name='T-Vsxmd-TableOfContents'></a>
 ## TableOfContents `type`
@@ -1456,7 +1456,7 @@ Table of contents.
 
 ##### Summary
 
-Initializes a new instance of the [TableOfContents](#T-Vsxmd-TableOfContents 'Vsxmd.TableOfContents') class.
+Initializes a new instance of the [TableOfContents](#T-Vsxmd-TableOfContents) class.
 
 It convert the table of contents from the `memberUnits`.
 
@@ -1464,7 +1464,7 @@ It convert the table of contents from the `memberUnits`.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| memberUnits | [System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.IOrderedEnumerable 'System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit}') | The member unit list. |
+| memberUnits | [System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.IOrderedEnumerable) | The member unit list. |
 
 <a name='P-Vsxmd-TableOfContents-Link'></a>
 ### Link `property`
@@ -1500,11 +1500,11 @@ Vsxmd.Program
 
 ##### Summary
 
-Initializes a new instance of the [Test](#T-Vsxmd-Program-Test 'Vsxmd.Program.Test') class.
+Initializes a new instance of the [Test](#T-Vsxmd-Program-Test) class.
 
 Test constructor without parameters.
 
-See [Test.#ctor](#M-Vsxmd-Program-Test-#ctor 'Vsxmd.Program.Test.#ctor').
+See [Test.#ctor](#M-Vsxmd-Program-Test-#ctor).
 
 ##### Parameters
 
@@ -1514,7 +1514,7 @@ This constructor has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| [Vsxmd.Program](#T-Vsxmd-Program 'Vsxmd.Program') | Just for test. |
+| [Vsxmd.Program](#T-Vsxmd-Program) | Just for test. |
 
 <a name='M-Vsxmd-Program-Test-TestBacktickInSummary'></a>
 ### TestBacktickInSummary() `method`
@@ -1556,7 +1556,7 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| [Vsxmd.Program.Test.TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}- 'Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})') | Just for test. |
+| [Vsxmd.Program.Test.TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-) | Just for test. |
 
 <a name='M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-'></a>
 ### TestGenericParameter\`\`2(expression) `method`
@@ -1575,7 +1575,7 @@ Nothing.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| expression | [System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}') | The linq expression. |
+| expression | [System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression) | The linq expression. |
 
 ##### Generic Types
 
@@ -1603,7 +1603,7 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| [Vsxmd.Program.Test.TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}- 'Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})') | Just for test. |
+| [Vsxmd.Program.Test.TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-) | Just for test. |
 
 <a name='M-Vsxmd-Program-Test-TestGenericReference'></a>
 ### TestGenericReference() `method`
@@ -1612,7 +1612,7 @@ This method has no parameters.
 
 Test generic reference type.
 
-See [TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}- 'Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})').
+See [TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-).
 
 ##### Returns
 
@@ -1637,7 +1637,7 @@ Nothing.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| p | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| p | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) |  |
 
 <a name='M-Vsxmd-Program-Test-TestSeeLangword'></a>
 ### TestSeeLangword() `method`
@@ -1665,7 +1665,7 @@ See `code block` should follow a space.
 
 See a value at the end of a `sentence`.
 
-See [TestSpaceAfterInlineElements\`\`1](#M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean- 'Vsxmd.Program.Test.TestSpaceAfterInlineElements``1(System.Boolean)') as a link.
+See [TestSpaceAfterInlineElements\`\`1](#M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean-) as a link.
 
 See `space` after a param ref.
 
@@ -1690,7 +1690,7 @@ Vsxmd.Program
 
 Test generic type.
 
-See [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestGenericType`2').
+See [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2).
 
 ##### Generic Types
 
@@ -1706,7 +1706,7 @@ See [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestG
 
 Test generic method.
 
-See [TestGenericMethod\`\`2](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2 'Vsxmd.Program.TestGenericType`2.TestGenericMethod``2').
+See [TestGenericMethod\`\`2](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2).
 
 ##### Returns
 
@@ -1739,19 +1739,19 @@ Typeparam unit.
 
 ##### Summary
 
-Initializes a new instance of the [TypeparamUnit](#T-Vsxmd-Units-TypeparamUnit 'Vsxmd.Units.TypeparamUnit') class.
+Initializes a new instance of the [TypeparamUnit](#T-Vsxmd-Units-TypeparamUnit) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement 'System.Xml.Linq.XElement') | The typeparam XML element. |
+| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The typeparam XML element. |
 
 ##### Exceptions
 
 | Name | Description |
 | ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException 'System.ArgumentException') | Throw if XML element name is not `typeparam`. |
+| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `typeparam`. |
 
 <a name='M-Vsxmd-Units-TypeparamUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -1780,4 +1780,4 @@ The generated Markdown.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable 'System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}') | The param XML element list. |
+| elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The param XML element list. |

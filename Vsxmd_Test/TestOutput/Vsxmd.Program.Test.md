@@ -10,11 +10,11 @@ Vsxmd.Program
 
 ##### Summary
 
-Initializes a new instance of the [Test](#T-Vsxmd-Program-Test 'Vsxmd.Program.Test') class.
+Initializes a new instance of the [Test](/Vsxmd-Program-Test.md/#T-Vsxmd-Program-Test) class.
 
 Test constructor without parameters.
 
-See [Test.#ctor](#M-Vsxmd-Program-Test-#ctor 'Vsxmd.Program.Test.#ctor').
+See [Test.#ctor](/Vsxmd-Program-Test.md/#M-Vsxmd-Program-Test-#ctor).
 
 ##### Parameters
 
@@ -24,7 +24,7 @@ This constructor has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| [Vsxmd.Program](#T-Vsxmd-Program 'Vsxmd.Program') | Just for test. |
+| [Vsxmd.Program](/Vsxmd-Program.md/#T-Vsxmd-Program) | Just for test. |
 
 <a name='M-Vsxmd-Program-Test-TestBacktickInSummary'></a>
 ### TestBacktickInSummary() `method`
@@ -66,7 +66,7 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| [Vsxmd.Program.Test.TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}- 'Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})') | Just for test. |
+| [Vsxmd.Program.Test.TestGenericParameter\`\`2](/Vsxmd-Program-Test.md/#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-) | Just for test. |
 
 <a name='M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-'></a>
 ### TestGenericParameter\`\`2(expression) `method`
@@ -85,7 +85,7 @@ Nothing.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| expression | [System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression 'System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}}') | The linq expression. |
+| expression | [System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression) | The linq expression. |
 
 ##### Generic Types
 
@@ -113,7 +113,7 @@ This method has no parameters.
 
 | Name | Description |
 | ---- | ----------- |
-| [Vsxmd.Program.Test.TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}- 'Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})') | Just for test. |
+| [Vsxmd.Program.Test.TestGenericParameter\`\`2](/Vsxmd-Program-Test.md/#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-) | Just for test. |
 
 <a name='M-Vsxmd-Program-Test-TestGenericReference'></a>
 ### TestGenericReference() `method`
@@ -122,7 +122,7 @@ This method has no parameters.
 
 Test generic reference type.
 
-See [TestGenericParameter\`\`2](#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}- 'Vsxmd.Program.Test.TestGenericParameter``2(System.Linq.Expressions.Expression{System.Func{``0,``1,System.String}})').
+See [TestGenericParameter\`\`2](/Vsxmd-Program-Test.md/#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-).
 
 ##### Returns
 
@@ -147,7 +147,7 @@ Nothing.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| p | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| p | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) |  |
 
 <a name='M-Vsxmd-Program-Test-TestSeeLangword'></a>
 ### TestSeeLangword() `method`
@@ -175,7 +175,7 @@ See `code block` should follow a space.
 
 See a value at the end of a `sentence`.
 
-See [TestSpaceAfterInlineElements\`\`1](#M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean- 'Vsxmd.Program.Test.TestSpaceAfterInlineElements``1(System.Boolean)') as a link.
+See [TestSpaceAfterInlineElements\`\`1](/Vsxmd-Program-Test.md/#M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean-) as a link.
 
 See `space` after a param ref.
 

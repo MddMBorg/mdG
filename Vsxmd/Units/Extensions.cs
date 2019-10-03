@@ -102,6 +102,19 @@ namespace Vsxmd.Units
         }
 
         /// <summary>
+        /// Escape a reference to an anchor, file or folder by replacing special characters with '-'.
+        /// </summary>
+        /// <param name="href">The href.</param>
+        /// <returns>An escaped href for Markdown files.</returns>
+        internal static string ToMarkdownRef(this string href)
+        {
+            return href.Replace('.', '-')
+            .Replace(':', '-')
+            .Replace('(', '-')
+            .Replace(')', '-');
+        }
+
+        /// <summary>
         /// Gets the n-th last element from the <paramref name="source"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>

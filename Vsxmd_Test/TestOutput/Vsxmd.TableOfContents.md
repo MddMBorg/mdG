@@ -14,7 +14,7 @@ Table of contents.
 
 ##### Summary
 
-Initializes a new instance of the [TableOfContents](#T-Vsxmd-TableOfContents 'Vsxmd.TableOfContents') class.
+Initializes a new instance of the [TableOfContents](/Vsxmd-TableOfContents.md/#T-Vsxmd-TableOfContents) class.
 
 It convert the table of contents from the `memberUnits`.
 
@@ -22,7 +22,7 @@ It convert the table of contents from the `memberUnits`.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| memberUnits | [System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.IOrderedEnumerable 'System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit}') | The member unit list. |
+| memberUnits | [System.Linq.IOrderedEnumerable{Vsxmd.Units.MemberUnit}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.IOrderedEnumerable) | The member unit list. |
 
 <a name='P-Vsxmd-TableOfContents-Link'></a>
 ### Link `property`

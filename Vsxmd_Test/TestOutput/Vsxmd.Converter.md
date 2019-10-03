@@ -14,13 +14,13 @@ Vsxmd
 
 ##### Summary
 
-Initializes a new instance of the [Converter](#T-Vsxmd-Converter 'Vsxmd.Converter') class.
+Initializes a new instance of the [Converter](/Vsxmd-Converter.md/#T-Vsxmd-Converter) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument 'System.Xml.Linq.XDocument') | The XML document. |
+| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument) | The XML document. |
 
 <a name='M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-'></a>
 ### ToMarkdown(document) `method`
@@ -37,7 +37,7 @@ The generated Markdown content.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument 'System.Xml.Linq.XDocument') | The XML document. |
+| document | [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument) | The XML document. |
 
 <a name='M-Vsxmd-Converter-ToMarkdown'></a>
 ### ToMarkdown() `method`

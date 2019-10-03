@@ -357,6 +357,13 @@
             <returns>The Markdown code span.</returns>
             <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .</remarks>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.ToMarkdownRef(System.String)">
+            <summary>
+            Escape a reference to an anchor, file or folder by replacing special characters with '-'.
+            </summary>
+            <param name="href">The href.</param>
+            <returns>An escaped href for Markdown files.</returns>
+        </member>
         <member name="M:Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Gets the n-th last element from the <paramref name="source"/>.

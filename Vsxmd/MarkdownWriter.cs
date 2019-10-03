@@ -33,6 +33,9 @@ namespace Vsxmd
         /// </summary>
         public void WriteSingleFile()
         {
+            MemberName.SplitFiles = false;
+            MemberName.SubFolder = false;
+
             File.WriteAllText(Path.ChangeExtension(_OutputPath, "md"), _Converter.ToMarkdown());
         }
 
@@ -42,6 +45,9 @@ namespace Vsxmd
         /// <param name="useSubDirectories">Use subdirectories for each namespace.</param>
         public void WriteMultipleFiles(bool useSubDirectories)
         {
+            MemberName.SplitFiles = true;
+            MemberName.SubFolder = useSubDirectories;
+
             string directory = Path.GetDirectoryName(_OutputPath);
 
             //Create output directory in case

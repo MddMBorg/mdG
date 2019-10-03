@@ -9,7 +9,7 @@ Vsxmd.Program
 
 Test generic type.
 
-See [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestGenericType`2').
+See [TestGenericType\`2](/Vsxmd-Program/Vsxmd-Program-TestGenericType`2.md/#T-Vsxmd-Program-TestGenericType`2).
 
 ##### Generic Types
 
@@ -25,7 +25,7 @@ See [TestGenericType\`2](#T-Vsxmd-Program-TestGenericType`2 'Vsxmd.Program.TestG
 
 Test generic method.
 
-See [TestGenericMethod\`\`2](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2 'Vsxmd.Program.TestGenericType`2.TestGenericMethod``2').
+See [TestGenericMethod\`\`2](/Vsxmd-Program/Vsxmd-Program-TestGenericType`2.md/#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2).
 
 ##### Returns
 

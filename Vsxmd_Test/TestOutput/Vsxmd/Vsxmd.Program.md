@@ -32,8 +32,8 @@ Program main function entry.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[] 'System.String[]') | Program arguments. |
+| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[]) | Program arguments. |
 
 ##### See Also
 
-- [Vsxmd.Program](#T-Vsxmd-Program 'Vsxmd.Program')
+- [Vsxmd.Program](/Vsxmd/Vsxmd-Program.md/#T-Vsxmd-Program)
