@@ -1,45 +1,10 @@
 <a name='T-Vsxmd-Program-TestGenericType`2'></a>
 # TestGenericType\`2 type
 
-###### Namespace:  Vsxmd.Program
+Test generic type.  See [TestGenericType\`2](/Vsxmd.Program/TestGenericType`2.md/#T-Vsxmd-Program-TestGenericType`2).
 
-###### Assembly:  Vsxmd
+# Methods
 
-Test generic type.
-
-See [TestGenericType\`2](/Vsxmd.Program/TestGenericType`2.md/#T-Vsxmd-Program-TestGenericType`2).
-
-#### Type Parameters
-
-`T1`  
-
-Generic type 1.
-
-`T2`  
-
-Generic type 2.
-
-<a name='M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2'></a>
-### TestGenericMethod\`\`2() method
-
-Test generic method.
-
-See [TestGenericMethod\`\`2](/Vsxmd.Program/TestGenericType`2.md/#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2).
-
-#### Type Parameters
-
-`T3`  
-
-Generic type 3.
-
-`T4`  
-
-Generic type 4.
-
-#### Returns
-
-
-
-
-
-Nothing.
+| Definition | Description |
+|-|-|
+| [TestGenericMethod\`\`2](/Vsxmd.Program/TestGenericType`2.md/#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2) | Test generic method.  See [TestGenericMethod\`\`2](/Vsxmd.Program/TestGenericType`2.md/#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2). |

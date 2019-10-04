@@ -13,13 +13,6 @@
             </summary>
             <param name="document">The XML document.</param>
         </member>
-        <member name="M:Vsxmd.Converter.ToMarkdown(System.Xml.Linq.XDocument)">
-            <summary>
-            Convert VS XML document to Markdown syntax.
-            </summary>
-            <param name="document">The XML document.</param>
-            <returns>The generated Markdown content.</returns>
-        </member>
         <member name="M:Vsxmd.Converter.ToMarkdown">
             <inheritdoc/>
         </member>
@@ -33,6 +26,36 @@
             Convert to Markdown syntax.
             </summary>
             <returns>The generated Markdown content.</returns>
+        </member>
+        <member name="M:Vsxmd.MarkdownWriter.#ctor(System.Xml.Linq.XDocument,System.String)">
+            <summary>
+            Ctor for Markdown Writer
+            </summary>
+            <param name="document">The XDocument to be converted to Markdown and output.</param>
+            <param name="outputPath">Path to output Markdown to.</param>
+        </member>
+        <member name="M:Vsxmd.MarkdownWriter.WriteSingleFile">
+            <summary>
+            Converts the XML to one Markdown file and writes to the output file
+            </summary>
+        </member>
+        <member name="M:Vsxmd.MarkdownWriter.WriteMultipleFiles(System.Boolean)">
+            <summary>
+            Converts the XML to multiple Markdown files (one per type) and writes to the output directory
+            </summary>
+            <param name="useSubDirectories">Use subdirectories for each namespace.</param>
+        </member>
+        <member name="F:Vsxmd.PageFormatter.test">
+            <summary>
+            Test string
+            </summary>
+        </member>
+        <member name="M:Vsxmd.PageFormatter.GetUnits(System.Collections.Generic.IEnumerable{Vsxmd.Units.BaseUnit})">
+            <summary>
+            Takes several base units of same type and organises them on page in the specified way according to the formatter.
+            </summary>
+            <param name="units">The units of the same type.</param>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
         </member>
         <member name="T:Vsxmd.Program">
             <summary>
@@ -159,7 +182,7 @@
             </summary>
             <value>The link pointing to the table of contents.</value>
         </member>
-        <member name="M:Vsxmd.TableOfContents.ToMarkdown">
+        <member name="M:Vsxmd.TableOfContents.ToMarkdown(Vsxmd.Units.FormatKind)">
             <summary>
             Convert the table of contents to Markdown syntax.
             </summary>
@@ -177,7 +200,7 @@
             <param name="element">The assembly XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>assembly</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.AssemblyUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.AssemblyUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="T:Vsxmd.Units.BaseUnit">
@@ -205,9 +228,9 @@
             </summary>
             <value>The Markdown content.</value>
         </member>
-        <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown">
-            <inheritdoc />
-        </member>
+      <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <inheritdoc />
+      </member>
         <member name="M:Vsxmd.Units.BaseUnit.GetChild(System.Xml.Linq.XName)">
             <summary>
             Gets the first (in document order) child element with the specified <paramref name="name"/>.
@@ -230,6 +253,57 @@
             <param name="name">The <see cref="T:System.Xml.Linq.XName"/> of the <see cref="T:System.Xml.Linq.XAttribute"/> to get.</param>
             <returns>An <see cref="T:System.Xml.Linq.XAttribute"/> value that has the specified <paramref name="name"/>; <value>null</value> if there is no attribute with the specified <paramref name="name"/>.</returns>
         </member>
+        <member name="T:Vsxmd.Units.FormatKind">
+            <summary>
+            The formatting kind to use when generating markup.
+            </summary>
+        </member>
+        <member name="T:Vsxmd.Units.IUnit">
+            <summary>
+            <see cref="T:Vsxmd.Units.IUnit"/> is wrapper to handle XML elements.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.IUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+            <summary>
+            Represent the XML element content as Markdown syntax.
+            </summary>
+            <returns>The generated Markdown content.</returns>
+        </member>
+        <member name="T:Vsxmd.Units.MemberKind">
+            <summary>
+            The member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.NotSupported">
+            <summary>
+            Not supported member kind.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Type">
+            <summary>
+            Type.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Constructor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Constants">
+            <summary>
+            Constants
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Property">
+            <summary>
+            Property.
+            </summary>
+        </member>
+        <member name="F:Vsxmd.Units.MemberKind.Method">
+            <summary>
+            Method.
+            </summary>
+        </member>
         <member name="T:Vsxmd.Units.ExampleUnit">
             <summary>
             Example unit.
@@ -242,7 +316,7 @@
             <param name="element">The example XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>example</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(System.Xml.Linq.XElement)">
@@ -265,7 +339,7 @@
             <param name="element">The exception XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>exception</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
@@ -280,6 +354,13 @@
             <summary>
             Extensions helper.
             </summary>
+        </member>
+        <member name="M:Vsxmd.Units.Extensions.GetAssemblyName(System.Xml.Linq.XElement)">
+            <summary>
+            Probably a lazy way to do this and more implementation should be moved to AssemblyUnit class
+            </summary>
+            <param name="xElement">The XElement to get the AssemblyUnit of.</param>
+            <returns>Assembly unit for the current Xdoc.</returns>
         </member>
         <member name="M:Vsxmd.Units.Extensions.ToLowerString(Vsxmd.Units.MemberKind)">
             <summary>
@@ -346,6 +427,13 @@
             <returns>The Markdown code span.</returns>
             <remarks>Reference: http://meta.stackexchange.com/questions/55437/how-can-the-backtick-character-be-included-in-code .</remarks>
         </member>
+        <member name="M:Vsxmd.Units.Extensions.ToMarkdownRef(System.String)">
+            <summary>
+            Escape a reference to an anchor, file or folder by replacing special characters with '-'.
+            </summary>
+            <param name="href">The href.</param>
+            <returns>An escaped href for Markdown files.</returns>
+        </member>
         <member name="M:Vsxmd.Units.Extensions.NthLast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Gets the n-th last element from the <paramref name="source"/>.
@@ -381,52 +469,6 @@
             The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
             </code>
             </example>
-        </member>
-        <member name="T:Vsxmd.Units.IUnit">
-            <summary>
-            <see cref="T:Vsxmd.Units.IUnit"/> is wrapper to handle XML elements.
-            </summary>
-        </member>
-        <member name="M:Vsxmd.Units.IUnit.ToMarkdown">
-            <summary>
-            Represent the XML element content as Markdown syntax.
-            </summary>
-            <returns>The generated Markdown content.</returns>
-        </member>
-        <member name="T:Vsxmd.Units.MemberKind">
-            <summary>
-            The member kind.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.NotSupported">
-            <summary>
-            Not supported member kind.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Type">
-            <summary>
-            Type.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Constructor">
-            <summary>
-            Constructor.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Constants">
-            <summary>
-            Constants
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Property">
-            <summary>
-            Property.
-            </summary>
-        </member>
-        <member name="F:Vsxmd.Units.MemberKind.Method">
-            <summary>
-            Method.
-            </summary>
         </member>
         <member name="T:Vsxmd.Units.MemberName">
             <summary>
@@ -543,7 +585,7 @@
             </summary>
             <value>The link pointing to this member unit.</value>
         </member>
-        <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
@@ -570,7 +612,7 @@
             <param name="paramType">The parameter type corresponding to the param XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberKind)">
@@ -599,7 +641,7 @@
             <param name="element">The permission XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>permission</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
@@ -622,7 +664,7 @@
             <param name="element">The remarks XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>remarks</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown(System.Xml.Linq.XElement)">
@@ -645,7 +687,7 @@
             <param name="element">The returns XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>returns</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(System.Xml.Linq.XElement)">
@@ -668,7 +710,7 @@
             <param name="element">The seealso XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>seealso</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
@@ -691,7 +733,7 @@
             <param name="element">The summary XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>summary</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement)">
@@ -714,7 +756,7 @@
             <param name="element">The typeparam XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>typeparam</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown">
+        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">

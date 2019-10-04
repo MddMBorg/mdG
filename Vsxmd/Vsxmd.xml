@@ -45,6 +45,18 @@
             </summary>
             <param name="useSubDirectories">Use subdirectories for each namespace.</param>
         </member>
+        <member name="F:Vsxmd.PageFormatter.test">
+            <summary>
+            Test string
+            </summary>
+        </member>
+        <member name="M:Vsxmd.PageFormatter.GetUnits(System.Collections.Generic.IEnumerable{Vsxmd.Units.BaseUnit})">
+            <summary>
+            Takes several base units of same type and organises them on page in the specified way according to the formatter.
+            </summary>
+            <param name="units">The units of the same type.</param>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
         <member name="T:Vsxmd.Program">
             <summary>
             Program entry.
@@ -724,7 +736,7 @@
         <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement,Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement)">
             <summary>
             Convert the summary XML element to Markdown safely.
             If element is <value>null</value>, return empty string.

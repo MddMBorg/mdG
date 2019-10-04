@@ -71,7 +71,7 @@ namespace Vsxmd
                     File.WriteAllText(
                         Path.Combine(
                             Path.Combine(directory, useSubDirectories ? n.Key : ""), t.Key),
-                        t.SelectMany(x => x.ToMarkdown(FormatKind.None)).Join("\n\n").Suffix("\n"));
+                        new PageFormatter(FormatKind.MethodSummary).GetUnits(t).Join("\n\n").Suffix("\n"));
             }
 
         }

@@ -18,7 +18,7 @@ namespace Vsxmd.Units
     {
         internal static bool SubFolder { get; set; }
 
-        internal static bool SplitFiles { get; set; } 
+        internal static bool SplitFiles { get; set; }
 
         private readonly string name;
 
@@ -149,8 +149,8 @@ namespace Vsxmd.Units
             ? this.TypeShortName
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
+              this.Kind == MemberKind.Method ||
+              this.Kind == MemberKind.Constructor
             ? this.NameSegments.Last()
             : string.Empty;
 
@@ -174,6 +174,9 @@ namespace Vsxmd.Units
         /// </example>
         internal IEnumerable<string> GetParamTypes()
         {
+            if (!this.name.Contains('('))
+                return Enumerable.Empty<string>();
+
             var paramString = this.name.Split('(').Last().Trim(')');
 
             var delta = 0;
@@ -211,6 +214,12 @@ namespace Vsxmd.Units
             ? $"[{this.GetReferenceName(useShortName).Escape()}](https://docs.microsoft.com/dotnet/api/{this.DocsName})"
             : $"[{this.GetReferenceName(useShortName).Escape()}]({this.FormattedHyperLink})";
 
+
+        internal string ToSummaryLink(bool useShortName) =>
+            $"[{this.GetReferenceName(useShortName).Escape()}" +
+            $"{(this.GetParamTypes().Count() > 0 ? $"({this.GetParamTypes().Select(x => x.Split('.').NthLast(1)).Join(", ")})" : "" )}" +
+            $"]({this.FormattedHyperLink})";
+
         internal string FormattedHyperLink =>
             !SplitFiles
             ? $"#{this.Href}"
@@ -226,14 +235,13 @@ namespace Vsxmd.Units
         private string GetReferenceName(bool useShortName) =>
             !useShortName
             ? this.LongName
-            : this.Kind == MemberKind.Type
+            : this.Kind == MemberKind.Type ||
+              this.Kind == MemberKind.Constructor
             ? this.TypeShortName
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
               this.Kind == MemberKind.Method
             ? this.FriendlyName
-            : this.Kind == MemberKind.Constructor
-            ? $"{this.TypeShortName}.{this.FriendlyName}"
             : string.Empty;
 
     }

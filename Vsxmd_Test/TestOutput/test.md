@@ -5,7 +5,7 @@
 
 - [AssemblyUnit](#T-Vsxmd-Units-AssemblyUnit)
   - [#ctor(element)](#M-Vsxmd-Units-AssemblyUnit-#ctor-System-Xml-Linq-XElement-)
-  - [ToMarkdown()](#M-Vsxmd-Units-AssemblyUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-AssemblyUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
 - [BaseUnit](#T-Vsxmd-Units-BaseUnit)
   - [#ctor(element, elementName)](#M-Vsxmd-Units-BaseUnit-#ctor-System-Xml-Linq-XElement,System-String-)
   - [Element](#P-Vsxmd-Units-BaseUnit-Element)
@@ -13,22 +13,22 @@
   - [GetAttribute(name)](#M-Vsxmd-Units-BaseUnit-GetAttribute-System-Xml-Linq-XName-)
   - [GetChild(name)](#M-Vsxmd-Units-BaseUnit-GetChild-System-Xml-Linq-XName-)
   - [GetChildren(name)](#M-Vsxmd-Units-BaseUnit-GetChildren-System-Xml-Linq-XName-)
-  - [ToMarkdown()](#M-Vsxmd-Units-BaseUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-BaseUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
 - [Converter](#T-Vsxmd-Converter)
   - [#ctor(document)](#M-Vsxmd-Converter-#ctor-System-Xml-Linq-XDocument-)
-  - [ToMarkdown(document)](#M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-)
   - [ToMarkdown()](#M-Vsxmd-Converter-ToMarkdown)
 - [ExampleUnit](#T-Vsxmd-Units-ExampleUnit)
   - [#ctor(element)](#M-Vsxmd-Units-ExampleUnit-#ctor-System-Xml-Linq-XElement-)
-  - [ToMarkdown()](#M-Vsxmd-Units-ExampleUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-ExampleUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
   - [ToMarkdown(element)](#M-Vsxmd-Units-ExampleUnit-ToMarkdown-System-Xml-Linq-XElement-)
 - [ExceptionUnit](#T-Vsxmd-Units-ExceptionUnit)
   - [#ctor(element)](#M-Vsxmd-Units-ExceptionUnit-#ctor-System-Xml-Linq-XElement-)
-  - [ToMarkdown()](#M-Vsxmd-Units-ExceptionUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-ExceptionUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
   - [ToMarkdown(elements)](#M-Vsxmd-Units-ExceptionUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-)
 - [Extensions](#T-Vsxmd-Units-Extensions)
   - [AsCode(code)](#M-Vsxmd-Units-Extensions-AsCode-System-String-)
   - [Escape(content)](#M-Vsxmd-Units-Extensions-Escape-System-String-)
+  - [GetAssemblyName(xElement)](#M-Vsxmd-Units-Extensions-GetAssemblyName-System-Xml-Linq-XElement-)
   - [Join(value, separator)](#M-Vsxmd-Units-Extensions-Join-System-Collections-Generic-IEnumerable{System-String},System-String-)
   - [NthLast\`\`1(source, index)](#M-Vsxmd-Units-Extensions-NthLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32-)
   - [Suffix(value, suffix)](#M-Vsxmd-Units-Extensions-Suffix-System-String,System-String-)
@@ -36,12 +36,18 @@
   - [ToAnchor(href)](#M-Vsxmd-Units-Extensions-ToAnchor-System-String-)
   - [ToHereLink(href)](#M-Vsxmd-Units-Extensions-ToHereLink-System-String-)
   - [ToLowerString(memberKind)](#M-Vsxmd-Units-Extensions-ToLowerString-Vsxmd-Units-MemberKind-)
+  - [ToMarkdownRef(href)](#M-Vsxmd-Units-Extensions-ToMarkdownRef-System-String-)
   - [ToMarkdownText(element)](#M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement-)
   - [ToReferenceLink(memberName, useShortName)](#M-Vsxmd-Units-Extensions-ToReferenceLink-System-String,System-Boolean-)
+- [FormatKind](#T-Vsxmd-Units-FormatKind)
 - [IConverter](#T-Vsxmd-IConverter)
   - [ToMarkdown()](#M-Vsxmd-IConverter-ToMarkdown)
 - [IUnit](#T-Vsxmd-Units-IUnit)
-  - [ToMarkdown()](#M-Vsxmd-Units-IUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-IUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
+- [MarkdownWriter](#T-Vsxmd-MarkdownWriter)
+  - [#ctor(document, outputPath)](#M-Vsxmd-MarkdownWriter-#ctor-System-Xml-Linq-XDocument,System-String-)
+  - [WriteMultipleFiles(useSubDirectories)](#M-Vsxmd-MarkdownWriter-WriteMultipleFiles-System-Boolean-)
+  - [WriteSingleFile()](#M-Vsxmd-MarkdownWriter-WriteSingleFile)
 - [MemberKind](#T-Vsxmd-Units-MemberKind)
   - [Constants](#F-Vsxmd-Units-MemberKind-Constants)
   - [Constructor](#F-Vsxmd-Units-MemberKind-Constructor)
@@ -67,39 +73,42 @@
   - [Link](#P-Vsxmd-Units-MemberUnit-Link)
   - [TypeName](#P-Vsxmd-Units-MemberUnit-TypeName)
   - [ComplementType(group)](#M-Vsxmd-Units-MemberUnit-ComplementType-System-Collections-Generic-IEnumerable{Vsxmd-Units-MemberUnit}-)
-  - [ToMarkdown()](#M-Vsxmd-Units-MemberUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-MemberUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
 - [MemberUnitComparer](#T-Vsxmd-Units-MemberUnit-MemberUnitComparer)
   - [Compare()](#M-Vsxmd-Units-MemberUnit-MemberUnitComparer-Compare-Vsxmd-Units-MemberUnit,Vsxmd-Units-MemberUnit-)
+- [PageFormatter](#T-Vsxmd-PageFormatter)
+  - [test](#F-Vsxmd-PageFormatter-test)
+  - [GetUnits(units)](#M-Vsxmd-PageFormatter-GetUnits-System-Collections-Generic-IEnumerable{Vsxmd-Units-BaseUnit}-)
 - [ParamUnit](#T-Vsxmd-Units-ParamUnit)
   - [#ctor(element, paramType)](#M-Vsxmd-Units-ParamUnit-#ctor-System-Xml-Linq-XElement,System-String-)
-  - [ToMarkdown()](#M-Vsxmd-Units-ParamUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-ParamUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
   - [ToMarkdown(elements, paramTypes, memberKind)](#M-Vsxmd-Units-ParamUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement},System-Collections-Generic-IEnumerable{System-String},Vsxmd-Units-MemberKind-)
 - [PermissionUnit](#T-Vsxmd-Units-PermissionUnit)
   - [#ctor(element)](#M-Vsxmd-Units-PermissionUnit-#ctor-System-Xml-Linq-XElement-)
-  - [ToMarkdown()](#M-Vsxmd-Units-PermissionUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-PermissionUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
   - [ToMarkdown(elements)](#M-Vsxmd-Units-PermissionUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-)
 - [Program](#T-Vsxmd-Program)
   - [Main(args)](#M-Vsxmd-Program-Main-System-String[]-)
 - [RemarksUnit](#T-Vsxmd-Units-RemarksUnit)
   - [#ctor(element)](#M-Vsxmd-Units-RemarksUnit-#ctor-System-Xml-Linq-XElement-)
-  - [ToMarkdown()](#M-Vsxmd-Units-RemarksUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-RemarksUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
   - [ToMarkdown(element)](#M-Vsxmd-Units-RemarksUnit-ToMarkdown-System-Xml-Linq-XElement-)
 - [ReturnsUnit](#T-Vsxmd-Units-ReturnsUnit)
   - [#ctor(element)](#M-Vsxmd-Units-ReturnsUnit-#ctor-System-Xml-Linq-XElement-)
-  - [ToMarkdown()](#M-Vsxmd-Units-ReturnsUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-ReturnsUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
   - [ToMarkdown(element)](#M-Vsxmd-Units-ReturnsUnit-ToMarkdown-System-Xml-Linq-XElement-)
 - [SeealsoUnit](#T-Vsxmd-Units-SeealsoUnit)
   - [#ctor(element)](#M-Vsxmd-Units-SeealsoUnit-#ctor-System-Xml-Linq-XElement-)
-  - [ToMarkdown()](#M-Vsxmd-Units-SeealsoUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-SeealsoUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
   - [ToMarkdown(elements)](#M-Vsxmd-Units-SeealsoUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-)
 - [SummaryUnit](#T-Vsxmd-Units-SummaryUnit)
   - [#ctor(element)](#M-Vsxmd-Units-SummaryUnit-#ctor-System-Xml-Linq-XElement-)
-  - [ToMarkdown()](#M-Vsxmd-Units-SummaryUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-SummaryUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
   - [ToMarkdown(element)](#M-Vsxmd-Units-SummaryUnit-ToMarkdown-System-Xml-Linq-XElement-)
 - [TableOfContents](#T-Vsxmd-TableOfContents)
   - [#ctor(memberUnits)](#M-Vsxmd-TableOfContents-#ctor-System-Linq-IOrderedEnumerable{Vsxmd-Units-MemberUnit}-)
   - [Link](#P-Vsxmd-TableOfContents-Link)
-  - [ToMarkdown()](#M-Vsxmd-TableOfContents-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-TableOfContents-ToMarkdown-Vsxmd-Units-FormatKind-)
 - [Test](#T-Vsxmd-Program-Test)
   - [#ctor()](#M-Vsxmd-Program-Test-#ctor)
   - [TestBacktickInSummary()](#M-Vsxmd-Program-Test-TestBacktickInSummary)
@@ -114,7 +123,7 @@
   - [TestGenericMethod\`\`2()](#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2)
 - [TypeparamUnit](#T-Vsxmd-Units-TypeparamUnit)
   - [#ctor(element)](#M-Vsxmd-Units-TypeparamUnit-#ctor-System-Xml-Linq-XElement-)
-  - [ToMarkdown()](#M-Vsxmd-Units-TypeparamUnit-ToMarkdown)
+  - [ToMarkdown()](#M-Vsxmd-Units-TypeparamUnit-ToMarkdown-Vsxmd-Units-FormatKind-)
   - [ToMarkdown(elements)](#M-Vsxmd-Units-TypeparamUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-)
 
 <a name='T-Vsxmd-Units-AssemblyUnit'></a>
@@ -143,7 +152,7 @@ The assembly XML element.
 
 Throw if XML element name is not `assembly`.
 
-<a name='M-Vsxmd-Units-AssemblyUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-AssemblyUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -246,7 +255,7 @@ The [XName](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName) to matc
 
 An [IEnumerable\`1](https://docs.microsoft.com/dotnet/api/System.Collections.Generic.IEnumerable`1) of [XElement](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XElement) containing the children that have a matching [XName](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName), in document order.
 
-<a name='M-Vsxmd-Units-BaseUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-BaseUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -270,25 +279,6 @@ Initializes a new instance of the [Converter](#T-Vsxmd-Converter) class.
 `document`  [XDocument](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XDocument)  
 
 The XML document.
-
-<a name='M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-'></a>
-### ToMarkdown(document) method
-
-Convert VS XML document to Markdown syntax.
-
-#### Parameters
-
-`document`  [XDocument](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XDocument)  
-
-The XML document.
-
-#### Returns
-
-
-
-
-
-The generated Markdown content.
 
 <a name='M-Vsxmd-Converter-ToMarkdown'></a>
 ### ToMarkdown() method
@@ -321,7 +311,7 @@ The example XML element.
 
 Throw if XML element name is not `example`.
 
-<a name='M-Vsxmd-Units-ExampleUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-ExampleUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -372,7 +362,7 @@ The exception XML element.
 
 Throw if XML element name is not `exception`.
 
-<a name='M-Vsxmd-Units-ExceptionUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-ExceptionUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -449,6 +439,25 @@ The content.
 
 
 The escaped content.
+
+<a name='M-Vsxmd-Units-Extensions-GetAssemblyName-System-Xml-Linq-XElement-'></a>
+### GetAssemblyName(xElement) method
+
+Probably a lazy way to do this and more implementation should be moved to AssemblyUnit class
+
+#### Parameters
+
+`xElement`  [XElement](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XElement)  
+
+The XElement to get the AssemblyUnit of.
+
+#### Returns
+
+
+
+
+
+Assembly unit for the current Xdoc.
 
 <a name='M-Vsxmd-Units-Extensions-Join-System-Collections-Generic-IEnumerable{System-String},System-String-'></a>
 ### Join(value,separator) method
@@ -611,6 +620,25 @@ The member kind.
 
 The member kind's lowercase name.
 
+<a name='M-Vsxmd-Units-Extensions-ToMarkdownRef-System-String-'></a>
+### ToMarkdownRef(href) method
+
+Escape a reference to an anchor, file or folder by replacing special characters with '-'.
+
+#### Parameters
+
+`href`  [String](https://docs.microsoft.com/dotnet/api/System.String)  
+
+The href.
+
+#### Returns
+
+
+
+
+
+An escaped href for Markdown files.
+
 <a name='M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement-'></a>
 ### ToMarkdownText(element) method
 
@@ -674,6 +702,15 @@ For `T:Vsxmd.Units.MemberUnit`, convert it to `[MemberUnit](#T-Vsxmd.Units.Membe
 
 For `T:System.ArgumentException`, convert it to `[ArgumentException](http://msdn/path/to/System.ArgumentException)`.
 
+<a name='T-Vsxmd-Units-FormatKind'></a>
+# FormatKind type
+
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
+The formatting kind to use when generating markup.
+
 <a name='T-Vsxmd-IConverter'></a>
 # IConverter type
 
@@ -705,7 +742,7 @@ The generated Markdown content.
 
 [IUnit](#T-Vsxmd-Units-IUnit) is wrapper to handle XML elements.
 
-<a name='M-Vsxmd-Units-IUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-IUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 Represent the XML element content as Markdown syntax.
@@ -717,6 +754,44 @@ Represent the XML element content as Markdown syntax.
 
 
 The generated Markdown content.
+
+<a name='T-Vsxmd-MarkdownWriter'></a>
+# MarkdownWriter type
+
+###### Namespace:  Vsxmd
+
+###### Assembly:  Vsxmd
+
+<a name='M-Vsxmd-MarkdownWriter-#ctor-System-Xml-Linq-XDocument,System-String-'></a>
+### #ctor(document,outputPath) constructor
+
+Ctor for Markdown Writer
+
+#### Parameters
+
+`document`  [XDocument](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XDocument)  
+
+The XDocument to be converted to Markdown and output.
+
+`outputPath`  [String](https://docs.microsoft.com/dotnet/api/System.String)  
+
+Path to output Markdown to.
+
+<a name='M-Vsxmd-MarkdownWriter-WriteMultipleFiles-System-Boolean-'></a>
+### WriteMultipleFiles(useSubDirectories) method
+
+Converts the XML to multiple Markdown files (one per type) and writes to the output directory
+
+#### Parameters
+
+`useSubDirectories`  [Boolean](https://docs.microsoft.com/dotnet/api/System.Boolean)  
+
+Use subdirectories for each namespace.
+
+<a name='M-Vsxmd-MarkdownWriter-WriteSingleFile'></a>
+### WriteSingleFile() method
+
+Converts the XML to one Markdown file and writes to the output file
 
 <a name='T-Vsxmd-Units-MemberKind'></a>
 # MemberKind type
@@ -952,7 +1027,7 @@ The member unit group.
 
 The complemented member unit group.
 
-<a name='M-Vsxmd-Units-MemberUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-MemberUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -968,6 +1043,37 @@ The complemented member unit group.
 ### Compare() method
 
 *Inherited from parent.*
+
+<a name='T-Vsxmd-PageFormatter'></a>
+# PageFormatter type
+
+###### Namespace:  Vsxmd
+
+###### Assembly:  Vsxmd
+
+<a name='F-Vsxmd-PageFormatter-test'></a>
+### test constants
+
+Test string
+
+<a name='M-Vsxmd-PageFormatter-GetUnits-System-Collections-Generic-IEnumerable{Vsxmd-Units-BaseUnit}-'></a>
+### GetUnits(units) method
+
+Takes several base units of same type and organises them on page in the specified way according to the formatter.
+
+#### Parameters
+
+`units`  [BaseUnit}](https://docs.microsoft.com/dotnet/api/System.Collections.Generic.IEnumerable)  
+
+The units of the same type.
+
+#### Returns
+
+[IEnumerable\`1](https://docs.microsoft.com/dotnet/api/System.Collections.Generic.IEnumerable`1)
+
+
+
+[IEnumerable\`1](https://docs.microsoft.com/dotnet/api/System.Collections.Generic.IEnumerable`1)
 
 <a name='T-Vsxmd-Units-ParamUnit'></a>
 # ParamUnit type
@@ -999,7 +1105,7 @@ The parameter type corresponding to the param XML element.
 
 Throw if XML element name is not `param`.
 
-<a name='M-Vsxmd-Units-ParamUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-ParamUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -1065,7 +1171,7 @@ The permission XML element.
 
 Throw if XML element name is not `permission`.
 
-<a name='M-Vsxmd-Units-PermissionUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-PermissionUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -1152,7 +1258,7 @@ The remarks XML element.
 
 Throw if XML element name is not `remarks`.
 
-<a name='M-Vsxmd-Units-RemarksUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-RemarksUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -1203,7 +1309,7 @@ The returns XML element.
 
 Throw if XML element name is not `returns`.
 
-<a name='M-Vsxmd-Units-ReturnsUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-ReturnsUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -1254,7 +1360,7 @@ The seealso XML element.
 
 Throw if XML element name is not `seealso`.
 
-<a name='M-Vsxmd-Units-SeealsoUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-SeealsoUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -1305,7 +1411,7 @@ The summary XML element.
 
 Throw if XML element name is not `summary`.
 
-<a name='M-Vsxmd-Units-SummaryUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-SummaryUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*
@@ -1357,7 +1463,7 @@ The member unit list.
 
 Gets the link pointing to the table of contents.
 
-<a name='M-Vsxmd-TableOfContents-ToMarkdown'></a>
+<a name='M-Vsxmd-TableOfContents-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 Convert the table of contents to Markdown syntax.
@@ -1384,7 +1490,7 @@ Initializes a new instance of the [Test](#T-Vsxmd-Program-Test) class.
 
 Test constructor without parameters.
 
-See [Test.#ctor](#M-Vsxmd-Program-Test-#ctor).
+See [Test](#M-Vsxmd-Program-Test-#ctor).
 
 #### Permissions
 
@@ -1618,7 +1724,7 @@ The typeparam XML element.
 
 Throw if XML element name is not `typeparam`.
 
-<a name='M-Vsxmd-Units-TypeparamUnit-ToMarkdown'></a>
+<a name='M-Vsxmd-Units-TypeparamUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
 ### ToMarkdown() method
 
 *Inherited from parent.*

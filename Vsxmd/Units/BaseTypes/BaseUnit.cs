@@ -46,6 +46,7 @@ namespace Vsxmd.Units
         /// <value>The Markdown content.</value>
         protected string ElementContent => this.Element.ToMarkdownText();
 
+        
         /// <inheritdoc />
         public virtual IEnumerable<string> ToMarkdown(FormatKind format) =>
             format == FormatKind.MethodDetail

@@ -1,39 +1,22 @@
 <a name='T-Vsxmd-TableOfContents'></a>
 # TableOfContents type
 
-###### Namespace:  Vsxmd
-
-###### Assembly:  Vsxmd
-
 Table of contents.
 
-<a name='M-Vsxmd-TableOfContents-#ctor-System-Linq-IOrderedEnumerable{Vsxmd-Units-MemberUnit}-'></a>
-### #ctor(memberUnits) constructor
+# Constructors
 
-Initializes a new instance of the [TableOfContents](/Vsxmd/TableOfContents.md/#T-Vsxmd-TableOfContents) class.
+| Definition | Description |
+|-|-|
+| [TableOfContents(MemberUnit})](/Vsxmd/TableOfContents.md/#M-Vsxmd-TableOfContents-#ctor-System-Linq-IOrderedEnumerable{Vsxmd-Units-MemberUnit}-) | Initializes a new instance of the [TableOfContents](/Vsxmd/TableOfContents.md/#T-Vsxmd-TableOfContents) class.  It convert the table of contents from the `memberUnits`. |
 
-It convert the table of contents from the `memberUnits`.
+# Properties
 
-#### Parameters
+| Definition | Description |
+|-|-|
+| [Link](/Vsxmd/TableOfContents.md/#P-Vsxmd-TableOfContents-Link) | Gets the link pointing to the table of contents. |
 
-`memberUnits`  [MemberUnit}](https://docs.microsoft.com/dotnet/api/System.Linq.IOrderedEnumerable)  
+# Methods
 
-The member unit list.
-
-<a name='P-Vsxmd-TableOfContents-Link'></a>
-### Link property
-
-Gets the link pointing to the table of contents.
-
-<a name='M-Vsxmd-TableOfContents-ToMarkdown'></a>
-### ToMarkdown() method
-
-Convert the table of contents to Markdown syntax.
-
-#### Returns
-
-
-
-
-
-The table of contents in Markdown syntax.
+| Definition | Description |
+|-|-|
+| [ToMarkdown(FormatKind)](/Vsxmd/TableOfContents.md/#M-Vsxmd-TableOfContents-ToMarkdown-Vsxmd-Units-FormatKind-) | Convert the table of contents to Markdown syntax. |
