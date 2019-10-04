@@ -14,21 +14,21 @@ Member name.
 
 ##### Summary
 
-Initializes a new instance of the [MemberName](/Vsxmd-Units-MemberName.md/#T-Vsxmd-Units-MemberName) class.
+Initializes a new instance of the [MemberName](./Vsxmd.Units.MemberName.md/#T-Vsxmd-Units-MemberName) class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | name | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String) | The raw member name. For example, `T:Vsxmd.Units.MemberName`. |
-| paramNames | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The parameter names. It is only used when member kind is [Constructor](/Vsxmd-Units-MemberKind.md/#F-Vsxmd-Units-MemberKind-Constructor) or [Method](/Vsxmd-Units-MemberKind.md/#F-Vsxmd-Units-MemberKind-Method). |
+| paramNames | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The parameter names. It is only used when member kind is [Constructor](./Vsxmd.Units.MemberKind.md/#F-Vsxmd-Units-MemberKind-Constructor) or [Method](./Vsxmd.Units.MemberKind.md/#F-Vsxmd-Units-MemberKind-Method). |
 
 <a name='M-Vsxmd-Units-MemberName-#ctor-System-String-'></a>
 ### #ctor(name) `constructor`
 
 ##### Summary
 
-Initializes a new instance of the [MemberName](/Vsxmd-Units-MemberName.md/#T-Vsxmd-Units-MemberName) class.
+Initializes a new instance of the [MemberName](./Vsxmd.Units.MemberName.md/#T-Vsxmd-Units-MemberName) class.
 
 ##### Parameters
 
@@ -45,7 +45,7 @@ Gets the caption representation for this member name.
 
 ##### Example
 
-For [Type](/Vsxmd-Units-MemberKind.md/#F-Vsxmd-Units-MemberKind-Type), show as `## Vsxmd.Units.MemberName [#](#here) [^](#contents)`.
+For [Type](./Vsxmd.Units.MemberKind.md/#F-Vsxmd-Units-MemberKind-Type), show as `## Vsxmd.Units.MemberName [#](#here) [^](#contents)`.
 
 For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)`.
 
@@ -54,7 +54,7 @@ For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#con
 
 ##### Summary
 
-Gets the member kind, one of [MemberKind](/Vsxmd-Units-MemberKind.md/#T-Vsxmd-Units-MemberKind).
+Gets the member kind, one of [MemberKind](./Vsxmd.Units.MemberKind.md/#T-Vsxmd-Units-MemberKind).
 
 <a name='P-Vsxmd-Units-MemberName-Link'></a>
 ### Link `property`

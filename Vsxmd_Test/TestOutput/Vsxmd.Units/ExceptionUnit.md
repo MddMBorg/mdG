@@ -14,7 +14,7 @@ Exception unit.
 
 ##### Summary
 
-Initializes a new instance of the [ExceptionUnit](/Vsxmd-Units/Vsxmd-Units-ExceptionUnit.md/#T-Vsxmd-Units-ExceptionUnit) class.
+Initializes a new instance of the [ExceptionUnit](./Vsxmd.Units/ExceptionUnit.md/#T-Vsxmd-Units-ExceptionUnit) class.
 
 ##### Parameters
 

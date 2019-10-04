@@ -222,12 +222,13 @@ namespace Vsxmd.Units
             !SplitFiles
             ? $"#{this.Href}"
             : !SubFolder
-                ? $"/{this.FormattedFileName}/#{this.Href}"
-                : $"/{this.Namespace.ToMarkdownRef()}/{this.FormattedFileName}/#{this.Href}";
+                ? $"./{this.FileName}/#{this.Href}"
+                : $"./{this.Namespace}/{this.FileName}/#{this.Href}";
 
-        internal string FileName => $"{this.TypeName}.md";
-
-        internal string FormattedFileName => $"{this.TypeName.ToMarkdownRef()}.md";
+        internal string FileName =>
+            !SubFolder
+            ? $"{this.TypeName}.md"
+            : $"{this.TypeShortName}.md";
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName

@@ -49,6 +49,10 @@ namespace Vsxmd.Units
         /// <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
         internal string TypeName => this.name.TypeName;
 
+        internal string TypeNamespace => name.Namespace;
+
+        internal string FileName => name.FileName;
+
         /// <summary>
         /// Gets the member kind, one of <see cref="MemberKind"/>.
         /// </summary>
@@ -78,8 +82,6 @@ namespace Vsxmd.Units
                 $"##### Namespace",
                 $"{this.name.Namespace}",
             };
-
-        public string TypeNamespace => name.Namespace;
 
         private IEnumerable<string> Summary =>
             SummaryUnit.ToMarkdown(this.GetChild("summary"));

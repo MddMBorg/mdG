@@ -14,7 +14,7 @@ Seealso unit.
 
 ##### Summary
 
-Initializes a new instance of the [SeealsoUnit](/Vsxmd-Units/Vsxmd-Units-SeealsoUnit.md/#T-Vsxmd-Units-SeealsoUnit) class.
+Initializes a new instance of the [SeealsoUnit](./Vsxmd.Units/SeealsoUnit.md/#T-Vsxmd-Units-SeealsoUnit) class.
 
 ##### Parameters
 

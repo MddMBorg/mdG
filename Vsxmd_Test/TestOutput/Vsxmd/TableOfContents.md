@@ -14,7 +14,7 @@ Table of contents.
 
 ##### Summary
 
-Initializes a new instance of the [TableOfContents](/Vsxmd/Vsxmd-TableOfContents.md/#T-Vsxmd-TableOfContents) class.
+Initializes a new instance of the [TableOfContents](./Vsxmd/TableOfContents.md/#T-Vsxmd-TableOfContents) class.
 
 It convert the table of contents from the `memberUnits`.
 

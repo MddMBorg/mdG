@@ -15,11 +15,9 @@ namespace Vsxmd_Test
             string resourceDir = "TestResources";
             string outputDir = "..\\..\\TestOutput";
 
-            if (Directory.Exists(outputDir))
-                Directory.Delete(outputDir, true);
+            if (!Directory.Exists(outputDir))
+                Directory.CreateDirectory(outputDir);
 
-            Directory.CreateDirectory(outputDir);
-            
             MarkdownWriter writer = new MarkdownWriter(XDocument.Load($"{resourceDir}\\vsxmd.xml"), Path.Combine(outputDir, "test.md"));
 
             writer.WriteSingleFile();

@@ -14,7 +14,7 @@ Remarks unit.
 
 ##### Summary
 
-Initializes a new instance of the [RemarksUnit](/Vsxmd-Units/Vsxmd-Units-RemarksUnit.md/#T-Vsxmd-Units-RemarksUnit) class.
+Initializes a new instance of the [RemarksUnit](./Vsxmd.Units/RemarksUnit.md/#T-Vsxmd-Units-RemarksUnit) class.
 
 ##### Parameters
 

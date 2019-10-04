@@ -67,10 +67,10 @@ namespace Vsxmd
 
             foreach (var n in types.GroupBy(x => x.TypeNamespace))
             {
-                foreach (var t in n.GroupBy(x => x.TypeName))
+                foreach (var t in n.GroupBy(x => x.FileName))
                     File.WriteAllText(
                         Path.Combine(
-                            Path.Combine(directory, useSubDirectories ? n.Key : ""), $"{t.Key}.md"),
+                            Path.Combine(directory, useSubDirectories ? n.Key : ""), t.Key),
                         t.SelectMany(x => x.ToMarkdown()).Join("\n\n").Suffix("\n"));
             }
 

@@ -14,7 +14,7 @@ Example unit.
 
 ##### Summary
 
-Initializes a new instance of the [ExampleUnit](/Vsxmd-Units-ExampleUnit.md/#T-Vsxmd-Units-ExampleUnit) class.
+Initializes a new instance of the [ExampleUnit](./Vsxmd.Units.ExampleUnit.md/#T-Vsxmd-Units-ExampleUnit) class.
 
 ##### Parameters
 

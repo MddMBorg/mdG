@@ -14,7 +14,7 @@ Assembly unit.
 
 ##### Summary
 
-Initializes a new instance of the [AssemblyUnit](/Vsxmd-Units/Vsxmd-Units-AssemblyUnit.md/#T-Vsxmd-Units-AssemblyUnit) class.
+Initializes a new instance of the [AssemblyUnit](./Vsxmd.Units/AssemblyUnit.md/#T-Vsxmd-Units-AssemblyUnit) class.
 
 ##### Parameters
 

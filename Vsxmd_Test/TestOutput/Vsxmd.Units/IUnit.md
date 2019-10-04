@@ -7,7 +7,7 @@ Vsxmd.Units
 
 ##### Summary
 
-[IUnit](/Vsxmd-Units/Vsxmd-Units-IUnit.md/#T-Vsxmd-Units-IUnit) is wrapper to handle XML elements.
+[IUnit](./Vsxmd.Units/IUnit.md/#T-Vsxmd-Units-IUnit) is wrapper to handle XML elements.
 
 <a name='M-Vsxmd-Units-IUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`

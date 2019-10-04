@@ -14,7 +14,7 @@ Permission unit.
 
 ##### Summary
 
-Initializes a new instance of the [PermissionUnit](/Vsxmd-Units-PermissionUnit.md/#T-Vsxmd-Units-PermissionUnit) class.
+Initializes a new instance of the [PermissionUnit](./Vsxmd.Units.PermissionUnit.md/#T-Vsxmd-Units-PermissionUnit) class.
 
 ##### Parameters
 

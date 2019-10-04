@@ -36,4 +36,4 @@ Program main function entry.
 
 ##### See Also
 
-- [Vsxmd.Program](/Vsxmd-Program.md/#T-Vsxmd-Program)
+- [Vsxmd.Program](./Vsxmd.Program.md/#T-Vsxmd-Program)

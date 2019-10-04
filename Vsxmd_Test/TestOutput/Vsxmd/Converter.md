@@ -14,7 +14,7 @@ Vsxmd
 
 ##### Summary
 
-Initializes a new instance of the [Converter](/Vsxmd/Vsxmd-Converter.md/#T-Vsxmd-Converter) class.
+Initializes a new instance of the [Converter](./Vsxmd/Converter.md/#T-Vsxmd-Converter) class.
 
 ##### Parameters
 

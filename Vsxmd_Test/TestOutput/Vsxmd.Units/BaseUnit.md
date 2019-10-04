@@ -14,7 +14,7 @@ The base unit.
 
 ##### Summary
 
-Initializes a new instance of the [BaseUnit](/Vsxmd-Units/Vsxmd-Units-BaseUnit.md/#T-Vsxmd-Units-BaseUnit) class.
+Initializes a new instance of the [BaseUnit](./Vsxmd.Units/BaseUnit.md/#T-Vsxmd-Units-BaseUnit) class.
 
 ##### Parameters
 

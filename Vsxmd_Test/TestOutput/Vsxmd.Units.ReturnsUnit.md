@@ -14,7 +14,7 @@ Returns unit.
 
 ##### Summary
 
-Initializes a new instance of the [ReturnsUnit](/Vsxmd-Units-ReturnsUnit.md/#T-Vsxmd-Units-ReturnsUnit) class.
+Initializes a new instance of the [ReturnsUnit](./Vsxmd.Units.ReturnsUnit.md/#T-Vsxmd-Units-ReturnsUnit) class.
 
 ##### Parameters
 

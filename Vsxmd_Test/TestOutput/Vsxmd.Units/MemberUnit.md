@@ -14,7 +14,7 @@ Member unit.
 
 ##### Summary
 
-Initializes a new instance of the [MemberUnit](/Vsxmd-Units/Vsxmd-Units-MemberUnit.md/#T-Vsxmd-Units-MemberUnit) class.
+Initializes a new instance of the [MemberUnit](./Vsxmd.Units/MemberUnit.md/#T-Vsxmd-Units-MemberUnit) class.
 
 ##### Parameters
 
@@ -40,7 +40,7 @@ Gets the member unit comparer.
 
 ##### Summary
 
-Gets the member kind, one of [MemberKind](/Vsxmd-Units/Vsxmd-Units-MemberKind.md/#T-Vsxmd-Units-MemberKind).
+Gets the member kind, one of [MemberKind](./Vsxmd.Units/MemberKind.md/#T-Vsxmd-Units-MemberKind).
 
 <a name='P-Vsxmd-Units-MemberUnit-Link'></a>
 ### Link `property`
@@ -66,7 +66,7 @@ Gets the type name.
 ##### Summary
 
 Complement a type unit if the member unit `group` does not have one.
-One member unit group has the same [TypeName](/Vsxmd-Units/Vsxmd-Units-MemberUnit.md/#P-Vsxmd-Units-MemberUnit-TypeName).
+One member unit group has the same [TypeName](./Vsxmd.Units/MemberUnit.md/#P-Vsxmd-Units-MemberUnit-TypeName).
 
 ##### Returns
 

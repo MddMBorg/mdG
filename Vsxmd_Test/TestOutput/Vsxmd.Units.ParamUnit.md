@@ -14,7 +14,7 @@ Param unit.
 
 ##### Summary
 
-Initializes a new instance of the [ParamUnit](/Vsxmd-Units-ParamUnit.md/#T-Vsxmd-Units-ParamUnit) class.
+Initializes a new instance of the [ParamUnit](./Vsxmd.Units.ParamUnit.md/#T-Vsxmd-Units-ParamUnit) class.
 
 ##### Parameters
 
@@ -57,12 +57,12 @@ The generated Markdown.
 | ---- | ---- | ----------- |
 | elements | [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The param XML element list. |
 | paramTypes | [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable) | The paramater type names. |
-| memberKind | [Vsxmd.Units.MemberKind](/Vsxmd-Units-MemberKind.md/#T-Vsxmd-Units-MemberKind) | The member kind of the parent element. |
+| memberKind | [Vsxmd.Units.MemberKind](./Vsxmd.Units.MemberKind.md/#T-Vsxmd-Units-MemberKind) | The member kind of the parent element. |
 
 ##### Remarks
 
 When the parameter (a.k.a `elements`) list is empty:
 
-If parent element kind is [Constructor](/Vsxmd-Units-MemberKind.md/#F-Vsxmd-Units-MemberKind-Constructor) or [Method](/Vsxmd-Units-MemberKind.md/#F-Vsxmd-Units-MemberKind-Method), it returns a hint about "no parameters".
+If parent element kind is [Constructor](./Vsxmd.Units.MemberKind.md/#F-Vsxmd-Units-MemberKind-Constructor) or [Method](./Vsxmd.Units.MemberKind.md/#F-Vsxmd-Units-MemberKind-Method), it returns a hint about "no parameters".
 
 If parent element kind is not the value mentioned above, it returns an empty string.

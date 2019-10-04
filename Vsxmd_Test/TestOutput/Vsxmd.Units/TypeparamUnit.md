@@ -14,7 +14,7 @@ Typeparam unit.
 
 ##### Summary
 
-Initializes a new instance of the [TypeparamUnit](/Vsxmd-Units/Vsxmd-Units-TypeparamUnit.md/#T-Vsxmd-Units-TypeparamUnit) class.
+Initializes a new instance of the [TypeparamUnit](./Vsxmd.Units/TypeparamUnit.md/#T-Vsxmd-Units-TypeparamUnit) class.
 
 ##### Parameters
 

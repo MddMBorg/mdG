@@ -14,7 +14,7 @@ Summary unit.
 
 ##### Summary
 
-Initializes a new instance of the [SummaryUnit](/Vsxmd-Units-SummaryUnit.md/#T-Vsxmd-Units-SummaryUnit) class.
+Initializes a new instance of the [SummaryUnit](./Vsxmd.Units.SummaryUnit.md/#T-Vsxmd-Units-SummaryUnit) class.
 
 ##### Parameters
 

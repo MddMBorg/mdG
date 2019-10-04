@@ -172,7 +172,7 @@ The "to here" link for the `href`.
 
 ##### Summary
 
-Convert the [MemberKind](/Vsxmd-Units-MemberKind.md/#T-Vsxmd-Units-MemberKind) to its lowercase name.
+Convert the [MemberKind](./Vsxmd.Units.MemberKind.md/#T-Vsxmd-Units-MemberKind) to its lowercase name.
 
 ##### Returns
 
@@ -182,7 +182,7 @@ The member kind's lowercase name.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| memberKind | [Vsxmd.Units.MemberKind](/Vsxmd-Units-MemberKind.md/#T-Vsxmd-Units-MemberKind) | The member kind. |
+| memberKind | [Vsxmd.Units.MemberKind](./Vsxmd.Units.MemberKind.md/#T-Vsxmd-Units-MemberKind) | The member kind. |
 
 <a name='M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement-'></a>
 ### ToMarkdownText(element) `method`
