@@ -222,8 +222,8 @@ namespace Vsxmd.Units
             !SplitFiles
             ? $"#{this.Href}"
             : !SubFolder
-                ? $"./{this.FileName}/#{this.Href}"
-                : $"./{this.Namespace}/{this.FileName}/#{this.Href}";
+                ? $"/{this.FileName}/#{this.Href}"
+                : $"/{this.Namespace}/{this.FileName}/#{this.Href}";
 
         internal string FileName =>
             !SubFolder

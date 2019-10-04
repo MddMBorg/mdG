@@ -29,7 +29,7 @@ namespace Vsxmd
         /// <inheritdoc/>
         public string ToMarkdown() =>
             ToUnits()
-                .SelectMany(x => x.ToMarkdown())
+                .SelectMany(x => x.ToMarkdown(FormatKind.None))
                 .Join("\n\n")
                 .Suffix("\n");
 

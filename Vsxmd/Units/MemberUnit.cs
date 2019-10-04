@@ -18,6 +18,8 @@ namespace Vsxmd.Units
     {
         private readonly MemberName name;
 
+        internal readonly string AssemblyName;
+
         static MemberUnit()
         {
             Comparer = new MemberUnitComparer();
@@ -31,6 +33,7 @@ namespace Vsxmd.Units
         internal MemberUnit(XElement element)
             : base(element, "member")
         {
+            AssemblyName = element.GetAssemblyName();
             this.name = new MemberName(
                 this.GetAttribute("name"),
                 this.GetChildren("param").Select(x => x.Attribute("name").Value));
@@ -79,12 +82,19 @@ namespace Vsxmd.Units
             ? Enumerable.Empty<string>()
             : new[]
             {
-                $"##### Namespace",
-                $"{this.name.Namespace}",
+                $"###### Namespace:  {this.name.Namespace}"
+            };
+
+        private IEnumerable<string> Assembly =>
+            this.Kind != MemberKind.Type
+            ? Enumerable.Empty<string>()
+            : new[]
+            {
+                $"###### Assembly:  {this.AssemblyName}"
             };
 
         private IEnumerable<string> Summary =>
-            SummaryUnit.ToMarkdown(this.GetChild("summary"));
+            SummaryUnit.ToMarkdown(this.GetChild("summary"), FormatKind.MethodSummary);
 
         private IEnumerable<string> Returns =>
             ReturnsUnit.ToMarkdown(this.GetChild("returns"));
@@ -114,9 +124,10 @@ namespace Vsxmd.Units
             SeealsoUnit.ToMarkdown(this.GetChildren("seealso"));
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown() =>
+        public override IEnumerable<string> ToMarkdown(FormatKind foramt) =>
             new[] { this.name.Caption }
                 .Concat(this.Namespace)
+                .Concat(this.Assembly)
                 .Concat(this.InheritDoc)
                 .Concat(this.Summary)
                 .Concat(this.Returns)
@@ -152,5 +163,7 @@ namespace Vsxmd.Units
             public int Compare(MemberUnit x, MemberUnit y) =>
                 x.name.CompareTo(y.name);
         }
+
     }
+
 }

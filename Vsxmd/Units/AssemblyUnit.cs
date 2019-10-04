@@ -30,10 +30,12 @@ namespace Vsxmd.Units
         private string AssemblyName => this.GetChild("name").Value;
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown() =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
                 $"{Href.ToAnchor()}# {this.AssemblyName}",
             };
+
     }
+
 }

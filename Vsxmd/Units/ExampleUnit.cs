@@ -27,10 +27,10 @@ namespace Vsxmd.Units
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown() =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
-                $"##### Example",
+                $"# Examples",
                 $"{this.ElementContent}",
             };
 
@@ -42,7 +42,8 @@ namespace Vsxmd.Units
         /// <returns>The generated Markdown.</returns>
         internal static IEnumerable<string> ToMarkdown(XElement element) =>
             element != null
-                ? new ExampleUnit(element).ToMarkdown()
+                ? new ExampleUnit(element).ToMarkdown(FormatKind.None)
                 : Enumerable.Empty<string>();
     }
+
 }

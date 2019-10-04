@@ -1,32 +1,28 @@
 <a name='T-Vsxmd-Units-SummaryUnit'></a>
 ## SummaryUnit `type`
 
-##### Namespace
+###### Namespace:  Vsxmd.Units
 
-Vsxmd.Units
-
-##### Summary
+###### Assembly:  Vsxmd
 
 Summary unit.
 
 <a name='M-Vsxmd-Units-SummaryUnit-#ctor-System-Xml-Linq-XElement-'></a>
 ### #ctor(element) `constructor`
 
-##### Summary
+Initializes a new instance of the [SummaryUnit](/Vsxmd.Units/SummaryUnit.md/#T-Vsxmd-Units-SummaryUnit) class.
 
-Initializes a new instance of the [SummaryUnit](./Vsxmd.Units/SummaryUnit.md/#T-Vsxmd-Units-SummaryUnit) class.
+#### Parameters
 
-##### Parameters
+`element`  [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement)  
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The summary XML element. |
+The summary XML element.
 
-##### Exceptions
+#### Exceptions
 
-| Name | Description |
-| ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `summary`. |
+`[System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException)`  
+
+Throw if XML element name is not `summary`.
 
 <a name='M-Vsxmd-Units-SummaryUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -35,24 +31,22 @@ Initializes a new instance of the [SummaryUnit](./Vsxmd.Units/SummaryUnit.md/#T-
 
 *Inherit from parent.*
 
-##### Parameters
-
-This method has no parameters.
-
 <a name='M-Vsxmd-Units-SummaryUnit-ToMarkdown-System-Xml-Linq-XElement-'></a>
 ### ToMarkdown(element) `method`
-
-##### Summary
 
 Convert the summary XML element to Markdown safely.
 If element is `null`, return empty string.
 
-##### Returns
+#### Returns
+
+
+
+
 
 The generated Markdown.
 
-##### Parameters
+#### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The summary XML element. |
+`element`  [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement)  
+
+The summary XML element.

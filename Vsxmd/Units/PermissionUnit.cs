@@ -31,7 +31,7 @@ namespace Vsxmd.Units
         private string Description => this.ElementContent;
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown() =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
                 $"| {this.Name} | {this.Description} |",
@@ -52,19 +52,12 @@ namespace Vsxmd.Units
 
             var markdowns = elements
                 .Select(element => new PermissionUnit(element))
-                .SelectMany(unit => unit.ToMarkdown());
-
-            var table = new[]
-            {
-                "| Name | Description |",
-                "| ---- | ----------- |",
-            }
-            .Concat(markdowns);
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None));
 
             return new[]
             {
-                "##### Permissions",
-                string.Join("\n", table),
+                "#### Permissions",
+                string.Join("\n", markdowns),
             };
         }
     }

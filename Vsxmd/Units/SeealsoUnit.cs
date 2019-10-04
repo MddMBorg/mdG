@@ -27,7 +27,7 @@ namespace Vsxmd.Units
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown() =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
                 $"- {this.GetAttribute("cref").ToReferenceLink()}",
@@ -42,19 +42,19 @@ namespace Vsxmd.Units
         internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements)
         {
             if (!elements.Any())
-            {
                 return Enumerable.Empty<string>();
-            }
 
             var markdowns = elements
                 .Select(element => new SeealsoUnit(element))
-                .SelectMany(unit => unit.ToMarkdown());
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None));
 
             return new[]
             {
-                "##### See Also",
+                "# See Also",
                 string.Join("\n", markdowns),
             };
         }
+
     }
+
 }

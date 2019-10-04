@@ -1,15 +1,13 @@
 <a name='T-Vsxmd-Program'></a>
 ## Program `type`
 
-##### Namespace
+###### Namespace:  Vsxmd
 
-Vsxmd
-
-##### Summary
+###### Assembly:  Vsxmd
 
 Program entry.
 
-##### Remarks
+#### Remarks
 
 Usage syntax:
 
@@ -24,16 +22,14 @@ The `output-Markdown-path` argument is optional. It indicates the file path for 
 <a name='M-Vsxmd-Program-Main-System-String[]-'></a>
 ### Main(args) `method`
 
-##### Summary
-
 Program main function entry.
 
-##### Parameters
+#### Parameters
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| args | [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[]) | Program arguments. |
+`args`  [System.String[]](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String[])  
 
-##### See Also
+Program arguments.
 
-- [Vsxmd.Program](./Vsxmd/Program.md/#T-Vsxmd-Program)
+# See Also
+
+- [Vsxmd.Program](/Vsxmd/Program.md/#T-Vsxmd-Program)

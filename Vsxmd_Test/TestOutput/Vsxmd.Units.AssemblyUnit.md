@@ -1,32 +1,28 @@
 <a name='T-Vsxmd-Units-AssemblyUnit'></a>
 ## AssemblyUnit `type`
 
-##### Namespace
+###### Namespace:  Vsxmd.Units
 
-Vsxmd.Units
-
-##### Summary
+###### Assembly:  Vsxmd
 
 Assembly unit.
 
 <a name='M-Vsxmd-Units-AssemblyUnit-#ctor-System-Xml-Linq-XElement-'></a>
 ### #ctor(element) `constructor`
 
-##### Summary
+Initializes a new instance of the [AssemblyUnit](/Vsxmd.Units.AssemblyUnit.md/#T-Vsxmd-Units-AssemblyUnit) class.
 
-Initializes a new instance of the [AssemblyUnit](./Vsxmd.Units.AssemblyUnit.md/#T-Vsxmd-Units-AssemblyUnit) class.
+#### Parameters
 
-##### Parameters
+`element`  [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement)  
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| element | [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement) | The assembly XML element. |
+The assembly XML element.
 
-##### Exceptions
+#### Exceptions
 
-| Name | Description |
-| ---- | ----------- |
-| [System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException) | Throw if XML element name is not `assembly`. |
+`[System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException)`  
+
+Throw if XML element name is not `assembly`.
 
 <a name='M-Vsxmd-Units-AssemblyUnit-ToMarkdown'></a>
 ### ToMarkdown() `method`
@@ -34,7 +30,3 @@ Initializes a new instance of the [AssemblyUnit](./Vsxmd.Units.AssemblyUnit.md/#
 ##### Summary
 
 *Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.

@@ -35,11 +35,13 @@ namespace Vsxmd.Units
         private string Description => this.ElementContent;
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown() =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
-                $"| {this.Name} | {this.paramType.ToReferenceLink()} | {this.Description} |",
+                $"{this.Name.AsCode()}  {this.paramType.ToReferenceLink()}  ",
+                this.Element.ToMarkdownText()
             };
+
 
         /// <summary>
         /// Convert the param XML element to Markdown safely.
@@ -53,40 +55,22 @@ namespace Vsxmd.Units
         /// <para>If parent element kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>, it returns a hint about "no parameters".</para>
         /// <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
         /// </remarks>
-        internal static IEnumerable<string> ToMarkdown(
-            IEnumerable<XElement> elements,
-            IEnumerable<string> paramTypes,
-            MemberKind memberKind)
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, IEnumerable<string> paramTypes, MemberKind memberKind)
         {
             if (!elements.Any())
-            {
-                return
-                    memberKind != MemberKind.Constructor &&
-                    memberKind != MemberKind.Method
-                    ? Enumerable.Empty<string>()
-                    : new[]
-                    {
-                        "##### Parameters",
-                        $"This {memberKind.ToLowerString()} has no parameters.",
-                    };
-            }
+                return Enumerable.Empty<string>();
 
             var markdowns = elements
                 .Zip(paramTypes, (element, type) => new ParamUnit(element, type))
-                .SelectMany(unit => unit.ToMarkdown());
-
-            var table = new[]
-            {
-                "| Name | Type | Description |",
-                "| ---- | ---- | ----------- |",
-            }
-            .Concat(markdowns);
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None));
 
             return new[]
             {
-                "##### Parameters",
-                string.Join("\n", table),
+                "#### Parameters",
+                string.Join("\n\n", markdowns),
             };
         }
+
     }
+
 }

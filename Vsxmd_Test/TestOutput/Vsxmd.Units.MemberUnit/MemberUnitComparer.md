@@ -1,9 +1,9 @@
 <a name='T-Vsxmd-Units-MemberUnit-MemberUnitComparer'></a>
 ## MemberUnitComparer `type`
 
-##### Namespace
+###### Namespace:  Vsxmd.Units.MemberUnit
 
-Vsxmd.Units.MemberUnit
+###### Assembly:  Vsxmd
 
 <a name='M-Vsxmd-Units-MemberUnit-MemberUnitComparer-Compare-Vsxmd-Units-MemberUnit,Vsxmd-Units-MemberUnit-'></a>
 ### Compare() `method`
@@ -11,7 +11,3 @@ Vsxmd.Units.MemberUnit
 ##### Summary
 
 *Inherit from parent.*
-
-##### Parameters
-
-This method has no parameters.

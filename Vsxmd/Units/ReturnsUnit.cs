@@ -16,6 +16,10 @@ namespace Vsxmd.Units
     /// </summary>
     internal class ReturnsUnit : BaseUnit
     {
+
+        private XElement _ReturnType =>
+            Element.Elements("see").FirstOrDefault();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ReturnsUnit"/> class.
         /// </summary>
@@ -27,10 +31,13 @@ namespace Vsxmd.Units
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown() =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
-                "##### Returns",
+                "#### Returns",
+                _ReturnType != null
+                ? $"{_ReturnType.Attribute("cref").Value.ToReferenceLink(true)}\n\n"
+                : "\n\n",
                 this.ElementContent,
             };
 
@@ -42,7 +49,9 @@ namespace Vsxmd.Units
         /// <returns>The generated Markdown.</returns>
         internal static IEnumerable<string> ToMarkdown(XElement element) =>
             element != null
-                ? new ReturnsUnit(element).ToMarkdown()
+                ? new ReturnsUnit(element).ToMarkdown(FormatKind.None)
                 : Enumerable.Empty<string>();
+
     }
+
 }

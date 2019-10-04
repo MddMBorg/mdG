@@ -16,6 +16,27 @@ namespace Vsxmd.Units
     /// </summary>
     internal static class Extensions
     {
+
+        private static XDocument _XDocument { get; set; }
+
+        private static string _AssemblyName { get; set; }
+
+        /// <summary>
+        /// Probably a lazy way to do this and more implementation should be moved to AssemblyUnit class
+        /// </summary>
+        /// <param name="xElement">The XElement to get the AssemblyUnit of.</param>
+        /// <returns>Assembly unit for the current Xdoc.</returns>
+        internal static string GetAssemblyName(this XElement xElement)
+        {
+            var doc = xElement.Document;
+            if (_XDocument != doc && doc != null)
+            {
+                _XDocument = doc;
+                _AssemblyName = _XDocument.Root.Element("assembly").Element("name").Value;
+            }
+            return _AssemblyName;
+        }
+
         /// <summary>
         /// Convert the <see cref="MemberKind"/> to its lowercase name.
         /// </summary>
@@ -247,5 +268,7 @@ namespace Vsxmd.Units
 
             return string.Empty;
         }
+
     }
+
 }

@@ -15,6 +15,10 @@ namespace Vsxmd.Units
     /// </summary>
     internal abstract class BaseUnit : IUnit
     {
+
+        protected readonly string _UnitHeader;
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseUnit"/> class.
         /// </summary>
@@ -24,11 +28,10 @@ namespace Vsxmd.Units
         internal BaseUnit(XElement element, string elementName)
         {
             if (element.Name != elementName)
-            {
                 throw new ArgumentException("The element name is not expected", nameof(element));
-            }
 
             this.Element = element;
+            this._UnitHeader = elementName.ToUpperInvariant();
         }
 
         /// <summary>
@@ -44,7 +47,17 @@ namespace Vsxmd.Units
         protected string ElementContent => this.Element.ToMarkdownText();
 
         /// <inheritdoc />
-        public abstract IEnumerable<string> ToMarkdown();
+        public virtual IEnumerable<string> ToMarkdown(FormatKind format) =>
+            format == FormatKind.MethodDetail
+            ? new[]
+            {
+                $"#### {_UnitHeader}",
+                this.ElementContent
+            }
+            : new[]
+            {
+                this.ElementContent
+            };
 
         /// <summary>
         /// Gets the first (in document order) child element with the specified <paramref name="name"/>.

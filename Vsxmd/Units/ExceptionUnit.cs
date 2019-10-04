@@ -31,10 +31,11 @@ namespace Vsxmd.Units
         private string Description => this.ElementContent;
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown() =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
-                $"| {this.Name} | {this.Description} |",
+                $"{this.Name.AsCode()}  ",
+                this.Element.ToMarkdownText()
             };
 
         /// <summary>
@@ -46,25 +47,16 @@ namespace Vsxmd.Units
         internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements)
         {
             if (!elements.Any())
-            {
                 return Enumerable.Empty<string>();
-            }
 
             var markdowns = elements
                 .Select(element => new ExceptionUnit(element))
-                .SelectMany(unit => unit.ToMarkdown());
-
-            var table = new[]
-            {
-                "| Name | Description |",
-                "| ---- | ----------- |",
-            }
-            .Concat(markdowns);
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None));
 
             return new[]
             {
-                "##### Exceptions",
-                string.Join("\n", table),
+                "#### Exceptions",
+                string.Join("\n\n", markdowns),
             };
         }
     }

@@ -39,10 +39,10 @@ namespace Vsxmd
         /// Convert the table of contents to Markdown syntax.
         /// </summary>
         /// <returns>The table of contents in Markdown syntax.</returns>
-        public IEnumerable<string> ToMarkdown() =>
+        public IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
-                $"## Contents",
+                $"# Contents",
                 this.memberUnits.Select(ToMarkdown).Join("\n"),
             };
 
