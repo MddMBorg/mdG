@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Program-TestGenericType`2'></a>
-## TestGenericType\`2 `type`
+# TestGenericType\`2 type
 
 ###### Namespace:  Vsxmd.Program
 
@@ -20,19 +20,11 @@ Generic type 1.
 Generic type 2.
 
 <a name='M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2'></a>
-### TestGenericMethod\`\`2() `method`
+### TestGenericMethod\`\`2() method
 
 Test generic method.
 
 See [TestGenericMethod\`\`2](/Vsxmd.Program.TestGenericType`2.md/#M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2).
-
-#### Returns
-
-
-
-
-
-Nothing.
 
 #### Type Parameters
 
@@ -43,3 +35,11 @@ Generic type 3.
 `T4`  
 
 Generic type 4.
+
+#### Returns
+
+
+
+
+
+Nothing.

@@ -1,29 +1,33 @@
 <a name='T-Vsxmd-Converter'></a>
-## Converter `type`
+# Converter type
 
 ###### Namespace:  Vsxmd
 
 ###### Assembly:  Vsxmd
 
-##### Summary
-
-*Inherit from parent.*
+*Inherited from parent.*
 
 <a name='M-Vsxmd-Converter-#ctor-System-Xml-Linq-XDocument-'></a>
-### #ctor(document) `constructor`
+### #ctor(document) constructor
 
 Initializes a new instance of the [Converter](/Vsxmd.Converter.md/#T-Vsxmd-Converter) class.
 
 #### Parameters
 
-`document`  [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument)  
+`document`  [XDocument](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XDocument)  
 
 The XML document.
 
 <a name='M-Vsxmd-Converter-ToMarkdown-System-Xml-Linq-XDocument-'></a>
-### ToMarkdown(document) `method`
+### ToMarkdown(document) method
 
 Convert VS XML document to Markdown syntax.
+
+#### Parameters
+
+`document`  [XDocument](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XDocument)  
+
+The XML document.
 
 #### Returns
 
@@ -33,15 +37,7 @@ Convert VS XML document to Markdown syntax.
 
 The generated Markdown content.
 
-#### Parameters
-
-`document`  [System.Xml.Linq.XDocument](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XDocument)  
-
-The XML document.
-
 <a name='M-Vsxmd-Converter-ToMarkdown'></a>
-### ToMarkdown() `method`
+### ToMarkdown() method
 
-##### Summary
-
-*Inherit from parent.*
+*Inherited from parent.*

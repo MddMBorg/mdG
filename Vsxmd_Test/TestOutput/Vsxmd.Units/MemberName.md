@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-MemberName'></a>
-## MemberName `type`
+# MemberName type
 
 ###### Namespace:  Vsxmd.Units
 
@@ -8,33 +8,33 @@
 Member name.
 
 <a name='M-Vsxmd-Units-MemberName-#ctor-System-String,System-Collections-Generic-IEnumerable{System-String}-'></a>
-### #ctor(name,paramNames) `constructor`
+### #ctor(name,paramNames) constructor
 
 Initializes a new instance of the [MemberName](/Vsxmd.Units/MemberName.md/#T-Vsxmd-Units-MemberName) class.
 
 #### Parameters
 
-`name`  [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String)  
+`name`  [String](https://docs.microsoft.com/dotnet/api/System.String)  
 
 The raw member name. For example, `T:Vsxmd.Units.MemberName`.
 
-`paramNames`  [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable)  
+`paramNames`  [String}](https://docs.microsoft.com/dotnet/api/System.Collections.Generic.IEnumerable)  
 
 The parameter names. It is only used when member kind is [Constructor](/Vsxmd.Units/MemberKind.md/#F-Vsxmd-Units-MemberKind-Constructor) or [Method](/Vsxmd.Units/MemberKind.md/#F-Vsxmd-Units-MemberKind-Method).
 
 <a name='M-Vsxmd-Units-MemberName-#ctor-System-String-'></a>
-### #ctor(name) `constructor`
+### #ctor(name) constructor
 
 Initializes a new instance of the [MemberName](/Vsxmd.Units/MemberName.md/#T-Vsxmd-Units-MemberName) class.
 
 #### Parameters
 
-`name`  [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String)  
+`name`  [String](https://docs.microsoft.com/dotnet/api/System.String)  
 
 The raw member name. For example, `T:Vsxmd.Units.MemberName`.
 
 <a name='P-Vsxmd-Units-MemberName-Caption'></a>
-### Caption `property`
+### Caption property
 
 Gets the caption representation for this member name.
 
@@ -45,17 +45,17 @@ For [Type](/Vsxmd.Units/MemberKind.md/#F-Vsxmd-Units-MemberKind-Type), show as `
 For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)`.
 
 <a name='P-Vsxmd-Units-MemberName-Kind'></a>
-### Kind `property`
+### Kind property
 
 Gets the member kind, one of [MemberKind](/Vsxmd.Units/MemberKind.md/#T-Vsxmd-Units-MemberKind).
 
 <a name='P-Vsxmd-Units-MemberName-Link'></a>
-### Link `property`
+### Link property
 
 Gets the link pointing to this member unit.
 
 <a name='P-Vsxmd-Units-MemberName-Namespace'></a>
-### Namespace `property`
+### Namespace property
 
 Gets the namespace name.
 
@@ -64,7 +64,7 @@ Gets the namespace name.
 `System`, `Vsxmd`, `Vsxmd.Units`.
 
 <a name='P-Vsxmd-Units-MemberName-TypeName'></a>
-### TypeName `property`
+### TypeName property
 
 Gets the type name.
 
@@ -73,14 +73,12 @@ Gets the type name.
 `Vsxmd.Program`, `Vsxmd.Units.TypeUnit`.
 
 <a name='M-Vsxmd-Units-MemberName-CompareTo-Vsxmd-Units-MemberName-'></a>
-### CompareTo() `method`
+### CompareTo() method
 
-##### Summary
-
-*Inherit from parent.*
+*Inherited from parent.*
 
 <a name='M-Vsxmd-Units-MemberName-GetParamTypes'></a>
-### GetParamTypes() `method`
+### GetParamTypes() method
 
 Gets the method parameter type names from the member name.
 
@@ -103,13 +101,19 @@ It also handle generic type.
 For `(System.Collections.Generic.IEnumerable{System.String})`, returns `["T:System.Collections.Generic.IEnumerable{System.String}"]`.
 
 <a name='M-Vsxmd-Units-MemberName-ToReferenceLink-System-Boolean-'></a>
-### ToReferenceLink(useShortName) `method`
+### ToReferenceLink(useShortName) method
 
 Convert the member name to Markdown reference link.
 
 If then name is under `System` namespace, the link points to MSDN.
 
 Otherwise, the link points to this page anchor.
+
+#### Parameters
+
+`useShortName`  [Boolean](https://docs.microsoft.com/dotnet/api/System.Boolean)  
+
+Indicate if use short type name.
 
 #### Returns
 
@@ -118,9 +122,3 @@ Otherwise, the link points to this page anchor.
 
 
 The generated Markdown reference link.
-
-#### Parameters
-
-`useShortName`  [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean)  
-
-Indicate if use short type name.

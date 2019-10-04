@@ -88,13 +88,13 @@ namespace Vsxmd.Units
         /// </example>
         internal string Caption =>
             this.Kind == MemberKind.Type
-            ? $"{this.Href.ToAnchor()}## {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}`"
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} {this.Kind.ToLowerString()}"
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} `{this.Kind.ToLowerString()}`"
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} {this.Kind.ToLowerString()}"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) `{this.Kind.ToLowerString()}`"
+            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) {this.Kind.ToLowerString()}"
             : string.Empty;
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Vsxmd.Units
         private string LongName =>
             this.StrippedName.Split('(').First();
 
-        private string MsdnName =>
+        private string DocsName =>
             this.LongName.Split('{').First();
 
         private IEnumerable<string> NameSegments =>
@@ -185,22 +185,14 @@ namespace Vsxmd.Units
             foreach (var character in paramString)
             {
                 if (character == '{')
-                {
                     delta++;
-                }
                 else if (character == '}')
-                {
                     delta--;
-                }
                 else if (character == ',' && delta == 0)
-                {
                     list.Add(new StringBuilder("T:"));
-                }
 
                 if (character != ',' || delta != 0)
-                {
                     list.Last().Append(character);
-                }
             }
 
             return list.Select(x => x.ToString());
@@ -215,7 +207,8 @@ namespace Vsxmd.Units
         /// <returns>The generated Markdown reference link.</returns>
         internal string ToReferenceLink(bool useShortName) =>
             $"{this.Namespace}.".StartsWith("System.", StringComparison.Ordinal)
-            ? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName})"
+            //? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName})"   //old version, changed for docs.microsoft.com
+            ? $"[{this.GetReferenceName(useShortName).Escape()}](https://docs.microsoft.com/dotnet/api/{this.DocsName})"
             : $"[{this.GetReferenceName(useShortName).Escape()}]({this.FormattedHyperLink})";
 
         internal string FormattedHyperLink =>

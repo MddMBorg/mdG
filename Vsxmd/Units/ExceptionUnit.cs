@@ -34,7 +34,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
-                $"{this.Name.AsCode()}  ",
+                $"{this.Name}  ",
                 this.Element.ToMarkdownText()
             };
 

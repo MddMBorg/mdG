@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-ParamUnit'></a>
-## ParamUnit `type`
+# ParamUnit type
 
 ###### Namespace:  Vsxmd.Units
 
@@ -8,37 +8,49 @@
 Param unit.
 
 <a name='M-Vsxmd-Units-ParamUnit-#ctor-System-Xml-Linq-XElement,System-String-'></a>
-### #ctor(element,paramType) `constructor`
+### #ctor(element,paramType) constructor
 
 Initializes a new instance of the [ParamUnit](/Vsxmd.Units/ParamUnit.md/#T-Vsxmd-Units-ParamUnit) class.
 
 #### Parameters
 
-`element`  [System.Xml.Linq.XElement](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Xml.Linq.XElement)  
+`element`  [XElement](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XElement)  
 
 The param XML element.
 
-`paramType`  [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String)  
+`paramType`  [String](https://docs.microsoft.com/dotnet/api/System.String)  
 
 The parameter type corresponding to the param XML element.
 
 #### Exceptions
 
-`[System.ArgumentException](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.ArgumentException)`  
+[System.ArgumentException](https://docs.microsoft.com/dotnet/api/System.ArgumentException)  
 
 Throw if XML element name is not `param`.
 
 <a name='M-Vsxmd-Units-ParamUnit-ToMarkdown'></a>
-### ToMarkdown() `method`
+### ToMarkdown() method
 
-##### Summary
-
-*Inherit from parent.*
+*Inherited from parent.*
 
 <a name='M-Vsxmd-Units-ParamUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement},System-Collections-Generic-IEnumerable{System-String},Vsxmd-Units-MemberKind-'></a>
-### ToMarkdown(elements,paramTypes,memberKind) `method`
+### ToMarkdown(elements,paramTypes,memberKind) method
 
 Convert the param XML element to Markdown safely.
+
+#### Parameters
+
+`elements`  [XElement}](https://docs.microsoft.com/dotnet/api/System.Collections.Generic.IEnumerable)  
+
+The param XML element list.
+
+`paramTypes`  [String}](https://docs.microsoft.com/dotnet/api/System.Collections.Generic.IEnumerable)  
+
+The paramater type names.
+
+`memberKind`  [MemberKind](/Vsxmd.Units/MemberKind.md/#T-Vsxmd-Units-MemberKind)  
+
+The member kind of the parent element.
 
 #### Returns
 
@@ -47,20 +59,6 @@ Convert the param XML element to Markdown safely.
 
 
 The generated Markdown.
-
-#### Parameters
-
-`elements`  [System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable)  
-
-The param XML element list.
-
-`paramTypes`  [System.Collections.Generic.IEnumerable{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.IEnumerable)  
-
-The paramater type names.
-
-`memberKind`  [Vsxmd.Units.MemberKind](/Vsxmd.Units/MemberKind.md/#T-Vsxmd-Units-MemberKind)  
-
-The member kind of the parent element.
 
 #### Remarks
 

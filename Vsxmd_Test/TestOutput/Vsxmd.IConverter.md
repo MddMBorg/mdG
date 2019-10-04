@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-IConverter'></a>
-## IConverter `type`
+# IConverter type
 
 ###### Namespace:  Vsxmd
 
@@ -8,7 +8,7 @@
 Converter for XML document to Markdown syntax conversion.
 
 <a name='M-Vsxmd-IConverter-ToMarkdown'></a>
-### ToMarkdown() `method`
+### ToMarkdown() method
 
 Convert to Markdown syntax.
 

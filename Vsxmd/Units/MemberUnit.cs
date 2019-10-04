@@ -73,8 +73,7 @@ namespace Vsxmd.Units
                 ? Enumerable.Empty<string>()
                 : new[]
                 {
-                    "##### Summary",
-                    "*Inherit from parent.*",
+                    "*Inherited from parent.*",
                 };
 
         private IEnumerable<string> Namespace =>
@@ -130,10 +129,10 @@ namespace Vsxmd.Units
                 .Concat(this.Assembly)
                 .Concat(this.InheritDoc)
                 .Concat(this.Summary)
-                .Concat(this.Returns)
-                .Concat(this.Params)
                 .Concat(this.Typeparams)
+                .Concat(this.Params)
                 .Concat(this.Exceptions)
+                .Concat(this.Returns)
                 .Concat(this.Permissions)
                 .Concat(this.Example)
                 .Concat(this.Remarks)

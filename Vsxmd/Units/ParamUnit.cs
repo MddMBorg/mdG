@@ -38,7 +38,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown(FormatKind format) =>
             new[]
             {
-                $"{this.Name.AsCode()}  {this.paramType.ToReferenceLink()}  ",
+                $"{this.Name.AsCode()}  {this.paramType.ToReferenceLink(true)}  ",
                 this.Element.ToMarkdownText()
             };
 

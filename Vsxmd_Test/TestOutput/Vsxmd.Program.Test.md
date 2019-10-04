@@ -1,12 +1,12 @@
 <a name='T-Vsxmd-Program-Test'></a>
-## Test `type`
+# Test type
 
 ###### Namespace:  Vsxmd.Program
 
 ###### Assembly:  Vsxmd
 
 <a name='M-Vsxmd-Program-Test-#ctor'></a>
-### #ctor() `constructor`
+### #ctor() constructor
 
 Initializes a new instance of the [Test](/Vsxmd.Program.Test.md/#T-Vsxmd-Program-Test) class.
 
@@ -19,7 +19,7 @@ See [Test.#ctor](/Vsxmd.Program.Test.md/#M-Vsxmd-Program-Test-#ctor).
 | [Vsxmd.Program](/Vsxmd.Program.md/#T-Vsxmd-Program) | Just for test. |
 
 <a name='M-Vsxmd-Program-Test-TestBacktickInSummary'></a>
-### TestBacktickInSummary() `method`
+### TestBacktickInSummary() method
 
 Test backtick characters in summary comment.
 
@@ -38,9 +38,15 @@ See \``code block inside backtick`\`.
 Nothing.
 
 <a name='M-Vsxmd-Program-Test-TestGenericException'></a>
-### TestGenericException() `method`
+### TestGenericException() method
 
 Test generic exception type.
+
+#### Exceptions
+
+[Vsxmd.Program.Test.TestGenericParameter\`\`2](/Vsxmd.Program.Test.md/#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-)  
+
+Just for test.
 
 #### Returns
 
@@ -50,32 +56,12 @@ Test generic exception type.
 
 Nothing.
 
-#### Exceptions
-
-```[Vsxmd.Program.Test.TestGenericParameter\`\`2](/Vsxmd.Program.Test.md/#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-)```  
-
-Just for test.
-
 <a name='M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-'></a>
-### TestGenericParameter\`\`2(expression) `method`
+### TestGenericParameter\`\`2(expression) method
 
 Test generic parameter type.
 
 See `T1` and `T2`.
-
-#### Returns
-
-
-
-
-
-Nothing.
-
-#### Parameters
-
-`expression`  [System.Linq.Expressions.Expression{System.Func{\`\`0,\`\`1,System.String}}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Linq.Expressions.Expression)  
-
-The linq expression.
 
 #### Type Parameters
 
@@ -87,8 +73,22 @@ Generic type 1.
 
 Generic type 2.
 
+#### Parameters
+
+`expression`  [String}}](https://docs.microsoft.com/dotnet/api/System.Linq.Expressions.Expression)  
+
+The linq expression.
+
+#### Returns
+
+
+
+
+
+Nothing.
+
 <a name='M-Vsxmd-Program-Test-TestGenericPermission'></a>
-### TestGenericPermission() `method`
+### TestGenericPermission() method
 
 Test generic exception type.
 
@@ -105,7 +105,7 @@ Nothing.
 | [Vsxmd.Program.Test.TestGenericParameter\`\`2](/Vsxmd.Program.Test.md/#M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-) | Just for test. |
 
 <a name='M-Vsxmd-Program-Test-TestGenericReference'></a>
-### TestGenericReference() `method`
+### TestGenericReference() method
 
 Test generic reference type.
 
@@ -120,9 +120,15 @@ See [TestGenericParameter\`\`2](/Vsxmd.Program.Test.md/#M-Vsxmd-Program-Test-Tes
 Nothing.
 
 <a name='M-Vsxmd-Program-Test-TestParamWithoutDescription-System-String-'></a>
-### TestParamWithoutDescription(p) `method`
+### TestParamWithoutDescription(p) method
 
 Test a param tag without description.
+
+#### Parameters
+
+`p`  [String](https://docs.microsoft.com/dotnet/api/System.String)  
+
+
 
 #### Returns
 
@@ -132,14 +138,8 @@ Test a param tag without description.
 
 Nothing.
 
-#### Parameters
-
-`p`  [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String)  
-
-
-
 <a name='M-Vsxmd-Program-Test-TestSeeLangword'></a>
-### TestSeeLangword() `method`
+### TestSeeLangword() method
 
 Test see tag with langword attribute. See `true`.
 
@@ -152,7 +152,7 @@ Test see tag with langword attribute. See `true`.
 Nothing.
 
 <a name='M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean-'></a>
-### TestSpaceAfterInlineElements\`\`1() `method`
+### TestSpaceAfterInlineElements\`\`1() method
 
 Test space after inline elements.
 

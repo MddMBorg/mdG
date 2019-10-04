@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-IUnit'></a>
-## IUnit `type`
+# IUnit type
 
 ###### Namespace:  Vsxmd.Units
 
@@ -8,7 +8,7 @@
 [IUnit](/Vsxmd.Units.IUnit.md/#T-Vsxmd-Units-IUnit) is wrapper to handle XML elements.
 
 <a name='M-Vsxmd-Units-IUnit-ToMarkdown'></a>
-### ToMarkdown() `method`
+### ToMarkdown() method
 
 Represent the XML element content as Markdown syntax.
 
