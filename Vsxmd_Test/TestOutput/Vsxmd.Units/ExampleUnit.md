@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-ExampleUnit'></a>
 # ExampleUnit type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 Example unit.
 
 # Constructors

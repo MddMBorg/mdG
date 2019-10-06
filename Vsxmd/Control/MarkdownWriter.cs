@@ -29,25 +29,10 @@ namespace Vsxmd
         }
 
         /// <summary>
-        /// Converts the XML to one Markdown file and writes to the output file
-        /// </summary>
-        public void WriteSingleFile()
-        {
-            MemberName.SplitFiles = false;
-            MemberName.SubFolder = false;
-
-            File.WriteAllText(Path.ChangeExtension(_OutputPath, "md"), _Converter.ToMarkdown());
-        }
-
-        /// <summary>
         /// Converts the XML to multiple Markdown files (one per type) and writes to the output directory
         /// </summary>
-        /// <param name="useSubDirectories">Use subdirectories for each namespace.</param>
-        public void WriteMultipleFiles(bool useSubDirectories)
+        public void WriteFiles()
         {
-            MemberName.SplitFiles = true;
-            MemberName.SubFolder = useSubDirectories;
-
             string directory = Path.GetDirectoryName(_OutputPath);
 
             //Create output directory in case
@@ -56,22 +41,33 @@ namespace Vsxmd
 
             var types = _Converter.MemberUnits();
 
-            if (useSubDirectories)
+            foreach (var dirs in types.GroupBy(x => x.DirectoryName))
             {
-                foreach (var x in types.GroupBy(z => z.TypeNamespace))
-                {
-                    if (!Directory.Exists(Path.Combine(directory, x.Key)))
-                        Directory.CreateDirectory(Path.Combine(directory, x.Key));
-                }
+                if (!Directory.Exists(Path.Combine(directory, dirs.Key)))
+                    Directory.CreateDirectory(Path.Combine(directory, dirs.Key));
             }
+
+            PageFormatter formatter = new PageFormatter();
 
             foreach (var n in types.GroupBy(x => x.TypeNamespace))
             {
-                foreach (var t in n.GroupBy(x => x.FileName))
-                    File.WriteAllText(
-                        Path.Combine(
-                            Path.Combine(directory, useSubDirectories ? n.Key : ""), t.Key),
-                        new PageFormatter(FormatKind.MethodSummary).GetUnits(t).Join("\n\n").Suffix("\n"));
+                foreach (var t in n.GroupBy(x => x.TypeName))
+                {
+                    var markdown = formatter.GetMarkdownByType(t.Select(x => x));
+                    File.WriteAllText(Path.Combine(directory, t.Where(x => x.Kind == MemberKind.Type).FirstOrDefault().FullFilePath),
+                        markdown.Join("\n\n").Suffix("\n"));
+                }
+
+                foreach (var m in n.Where(x => (x as MemberUnit).Kind != MemberKind.Type).GroupBy(x => x.FullFilePath))
+                {
+                    foreach (var u in (m.Where(x => x.Kind != MemberKind.NotSupported)))
+                    {
+                        var markdown = formatter.GetMarkdownByMember(u);
+                        File.WriteAllText(Path.Combine(directory, u.FullFilePath),
+                            markdown.Join("\n\n").Suffix("\n"));
+                    }
+                }
+
             }
 
         }

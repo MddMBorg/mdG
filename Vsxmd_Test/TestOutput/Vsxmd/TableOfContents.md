@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-TableOfContents'></a>
 # TableOfContents type
 
+###### Namespace:  Vsxmd
+
+###### Assembly:  Vsxmd
+
 Table of contents.
 
 # Constructors

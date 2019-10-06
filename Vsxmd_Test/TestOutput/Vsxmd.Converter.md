@@ -1,7 +1,11 @@
 <a name='T-Vsxmd-Converter'></a>
 # Converter type
 
+###### Namespace:  Vsxmd
 
+###### Assembly:  Vsxmd
+
+*Inherited from parent.*
 
 # Constructors
 

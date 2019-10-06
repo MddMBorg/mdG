@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-SeealsoUnit'></a>
 # SeealsoUnit type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 Seealso unit.
 
 # Constructors

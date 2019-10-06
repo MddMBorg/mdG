@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-MemberKind'></a>
 # MemberKind type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 The member kind.
 
 # Fields

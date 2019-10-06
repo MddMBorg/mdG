@@ -20,15 +20,9 @@ namespace Vsxmd_Test
 
             MarkdownWriter writer = new MarkdownWriter(XDocument.Load($"{resourceDir}\\vsxmd.xml"), Path.Combine(outputDir, "test.md"));
 
-            writer.WriteSingleFile();
-
-            writer.WriteMultipleFiles(true);
+            writer.WriteFiles();
             Assert.IsTrue(Directory.Exists(outputDir));
             Assert.IsTrue(Directory.GetDirectories(outputDir).Length > 0);
-
-            writer.WriteMultipleFiles(false);
-            Assert.IsTrue(Directory.GetFiles(outputDir).Length > 0);
-            Console.Write(1);
         }
 
     }

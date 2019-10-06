@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-ReturnsUnit'></a>
 # ReturnsUnit type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 Returns unit.
 
 # Constructors

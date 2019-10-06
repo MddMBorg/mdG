@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-SummaryUnit'></a>
 # SummaryUnit type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 Summary unit.
 
 # Constructors

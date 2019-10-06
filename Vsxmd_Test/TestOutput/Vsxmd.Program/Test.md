@@ -1,7 +1,9 @@
 <a name='T-Vsxmd-Program-Test'></a>
 # Test type
 
+###### Namespace:  Vsxmd.Program
 
+###### Assembly:  Vsxmd
 
 # Constructors
 

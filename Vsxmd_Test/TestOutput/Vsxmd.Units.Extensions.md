@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-Extensions'></a>
 # Extensions type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 Extensions helper.
 
 # Methods

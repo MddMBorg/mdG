@@ -1,7 +1,9 @@
 <a name='T-Vsxmd-PageFormatter'></a>
 # PageFormatter type
 
+###### Namespace:  Vsxmd
 
+###### Assembly:  Vsxmd
 
 # Fields
 

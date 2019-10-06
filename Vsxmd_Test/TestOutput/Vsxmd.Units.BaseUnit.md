@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-BaseUnit'></a>
 # BaseUnit type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 The base unit.
 
 # Constructors

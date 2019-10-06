@@ -8,6 +8,7 @@ namespace Vsxmd.Units
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
 
@@ -91,10 +92,10 @@ namespace Vsxmd.Units
             ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} {this.Kind.ToLowerString()}"
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()} {this.Kind.ToLowerString()}"
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} {this.Kind.ToLowerString()}"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"{this.Href.ToAnchor()}### {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) {this.Kind.ToLowerString()}"
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) {this.Kind.ToLowerString()}"
             : string.Empty;
 
         /// <summary>
@@ -221,16 +222,28 @@ namespace Vsxmd.Units
             $"]({this.FormattedHyperLink})";
 
         internal string FormattedHyperLink =>
-            !SplitFiles
-            ? $"#{this.Href}"
-            : !SubFolder
-                ? $"/{this.FileName}/#{this.Href}"
-                : $"/{this.Namespace}/{this.FileName}/#{this.Href}";
+            $"/{this.Namespace}/{this.FileName}/#{this.Href}";
 
         internal string FileName =>
-            !SubFolder
-            ? $"{this.TypeName}.md"
-            : $"{this.TypeShortName}.md";
+            Kind != MemberKind.Constructor
+            ? $"{this.FriendlyName}.md"
+            : "Constructors.md";
+
+        internal string DirectoryName =>
+            Kind == MemberKind.Type
+            ? Path.Combine(this.Namespace, this.TypeName)
+            : Kind == MemberKind.Constructor
+            ? Path.Combine(this.Namespace, this.TypeName, "Constructors")
+            : Kind == MemberKind.Method
+            ? Path.Combine(this.Namespace, this.TypeName, "Methods")
+            : Kind == MemberKind.Constants
+            ? Path.Combine(this.Namespace, this.TypeName, "Fields")
+            : Kind == MemberKind.Property
+            ? Path.Combine(this.Namespace, this.TypeName, "Properties")
+            : "" ;
+
+        internal string FullFilePath =>
+            Path.Combine(DirectoryName, FileName);
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName

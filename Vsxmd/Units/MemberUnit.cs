@@ -56,6 +56,10 @@ namespace Vsxmd.Units
 
         internal string FileName => name.FileName;
 
+        internal string DirectoryName => name.DirectoryName;
+
+        internal string FullFilePath => name.FullFilePath;
+
         internal string Caption => name.Caption;
 
 
@@ -80,17 +84,13 @@ namespace Vsxmd.Units
                 };
 
         internal IEnumerable<string> Namespace =>
-            this.Kind != MemberKind.Type
-            ? Enumerable.Empty<string>()
-            : new[]
+            new[]
             {
                 $"###### Namespace:  {this.name.Namespace}"
             };
 
         internal IEnumerable<string> Assembly =>
-            this.Kind != MemberKind.Type
-            ? Enumerable.Empty<string>()
-            : new[]
+            new[]
             {
                 $"###### Assembly:  {this.AssemblyName}"
             };

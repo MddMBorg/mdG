@@ -34,27 +34,28 @@
             <param name="document">The XDocument to be converted to Markdown and output.</param>
             <param name="outputPath">Path to output Markdown to.</param>
         </member>
-        <member name="M:Vsxmd.MarkdownWriter.WriteSingleFile">
-            <summary>
-            Converts the XML to one Markdown file and writes to the output file
-            </summary>
-        </member>
-        <member name="M:Vsxmd.MarkdownWriter.WriteMultipleFiles(System.Boolean)">
+        <member name="M:Vsxmd.MarkdownWriter.WriteFiles">
             <summary>
             Converts the XML to multiple Markdown files (one per type) and writes to the output directory
             </summary>
-            <param name="useSubDirectories">Use subdirectories for each namespace.</param>
         </member>
         <member name="F:Vsxmd.PageFormatter.test">
             <summary>
             Test string
             </summary>
         </member>
-        <member name="M:Vsxmd.PageFormatter.GetUnits(System.Collections.Generic.IEnumerable{Vsxmd.Units.BaseUnit})">
+        <member name="M:Vsxmd.PageFormatter.GetMarkdownByType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
             <summary>
-            Takes several base units of same type and organises them on page in the specified way according to the formatter.
+            Takes several base units of same type and organises them on page in the specified way.
             </summary>
             <param name="units">The units of the same type.</param>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:Vsxmd.PageFormatter.GetMarkdownByMember(Vsxmd.Units.MemberUnit)">
+            <summary>
+            Takes one Member Unit (non class type) and organises it in markdown format as series of strings.
+            </summary>
+            <param name="unit">The unit to format.</param>
             <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
         </member>
         <member name="T:Vsxmd.Program">

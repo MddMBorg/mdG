@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-TypeparamUnit'></a>
 # TypeparamUnit type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 Typeparam unit.
 
 # Constructors

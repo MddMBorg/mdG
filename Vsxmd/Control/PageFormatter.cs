@@ -10,24 +10,22 @@ namespace Vsxmd
 {
     internal class PageFormatter
     {
-        private readonly FormatKind _Format;
 
         /// <summary>
         /// Test string
         /// </summary>
         public string test;
 
-        public PageFormatter(FormatKind format)
+        public PageFormatter()
         {
-            _Format = format;
         }
 
         /// <summary>
-        /// Takes several base units of same type and organises them on page in the specified way according to the formatter.
+        /// Takes several base units of same type and organises them on page in the specified way.
         /// </summary>
         /// <param name="units">The units of the same type.</param>
-        /// <returns><see cref="IEnumerable{BaseUnit}"/></returns>
-        public IEnumerable<string> GetUnits(IEnumerable<BaseUnit> units)
+        /// <returns><see cref="IEnumerable{String}"/></returns>
+        public IEnumerable<string> GetMarkdownByType(IEnumerable<MemberUnit> units)
         {
             var classUnit = units.OfType<MemberUnit>().Where(x => x.Kind == MemberKind.Type).FirstOrDefault();
             var properties = units.OfType<MemberUnit>().Where(x => x.Kind == MemberKind.Property);
@@ -37,58 +35,63 @@ namespace Vsxmd
 
             IEnumerable<string> formats = new[] { "" };
 
-            if (_Format == FormatKind.MethodSummary)
-            {
-                formats = new[] { classUnit.Caption }
-                    .Concat(new[] { classUnit.Summary.Join("").Replace('\n', ' ') });
+            formats = classUnit.ToMarkdown(FormatKind.MethodSummary);
 
-                if (constructors.Count() > 0)
-                {
-                    formats = formats.Concat(new[] { "# Constructors" })
-                        .Concat(new []
-                        {
+            if (constructors.Count() > 0)
+            {
+                formats = formats.Concat(new[] { "# Constructors" })
+                    .Concat(new[]
+                    {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
                             constructors.Select(x => x.ToMarkdown(FormatKind.MethodSummary).Join("")).Join("\n")
-                        });
-                }
-                
-                if (constants.Count() > 0)
-                {
-                    formats = formats.Concat(new[] { "# Fields" })
-                        .Concat(new[]
-                        {
+                    });
+            }
+
+            if (constants.Count() > 0)
+            {
+                formats = formats.Concat(new[] { "# Fields" })
+                    .Concat(new[]
+                    {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
                             constants.Select(x => x.ToMarkdown(FormatKind.MethodSummary).Join("")).Join("\n")
-                        });
-                }
+                    });
+            }
 
-                if (properties.Count() > 0)
-                {
-                    formats = formats.Concat(new[] { "# Properties" })
-                        .Concat(new[]
-                        {
+            if (properties.Count() > 0)
+            {
+                formats = formats.Concat(new[] { "# Properties" })
+                    .Concat(new[]
+                    {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
                             properties.Select(x => x.ToMarkdown(FormatKind.MethodSummary).Join("")).Join("\n")
-                        });
+                    });
 
-                }
+            }
 
-                if (methods.Count() > 0)
-                {
-                    formats = formats.Concat(new[] { "# Methods" })
-                        .Concat(new[]
-                        {
+            if (methods.Count() > 0)
+            {
+                formats = formats.Concat(new[] { "# Methods" })
+                    .Concat(new[]
+                    {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
                             methods.Select(x => x.ToMarkdown(FormatKind.MethodSummary).Join("")).Join("\n")
-                        });
-                }
-
+                    });
             }
             return formats;
+        }
+
+        /// <summary>
+        /// Takes one Member Unit (non class type) and organises it in markdown format as series of strings.
+        /// </summary>
+        /// <param name="unit">The unit to format.</param>
+        /// <returns><see cref="IEnumerable{String}"/></returns>
+        public IEnumerable<string> GetMarkdownByMember(MemberUnit unit)
+        {
+            return unit.ToMarkdown(FormatKind.MethodDetail);
         }
 
     }

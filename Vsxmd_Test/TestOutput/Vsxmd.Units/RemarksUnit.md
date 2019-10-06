@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-RemarksUnit'></a>
 # RemarksUnit type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 Remarks unit.
 
 # Constructors

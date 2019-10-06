@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-PermissionUnit'></a>
 # PermissionUnit type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 Permission unit.
 
 # Constructors

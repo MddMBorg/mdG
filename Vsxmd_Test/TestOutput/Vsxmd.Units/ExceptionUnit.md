@@ -1,6 +1,10 @@
 <a name='T-Vsxmd-Units-ExceptionUnit'></a>
 # ExceptionUnit type
 
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
 Exception unit.
 
 # Constructors

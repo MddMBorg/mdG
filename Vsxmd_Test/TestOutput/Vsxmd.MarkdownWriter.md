@@ -1,7 +1,9 @@
 <a name='T-Vsxmd-MarkdownWriter'></a>
 # MarkdownWriter type
 
+###### Namespace:  Vsxmd
 
+###### Assembly:  Vsxmd
 
 # Constructors
 

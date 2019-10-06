@@ -49,7 +49,7 @@ namespace Vsxmd
                 var document = XDocument.Load(xmlPath);
 
                 MarkdownWriter writer = new MarkdownWriter(document, markdownPath);
-                writer.WriteSingleFile();
+                writer.WriteFiles();
 
                 string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
                 if (string.IsNullOrWhiteSpace(vsxmdAutoDeleteXml))
