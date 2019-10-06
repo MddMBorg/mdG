@@ -26,15 +26,15 @@ namespace Vsxmd.Units
         {
         }
 
-        private string Name => this.GetAttribute("cref").ToReferenceLink();
+        private string _Name => this.GetAttribute("cref").ToReferenceLink(Name);
 
-        private string Description => this.ElementContent;
+        private string Description => this.ElementContent(Name);
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
             new[]
             {
-                $"| {this.Name} | {this.Description} |",
+                $"| {this._Name} | {this.Description} |",
             };
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="elements">The permission XML element list.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements)
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName sourceMember)
         {
             if (!elements.Any())
             {
@@ -52,7 +52,7 @@ namespace Vsxmd.Units
 
             var markdowns = elements
                 .Select(element => new PermissionUnit(element))
-                .SelectMany(unit => unit.ToMarkdown(FormatKind.None));
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, sourceMember));
 
             return new[]
             {

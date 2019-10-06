@@ -16,8 +16,6 @@ namespace Vsxmd.Units
     /// </summary>
     internal class MemberUnit : BaseUnit
     {
-        private readonly MemberName name;
-
         internal readonly string AssemblyName;
 
         static MemberUnit()
@@ -34,7 +32,7 @@ namespace Vsxmd.Units
             : base(element, "member")
         {
             AssemblyName = element.GetAssemblyName();
-            this.name = new MemberName(
+            this.Name = new MemberName(
                 this.GetAttribute("name"),
                 this.GetChildren("param").Select(x => x.Attribute("name").Value));
         }
@@ -50,30 +48,30 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The the type name.</value>
         /// <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
-        internal string TypeName => this.name.TypeName;
+        internal string TypeName => this.Name.TypeName;
 
-        internal string TypeNamespace => name.Namespace;
+        internal string TypeNamespace => Name.Namespace;
 
-        internal string FileName => name.FileName;
+        internal string FileName => Name.FileName;
 
-        internal string DirectoryName => name.DirectoryName;
+        internal string DirectoryName => Name.DirectoryName;
 
-        internal string FullFilePath => name.FullFilePath;
+        internal string FullFilePath => Name.FullFilePath;
 
-        internal string Caption => name.Caption;
+        internal string Caption => Name.Caption;
 
 
         /// <summary>
         /// Gets the member kind, one of <see cref="MemberKind"/>.
         /// </summary>
         /// <value>The member kind.</value>
-        internal MemberKind Kind => this.name.Kind;
+        internal MemberKind Kind => this.Name.Kind;
 
         /// <summary>
         /// Gets the link pointing to this member unit.
         /// </summary>
         /// <value>The link pointing to this member unit.</value>
-        internal string Link => this.name.Link;
+        internal string Link => this.Name.Link;
 
         internal IEnumerable<string> InheritDoc =>
             this.GetChild("inheritdoc") == null
@@ -86,7 +84,7 @@ namespace Vsxmd.Units
         internal IEnumerable<string> Namespace =>
             new[]
             {
-                $"###### Namespace:  {this.name.Namespace}"
+                $"###### Namespace:  {this.Name.Namespace}"
             };
 
         internal IEnumerable<string> Assembly =>
@@ -96,37 +94,37 @@ namespace Vsxmd.Units
             };
 
         internal IEnumerable<string> Summary =>
-            SummaryUnit.ToMarkdown(this.GetChild("summary"));
+            SummaryUnit.ToMarkdown(this.GetChild("summary"), Name);
 
         internal IEnumerable<string> Returns =>
-            ReturnsUnit.ToMarkdown(this.GetChild("returns"));
+            ReturnsUnit.ToMarkdown(this.GetChild("returns"), this.Name);
 
         internal IEnumerable<string> Params =>
             ParamUnit.ToMarkdown(
                 this.GetChildren("param"),
-                this.name.GetParamTypes(),
-                this.Kind);
+                this.Name.GetParamTypes(),
+                this.Name);
 
         internal IEnumerable<string> Typeparams =>
-            TypeparamUnit.ToMarkdown(this.GetChildren("typeparam"));
+            TypeparamUnit.ToMarkdown(this.GetChildren("typeparam"), Name);
 
         internal IEnumerable<string> Exceptions =>
-            ExceptionUnit.ToMarkdown(this.GetChildren("exception"));
+            ExceptionUnit.ToMarkdown(this.GetChildren("exception"), Name);
 
         internal IEnumerable<string> Permissions =>
-            PermissionUnit.ToMarkdown(this.GetChildren("permission"));
+            PermissionUnit.ToMarkdown(this.GetChildren("permission"), Name);
 
         internal IEnumerable<string> Example =>
-            ExampleUnit.ToMarkdown(this.GetChild("example"));
+            ExampleUnit.ToMarkdown(this.GetChild("example"), Name);
 
         internal IEnumerable<string> Remarks =>
-            RemarksUnit.ToMarkdown(this.GetChild("remarks"));
+            RemarksUnit.ToMarkdown(this.GetChild("remarks"), Name);
 
         internal IEnumerable<string> Seealsos =>
-            SeealsoUnit.ToMarkdown(this.GetChildren("seealso"));
+            SeealsoUnit.ToMarkdown(this.GetChildren("seealso"), Name);
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown(FormatKind format)
+        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember)
         {
             if (format == FormatKind.MethodDetail || format == FormatKind.None || Kind == MemberKind.Type)
                 return new[] { this.Caption }
@@ -148,7 +146,7 @@ namespace Vsxmd.Units
                     Kind == MemberKind.Constructor ||
                     Kind == MemberKind.Constants ||
                     Kind == MemberKind.Property)
-                    return new[] { $"| {this.name.ToSummaryLink(true)} | {this.Summary.Join("").Replace('\n', ' ')} |" };
+                    return new[] { $"| {this.Name.ToSummaryLink(true)} | {this.Summary.Join("").Replace('\n', ' ')} |" };
                 else
                     return new[] { "|  |  |" };
             }
@@ -176,7 +174,7 @@ namespace Vsxmd.Units
         {
             /// <inheritdoc />
             public int Compare(MemberUnit x, MemberUnit y) =>
-                x.name.CompareTo(y.name);
+                x.Name.CompareTo(y.Name);
         }
 
     }

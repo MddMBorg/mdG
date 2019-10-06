@@ -99,8 +99,27 @@ namespace Vsxmd.Units
         /// <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
         /// <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
         /// </example>
-        internal static string ToReferenceLink(this string memberName, bool useShortName = false) =>
-            new MemberName(memberName).ToReferenceLink(useShortName);
+        internal static string ToReferenceLink(this string memberName, MemberName sourceMember, bool useShortName = false) =>
+            new MemberName(memberName).ToReferenceLink(sourceMember, useShortName);
+
+        internal static string ToMemberKindString(this MemberKind kind)
+        {
+            switch (kind)
+            {
+                case MemberKind.Constants:
+                    return "Fields";
+                case MemberKind.Constructor:
+                    return "Constructors";
+                case MemberKind.Method:
+                    return "Methods";
+                case MemberKind.Property:
+                    return "Properties";
+                case MemberKind.Type:
+                    return "";
+                default:
+                    return "";
+            }
+        }
 
         /// <summary>
         /// Wrap the <paramref name="code"/> into Markdown backtick safely.
@@ -174,13 +193,13 @@ namespace Vsxmd.Units
         /// The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
         /// </code>
         /// </example>
-        internal static string ToMarkdownText(this XElement element) =>
+        internal static string ToMarkdownText(this XElement element, MemberName sourceMember) =>
             element.Nodes()
-                .Select(ToMarkdownSpan)
+                .Select(x => ToMarkdownSpan(x, sourceMember))
                 .Aggregate(string.Empty, JoinMarkdownSpan)
                 .Trim();
 
-        private static string ToMarkdownSpan(XNode node)
+        private static string ToMarkdownSpan(XNode node, MemberName sourceMember)
         {
             var text = node as XText;
             if (text != null)
@@ -194,7 +213,7 @@ namespace Vsxmd.Units
                 switch (child.Name.ToString())
                 {
                     case "see":
-                        return $"{child.ToSeeTagMarkdownSpan()}{child.NextNode.AsSpanMargin()}";
+                        return $"{child.ToSeeTagMarkdownSpan(sourceMember)}{child.NextNode.AsSpanMargin()}";
                     case "paramref":
                     case "typeparamref":
                         return $"{child.Attribute("name")?.Value?.AsCode()}{child.NextNode.AsSpanMargin()}";
@@ -215,7 +234,7 @@ namespace Vsxmd.Units
                         return $"\n\n```{lang}\n{codeblock}\n```\n\n";
                     case "example":
                     case "para":
-                        return $"\n\n{child.ToMarkdownText()}\n\n";
+                        return $"\n\n{child.ToMarkdownText(sourceMember)}\n\n";
                     default:
                         return string.Empty;
                 }
@@ -254,8 +273,8 @@ namespace Vsxmd.Units
                 ? $"{x.TrimEnd()}{y}"
                 : $"{x}{y}";
 
-        private static string ToSeeTagMarkdownSpan(this XElement seeTag) =>
-            seeTag.Attribute("cref")?.Value?.ToReferenceLink(useShortName: true) ??
+        private static string ToSeeTagMarkdownSpan(this XElement seeTag, MemberName sourceMember) =>
+            seeTag.Attribute("cref")?.Value?.ToReferenceLink(sourceMember, useShortName: true) ??
             seeTag.Attribute("langword")?.Value?.AsCode();
 
         private static string AsSpanMargin(this XNode node)

@@ -17,7 +17,7 @@ namespace Vsxmd.Units
         /// Represent the XML element content as Markdown syntax.
         /// </summary>
         /// <returns>The generated Markdown content.</returns>
-        IEnumerable<string> ToMarkdown(FormatKind format);
+        IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember);
     }
 
 }

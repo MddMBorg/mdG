@@ -13,7 +13,7 @@ namespace Vsxmd
     using Vsxmd.Units;
 
     /// <inheritdoc/>
-    public class Converter : IConverter
+    public class Converter
     {
         private readonly XElement _Document;
 
@@ -25,14 +25,7 @@ namespace Vsxmd
         {
             _Document = document.Root;
         }
-
-        /// <inheritdoc/>
-        public string ToMarkdown() =>
-            ToUnits()
-                .SelectMany(x => x.ToMarkdown(FormatKind.None))
-                .Join("\n\n")
-                .Suffix("\n");
-
+        
         internal IEnumerable<IUnit> ToUnits()
         {
             // assembly unit

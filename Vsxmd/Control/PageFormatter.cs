@@ -35,7 +35,7 @@ namespace Vsxmd
 
             IEnumerable<string> formats = new[] { "" };
 
-            formats = classUnit.ToMarkdown(FormatKind.MethodSummary);
+            formats = classUnit.ToMarkdown(FormatKind.MethodSummary, classUnit.Name);
 
             if (constructors.Count() > 0)
             {
@@ -44,7 +44,7 @@ namespace Vsxmd
                     {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
-                            constructors.Select(x => x.ToMarkdown(FormatKind.MethodSummary).Join("")).Join("\n")
+                            constructors.Select(x => x.ToMarkdown(FormatKind.MethodSummary, x.Name).Join("")).Join("\n")
                     });
             }
 
@@ -55,7 +55,7 @@ namespace Vsxmd
                     {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
-                            constants.Select(x => x.ToMarkdown(FormatKind.MethodSummary).Join("")).Join("\n")
+                            constants.Select(x => x.ToMarkdown(FormatKind.MethodSummary, x.Name).Join("")).Join("\n")
                     });
             }
 
@@ -66,7 +66,7 @@ namespace Vsxmd
                     {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
-                            properties.Select(x => x.ToMarkdown(FormatKind.MethodSummary).Join("")).Join("\n")
+                            properties.Select(x => x.ToMarkdown(FormatKind.MethodSummary, x.Name).Join("")).Join("\n")
                     });
 
             }
@@ -78,7 +78,7 @@ namespace Vsxmd
                     {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
-                            methods.Select(x => x.ToMarkdown(FormatKind.MethodSummary).Join("")).Join("\n")
+                            methods.Select(x => x.ToMarkdown(FormatKind.MethodSummary, x.Name).Join("")).Join("\n")
                     });
             }
             return formats;
@@ -91,7 +91,7 @@ namespace Vsxmd
         /// <returns><see cref="IEnumerable{String}"/></returns>
         public IEnumerable<string> GetMarkdownByMember(MemberUnit unit)
         {
-            return unit.ToMarkdown(FormatKind.MethodDetail);
+            return unit.ToMarkdown(FormatKind.MethodDetail, unit.Name);
         }
 
     }

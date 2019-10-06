@@ -26,16 +26,16 @@ namespace Vsxmd.Units
         {
         }
 
-        private string Name => this.GetAttribute("name");
+        private string _Name => this.GetAttribute("name");
 
-        private string Description => this.ElementContent;
+        private string Description => this.ElementContent(Name);
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
             new[]
             {
-                $"{this.Name.AsCode()}  ",
-                this.Element.ToMarkdownText()
+                $"{this._Name.AsCode()}  ",
+                this.Element.ToMarkdownText(sourceMember)
             };
 
         /// <summary>
@@ -44,14 +44,14 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="elements">The param XML element list.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements)
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName sourceMember)
         {
             if (!elements.Any())
                 return Enumerable.Empty<string>();
 
             var markdowns = elements
                 .Select(element => new TypeparamUnit(element))
-                .SelectMany(unit => unit.ToMarkdown(FormatKind.None));
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, sourceMember));
 
             return new[]
             {

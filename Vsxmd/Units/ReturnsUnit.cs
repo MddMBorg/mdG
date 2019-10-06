@@ -31,14 +31,14 @@ namespace Vsxmd.Units
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
             new[]
             {
                 "#### Returns",
                 _ReturnType != null
-                ? $"{_ReturnType.Attribute("cref").Value.ToReferenceLink(true)}\n\n"
+                ? $"{_ReturnType.Attribute("cref").Value.ToReferenceLink(sourceMember, true)}\n\n"
                 : "\n\n",
-                this.ElementContent,
+                this.ElementContent(sourceMember)
             };
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The returns XML element.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(XElement element) =>
+        internal static IEnumerable<string> ToMarkdown(XElement element, MemberName sourceMember) =>
             element != null
-                ? new ReturnsUnit(element).ToMarkdown(FormatKind.None)
+                ? new ReturnsUnit(element).ToMarkdown(FormatKind.None, sourceMember)
                 : Enumerable.Empty<string>();
 
     }

@@ -13,20 +13,6 @@
             </summary>
             <param name="document">The XML document.</param>
         </member>
-        <member name="M:Vsxmd.Converter.ToMarkdown">
-            <inheritdoc/>
-        </member>
-        <member name="T:Vsxmd.IConverter">
-            <summary>
-            Converter for XML document to Markdown syntax conversion.
-            </summary>
-        </member>
-        <member name="M:Vsxmd.IConverter.ToMarkdown">
-            <summary>
-            Convert to Markdown syntax.
-            </summary>
-            <returns>The generated Markdown content.</returns>
-        </member>
         <member name="M:Vsxmd.MarkdownWriter.#ctor(System.Xml.Linq.XDocument,System.String)">
             <summary>
             Ctor for Markdown Writer
@@ -183,7 +169,7 @@
             </summary>
             <value>The link pointing to the table of contents.</value>
         </member>
-        <member name="M:Vsxmd.TableOfContents.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.TableOfContents.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <summary>
             Convert the table of contents to Markdown syntax.
             </summary>
@@ -201,7 +187,7 @@
             <param name="element">The assembly XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>assembly</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.AssemblyUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.AssemblyUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
         <member name="T:Vsxmd.Units.BaseUnit">
@@ -223,13 +209,13 @@
             </summary>
             <value>The XML element.</value>
         </member>
-        <member name="P:Vsxmd.Units.BaseUnit.ElementContent">
+        <member name="M:Vsxmd.Units.BaseUnit.ElementContent(Vsxmd.Units.MemberName)">
             <summary>
             Gets the Markdown content representing the element.
             </summary>
             <value>The Markdown content.</value>
         </member>
-        <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.BaseUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.BaseUnit.GetChild(System.Xml.Linq.XName)">
@@ -264,7 +250,7 @@
             <see cref="T:Vsxmd.Units.IUnit"/> is wrapper to handle XML elements.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.IUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.IUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <summary>
             Represent the XML element content as Markdown syntax.
             </summary>
@@ -317,10 +303,10 @@
             <param name="element">The example XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>example</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.ExampleUnit.ToMarkdown(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Convert the example XML element to Markdown safely.
             If element is <value>null</value>, return empty string.
@@ -340,10 +326,10 @@
             <param name="element">The exception XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>exception</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+        <member name="M:Vsxmd.Units.ExceptionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},Vsxmd.Units.MemberName)">
             <summary>
             Convert the exception XML element to Markdown safely.
             If element is <value>null</value>, return empty string.
@@ -407,7 +393,7 @@
             <param name="href">The href.</param>
             <returns>The "to here" link for the <paramref name="href"/>.</returns>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.ToReferenceLink(System.String,System.Boolean)">
+        <member name="M:Vsxmd.Units.Extensions.ToReferenceLink(System.String,Vsxmd.Units.MemberName,System.Boolean)">
             <summary>
             Generate the reference link for the <paramref name="memberName"/>.
             </summary>
@@ -453,7 +439,7 @@
             <param name="count">The number to except.</param>
             <returns>The generated enumerable.</returns>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Convert the inline XML nodes to Markdown text.
             For example, it works for <c>summary</c> and <c>returns</c> elements.
@@ -463,7 +449,7 @@
             <example>
             This method converts the following <c>summary</c> element.
             <code>
-            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement)"/>.</summary>
+            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="!:ToMarkdownText(XElement)"/>.</summary>
             </code>
             To the below Markdown content.
             <code>
@@ -540,7 +526,7 @@
             <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
             </example>
         </member>
-        <member name="M:Vsxmd.Units.MemberName.ToReferenceLink(System.Boolean)">
+        <member name="M:Vsxmd.Units.MemberName.ToReferenceLink(Vsxmd.Units.MemberName,System.Boolean)">
             <summary>
             Convert the member name to Markdown reference link.
             <para>If then name is under <c>System</c> namespace, the link points to MSDN.</para>
@@ -586,7 +572,7 @@
             </summary>
             <value>The link pointing to this member unit.</value>
         </member>
-        <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
@@ -613,16 +599,16 @@
             <param name="paramType">The parameter type corresponding to the param XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberKind)">
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberName)">
             <summary>
             Convert the param XML element to Markdown safely.
             </summary>
             <param name="elements">The param XML element list.</param>
             <param name="paramTypes">The paramater type names.</param>
-            <param name="memberKind">The member kind of the parent element.</param>
+            <param name="sourceMember">The member kind of the parent element.</param>
             <returns>The generated Markdown.</returns>
             <remarks>
             When the parameter (a.k.a <paramref name="elements"/>) list is empty:
@@ -642,10 +628,10 @@
             <param name="element">The permission XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>permission</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+        <member name="M:Vsxmd.Units.PermissionUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},Vsxmd.Units.MemberName)">
             <summary>
             Convert the permission XML element to Markdown safely.
             If element is <value>null</value>, return empty string.
@@ -665,10 +651,10 @@
             <param name="element">The remarks XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>remarks</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.RemarksUnit.ToMarkdown(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Convert the remarks XML element to Markdown safely.
             If element is <value>null</value>, return empty string.
@@ -688,10 +674,10 @@
             <param name="element">The returns XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>returns</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.ReturnsUnit.ToMarkdown(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Convert the returns XML element to Markdown safely.
             If element is <value>null</value>, return empty string.
@@ -711,10 +697,10 @@
             <param name="element">The seealso XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>seealso</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+        <member name="M:Vsxmd.Units.SeealsoUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},Vsxmd.Units.MemberName)">
             <summary>
             Convert the seealso XML element to Markdown safely.
             If element is <value>null</value>, return empty string.
@@ -734,10 +720,10 @@
             <param name="element">The summary XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>summary</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.SummaryUnit.ToMarkdown(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Convert the summary XML element to Markdown safely.
             If element is <value>null</value>, return empty string.
@@ -757,10 +743,10 @@
             <param name="element">The typeparam XML element.</param>
             <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>typeparam</c>.</exception>
         </member>
-        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown(Vsxmd.Units.FormatKind)">
+        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement})">
+        <member name="M:Vsxmd.Units.TypeparamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},Vsxmd.Units.MemberName)">
             <summary>
             Convert the param XML element to Markdown safely.
             If element is <value>null</value>, return empty string.

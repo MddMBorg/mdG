@@ -30,16 +30,16 @@ namespace Vsxmd.Units
             this.paramType = paramType;
         }
 
-        private string Name => this.GetAttribute("name");
+        private string _Name => this.GetAttribute("name");
 
-        private string Description => this.ElementContent;
+        private string Description => this.ElementContent(Name);
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown(FormatKind format) =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
             new[]
             {
-                $"{this.Name.AsCode()}  {this.paramType.ToReferenceLink(true)}  ",
-                this.Element.ToMarkdownText()
+                $"{this._Name.AsCode()}  {this.paramType.ToReferenceLink(sourceMember, true)}  ",
+                this.Element.ToMarkdownText(sourceMember)
             };
 
 
@@ -48,21 +48,21 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="elements">The param XML element list.</param>
         /// <param name="paramTypes">The paramater type names.</param>
-        /// <param name="memberKind">The member kind of the parent element.</param>
+        /// <param name="sourceMember">The member kind of the parent element.</param>
         /// <returns>The generated Markdown.</returns>
         /// <remarks>
         /// When the parameter (a.k.a <paramref name="elements"/>) list is empty:
         /// <para>If parent element kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>, it returns a hint about "no parameters".</para>
         /// <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
         /// </remarks>
-        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, IEnumerable<string> paramTypes, MemberKind memberKind)
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, IEnumerable<string> paramTypes, MemberName sourceMember)
         {
             if (!elements.Any())
                 return Enumerable.Empty<string>();
 
             var markdowns = elements
                 .Zip(paramTypes, (element, type) => new ParamUnit(element, type))
-                .SelectMany(unit => unit.ToMarkdown(FormatKind.None));
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, sourceMember));
 
             return new[]
             {

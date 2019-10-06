@@ -17,10 +17,6 @@ namespace Vsxmd.Units
     /// </summary>
     internal class MemberName : IComparable<MemberName>
     {
-        internal static bool SubFolder { get; set; }
-
-        internal static bool SplitFiles { get; set; }
-
         private readonly string name;
 
         private readonly char type;
@@ -209,12 +205,46 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="useShortName">Indicate if use short type name.</param>
         /// <returns>The generated Markdown reference link.</returns>
-        internal string ToReferenceLink(bool useShortName) =>
-            $"{this.Namespace}.".StartsWith("System.", StringComparison.Ordinal)
-            //? $"[{this.GetReferenceName(useShortName).Escape()}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:{this.MsdnName})"   //old version, changed for docs.microsoft.com
-            ? $"[{this.GetReferenceName(useShortName).Escape()}](https://docs.microsoft.com/dotnet/api/{this.DocsName})"
-            : $"[{this.GetReferenceName(useShortName).Escape()}]({this.FormattedHyperLink})";
+        internal string ToReferenceLink(MemberName sourceMember, bool useShortName)
+        {
+            if (this.Namespace.StartsWith("System.", StringComparison.Ordinal))
+                return $"[{this.GetReferenceName(useShortName).Escape()}](https://docs.microsoft.com/dotnet/api/{this.DocsName})";
 
+            StringBuilder sB = new StringBuilder();
+            string relLink = "";
+
+            if (this.LongName == sourceMember.LongName)
+                return $"[{this.GetReferenceName(true)}](#)";
+
+            if (this.Namespace != sourceMember.Namespace)
+            {
+                if (sourceMember.Kind == MemberKind.Type)
+                    relLink = $"../../../{this.FullFilePath}".Replace('\\', '/');
+                else
+                    relLink = $"../../../../{this.FullFilePath}".Replace('\\', '/');
+            }
+            else if (this.TypeShortName != sourceMember.TypeShortName)
+            {
+                if (sourceMember.Kind == MemberKind.Type)
+                    relLink = $"../../{this.TypeShortName}/{this.FileName}";
+                else
+                    relLink = $"../../../{this.TypeShortName}/{this.Kind.ToMemberKindString()}/{this.FileName}";
+            }
+            else if (this.Kind != sourceMember.Kind)
+            {
+                if (sourceMember.Kind == MemberKind.Type)
+                    relLink = $"../{this.Kind.ToMemberKindString()}/{this.FileName}";
+                else
+                    relLink = $"../../{this.Kind.ToMemberKindString()}/{this.FileName}";
+            }
+            else
+            {
+                relLink = $"{this.Kind.ToMemberKindString()}/{this.FileName}";
+            }
+
+
+            return $"[{this.GetReferenceName(useShortName).Escape()}]({relLink})";
+        }
 
         internal string ToSummaryLink(bool useShortName) =>
             $"[{this.GetReferenceName(useShortName).Escape()}" +
@@ -224,6 +254,7 @@ namespace Vsxmd.Units
         internal string FormattedHyperLink =>
             $"/{this.Namespace}/{this.FileName}/#{this.Href}";
 
+
         internal string FileName =>
             Kind != MemberKind.Constructor
             ? $"{this.FriendlyName}.md"
@@ -231,16 +262,8 @@ namespace Vsxmd.Units
 
         internal string DirectoryName =>
             Kind == MemberKind.Type
-            ? Path.Combine(this.Namespace, this.TypeName)
-            : Kind == MemberKind.Constructor
-            ? Path.Combine(this.Namespace, this.TypeName, "Constructors")
-            : Kind == MemberKind.Method
-            ? Path.Combine(this.Namespace, this.TypeName, "Methods")
-            : Kind == MemberKind.Constants
-            ? Path.Combine(this.Namespace, this.TypeName, "Fields")
-            : Kind == MemberKind.Property
-            ? Path.Combine(this.Namespace, this.TypeName, "Properties")
-            : "" ;
+            ? Path.Combine(this.Namespace, this.TypeShortName)
+            : Path.Combine(this.Namespace, this.TypeShortName, this.Kind.ToMemberKindString());
 
         internal string FullFilePath =>
             Path.Combine(DirectoryName, FileName);
