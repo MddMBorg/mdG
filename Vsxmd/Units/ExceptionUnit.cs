@@ -14,21 +14,18 @@ namespace Vsxmd.Units
     /// <summary>
     /// Exception unit.
     /// </summary>
-    internal class ExceptionUnit : BaseUnit
+    internal class ExceptionUnit : BaseTag
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExceptionUnit"/> class.
         /// </summary>
         /// <param name="element">The exception XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>exception</c>.</exception>
-        internal ExceptionUnit(XElement element)
-            : base(element, "exception")
+        internal ExceptionUnit(XElement element, MemberName parentName) : base(element, "exception", parentName)
         {
         }
 
-        private string _Name => this.GetAttribute("cref").ToReferenceLink(Name);
-
-        private string Description => this.ElementContent(Name);
+        private string _Name => this.GetAttribute("cref").ToReferenceLink(_ParentName);
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
@@ -44,14 +41,14 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="elements">The exception XML element list.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName sourceMember)
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName parentName)
         {
             if (!elements.Any())
                 return Enumerable.Empty<string>();
 
             var markdowns = elements
-                .Select(element => new ExceptionUnit(element))
-                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, sourceMember));
+                .Select(element => new ExceptionUnit(element, parentName))
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, parentName));
 
             return new[]
             {
@@ -59,5 +56,7 @@ namespace Vsxmd.Units
                 string.Join("\n\n", markdowns),
             };
         }
+
     }
+
 }

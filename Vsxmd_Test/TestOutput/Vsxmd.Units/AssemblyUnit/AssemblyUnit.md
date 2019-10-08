@@ -1,0 +1,20 @@
+<a name='T-Vsxmd-Units-AssemblyUnit'></a>
+# AssemblyUnit type
+
+###### Namespace:  Vsxmd.Units
+
+###### Assembly:  Vsxmd
+
+Assembly unit.
+
+# Constructors
+
+| Definition | Description |
+|-|-|
+| [AssemblyUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [AssemblyUnit](././AssemblyUnit.md) class. |
+
+# Methods
+
+| Definition | Description |
+|-|-|
+| [ToMarkdown(FormatKind)](Methods/ToMarkdown.md) |  |

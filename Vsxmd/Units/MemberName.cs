@@ -205,55 +205,61 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="useShortName">Indicate if use short type name.</param>
         /// <returns>The generated Markdown reference link.</returns>
-        internal string ToReferenceLink(MemberName sourceMember, bool useShortName)
-        {
-            if (this.Namespace.StartsWith("System.", StringComparison.Ordinal))
-                return $"[{this.GetReferenceName(useShortName).Escape()}](https://docs.microsoft.com/dotnet/api/{this.DocsName})";
-
-            StringBuilder sB = new StringBuilder();
-            string relLink = "";
-
-            if (this.LongName == sourceMember.LongName)
-                return $"[{this.GetReferenceName(true)}](#)";
-
-            if (this.Namespace != sourceMember.Namespace)
-            {
-                if (sourceMember.Kind == MemberKind.Type)
-                    relLink = $"../../../{this.FullFilePath}".Replace('\\', '/');
-                else
-                    relLink = $"../../../../{this.FullFilePath}".Replace('\\', '/');
-            }
-            else if (this.TypeShortName != sourceMember.TypeShortName)
-            {
-                if (sourceMember.Kind == MemberKind.Type)
-                    relLink = $"../../{this.TypeShortName}/{this.FileName}";
-                else
-                    relLink = $"../../../{this.TypeShortName}/{this.Kind.ToMemberKindString()}/{this.FileName}";
-            }
-            else if (this.Kind != sourceMember.Kind)
-            {
-                if (sourceMember.Kind == MemberKind.Type)
-                    relLink = $"../{this.Kind.ToMemberKindString()}/{this.FileName}";
-                else
-                    relLink = $"../../{this.Kind.ToMemberKindString()}/{this.FileName}";
-            }
-            else
-            {
-                relLink = $"{this.Kind.ToMemberKindString()}/{this.FileName}";
-            }
-
-
-            return $"[{this.GetReferenceName(useShortName).Escape()}]({relLink})";
-        }
+        internal string ToReferenceLink(MemberName sourceMember, bool useShortName) =>
+            $"[{this.GetReferenceName(useShortName).Escape()}]({this.MemberLink(sourceMember)})";
 
         internal string ToSummaryLink(bool useShortName) =>
             $"[{this.GetReferenceName(useShortName).Escape()}" +
-            $"{(this.GetParamTypes().Count() > 0 ? $"({this.GetParamTypes().Select(x => x.Split('.').NthLast(1)).Join(", ")})" : "" )}" +
-            $"]({this.FormattedHyperLink})";
+            $"{(this.GetParamTypes().Count() > 0 ? $"({this.GetParamTypes().Select(x => x.Split('.').NthLast(1)).Join(", ")})" : "")}" +
+            $"]({this.Kind.ToMemberKindString()}/{this.FileName})";
 
         internal string FormattedHyperLink =>
             $"/{this.Namespace}/{this.FileName}/#{this.Href}";
 
+        internal string MemberLink(MemberName sourceMember)
+        {
+            //Use docs.microsoft for references to the System namespace
+            if (this.Namespace.StartsWith("System.", StringComparison.Ordinal) || this.Namespace.Equals("System", StringComparison.Ordinal))
+                return $"https://docs.microsoft.com/dotnet/api/{this.DocsName}";
+            
+            string shortFilePath = this.Kind.ToMemberKindString();
+            shortFilePath = $"{shortFilePath}{(!string.IsNullOrWhiteSpace(shortFilePath) ? "/" : "")}{this.FileName}";
+
+            //if the LongName property is the same then the reference is to itself
+            if (this.LongName == sourceMember.LongName)
+                return "#";
+             /*
+             * N.B. Type kinds are always (here) one level above methods/props/fields etc, and so require one less ../ to index to the upper level (Kind, Class, namespace)
+             */
+            //If the namespace is different, go up to the top level and then index into the markdown file
+            if (this.Namespace != sourceMember.Namespace)
+            {
+                //Need to replace the backslashes since Windows file system is \ vs the web /
+                if (sourceMember.Kind == MemberKind.Type)
+                    return $"./././{this.FullFilePath}".Replace('\\', '/');
+                else
+                    return $"././././{this.FullFilePath}".Replace('\\', '/');
+            }
+            //If the type is different, go up to the namespace level
+            else if (this.TypeShortName != sourceMember.TypeShortName)
+            {
+                if (sourceMember.Kind == MemberKind.Type)
+                    return $"././{this.TypeShortName}/{shortFilePath}";
+                else
+                    return $"./././{this.TypeShortName}/{shortFilePath}";
+            }
+            //If using a different kind (method, ctor, class etc), go to the common type level
+            else if (this.Kind != sourceMember.Kind)
+            {
+                if (sourceMember.Kind == MemberKind.Type)
+                    return $"./{shortFilePath}";
+                else
+                    return $"././{shortFilePath}";
+            }
+            //Else, index as if the markdown file is on the same level
+            else
+                return $"{this.FileName}";
+        }
 
         internal string FileName =>
             Kind != MemberKind.Constructor

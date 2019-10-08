@@ -14,7 +14,7 @@ namespace Vsxmd.Units
     /// <summary>
     /// Returns unit.
     /// </summary>
-    internal class ReturnsUnit : BaseUnit
+    internal class ReturnsUnit : BaseTag
     {
 
         private XElement _ReturnType =>
@@ -25,20 +25,19 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The returns XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>returns</c>.</exception>
-        internal ReturnsUnit(XElement element)
-            : base(element, "returns")
+        internal ReturnsUnit(XElement element, MemberName parentName) : base(element, "returns", parentName)
         {
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
                 "#### Returns",
                 _ReturnType != null
-                ? $"{_ReturnType.Attribute("cref").Value.ToReferenceLink(sourceMember, true)}\n\n"
+                ? $"{_ReturnType.Attribute("cref").Value.ToReferenceLink(parentName, true)}\n\n"
                 : "\n\n",
-                this.ElementContent(sourceMember)
+                this.ElementContent(parentName)
             };
 
         /// <summary>
@@ -47,9 +46,9 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The returns XML element.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(XElement element, MemberName sourceMember) =>
+        internal static IEnumerable<string> ToMarkdown(XElement element, MemberName parentName) =>
             element != null
-                ? new ReturnsUnit(element).ToMarkdown(FormatKind.None, sourceMember)
+                ? new ReturnsUnit(element, parentName).ToMarkdown(FormatKind.None, parentName)
                 : Enumerable.Empty<string>();
 
     }

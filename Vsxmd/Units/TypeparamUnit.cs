@@ -14,28 +14,25 @@ namespace Vsxmd.Units
     /// <summary>
     /// Typeparam unit.
     /// </summary>
-    internal class TypeparamUnit : BaseUnit
+    internal class TypeparamUnit : BaseTag
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TypeparamUnit"/> class.
         /// </summary>
         /// <param name="element">The typeparam XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>typeparam</c>.</exception>
-        internal TypeparamUnit(XElement element)
-            : base(element, "typeparam")
+        internal TypeparamUnit(XElement element, MemberName parentName) : base(element, "typeparam", parentName)
         {
         }
 
         private string _Name => this.GetAttribute("name");
 
-        private string Description => this.ElementContent(Name);
-
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
                 $"{this._Name.AsCode()}  ",
-                this.Element.ToMarkdownText(sourceMember)
+                this.Element.ToMarkdownText(parentName)
             };
 
         /// <summary>
@@ -44,14 +41,14 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="elements">The param XML element list.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName sourceMember)
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName parentName)
         {
             if (!elements.Any())
                 return Enumerable.Empty<string>();
 
             var markdowns = elements
-                .Select(element => new TypeparamUnit(element))
-                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, sourceMember));
+                .Select(element => new TypeparamUnit(element, parentName))
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, parentName));
 
             return new[]
             {

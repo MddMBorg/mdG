@@ -296,7 +296,7 @@
             Example unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.ExampleUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.ExampleUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.ExampleUnit"/> class.
             </summary>
@@ -319,7 +319,7 @@
             Exception unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.ExceptionUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.ExceptionUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.ExceptionUnit"/> class.
             </summary>
@@ -591,7 +591,7 @@
             Param unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.#ctor(System.Xml.Linq.XElement,System.String)">
+        <member name="M:Vsxmd.Units.ParamUnit.#ctor(System.Xml.Linq.XElement,System.String,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.ParamUnit"/> class.
             </summary>
@@ -608,7 +608,7 @@
             </summary>
             <param name="elements">The param XML element list.</param>
             <param name="paramTypes">The paramater type names.</param>
-            <param name="sourceMember">The member kind of the parent element.</param>
+            <param name="parentName">The member kind of the parent element.</param>
             <returns>The generated Markdown.</returns>
             <remarks>
             When the parameter (a.k.a <paramref name="elements"/>) list is empty:
@@ -621,7 +621,7 @@
             Permission unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.PermissionUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.PermissionUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.PermissionUnit"/> class.
             </summary>
@@ -644,7 +644,7 @@
             Remarks unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.RemarksUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.RemarksUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.RemarksUnit"/> class.
             </summary>
@@ -667,7 +667,7 @@
             Returns unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.ReturnsUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.ReturnsUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.ReturnsUnit"/> class.
             </summary>
@@ -690,7 +690,7 @@
             Seealso unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.SeealsoUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.SeealsoUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.SeealsoUnit"/> class.
             </summary>
@@ -713,7 +713,7 @@
             Summary unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.SummaryUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.SummaryUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.SummaryUnit"/> class.
             </summary>
@@ -736,7 +736,7 @@
             Typeparam unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.TypeparamUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="M:Vsxmd.Units.TypeparamUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.TypeparamUnit"/> class.
             </summary>

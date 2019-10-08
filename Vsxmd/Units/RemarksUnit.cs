@@ -14,24 +14,23 @@ namespace Vsxmd.Units
     /// <summary>
     /// Remarks unit.
     /// </summary>
-    internal class RemarksUnit : BaseUnit
+    internal class RemarksUnit : BaseTag
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RemarksUnit"/> class.
         /// </summary>
         /// <param name="element">The remarks XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>remarks</c>.</exception>
-        internal RemarksUnit(XElement element)
-            : base(element, "remarks")
+        internal RemarksUnit(XElement element, MemberName parentName) : base(element, "remarks", parentName)
         {
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
                 "#### Remarks",
-                this.ElementContent(sourceMember)
+                this.ElementContent(parentName)
             };
 
         /// <summary>
@@ -40,10 +39,11 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The remarks XML element.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(XElement element, MemberName sourceMember) =>
+        internal static IEnumerable<string> ToMarkdown(XElement element, MemberName parentName) =>
             element != null
-                ? new RemarksUnit(element).ToMarkdown(FormatKind.None, sourceMember)
+                ? new RemarksUnit(element, parentName).ToMarkdown(FormatKind.None, parentName)
                 : Enumerable.Empty<string>();
+
     }
 
 }

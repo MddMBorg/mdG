@@ -14,15 +14,14 @@ namespace Vsxmd.Units
     /// <summary>
     /// Example unit.
     /// </summary>
-    internal class ExampleUnit : BaseUnit
+    internal class ExampleUnit : BaseTag
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ExampleUnit"/> class.
         /// </summary>
         /// <param name="element">The example XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>example</c>.</exception>
-        internal ExampleUnit(XElement element)
-            : base(element, "example")
+        internal ExampleUnit(XElement element, MemberName parentName) : base(element, "example", parentName)
         {
         }
 
@@ -40,10 +39,11 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The example XML element.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(XElement element, MemberName sourceMember) =>
+        internal static IEnumerable<string> ToMarkdown(XElement element, MemberName parentName) =>
             element != null
-                ? new ExampleUnit(element).ToMarkdown(FormatKind.None, sourceMember)
+                ? new ExampleUnit(element, parentName).ToMarkdown(FormatKind.None, parentName)
                 : Enumerable.Empty<string>();
+
     }
 
 }

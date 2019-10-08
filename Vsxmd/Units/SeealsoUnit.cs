@@ -14,23 +14,22 @@ namespace Vsxmd.Units
     /// <summary>
     /// Seealso unit.
     /// </summary>
-    internal class SeealsoUnit : BaseUnit
+    internal class SeealsoUnit : BaseTag
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SeealsoUnit"/> class.
         /// </summary>
         /// <param name="element">The seealso XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>seealso</c>.</exception>
-        internal SeealsoUnit(XElement element)
-            : base(element, "seealso")
+        internal SeealsoUnit(XElement element, MemberName parentName) : base(element, "seealso", parentName)
         {
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
+        public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
-                $"- {this.GetAttribute("cref").ToReferenceLink(sourceMember)}",
+                $"- {this.GetAttribute("cref").ToReferenceLink(parentName)}",
             };
 
         /// <summary>
@@ -39,14 +38,14 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="elements">The seealso XML element list.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName sourceMember)
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName parentName)
         {
             if (!elements.Any())
                 return Enumerable.Empty<string>();
 
             var markdowns = elements
-                .Select(element => new SeealsoUnit(element))
-                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, sourceMember));
+                .Select(element => new SeealsoUnit(element, parentName))
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, parentName));
 
             return new[]
             {

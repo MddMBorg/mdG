@@ -14,27 +14,26 @@ namespace Vsxmd.Units
     /// <summary>
     /// Permission unit.
     /// </summary>
-    internal class PermissionUnit : BaseUnit
+    internal class PermissionUnit : BaseTag
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PermissionUnit"/> class.
         /// </summary>
         /// <param name="element">The permission XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>permission</c>.</exception>
-        internal PermissionUnit(XElement element)
-            : base(element, "permission")
+        internal PermissionUnit(XElement element, MemberName parentName) : base(element, "permission", parentName)
         {
         }
 
-        private string _Name => this.GetAttribute("cref").ToReferenceLink(Name);
+        private string _Name => this.GetAttribute("cref").ToReferenceLink(_ParentName);
 
-        private string Description => this.ElementContent(Name);
+        private string _Description => this.ElementContent(_ParentName);
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
             new[]
             {
-                $"| {this._Name} | {this.Description} |",
+                $"| {this._Name} | {this._Description} |",
             };
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="elements">The permission XML element list.</param>
         /// <returns>The generated Markdown.</returns>
-        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName sourceMember)
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName parentName)
         {
             if (!elements.Any())
             {
@@ -51,8 +50,8 @@ namespace Vsxmd.Units
             }
 
             var markdowns = elements
-                .Select(element => new PermissionUnit(element))
-                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, sourceMember));
+                .Select(element => new PermissionUnit(element, parentName))
+                .SelectMany(unit => unit.ToMarkdown(FormatKind.None, parentName));
 
             return new[]
             {
@@ -60,5 +59,7 @@ namespace Vsxmd.Units
                 string.Join("\n", markdowns),
             };
         }
+
     }
+
 }

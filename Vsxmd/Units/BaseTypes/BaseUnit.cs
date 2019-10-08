@@ -15,8 +15,6 @@ namespace Vsxmd.Units
     /// </summary>
     internal abstract class BaseUnit : IUnit
     {
-        internal MemberName Name;
-
         protected readonly string _UnitHeader;
 
 
@@ -47,7 +45,6 @@ namespace Vsxmd.Units
         /// <value>The Markdown content.</value>
         protected string ElementContent(MemberName sourceMember) => this.Element.ToMarkdownText(sourceMember);
 
-        
         /// <inheritdoc />
         public virtual IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
             format == FormatKind.MethodDetail
@@ -86,4 +83,5 @@ namespace Vsxmd.Units
         protected string GetAttribute(XName name) =>
             this.Element.Attribute(name).Value;
     }
+
 }

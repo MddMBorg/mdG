@@ -18,6 +18,8 @@ namespace Vsxmd.Units
     {
         internal readonly string AssemblyName;
 
+        internal readonly MemberName Name;
+
         static MemberUnit()
         {
             Comparer = new MemberUnitComparer();
