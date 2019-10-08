@@ -11,7 +11,7 @@ Remarks unit.
 
 | Definition | Description |
 |-|-|
-| [RemarksUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [RemarksUnit](./../RemarksUnit.md) class. |
+| [RemarksUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [RemarksUnit](#) class. |
 
 # Methods
 

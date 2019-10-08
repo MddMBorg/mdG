@@ -11,7 +11,7 @@ Returns unit.
 
 | Definition | Description |
 |-|-|
-| [ReturnsUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [ReturnsUnit](./../ReturnsUnit.md) class. |
+| [ReturnsUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [ReturnsUnit](#) class. |
 
 # Methods
 

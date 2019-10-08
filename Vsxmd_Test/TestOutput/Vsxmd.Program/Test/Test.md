@@ -9,7 +9,7 @@
 
 | Definition | Description |
 |-|-|
-| [Test](Constructors/Constructors.md) | Initializes a new instance of the [Test](./../Test.md) class.  Test constructor without parameters.  See [Test](#). |
+| [Test](Constructors/Constructors.md) | Initializes a new instance of the [Test](#) class.  Test constructor without parameters.  See [Test](./Constructors/Constructors.md). |
 
 # Methods
 
@@ -19,7 +19,7 @@
 | [TestGenericException](Methods/TestGenericException.md) | Test generic exception type. |
 | [TestGenericParameter\`\`2(String}})](Methods/TestGenericParameter``2.md) | Test generic parameter type.  See `T1` and `T2`. |
 | [TestGenericPermission](Methods/TestGenericPermission.md) | Test generic exception type. |
-| [TestGenericReference](Methods/TestGenericReference.md) | Test generic reference type.  See [TestGenericParameter\`\`2](TestGenericParameter``2.md). |
+| [TestGenericReference](Methods/TestGenericReference.md) | Test generic reference type.  See [TestGenericParameter\`\`2](./Methods/TestGenericParameter``2.md). |
 | [TestParamWithoutDescription(String)](Methods/TestParamWithoutDescription.md) | Test a param tag without description. |
 | [TestSeeLangword](Methods/TestSeeLangword.md) | Test see tag with langword attribute. See `true`. |
-| [TestSpaceAfterInlineElements\`\`1(Boolean)](Methods/TestSpaceAfterInlineElements``1.md) | Test space after inline elements.  See `code block` should follow a space.  See a value at the end of a `sentence`.  See [TestSpaceAfterInlineElements\`\`1](#) as a link.  See `space` after a param ref.  See `T` after a type param ref. |
+| [TestSpaceAfterInlineElements\`\`1(Boolean)](Methods/TestSpaceAfterInlineElements``1.md) | Test space after inline elements.  See `code block` should follow a space.  See a value at the end of a `sentence`.  See [TestSpaceAfterInlineElements\`\`1](./Methods/TestSpaceAfterInlineElements``1.md) as a link.  See `space` after a param ref.  See `T` after a type param ref. |

@@ -11,7 +11,7 @@ Summary unit.
 
 | Definition | Description |
 |-|-|
-| [SummaryUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [SummaryUnit](./../SummaryUnit.md) class. |
+| [SummaryUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [SummaryUnit](#) class. |
 
 # Methods
 

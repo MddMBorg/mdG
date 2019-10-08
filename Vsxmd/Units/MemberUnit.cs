@@ -30,8 +30,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <param name="element">The member XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
-        internal MemberUnit(XElement element)
-            : base(element, "member")
+        internal MemberUnit(XElement element) : base(element, "member")
         {
             AssemblyName = element.GetAssemblyName();
             this.Name = new MemberName(
@@ -98,14 +97,14 @@ namespace Vsxmd.Units
         internal IEnumerable<string> Summary =>
             SummaryUnit.ToMarkdown(this.GetChild("summary"), Name);
 
+        internal IEnumerable<string> SummarySummary =>
+            SummaryUnit.ToMarkdown(this.GetChild("summary"), new MemberName($"T:{this.TypeName}"));
+
         internal IEnumerable<string> Returns =>
-            ReturnsUnit.ToMarkdown(this.GetChild("returns"), this.Name);
+            ReturnsUnit.ToMarkdown(this.GetChild("returns"), Name);
 
         internal IEnumerable<string> Params =>
-            ParamUnit.ToMarkdown(
-                this.GetChildren("param"),
-                this.Name.GetParamTypes(),
-                this.Name);
+            ParamUnit.ToMarkdown(this.GetChildren("param"), Name.GetParamTypes(), Name);
 
         internal IEnumerable<string> Typeparams =>
             TypeparamUnit.ToMarkdown(this.GetChildren("typeparam"), Name);
@@ -148,7 +147,7 @@ namespace Vsxmd.Units
                     Kind == MemberKind.Constructor ||
                     Kind == MemberKind.Constants ||
                     Kind == MemberKind.Property)
-                    return new[] { $"| {this.Name.ToSummaryLink(true)} | {this.Summary.Join("").Replace('\n', ' ')} |" };
+                    return new[] { $"| {this.Name.ToSummaryLink(true)} | {this.SummarySummary.Join("").Replace('\n', ' ')} |" };
                 else
                     return new[] { "|  |  |" };
             }

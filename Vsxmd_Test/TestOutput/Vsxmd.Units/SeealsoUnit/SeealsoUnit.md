@@ -11,7 +11,7 @@ Seealso unit.
 
 | Definition | Description |
 |-|-|
-| [SeealsoUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [SeealsoUnit](./../SeealsoUnit.md) class. |
+| [SeealsoUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [SeealsoUnit](#) class. |
 
 # Methods
 

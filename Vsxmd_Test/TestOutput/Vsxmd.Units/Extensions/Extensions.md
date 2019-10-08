@@ -20,7 +20,7 @@ Extensions helper.
 | [TakeAllButLast\`\`1(IEnumerable{``0}, Int32)](Methods/TakeAllButLast``1.md) | Take all element except the last `count`. |
 | [ToAnchor(String)](Methods/ToAnchor.md) | Generate an anchor for the `href`. |
 | [ToHereLink(String)](Methods/ToHereLink.md) | Generate "to here" link for the `href`. |
-| [ToLowerString(MemberKind)](Methods/ToLowerString.md) | Convert the [MemberKind](./../../MemberKind/MemberKind.md) to its lowercase name. |
+| [ToLowerString(MemberKind)](Methods/ToLowerString.md) | Convert the [MemberKind](./../MemberKind/MemberKind.md) to its lowercase name. |
 | [ToMarkdownRef(String)](Methods/ToMarkdownRef.md) | Escape a reference to an anchor, file or folder by replacing special characters with '-'. |
 | [ToMarkdownText(XElement)](Methods/ToMarkdownText.md) | Convert the inline XML nodes to Markdown text. For example, it works for `summary` and `returns` elements. |
 | [ToReferenceLink(String, Boolean)](Methods/ToReferenceLink.md) | Generate the reference link for the `memberName`. |

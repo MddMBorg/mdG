@@ -11,7 +11,7 @@ Typeparam unit.
 
 | Definition | Description |
 |-|-|
-| [TypeparamUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [TypeparamUnit](./../TypeparamUnit.md) class. |
+| [TypeparamUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [TypeparamUnit](#) class. |
 
 # Methods
 

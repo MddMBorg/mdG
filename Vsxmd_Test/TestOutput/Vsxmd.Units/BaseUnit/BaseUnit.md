@@ -11,7 +11,7 @@ The base unit.
 
 | Definition | Description |
 |-|-|
-| [BaseUnit(XElement, String)](Constructors/Constructors.md) | Initializes a new instance of the [BaseUnit](./../BaseUnit.md) class. |
+| [BaseUnit(XElement, String)](Constructors/Constructors.md) | Initializes a new instance of the [BaseUnit](#) class. |
 
 # Properties
 

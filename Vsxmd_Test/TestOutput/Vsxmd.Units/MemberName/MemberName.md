@@ -11,15 +11,15 @@ Member name.
 
 | Definition | Description |
 |-|-|
-| [MemberName(String, String})](Constructors/Constructors.md) | Initializes a new instance of the [MemberName](./../MemberName.md) class. |
-| [MemberName(String)](Constructors/Constructors.md) | Initializes a new instance of the [MemberName](./../MemberName.md) class. |
+| [MemberName(String, String})](Constructors/Constructors.md) | Initializes a new instance of the [MemberName](#) class. |
+| [MemberName(String)](Constructors/Constructors.md) | Initializes a new instance of the [MemberName](#) class. |
 
 # Properties
 
 | Definition | Description |
 |-|-|
 | [Caption](Properties/Caption.md) | Gets the caption representation for this member name. |
-| [Kind](Properties/Kind.md) | Gets the member kind, one of [MemberKind](./../../MemberKind/MemberKind.md). |
+| [Kind](Properties/Kind.md) | Gets the member kind, one of [MemberKind](./../MemberKind/MemberKind.md). |
 | [Link](Properties/Link.md) | Gets the link pointing to this member unit. |
 | [Namespace](Properties/Namespace.md) | Gets the namespace name. |
 | [TypeName](Properties/TypeName.md) | Gets the type name. |

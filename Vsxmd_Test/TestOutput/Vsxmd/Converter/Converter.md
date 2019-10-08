@@ -11,7 +11,7 @@
 
 | Definition | Description |
 |-|-|
-| [Converter(XDocument)](Constructors/Constructors.md) | Initializes a new instance of the [Converter](./../Converter.md) class. |
+| [Converter(XDocument)](Constructors/Constructors.md) | Initializes a new instance of the [Converter](#) class. |
 
 # Methods
 

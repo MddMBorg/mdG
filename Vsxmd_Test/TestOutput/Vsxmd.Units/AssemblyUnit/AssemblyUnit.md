@@ -11,7 +11,7 @@ Assembly unit.
 
 | Definition | Description |
 |-|-|
-| [AssemblyUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [AssemblyUnit](./../AssemblyUnit.md) class. |
+| [AssemblyUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [AssemblyUnit](#) class. |
 
 # Methods
 

@@ -11,7 +11,7 @@ Permission unit.
 
 | Definition | Description |
 |-|-|
-| [PermissionUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [PermissionUnit](./../PermissionUnit.md) class. |
+| [PermissionUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [PermissionUnit](#) class. |
 
 # Methods
 
