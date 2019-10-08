@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-Main-System-String[]-'></a>
-# Main(args) method
+# Main(args) Method
 
 ###### Namespace:  Vsxmd
 
@@ -15,4 +15,4 @@ Program arguments.
 
 # See Also
 
-- [Vsxmd.Program](././Program.md)
+- [Vsxmd.Program](./../Program.md)

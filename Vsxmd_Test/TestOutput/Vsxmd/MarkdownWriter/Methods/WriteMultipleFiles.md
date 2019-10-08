@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-MarkdownWriter-WriteMultipleFiles-System-Boolean-'></a>
-# WriteMultipleFiles(useSubDirectories) method
+# WriteMultipleFiles(useSubDirectories) Method
 
 ###### Namespace:  Vsxmd
 

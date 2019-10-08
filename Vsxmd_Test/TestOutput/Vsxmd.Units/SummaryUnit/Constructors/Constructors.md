@@ -1,11 +1,11 @@
 <a name='M-Vsxmd-Units-SummaryUnit-#ctor-System-Xml-Linq-XElement-'></a>
-# #ctor(element) constructor
+# SummaryUnit(element) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [SummaryUnit](././SummaryUnit.md) class.
+Initializes a new instance of the [SummaryUnit](./../SummaryUnit.md) class.
 
 #### Parameters
 

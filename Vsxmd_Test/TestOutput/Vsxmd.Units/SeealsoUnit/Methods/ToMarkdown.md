@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-SeealsoUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-'></a>
-# ToMarkdown(elements) method
+# ToMarkdown(elements) Method
 
 ###### Namespace:  Vsxmd.Units
 

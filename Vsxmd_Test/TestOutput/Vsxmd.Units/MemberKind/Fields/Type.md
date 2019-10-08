@@ -1,5 +1,5 @@
 <a name='F-Vsxmd-Units-MemberKind-Type'></a>
-# Type constants
+# Type Field
 
 ###### Namespace:  Vsxmd.Units
 

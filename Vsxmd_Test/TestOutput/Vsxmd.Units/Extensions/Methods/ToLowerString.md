@@ -1,15 +1,15 @@
 <a name='M-Vsxmd-Units-Extensions-ToLowerString-Vsxmd-Units-MemberKind-'></a>
-# ToLowerString(memberKind) method
+# ToLowerString(memberKind) Method
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Convert the [MemberKind](./././MemberKind/MemberKind.md) to its lowercase name.
+Convert the [MemberKind](./../../MemberKind/MemberKind.md) to its lowercase name.
 
 #### Parameters
 
-`memberKind`  [MemberKind](./././MemberKind/MemberKind.md)  
+`memberKind`  [MemberKind](./../../MemberKind/MemberKind.md)  
 
 The member kind.
 

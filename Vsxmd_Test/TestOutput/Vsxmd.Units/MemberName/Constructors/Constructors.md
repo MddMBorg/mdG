@@ -1,11 +1,11 @@
 <a name='M-Vsxmd-Units-MemberName-#ctor-System-String-'></a>
-# #ctor(name) constructor
+# MemberName(name) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [MemberName](././MemberName.md) class.
+Initializes a new instance of the [MemberName](./../MemberName.md) class.
 
 #### Parameters
 

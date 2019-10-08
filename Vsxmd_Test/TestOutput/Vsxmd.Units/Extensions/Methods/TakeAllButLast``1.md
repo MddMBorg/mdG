@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-TakeAllButLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32-'></a>
-# TakeAllButLast\`\`1(source,count) method
+# TakeAllButLast\`\`1(source,count) Method
 
 ###### Namespace:  Vsxmd.Units
 

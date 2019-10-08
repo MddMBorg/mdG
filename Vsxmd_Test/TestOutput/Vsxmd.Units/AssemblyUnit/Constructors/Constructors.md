@@ -1,11 +1,11 @@
 <a name='M-Vsxmd-Units-AssemblyUnit-#ctor-System-Xml-Linq-XElement-'></a>
-# #ctor(element) constructor
+# AssemblyUnit(element) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [AssemblyUnit](././AssemblyUnit.md) class.
+Initializes a new instance of the [AssemblyUnit](./../AssemblyUnit.md) class.
 
 #### Parameters
 

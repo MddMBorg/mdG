@@ -1,5 +1,5 @@
 <a name='P-Vsxmd-Units-MemberName-Caption'></a>
-# Caption property
+# Caption Property
 
 ###### Namespace:  Vsxmd.Units
 
@@ -9,6 +9,6 @@ Gets the caption representation for this member name.
 
 # Examples
 
-For [Type](./././MemberKind/Fields/Type.md), show as `## Vsxmd.Units.MemberName [#](#here) [^](#contents)`.
+For [Type](./../../MemberKind/Fields/Type.md), show as `## Vsxmd.Units.MemberName [#](#here) [^](#contents)`.
 
 For other kinds, show as `### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)`.

@@ -1,5 +1,5 @@
 <a name='F-Vsxmd-Units-MemberKind-Property'></a>
-# Property constants
+# Property Field
 
 ###### Namespace:  Vsxmd.Units
 

@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-ExceptionUnit'></a>
-# ExceptionUnit type
+# ExceptionUnit Type
 
 ###### Namespace:  Vsxmd.Units
 
@@ -11,7 +11,7 @@ Exception unit.
 
 | Definition | Description |
 |-|-|
-| [ExceptionUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [ExceptionUnit](././ExceptionUnit.md) class. |
+| [ExceptionUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [ExceptionUnit](./../ExceptionUnit.md) class. |
 
 # Methods
 

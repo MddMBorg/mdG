@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-AssemblyUnit'></a>
-# AssemblyUnit type
+# AssemblyUnit Type
 
 ###### Namespace:  Vsxmd.Units
 
@@ -11,7 +11,7 @@ Assembly unit.
 
 | Definition | Description |
 |-|-|
-| [AssemblyUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [AssemblyUnit](././AssemblyUnit.md) class. |
+| [AssemblyUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [AssemblyUnit](./../AssemblyUnit.md) class. |
 
 # Methods
 

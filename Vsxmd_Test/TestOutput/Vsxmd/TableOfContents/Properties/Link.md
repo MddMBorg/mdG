@@ -1,5 +1,5 @@
 <a name='P-Vsxmd-TableOfContents-Link'></a>
-# Link property
+# Link Property
 
 ###### Namespace:  Vsxmd
 

@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-ExampleUnit'></a>
-# ExampleUnit type
+# ExampleUnit Type
 
 ###### Namespace:  Vsxmd.Units
 
@@ -11,7 +11,7 @@ Example unit.
 
 | Definition | Description |
 |-|-|
-| [ExampleUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [ExampleUnit](././ExampleUnit.md) class. |
+| [ExampleUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [ExampleUnit](./../ExampleUnit.md) class. |
 
 # Methods
 

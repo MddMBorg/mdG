@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-TestGenericType`2-TestGenericMethod``2'></a>
-# TestGenericMethod\`\`2() method
+# TestGenericMethod\`\`2() Method
 
 ###### Namespace:  Vsxmd.Program
 

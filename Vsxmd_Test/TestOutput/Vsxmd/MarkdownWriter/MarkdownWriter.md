@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-MarkdownWriter'></a>
-# MarkdownWriter type
+# MarkdownWriter Type
 
 ###### Namespace:  Vsxmd
 

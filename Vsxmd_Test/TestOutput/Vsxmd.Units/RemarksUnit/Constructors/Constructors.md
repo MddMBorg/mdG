@@ -1,11 +1,11 @@
 <a name='M-Vsxmd-Units-RemarksUnit-#ctor-System-Xml-Linq-XElement-'></a>
-# #ctor(element) constructor
+# RemarksUnit(element) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [RemarksUnit](././RemarksUnit.md) class.
+Initializes a new instance of the [RemarksUnit](./../RemarksUnit.md) class.
 
 #### Parameters
 

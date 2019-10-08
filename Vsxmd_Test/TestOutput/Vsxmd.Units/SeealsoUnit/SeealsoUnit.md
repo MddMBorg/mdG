@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-SeealsoUnit'></a>
-# SeealsoUnit type
+# SeealsoUnit Type
 
 ###### Namespace:  Vsxmd.Units
 
@@ -11,7 +11,7 @@ Seealso unit.
 
 | Definition | Description |
 |-|-|
-| [SeealsoUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [SeealsoUnit](././SeealsoUnit.md) class. |
+| [SeealsoUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [SeealsoUnit](./../SeealsoUnit.md) class. |
 
 # Methods
 

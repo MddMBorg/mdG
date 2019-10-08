@@ -1,11 +1,11 @@
 <a name='M-Vsxmd-Units-SeealsoUnit-#ctor-System-Xml-Linq-XElement-'></a>
-# #ctor(element) constructor
+# SeealsoUnit(element) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [SeealsoUnit](././SeealsoUnit.md) class.
+Initializes a new instance of the [SeealsoUnit](./../SeealsoUnit.md) class.
 
 #### Parameters
 

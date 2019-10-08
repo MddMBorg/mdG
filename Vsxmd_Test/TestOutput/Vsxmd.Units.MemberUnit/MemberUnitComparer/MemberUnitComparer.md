@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-MemberUnit-MemberUnitComparer'></a>
-# MemberUnitComparer type
+# MemberUnitComparer Type
 
 ###### Namespace:  Vsxmd.Units.MemberUnit
 

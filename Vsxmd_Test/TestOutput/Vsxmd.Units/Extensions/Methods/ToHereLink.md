@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-ToHereLink-System-String-'></a>
-# ToHereLink(href) method
+# ToHereLink(href) Method
 
 ###### Namespace:  Vsxmd.Units
 

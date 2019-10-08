@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-MarkdownWriter-#ctor-System-Xml-Linq-XDocument,System-String-'></a>
-# #ctor(document,outputPath) constructor
+# MarkdownWriter(document,outputPath) Constructor
 
 ###### Namespace:  Vsxmd
 

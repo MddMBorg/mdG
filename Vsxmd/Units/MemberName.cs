@@ -85,13 +85,15 @@ namespace Vsxmd.Units
         /// </example>
         internal string Caption =>
             this.Kind == MemberKind.Type
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} {this.Kind.ToLowerString()}"
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} {this.Kind.ToLowerString()}"
-            : this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) {this.Kind.ToLowerString()}"
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} Type"
+            : this.Kind == MemberKind.Constants 
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} Field"
+            : this.Kind == MemberKind.Property
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} Property"
+            : this.Kind == MemberKind.Constructor
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) Constructor"
+            : this.Kind == MemberKind.Method
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) Method"
             : string.Empty;
 
         /// <summary>
@@ -146,9 +148,10 @@ namespace Vsxmd.Units
             ? this.TypeShortName
             : this.Kind == MemberKind.Constants ||
               this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Method ||
-              this.Kind == MemberKind.Constructor
+              this.Kind == MemberKind.Method
             ? this.NameSegments.Last()
+            : this.Kind == MemberKind.Constructor
+            ? this.TypeShortName
             : string.Empty;
 
         /// <inheritdoc />
@@ -236,17 +239,17 @@ namespace Vsxmd.Units
             {
                 //Need to replace the backslashes since Windows file system is \ vs the web /
                 if (sourceMember.Kind == MemberKind.Type)
-                    return $"./././{this.FullFilePath}".Replace('\\', '/');
+                    return $"./../../{this.FullFilePath}".Replace('\\', '/');
                 else
-                    return $"././././{this.FullFilePath}".Replace('\\', '/');
+                    return $"./../../../{this.FullFilePath}".Replace('\\', '/');
             }
             //If the type is different, go up to the namespace level
             else if (this.TypeShortName != sourceMember.TypeShortName)
             {
                 if (sourceMember.Kind == MemberKind.Type)
-                    return $"././{this.TypeShortName}/{shortFilePath}";
+                    return $"./../{this.TypeShortName}/{shortFilePath}";
                 else
-                    return $"./././{this.TypeShortName}/{shortFilePath}";
+                    return $"./../../{this.TypeShortName}/{shortFilePath}";
             }
             //If using a different kind (method, ctor, class etc), go to the common type level
             else if (this.Kind != sourceMember.Kind)
@@ -254,7 +257,7 @@ namespace Vsxmd.Units
                 if (sourceMember.Kind == MemberKind.Type)
                     return $"./{shortFilePath}";
                 else
-                    return $"././{shortFilePath}";
+                    return $"./../{shortFilePath}";
             }
             //Else, index as if the markdown file is on the same level
             else

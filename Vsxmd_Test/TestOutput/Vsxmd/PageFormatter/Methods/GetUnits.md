@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-PageFormatter-GetUnits-System-Collections-Generic-IEnumerable{Vsxmd-Units-BaseUnit}-'></a>
-# GetUnits(units) method
+# GetUnits(units) Method
 
 ###### Namespace:  Vsxmd
 

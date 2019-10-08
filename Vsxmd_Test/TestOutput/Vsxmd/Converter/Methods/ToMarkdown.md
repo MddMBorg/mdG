@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Converter-ToMarkdown'></a>
-# ToMarkdown() method
+# ToMarkdown() Method
 
 ###### Namespace:  Vsxmd
 

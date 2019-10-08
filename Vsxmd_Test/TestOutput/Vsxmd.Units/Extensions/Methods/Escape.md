@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-Escape-System-String-'></a>
-# Escape(content) method
+# Escape(content) Method
 
 ###### Namespace:  Vsxmd.Units
 

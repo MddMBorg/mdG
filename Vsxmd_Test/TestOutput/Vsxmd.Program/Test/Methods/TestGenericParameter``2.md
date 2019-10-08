@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-Test-TestGenericParameter``2-System-Linq-Expressions-Expression{System-Func{``0,``1,System-String}}-'></a>
-# TestGenericParameter\`\`2(expression) method
+# TestGenericParameter\`\`2(expression) Method
 
 ###### Namespace:  Vsxmd.Program
 

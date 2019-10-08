@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-MemberName-GetParamTypes'></a>
-# GetParamTypes() method
+# GetParamTypes() Method
 
 ###### Namespace:  Vsxmd.Units
 

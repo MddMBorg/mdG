@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-MemberName-ToReferenceLink-System-Boolean-'></a>
-# ToReferenceLink(useShortName) method
+# ToReferenceLink(useShortName) Method
 
 ###### Namespace:  Vsxmd.Units
 

@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-FormatKind'></a>
-# FormatKind type
+# FormatKind Type
 
 ###### Namespace:  Vsxmd.Units
 

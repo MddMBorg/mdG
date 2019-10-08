@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-Test-TestSpaceAfterInlineElements``1-System-Boolean-'></a>
-# TestSpaceAfterInlineElements\`\`1() method
+# TestSpaceAfterInlineElements\`\`1() Method
 
 ###### Namespace:  Vsxmd.Program
 

@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-Join-System-Collections-Generic-IEnumerable{System-String},System-String-'></a>
-# Join(value,separator) method
+# Join(value,separator) Method
 
 ###### Namespace:  Vsxmd.Units
 

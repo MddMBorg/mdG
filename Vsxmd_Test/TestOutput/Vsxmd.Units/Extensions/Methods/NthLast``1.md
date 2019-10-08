@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-NthLast``1-System-Collections-Generic-IEnumerable{``0},System-Int32-'></a>
-# NthLast\`\`1(source,index) method
+# NthLast\`\`1(source,index) Method
 
 ###### Namespace:  Vsxmd.Units
 

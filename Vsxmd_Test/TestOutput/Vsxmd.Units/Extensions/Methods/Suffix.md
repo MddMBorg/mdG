@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-Suffix-System-String,System-String-'></a>
-# Suffix(value,suffix) method
+# Suffix(value,suffix) Method
 
 ###### Namespace:  Vsxmd.Units
 

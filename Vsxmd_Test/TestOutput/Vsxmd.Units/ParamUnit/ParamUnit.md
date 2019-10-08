@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-ParamUnit'></a>
-# ParamUnit type
+# ParamUnit Type
 
 ###### Namespace:  Vsxmd.Units
 
@@ -11,7 +11,7 @@ Param unit.
 
 | Definition | Description |
 |-|-|
-| [ParamUnit(XElement, String)](Constructors/Constructors.md) | Initializes a new instance of the [ParamUnit](././ParamUnit.md) class. |
+| [ParamUnit(XElement, String)](Constructors/Constructors.md) | Initializes a new instance of the [ParamUnit](./../ParamUnit.md) class. |
 
 # Methods
 

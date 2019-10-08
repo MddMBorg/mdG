@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-Test-TestGenericReference'></a>
-# TestGenericReference() method
+# TestGenericReference() Method
 
 ###### Namespace:  Vsxmd.Program
 

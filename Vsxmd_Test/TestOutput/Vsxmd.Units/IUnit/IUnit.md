@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-IUnit'></a>
-# IUnit type
+# IUnit Type
 
 ###### Namespace:  Vsxmd.Units
 

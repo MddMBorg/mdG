@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-Test-TestGenericPermission'></a>
-# TestGenericPermission() method
+# TestGenericPermission() Method
 
 ###### Namespace:  Vsxmd.Program
 

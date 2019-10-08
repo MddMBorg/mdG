@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-SummaryUnit'></a>
-# SummaryUnit type
+# SummaryUnit Type
 
 ###### Namespace:  Vsxmd.Units
 
@@ -11,7 +11,7 @@ Summary unit.
 
 | Definition | Description |
 |-|-|
-| [SummaryUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [SummaryUnit](././SummaryUnit.md) class. |
+| [SummaryUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [SummaryUnit](./../SummaryUnit.md) class. |
 
 # Methods
 

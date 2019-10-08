@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-MemberUnit-ToMarkdown-Vsxmd-Units-FormatKind-'></a>
-# ToMarkdown() method
+# ToMarkdown() Method
 
 ###### Namespace:  Vsxmd.Units
 

@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-Test-TestGenericException'></a>
-# TestGenericException() method
+# TestGenericException() Method
 
 ###### Namespace:  Vsxmd.Program
 

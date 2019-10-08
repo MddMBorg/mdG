@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Program'></a>
-# Program type
+# Program Type
 
 ###### Namespace:  Vsxmd
 

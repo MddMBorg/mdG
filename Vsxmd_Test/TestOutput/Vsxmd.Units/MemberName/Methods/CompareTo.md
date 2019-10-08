@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-MemberName-CompareTo-Vsxmd-Units-MemberName-'></a>
-# CompareTo() method
+# CompareTo() Method
 
 ###### Namespace:  Vsxmd.Units
 

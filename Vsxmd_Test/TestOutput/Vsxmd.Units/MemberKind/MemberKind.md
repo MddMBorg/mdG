@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Units-MemberKind'></a>
-# MemberKind type
+# MemberKind Type
 
 ###### Namespace:  Vsxmd.Units
 

@@ -1,11 +1,11 @@
 <a name='M-Vsxmd-Units-BaseUnit-#ctor-System-Xml-Linq-XElement,System-String-'></a>
-# #ctor(element,elementName) constructor
+# BaseUnit(element,elementName) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [BaseUnit](././BaseUnit.md) class.
+Initializes a new instance of the [BaseUnit](./../BaseUnit.md) class.
 
 #### Parameters
 

@@ -1,5 +1,5 @@
 <a name='P-Vsxmd-Units-MemberName-Namespace'></a>
-# Namespace property
+# Namespace Property
 
 ###### Namespace:  Vsxmd.Units
 

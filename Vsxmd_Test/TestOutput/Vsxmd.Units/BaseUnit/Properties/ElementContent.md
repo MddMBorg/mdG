@@ -1,5 +1,5 @@
 <a name='P-Vsxmd-Units-BaseUnit-ElementContent'></a>
-# ElementContent property
+# ElementContent Property
 
 ###### Namespace:  Vsxmd.Units
 

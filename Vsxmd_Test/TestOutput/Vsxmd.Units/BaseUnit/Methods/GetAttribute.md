@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-BaseUnit-GetAttribute-System-Xml-Linq-XName-'></a>
-# GetAttribute(name) method
+# GetAttribute(name) Method
 
 ###### Namespace:  Vsxmd.Units
 

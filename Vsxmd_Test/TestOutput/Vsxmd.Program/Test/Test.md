@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Program-Test'></a>
-# Test type
+# Test Type
 
 ###### Namespace:  Vsxmd.Program
 
@@ -9,7 +9,7 @@
 
 | Definition | Description |
 |-|-|
-| [Test](Constructors/Constructors.md) | Initializes a new instance of the [Test](././Test.md) class.  Test constructor without parameters.  See [Test](#). |
+| [Test](Constructors/Constructors.md) | Initializes a new instance of the [Test](./../Test.md) class.  Test constructor without parameters.  See [Test](#). |
 
 # Methods
 

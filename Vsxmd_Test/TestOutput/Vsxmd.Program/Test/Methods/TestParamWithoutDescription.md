@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-Test-TestParamWithoutDescription-System-String-'></a>
-# TestParamWithoutDescription(p) method
+# TestParamWithoutDescription(p) Method
 
 ###### Namespace:  Vsxmd.Program
 

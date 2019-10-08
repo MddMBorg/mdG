@@ -1,5 +1,5 @@
 <a name='P-Vsxmd-Units-MemberUnit-TypeName'></a>
-# TypeName property
+# TypeName Property
 
 ###### Namespace:  Vsxmd.Units
 

@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-PageFormatter'></a>
-# PageFormatter type
+# PageFormatter Type
 
 ###### Namespace:  Vsxmd
 

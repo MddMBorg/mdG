@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-BaseUnit-GetChildren-System-Xml-Linq-XName-'></a>
-# GetChildren(name) method
+# GetChildren(name) Method
 
 ###### Namespace:  Vsxmd.Units
 

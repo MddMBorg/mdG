@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-Test-TestSeeLangword'></a>
-# TestSeeLangword() method
+# TestSeeLangword() Method
 
 ###### Namespace:  Vsxmd.Program
 

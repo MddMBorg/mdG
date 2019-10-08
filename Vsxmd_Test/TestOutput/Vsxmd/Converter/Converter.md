@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Converter'></a>
-# Converter type
+# Converter Type
 
 ###### Namespace:  Vsxmd
 
@@ -11,7 +11,7 @@
 
 | Definition | Description |
 |-|-|
-| [Converter(XDocument)](Constructors/Constructors.md) | Initializes a new instance of the [Converter](././Converter.md) class. |
+| [Converter(XDocument)](Constructors/Constructors.md) | Initializes a new instance of the [Converter](./../Converter.md) class. |
 
 # Methods
 

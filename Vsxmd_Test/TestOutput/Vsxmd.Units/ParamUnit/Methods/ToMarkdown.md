@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-ParamUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement},System-Collections-Generic-IEnumerable{System-String},Vsxmd-Units-MemberKind-'></a>
-# ToMarkdown(elements,paramTypes,memberKind) method
+# ToMarkdown(elements,paramTypes,memberKind) Method
 
 ###### Namespace:  Vsxmd.Units
 
@@ -17,7 +17,7 @@ The param XML element list.
 
 The paramater type names.
 
-`memberKind`  [MemberKind](./././MemberKind/MemberKind.md)  
+`memberKind`  [MemberKind](./../../MemberKind/MemberKind.md)  
 
 The member kind of the parent element.
 
@@ -33,6 +33,6 @@ The generated Markdown.
 
 When the parameter (a.k.a `elements`) list is empty:
 
-If parent element kind is [Constructor](./././MemberKind/Fields/Constructor.md) or [Method](./././MemberKind/Fields/Method.md), it returns a hint about "no parameters".
+If parent element kind is [Constructor](./../../MemberKind/Fields/Constructor.md) or [Method](./../../MemberKind/Fields/Method.md), it returns a hint about "no parameters".
 
 If parent element kind is not the value mentioned above, it returns an empty string.

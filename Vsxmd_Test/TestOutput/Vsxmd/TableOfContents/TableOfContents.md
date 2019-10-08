@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-TableOfContents'></a>
-# TableOfContents type
+# TableOfContents Type
 
 ###### Namespace:  Vsxmd
 
@@ -11,7 +11,7 @@ Table of contents.
 
 | Definition | Description |
 |-|-|
-| [TableOfContents(MemberUnit})](Constructors/Constructors.md) | Initializes a new instance of the [TableOfContents](././TableOfContents.md) class.  It convert the table of contents from the `memberUnits`. |
+| [TableOfContents(MemberUnit})](Constructors/Constructors.md) | Initializes a new instance of the [TableOfContents](./../TableOfContents.md) class.  It convert the table of contents from the `memberUnits`. |
 
 # Properties
 

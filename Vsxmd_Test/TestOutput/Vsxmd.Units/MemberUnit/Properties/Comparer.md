@@ -1,5 +1,5 @@
 <a name='P-Vsxmd-Units-MemberUnit-Comparer'></a>
-# Comparer property
+# Comparer Property
 
 ###### Namespace:  Vsxmd.Units
 

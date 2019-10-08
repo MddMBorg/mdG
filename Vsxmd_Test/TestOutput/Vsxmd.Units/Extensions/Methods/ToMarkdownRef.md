@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-ToMarkdownRef-System-String-'></a>
-# ToMarkdownRef(href) method
+# ToMarkdownRef(href) Method
 
 ###### Namespace:  Vsxmd.Units
 

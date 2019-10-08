@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-MarkdownWriter-WriteSingleFile'></a>
-# WriteSingleFile() method
+# WriteSingleFile() Method
 
 ###### Namespace:  Vsxmd
 

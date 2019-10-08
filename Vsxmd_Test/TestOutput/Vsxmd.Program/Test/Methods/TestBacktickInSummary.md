@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Program-Test-TestBacktickInSummary'></a>
-# TestBacktickInSummary() method
+# TestBacktickInSummary() Method
 
 ###### Namespace:  Vsxmd.Program
 

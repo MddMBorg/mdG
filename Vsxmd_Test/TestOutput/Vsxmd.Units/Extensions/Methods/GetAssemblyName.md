@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-GetAssemblyName-System-Xml-Linq-XElement-'></a>
-# GetAssemblyName(xElement) method
+# GetAssemblyName(xElement) Method
 
 ###### Namespace:  Vsxmd.Units
 

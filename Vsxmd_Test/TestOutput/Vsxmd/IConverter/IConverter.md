@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-IConverter'></a>
-# IConverter type
+# IConverter Type
 
 ###### Namespace:  Vsxmd
 

@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-MemberUnit-MemberUnitComparer-Compare-Vsxmd-Units-MemberUnit,Vsxmd-Units-MemberUnit-'></a>
-# Compare() method
+# Compare() Method
 
 ###### Namespace:  Vsxmd.Units.MemberUnit
 

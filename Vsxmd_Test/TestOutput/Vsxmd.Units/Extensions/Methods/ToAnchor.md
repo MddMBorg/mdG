@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-ToAnchor-System-String-'></a>
-# ToAnchor(href) method
+# ToAnchor(href) Method
 
 ###### Namespace:  Vsxmd.Units
 

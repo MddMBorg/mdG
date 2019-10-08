@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-AsCode-System-String-'></a>
-# AsCode(code) method
+# AsCode(code) Method
 
 ###### Namespace:  Vsxmd.Units
 

@@ -1,11 +1,11 @@
 <a name='M-Vsxmd-Converter-#ctor-System-Xml-Linq-XDocument-'></a>
-# #ctor(document) constructor
+# Converter(document) Constructor
 
 ###### Namespace:  Vsxmd
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [Converter](././Converter.md) class.
+Initializes a new instance of the [Converter](./../Converter.md) class.
 
 #### Parameters
 

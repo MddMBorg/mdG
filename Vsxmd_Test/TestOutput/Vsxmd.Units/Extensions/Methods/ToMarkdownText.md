@@ -1,5 +1,5 @@
 <a name='M-Vsxmd-Units-Extensions-ToMarkdownText-System-Xml-Linq-XElement-'></a>
-# ToMarkdownText(element) method
+# ToMarkdownText(element) Method
 
 ###### Namespace:  Vsxmd.Units
 
