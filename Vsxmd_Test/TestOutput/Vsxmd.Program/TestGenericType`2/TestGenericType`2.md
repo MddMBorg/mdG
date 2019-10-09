@@ -23,4 +23,4 @@ Generic type 2.
 
 | Definition | Description |
 |-|-|
-| [TestGenericMethod\`\`2](Methods/TestGenericMethod``2.md) | Test generic method.  See [TestGenericMethod\`\`2](./Methods/TestGenericMethod``2.md). |
+| [TestGenericMethod\`\`2](Methods/TestGenericMethod``2.md) | Test generic method.<br/><br/>See [TestGenericMethod\`\`2](./Methods/TestGenericMethod``2.md). |

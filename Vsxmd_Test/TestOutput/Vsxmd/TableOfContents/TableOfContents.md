@@ -11,7 +11,7 @@ Table of contents.
 
 | Definition | Description |
 |-|-|
-| [TableOfContents(MemberUnit})](Constructors/Constructors.md) | Initializes a new instance of the [TableOfContents](#) class.  It convert the table of contents from the `memberUnits`. |
+| [TableOfContents(MemberUnit})](Constructors/Constructors.md) | Initializes a new instance of the [TableOfContents](#) class.<br/><br/>It convert the table of contents from the `memberUnits`. |
 
 # Properties
 

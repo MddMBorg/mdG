@@ -68,12 +68,6 @@ namespace Vsxmd.Units
         /// <value>The member kind.</value>
         internal MemberKind Kind => this.Name.Kind;
 
-        /// <summary>
-        /// Gets the link pointing to this member unit.
-        /// </summary>
-        /// <value>The link pointing to this member unit.</value>
-        internal string Link => this.Name.Link;
-
         internal IEnumerable<string> InheritDoc =>
             this.GetChild("inheritdoc") == null
                 ? Enumerable.Empty<string>()
@@ -147,7 +141,7 @@ namespace Vsxmd.Units
                     Kind == MemberKind.Constructor ||
                     Kind == MemberKind.Constants ||
                     Kind == MemberKind.Property)
-                    return new[] { $"| {this.Name.ToSummaryLink(true)} | {this.SummarySummary.Join("").Replace('\n', ' ')} |" };
+                    return new[] { $"| {this.Name.ToSummaryLink(true)} | {this.SummarySummary.Join("").Replace("\n", "<br/>")} |" };
                 else
                     return new[] { "|  |  |" };
             }
@@ -163,9 +157,9 @@ namespace Vsxmd.Units
             IEnumerable<MemberUnit> group) =>
             group.Any(unit => unit.Kind == MemberKind.Type)
                 ? group
-                : group.Concat(new[] { Create(group.First().TypeName) });
+                : group.Concat(new[] { _Create(group.First().TypeName) });
 
-        private static MemberUnit Create(string typeName) =>
+        private static MemberUnit _Create(string typeName) =>
             new MemberUnit(
                 new XElement(
                     "member",

@@ -18,4 +18,4 @@ Remarks unit.
 | Definition | Description |
 |-|-|
 | [ToMarkdown(FormatKind)](Methods/ToMarkdown.md) |  |
-| [ToMarkdown(XElement)](Methods/ToMarkdown.md) | Convert the remarks XML element to Markdown safely. If element is `null`, return empty string. |
+| [ToMarkdown(XElement)](Methods/ToMarkdown.md) | Convert the remarks XML element to Markdown safely.<br/>If element is `null`, return empty string. |

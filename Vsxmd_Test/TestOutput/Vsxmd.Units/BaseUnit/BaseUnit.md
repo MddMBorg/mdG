@@ -26,5 +26,5 @@ The base unit.
 |-|-|
 | [GetAttribute(XName)](Methods/GetAttribute.md) | Returns the [XAttribute](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XAttribute) value of this [XElement](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XElement) that has the specified `name`. |
 | [GetChild(XName)](Methods/GetChild.md) | Gets the first (in document order) child element with the specified `name`. |
-| [GetChildren(XName)](Methods/GetChildren.md) | Returns a collection of the child elements of this element or document, in document order. Only elements that have a matching [XName](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName) are included in the collection. |
+| [GetChildren(XName)](Methods/GetChildren.md) | Returns a collection of the child elements of this element or document, in document order.<br/>Only elements that have a matching [XName](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName) are included in the collection. |
 | [ToMarkdown(FormatKind)](Methods/ToMarkdown.md) |  |

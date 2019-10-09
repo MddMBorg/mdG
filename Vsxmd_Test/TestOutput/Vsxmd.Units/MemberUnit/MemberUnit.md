@@ -26,5 +26,5 @@ Member unit.
 
 | Definition | Description |
 |-|-|
-| [ComplementType(MemberUnit})](Methods/ComplementType.md) | Complement a type unit if the member unit `group` does not have one. One member unit group has the same [TypeName](./Properties/TypeName.md). |
+| [ComplementType(MemberUnit})](Methods/ComplementType.md) | Complement a type unit if the member unit `group` does not have one.<br/>One member unit group has the same [TypeName](./Properties/TypeName.md). |
 | [ToMarkdown(FormatKind)](Methods/ToMarkdown.md) |  |

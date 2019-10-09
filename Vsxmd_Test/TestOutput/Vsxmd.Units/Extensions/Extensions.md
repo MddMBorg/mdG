@@ -11,7 +11,7 @@ Extensions helper.
 
 | Definition | Description |
 |-|-|
-| [AsCode(String)](Methods/AsCode.md) | Wrap the `code` into Markdown backtick safely.  The backtick characters inside the `code` reverse as it is. |
+| [AsCode(String)](Methods/AsCode.md) | Wrap the `code` into Markdown backtick safely.<br/><br/>The backtick characters inside the `code` reverse as it is. |
 | [Escape(String)](Methods/Escape.md) | Escape the content to keep it raw in Markdown syntax. |
 | [GetAssemblyName(XElement)](Methods/GetAssemblyName.md) | Probably a lazy way to do this and more implementation should be moved to AssemblyUnit class |
 | [Join(String}, String)](Methods/Join.md) | Concatenates the `value`s with the `separator`. |
@@ -22,5 +22,5 @@ Extensions helper.
 | [ToHereLink(String)](Methods/ToHereLink.md) | Generate "to here" link for the `href`. |
 | [ToLowerString(MemberKind)](Methods/ToLowerString.md) | Convert the [MemberKind](./../MemberKind/MemberKind.md) to its lowercase name. |
 | [ToMarkdownRef(String)](Methods/ToMarkdownRef.md) | Escape a reference to an anchor, file or folder by replacing special characters with '-'. |
-| [ToMarkdownText(XElement)](Methods/ToMarkdownText.md) | Convert the inline XML nodes to Markdown text. For example, it works for `summary` and `returns` elements. |
+| [ToMarkdownText(XElement)](Methods/ToMarkdownText.md) | Convert the inline XML nodes to Markdown text.<br/>For example, it works for `summary` and `returns` elements. |
 | [ToReferenceLink(String, Boolean)](Methods/ToReferenceLink.md) | Generate the reference link for the `memberName`. |

@@ -30,4 +30,4 @@ Member name.
 |-|-|
 | [CompareTo(MemberName)](Methods/CompareTo.md) |  |
 | [GetParamTypes](Methods/GetParamTypes.md) | Gets the method parameter type names from the member name. |
-| [ToReferenceLink(Boolean)](Methods/ToReferenceLink.md) | Convert the member name to Markdown reference link.  If then name is under `System` namespace, the link points to MSDN.  Otherwise, the link points to this page anchor. |
+| [ToReferenceLink(Boolean)](Methods/ToReferenceLink.md) | Convert the member name to Markdown reference link.<br/><br/>If then name is under `System` namespace, the link points to MSDN.<br/><br/>Otherwise, the link points to this page anchor. |

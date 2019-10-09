@@ -33,12 +33,8 @@ namespace Vsxmd
 
             // member units
             var memberUnits = MemberUnits();
-            
-            // table of contents
-            var tableOfContents = new TableOfContents(memberUnits);
 
             return new IUnit[] { assemblyUnit }
-                .Concat(new[] { tableOfContents })
                 .Concat(memberUnits);
         }
 

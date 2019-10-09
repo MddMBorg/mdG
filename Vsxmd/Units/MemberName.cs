@@ -17,11 +17,11 @@ namespace Vsxmd.Units
     /// </summary>
     internal class MemberName : IComparable<MemberName>
     {
-        private readonly string name;
+        private readonly string _Name;
 
-        private readonly char type;
+        private readonly char _Type;
 
-        private readonly IEnumerable<string> paramNames;
+        private readonly IEnumerable<string> _ParamNames;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberName"/> class.
@@ -30,9 +30,9 @@ namespace Vsxmd.Units
         /// <param name="paramNames">The parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
         internal MemberName(string name, IEnumerable<string> paramNames)
         {
-            this.name = name;
-            this.type = name.First();
-            this.paramNames = paramNames;
+            this._Name = name;
+            this._Type = name.First();
+            this._ParamNames = paramNames;
         }
 
         /// <summary>
@@ -49,15 +49,15 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The member kind.</value>
         internal MemberKind Kind =>
-            this.type == 'T'
+            this._Type == 'T'
             ? MemberKind.Type
-            : this.type == 'F'
+            : this._Type == 'F'
             ? MemberKind.Constants
-            : this.type == 'P'
+            : this._Type == 'P'
             ? MemberKind.Property
-            : this.type == 'M' && this.name.Contains(".#ctor")
+            : this._Type == 'M' && this._Name.Contains(".#ctor")
             ? MemberKind.Constructor
-            : this.type == 'M' && !this.name.Contains(".#ctor")
+            : this._Type == 'M' && !this._Name.Contains(".#ctor")
             ? MemberKind.Method
             : MemberKind.NotSupported;
 
@@ -72,7 +72,7 @@ namespace Vsxmd.Units
             ? $"[{this.FriendlyName.Escape()}]({this.FormattedHyperLink})"
             : this.Kind == MemberKind.Constructor ||
               this.Kind == MemberKind.Method
-            ? $"[{this.FriendlyName.Escape()}({this.paramNames.Join(", ")})]({this.FormattedHyperLink})"
+            ? $"[{this.FriendlyName.Escape()}({this._ParamNames.Join(", ")})]({this.FormattedHyperLink})"
             : string.Empty;
 
         /// <summary>
@@ -91,9 +91,9 @@ namespace Vsxmd.Units
             : this.Kind == MemberKind.Property
             ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} Property"
             : this.Kind == MemberKind.Constructor
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) Constructor"
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this._ParamNames.Join(",")}) Constructor"
             : this.Kind == MemberKind.Method
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this.paramNames.Join(",")}) Method"
+            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this._ParamNames.Join(",")}) Method"
             : string.Empty;
 
         /// <summary>
@@ -129,10 +129,10 @@ namespace Vsxmd.Units
             ? this.NameSegments.NthLast(2)
             : string.Empty;
 
-        private string Href => this.name.ToMarkdownRef();
+        private string Href => this._Name.ToMarkdownRef();
 
         private string StrippedName =>
-            this.name.Substring(2);
+            this._Name.Substring(2);
 
         private string LongName =>
             this.StrippedName.Split('(').First();
@@ -174,10 +174,10 @@ namespace Vsxmd.Units
         /// </example>
         internal IEnumerable<string> GetParamTypes()
         {
-            if (!this.name.Contains('('))
+            if (!this._Name.Contains('('))
                 return Enumerable.Empty<string>();
 
-            var paramString = this.name.Split('(').Last().Trim(')');
+            var paramString = this._Name.Split('(').Last().Trim(')');
 
             var delta = 0;
             var list = new List<StringBuilder>()
