@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
@@ -27,7 +30,7 @@ namespace mdGExtension
         /// <summary>
         /// VS Package that provides this command, not null.
         /// </summary>
-        private readonly AsyncPackage package;
+        private readonly AsyncPackage _Package;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigureMarkdownCommand"/> class.
@@ -37,33 +40,23 @@ namespace mdGExtension
         /// <param name="commandService">Command service to add command to, not null.</param>
         private ConfigureMarkdownCommand(AsyncPackage package, OleMenuCommandService commandService)
         {
-            this.package = package ?? throw new ArgumentNullException(nameof(package));
+            _Package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
 
             var menuCommandID = new CommandID(CommandSet, CommandId);
-            var menuItem = new MenuCommand(this.Execute, menuCommandID);
+            var menuItem = new MenuCommand(Execute, menuCommandID);
             commandService.AddCommand(menuItem);
         }
 
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static ConfigureMarkdownCommand Instance
-        {
-            get;
-            private set;
-        }
+        public static ConfigureMarkdownCommand Instance { get; private set; }
 
         /// <summary>
         /// Gets the service provider from the owner package.
         /// </summary>
-        private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider
-        {
-            get
-            {
-                return this.package;
-            }
-        }
+        private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider => _Package;
 
         /// <summary>
         /// Initializes the singleton instance of the command.
@@ -89,17 +82,36 @@ namespace mdGExtension
         private void Execute(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "ConfigureMarkdownCommand";
+            string message = "Configuring Markdown.";
+            string title = "Markdown";
 
             // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.package,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            //VsShellUtilities.ShowMessageBox(
+            //    _Package,
+            //    message,
+            //    title,
+            //    OLEMSGICON.OLEMSGICON_INFO,
+            //    OLEMSGBUTTON.OLEMSGBUTTON_OK,
+            //    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            
+            _DoWork();
         }
+
+        private async Task _DoWork()
+        {
+            DTE s = await (ServiceProvider as AsyncPackage).GetServiceAsync(typeof(SDTE)) as DTE;
+
+            var p = s.ActiveSolutionProjects as Array;
+           
+            foreach(Project t in p)
+            {
+                Debug.WriteLine(t?.Name);
+                Debug.WriteLine(t.Properties.Count);
+                var x = t.Properties.Item(1);
+            }
+            
+        }
+
     }
+
 }

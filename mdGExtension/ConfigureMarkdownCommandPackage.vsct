@@ -37,7 +37,7 @@
          must be a menu. -->
     <Groups>
       <Group guid="guidConfigureMarkdownCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
       </Group>
     </Groups>
 
@@ -54,9 +54,10 @@
           If you do not want an image next to your command, remove the Icon node /> -->
       <Button guid="guidConfigureMarkdownCommandPackageCmdSet" id="ConfigureMarkdownCommandId" priority="0x0100" type="Button">
         <Parent guid="guidConfigureMarkdownCommandPackageCmdSet" id="MyMenuGroup" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
         <!--<Icon guid="guidImages" id="bmpPic1" />-->
         <Strings>
-          <ButtonText>Invoke ConfigureMarkdownCommand</ButtonText>
+          <ButtonText>Configure Markdown...</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -91,4 +92,5 @@
       <IDSymbol name="bmpPicStrikethrough" value="6" />
     </GuidSymbol>-->
   </Symbols>
+  
 </CommandTable>
