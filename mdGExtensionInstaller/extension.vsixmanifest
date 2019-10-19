@@ -4,7 +4,7 @@
     <DisplayName>mdGExtension</DisplayName>
     <Description xml:space="preserve">mdG Extension</Description>
   </Metadata>
-  <Installation InstalledByMsi="true">
+  <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 16.0)" />
   </Installation>
   <Dependencies>
