@@ -3,11 +3,15 @@ using System.Collections;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.Threading;
 using Task = System.Threading.Tasks.Task;
 
 namespace mdGExtension
@@ -82,34 +86,67 @@ namespace mdGExtension
         private void Execute(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            string message = "Configuring Markdown.";
-            string title = "Markdown";
-
-            // Show a message box to prove we were here
-            //VsShellUtilities.ShowMessageBox(
-            //    _Package,
-            //    message,
-            //    title,
-            //    OLEMSGICON.OLEMSGICON_INFO,
-            //    OLEMSGBUTTON.OLEMSGBUTTON_OK,
-            //    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
-            
-            _DoWork();
+            _DoWorkAsync();
         }
 
-        private async Task _DoWork()
+        private async Task _DoWorkAsync()
         {
-            DTE s = await (ServiceProvider as AsyncPackage).GetServiceAsync(typeof(SDTE)) as DTE;
+            string targetName = "mdGTask";
+            string docFile = "DocumentationFile";
 
-            var p = s.ActiveSolutionProjects as Array;
-           
-            foreach(Project t in p)
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            DTE s = await (ServiceProvider as AsyncPackage).GetServiceAsync(typeof(SDTE)) as DTE ?? null;
+
+            Array projs = s.ActiveSolutionProjects as Array;
+            Project proj = projs.GetValue(0) as Project;
+
+            string fileName = proj.FileName;
+            XElement xDoc = XDocument.Load(fileName).Root;
+
+            XElement n = xDoc.Elements()
+                .Where(x => x.Name.LocalName == "Target")
+                .Where(x => x.Attribute("Name").Value == targetName)
+                .FirstOrDefault();
+            XElement xO = xDoc.Elements()
+                .Where(x => x.Name.LocalName == "PropertyGroup")
+                .Elements()
+                .Where(x => x.Name.LocalName == docFile)
+                .FirstOrDefault();
+
+            DataEntryForm form = new DataEntryForm();
+            form.XMLPath.Text = xO?.Value;
+            form.ShowDialog();
+
+            if (form.GenerateMarkdown.IsChecked ?? false)
             {
-                Debug.WriteLine(t?.Name);
-                Debug.WriteLine(t.Properties.Count);
-                var x = t.Properties.Item(1);
+                //set xml documentation output folder if not already specified in proj file
+                if (string.IsNullOrWhiteSpace(xO?.Value))
+                {
+                    if (xO == null)
+                        xDoc.Elements()
+                            .Where(x => x.Name.LocalName == "PropertyGroup")
+                            .FirstOrDefault()
+                            .Add(new XElement(docFile, Path.Combine("\\bin\\Debug", $"{proj.Name}.xml")));
+                    else
+                        xO.Value = Path.Combine("\\bin\\Debug", $"{proj.Name}.xml");
+                }
+
+                //if the target is not already in the proj file, then add
+                if (n == null)
+                {
+                    //using namespace because argh!
+                    string ns = xDoc.Name.NamespaceName;
+                    XElement outX = new XElement($"{{{ns}}}mDOutput", form.OutputPath.Text);
+                    XElement binX = new XElement($"{{{ns}}}mdGBinary", "\"$(MSBuildExtensionsPath)\"");
+                    XElement cmdX = new XElement($"{{{ns}}}mdGExecute", "$(mdGBinary) \"$(DocumentationFile)\" \"$(mDOutput)\"");
+                    XElement propGroup = new XElement($"{{{ns}}}PropertyGroup", outX, binX, cmdX);
+                    XElement execX = new XElement($"{{{ns}}}Exec", new XAttribute("Command", "$(mdGExecute)"));
+                    XElement tElement = new XElement($"{{{ns}}}Target", propGroup, execX);
+                    tElement.Add(new XAttribute("Name", targetName));
+                    tElement.Add(new XAttribute("AfterTargets", "PostBuildEvent"));
+                    xDoc.Add(tElement);
+                }
             }
-            
         }
 
     }
