@@ -11,11 +11,11 @@ Seealso unit.
 
 | Definition | Description |
 |-|-|
-| [SeealsoUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [SeealsoUnit](#) class. |
+| [SeealsoUnit(XElement, MemberName)](Constructors/Constructors.md) | Initializes a new instance of the [](#) class. |
 
 # Methods
 
 | Definition | Description |
 |-|-|
-| [ToMarkdown(FormatKind)](Methods/ToMarkdown.md) |  |
-| [ToMarkdown(XElement})](Methods/ToMarkdown.md) | Convert the seealso XML element to Markdown safely.<br/>If element is `null`, return empty string. |
+| [ToMarkdown(FormatKind, MemberName)](Methods/ToMarkdown.md) |  |
+| [ToMarkdown(XElement}, MemberName)](Methods/ToMarkdown.md) | Convert the seealso XML element to Markdown safely.<br/>If element is `null`, return empty string. |

@@ -5,7 +5,7 @@
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [Converter](./../Converter.md) class.
+Initializes a new instance of the [](./../Converter.md) class.
 
 #### Parameters
 

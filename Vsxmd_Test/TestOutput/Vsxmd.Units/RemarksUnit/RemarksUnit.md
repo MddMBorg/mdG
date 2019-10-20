@@ -11,11 +11,11 @@ Remarks unit.
 
 | Definition | Description |
 |-|-|
-| [RemarksUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [RemarksUnit](#) class. |
+| [RemarksUnit(XElement, MemberName)](Constructors/Constructors.md) | Initializes a new instance of the [](#) class. |
 
 # Methods
 
 | Definition | Description |
 |-|-|
-| [ToMarkdown(FormatKind)](Methods/ToMarkdown.md) |  |
-| [ToMarkdown(XElement)](Methods/ToMarkdown.md) | Convert the remarks XML element to Markdown safely.<br/>If element is `null`, return empty string. |
+| [ToMarkdown(FormatKind, MemberName)](Methods/ToMarkdown.md) |  |
+| [ToMarkdown(XElement, MemberName)](Methods/ToMarkdown.md) | Convert the remarks XML element to Markdown safely.<br/>If element is `null`, return empty string. |

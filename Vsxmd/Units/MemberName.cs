@@ -30,9 +30,9 @@ namespace Vsxmd.Units
         /// <param name="paramNames">The parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
         internal MemberName(string name, IEnumerable<string> paramNames)
         {
-            this._Name = name;
-            this._Type = name.First();
-            this._ParamNames = paramNames;
+            _Name = name;
+            _Type = name.First();
+            _ParamNames = paramNames;
         }
 
         /// <summary>
@@ -49,15 +49,15 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The member kind.</value>
         internal MemberKind Kind =>
-            this._Type == 'T'
+            _Type == 'T'
             ? MemberKind.Type
-            : this._Type == 'F'
+            : _Type == 'F'
             ? MemberKind.Constants
-            : this._Type == 'P'
+            : _Type == 'P'
             ? MemberKind.Property
-            : this._Type == 'M' && this._Name.Contains(".#ctor")
+            : _Type == 'M' && _Name.Contains(".#ctor")
             ? MemberKind.Constructor
-            : this._Type == 'M' && !this._Name.Contains(".#ctor")
+            : _Type == 'M' && !_Name.Contains(".#ctor")
             ? MemberKind.Method
             : MemberKind.NotSupported;
 
@@ -66,13 +66,13 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The link pointing to this member unit.</value>
         internal string Link =>
-            this.Kind == MemberKind.Type ||
-            this.Kind == MemberKind.Constants ||
-            this.Kind == MemberKind.Property
-            ? $"[{this.FriendlyName.Escape()}]({this.FormattedHyperLink})"
-            : this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
-            ? $"[{this.FriendlyName.Escape()}({this._ParamNames.Join(", ")})]({this.FormattedHyperLink})"
+            Kind == MemberKind.Type ||
+            Kind == MemberKind.Constants ||
+            Kind == MemberKind.Property
+            ? $"[{FriendlyName.Escape()}]({FormattedHyperLink})"
+            : Kind == MemberKind.Constructor ||
+              Kind == MemberKind.Method
+            ? $"[{FriendlyName.Escape()}({_ParamNames.Join(", ")})]({FormattedHyperLink})"
             : string.Empty;
 
         /// <summary>
@@ -83,18 +83,49 @@ namespace Vsxmd.Units
         /// <para>For <see cref="MemberKind.Type"/>, show as <c>## Vsxmd.Units.MemberName [#](#here) [^](#contents)</c>.</para>
         /// <para>For other kinds, show as <c>### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)</c>.</para>
         /// </example>
-        internal string Caption =>
-            this.Kind == MemberKind.Type
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} Type"
-            : this.Kind == MemberKind.Constants 
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} Field"
-            : this.Kind == MemberKind.Property
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()} Property"
-            : this.Kind == MemberKind.Constructor
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this._ParamNames.Join(",")}) Constructor"
-            : this.Kind == MemberKind.Method
-            ? $"{this.Href.ToAnchor()}# {this.FriendlyName.Escape()}({this._ParamNames.Join(",")}) Method"
-            : string.Empty;
+        internal string Caption
+        {
+            get
+            {
+                string name = ParseGenerics(FriendlyName).Escape();
+                return
+                    Kind == MemberKind.Type
+                    ? $"{Href.ToAnchor()}# {name} Type"
+                    : Kind == MemberKind.Constants
+                    ? $"{Href.ToAnchor()}# {name} Field"
+                    : Kind == MemberKind.Property
+                    ? $"{Href.ToAnchor()}# {name} Property"
+                    : Kind == MemberKind.Constructor
+                    ? $"{Href.ToAnchor()}# {name}({_ParamNames.Join(",")}) Constructor"
+                    : Kind == MemberKind.Method
+                    ? $"{Href.ToAnchor()}# {name}({_ParamNames.Join(",")}) Method"
+                    : string.Empty;
+            }
+        }
+
+
+        internal string ParseGenerics(string name, List<string> types = null)
+        {
+            if (name.Contains('-'))
+            {
+                if (types == null)
+                {
+                    string tempName = name.Split('-').First() + "<";
+                    if (name.EndsWith("-1"))
+                        tempName += "T";
+                    else
+                    {
+                        int num = Convert.ToInt32(name.Split('-').Last());
+                        for(int i = 1; i <= num; i++)
+                            tempName += $"T{i.ToString()}, ";
+                    }
+                    return tempName += ">";
+                }
+                else
+                    return types[Convert.ToInt32(name.Split('-').Last())];
+            }
+            return name;
+        }
 
         /// <summary>
         /// Gets the type name.
@@ -102,7 +133,7 @@ namespace Vsxmd.Units
         /// <value>The type name.</value>
         /// <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
         internal string TypeName =>
-            $"{this.Namespace}.{this.TypeShortName}";
+            $"{Namespace}.{TypeShortName}";
 
         /// <summary>
         /// Gets the namespace name.
@@ -110,57 +141,56 @@ namespace Vsxmd.Units
         /// <value>The namespace name.</value>
         /// <example><c>System</c>, <c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
         internal string Namespace =>
-            this.Kind == MemberKind.Type
-            ? this.NameSegments.TakeAllButLast(1).Join(".")
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
-            ? this.NameSegments.TakeAllButLast(2).Join(".")
+            Kind == MemberKind.Type
+            ? NameSegments.TakeAllButLast(1).Join(".")
+            : Kind == MemberKind.Constants ||
+              Kind == MemberKind.Property ||
+              Kind == MemberKind.Constructor ||
+              Kind == MemberKind.Method
+            ? NameSegments.TakeAllButLast(2).Join(".")
             : string.Empty;
 
         private string TypeShortName =>
-            this.Kind == MemberKind.Type
-            ? this.NameSegments.Last()
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Constructor ||
-              this.Kind == MemberKind.Method
-            ? this.NameSegments.NthLast(2)
+            Kind == MemberKind.Type
+            ? NameSegments.Last()
+            : Kind == MemberKind.Constants ||
+              Kind == MemberKind.Property ||
+              Kind == MemberKind.Constructor ||
+              Kind == MemberKind.Method
+            ? NameSegments.NthLast(2)
             : string.Empty;
 
-        private string Href => this._Name.ToMarkdownRef();
+        private string Href => _Name.ToMarkdownRef();
 
         private string StrippedName =>
-            this._Name.Substring(2);
+            _Name.Substring(2);
 
         private string LongName =>
-            this.StrippedName.Split('(').First();
+            StrippedName.Split('(').First();
 
         private string DocsName =>
-            this.LongName.Split('{').First();
+            LongName.Split('{').First();
 
         private IEnumerable<string> NameSegments =>
-            this.LongName.Split('.');
+            LongName.Split('.');
 
         private string FriendlyName =>
-            this.Kind == MemberKind.Type
-            ? this.TypeShortName
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Method
-            ? this.NameSegments.Last()
-            : this.Kind == MemberKind.Constructor
-            ? this.TypeShortName
+            Kind == MemberKind.Type ||
+            Kind == MemberKind.Constructor
+            ? TypeShortName.Replace('`', '-')
+            : Kind == MemberKind.Constants ||
+              Kind == MemberKind.Property ||
+              Kind == MemberKind.Method
+            ? NameSegments.Last().Replace('`', '-')
             : string.Empty;
 
         /// <inheritdoc />
         public int CompareTo(MemberName other) =>
-            this.TypeShortName != other.TypeShortName
-            ? string.Compare(this.TypeShortName, other.TypeShortName, StringComparison.Ordinal)
-            : this.Kind != other.Kind
-            ? this.Kind.CompareTo(other.Kind)
-            : string.Compare(this.LongName, other.LongName, StringComparison.Ordinal);
+            TypeShortName != other.TypeShortName
+            ? string.Compare(TypeShortName, other.TypeShortName, StringComparison.Ordinal)
+            : Kind != other.Kind
+            ? Kind.CompareTo(other.Kind)
+            : string.Compare(LongName, other.LongName, StringComparison.Ordinal);
 
         /// <summary>
         /// Gets the method parameter type names from the member name.
@@ -174,10 +204,10 @@ namespace Vsxmd.Units
         /// </example>
         internal IEnumerable<string> GetParamTypes()
         {
-            if (!this._Name.Contains('('))
+            if (!_Name.Contains('('))
                 return Enumerable.Empty<string>();
 
-            var paramString = this._Name.Split('(').Last().Trim(')');
+            var paramString = _Name.Split('(').Last().Trim(')');
 
             var delta = 0;
             var list = new List<StringBuilder>()
@@ -206,53 +236,55 @@ namespace Vsxmd.Units
         /// <para>If then name is under <c>System</c> namespace, the link points to MSDN.</para>
         /// <para>Otherwise, the link points to this page anchor.</para>
         /// </summary>
+        /// <param name="sourceMember">Originating member to begin relative reference from e.g. another namespace, class or member type.</param>
         /// <param name="useShortName">Indicate if use short type name.</param>
+        /// <param name="alternateName">An override to use for instance when using see tags for the link description.</param>
         /// <returns>The generated Markdown reference link.</returns>
-        internal string ToReferenceLink(MemberName sourceMember, bool useShortName) =>
-            $"[{this.GetReferenceName(useShortName).Escape()}]({this.MemberLink(sourceMember)})";
+        internal string ToReferenceLink(MemberName sourceMember, bool useShortName, string alternateName = null) =>
+            $"[{alternateName ?? GetReferenceName(useShortName).Escape()}]({MemberLink(sourceMember).Replace('`', '-')})";
 
         internal string ToSummaryLink(bool useShortName) =>
-            $"[{this.GetReferenceName(useShortName).Escape()}" +
-            $"{(this.GetParamTypes().Count() > 0 ? $"({this.GetParamTypes().Select(x => x.Split('.').NthLast(1)).Join(", ")})" : "")}" +
-            $"]({this.Kind.ToMemberKindString()}/{this.FileName})";
+            $"[{GetReferenceName(useShortName).Escape()}" +
+            $"{(GetParamTypes().Count() > 0 ? $"({GetParamTypes().Select(x => x.Split('.').NthLast(1)).Join(", ")})" : "")}" +
+            $"]({Kind.ToMemberKindString()}/{FileName})";
 
         internal string FormattedHyperLink =>
-            $"/{this.Namespace}/{this.FileName}/#{this.Href}";
+            $"/{Namespace}/{FileName}/#{Href}";
 
         internal string MemberLink(MemberName sourceMember)
         {
             //Use docs.microsoft for references to the System namespace
-            if (this.Namespace.StartsWith("System.", StringComparison.Ordinal) || this.Namespace.Equals("System", StringComparison.Ordinal))
-                return $"https://docs.microsoft.com/dotnet/api/{this.DocsName}";
-            
-            string shortFilePath = this.Kind.ToMemberKindString();
-            shortFilePath = $"{shortFilePath}{(!string.IsNullOrWhiteSpace(shortFilePath) ? "/" : "")}{this.FileName}";
+            if (Namespace.StartsWith("System.", StringComparison.Ordinal) || Namespace.Equals("System", StringComparison.Ordinal))
+                return $"https://docs.microsoft.com/dotnet/api/{DocsName}";
+
+            string shortFilePath = Kind.ToMemberKindString();
+            shortFilePath = $"{shortFilePath}{(!string.IsNullOrWhiteSpace(shortFilePath) ? "/" : "")}{FileName}";
 
             //if the LongName property is the same then the reference is to itself
-            if (this.LongName == sourceMember.LongName)
+            if (LongName == sourceMember.LongName)
                 return "#";
-             /*
-             * N.B. Type kinds are always (here) one level above methods/props/fields etc, and so require one less ../ to index to the upper level (Kind, Class, namespace)
-             */
+            /*
+            * N.B. Type kinds are always (here) one level above methods/props/fields etc, and so require one less ../ to index to the upper level (Kind, Class, namespace)
+            */
             //If the namespace is different, go up to the top level and then index into the markdown file
-            if (this.Namespace != sourceMember.Namespace)
+            if (Namespace != sourceMember.Namespace)
             {
                 //Need to replace the backslashes since Windows file system is \ vs the web /
                 if (sourceMember.Kind == MemberKind.Type)
-                    return $"./../../{this.FullFilePath}".Replace('\\', '/');
+                    return $"./../../{FullFilePath}".Replace('\\', '/');
                 else
-                    return $"./../../../{this.FullFilePath}".Replace('\\', '/');
+                    return $"./../../../{FullFilePath}".Replace('\\', '/');
             }
             //If the type is different, go up to the namespace level
-            else if (this.TypeShortName != sourceMember.TypeShortName)
+            else if (TypeShortName != sourceMember.TypeShortName)
             {
                 if (sourceMember.Kind == MemberKind.Type)
-                    return $"./../{this.TypeShortName}/{shortFilePath}";
+                    return $"./../{TypeShortName}/{shortFilePath}";
                 else
-                    return $"./../../{this.TypeShortName}/{shortFilePath}";
+                    return $"./../../{TypeShortName}/{shortFilePath}";
             }
             //If using a different kind (method, ctor, class etc), go to the common type level
-            else if (this.Kind != sourceMember.Kind)
+            else if (Kind != sourceMember.Kind)
             {
                 if (sourceMember.Kind == MemberKind.Type)
                     return $"./{shortFilePath}";
@@ -261,32 +293,32 @@ namespace Vsxmd.Units
             }
             //Else, index as if the markdown file is on the same level
             else
-                return $"{this.FileName}";
+                return $"{FileName}";
         }
 
         internal string FileName =>
             Kind != MemberKind.Constructor
-            ? $"{this.FriendlyName}.md"
+            ? $"{FriendlyName}.md"
             : "Constructors.md";
 
         internal string DirectoryName =>
             Kind == MemberKind.Type
-            ? Path.Combine(this.Namespace, this.TypeShortName)
-            : Path.Combine(this.Namespace, this.TypeShortName, this.Kind.ToMemberKindString());
+            ? Path.Combine(Namespace, TypeShortName)
+            : Path.Combine(Namespace, TypeShortName, Kind.ToMemberKindString());
 
         internal string FullFilePath =>
             Path.Combine(DirectoryName, FileName);
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName
-            ? this.LongName
-            : this.Kind == MemberKind.Type ||
-              this.Kind == MemberKind.Constructor
-            ? this.TypeShortName
-            : this.Kind == MemberKind.Constants ||
-              this.Kind == MemberKind.Property ||
-              this.Kind == MemberKind.Method
-            ? this.FriendlyName
+            ? ParseGenerics(LongName)
+            : Kind == MemberKind.Type ||
+              Kind == MemberKind.Constructor
+            ? ParseGenerics(TypeShortName)
+            : Kind == MemberKind.Constants ||
+              Kind == MemberKind.Property ||
+              Kind == MemberKind.Method
+            ? ParseGenerics(FriendlyName)
             : string.Empty;
 
     }

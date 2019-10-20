@@ -1,11 +1,11 @@
-<a name='M-Vsxmd-Units-ReturnsUnit-#ctor-System-Xml-Linq-XElement-'></a>
+<a name='M-Vsxmd-Units-ReturnsUnit-#ctor-System-Xml-Linq-XElement,Vsxmd-Units-MemberName-'></a>
 # ReturnsUnit(element) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [ReturnsUnit](./../ReturnsUnit.md) class.
+Initializes a new instance of the [](./../ReturnsUnit.md) class.
 
 #### Parameters
 

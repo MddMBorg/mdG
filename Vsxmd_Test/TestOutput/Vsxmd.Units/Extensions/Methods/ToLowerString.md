@@ -5,7 +5,7 @@
 
 ###### Assembly:  Vsxmd
 
-Convert the [MemberKind](./../../MemberKind/MemberKind.md) to its lowercase name.
+Convert the [](./../../MemberKind/MemberKind.md) to its lowercase name.
 
 #### Parameters
 

@@ -71,7 +71,7 @@ namespace Vsxmd.Units
         /// Only elements that have a matching <see cref="XName"/> are included in the collection.
         /// </summary>
         /// <param name="name">The <see cref="XName"/> to match.</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> of <see cref="XElement"/> containing the children that have a matching <see cref="XName"/>, in document order.</returns>
+        /// <returns>An <see cref="IEnumerable{XElement}"/> of <see cref="XElement"/> containing the children that have a matching <see cref="XName"/>, in document order.</returns>
         protected IEnumerable<XElement> GetChildren(XName name) =>
             this.Element.Elements(name);
 

@@ -9,7 +9,7 @@ Test generic exception type.
 
 #### Exceptions
 
-[Vsxmd.Program.Test.TestGenericParameter\`\`2](TestGenericParameter``2.md)  
+[Vsxmd.Program.Test.TestGenericParameter\`\`2](TestGenericParameter--2.md)  
 
 Just for test.
 

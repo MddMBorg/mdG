@@ -1,11 +1,11 @@
-<a name='M-Vsxmd-Units-ParamUnit-#ctor-System-Xml-Linq-XElement,System-String-'></a>
+<a name='M-Vsxmd-Units-ParamUnit-#ctor-System-Xml-Linq-XElement,System-String,Vsxmd-Units-MemberName-'></a>
 # ParamUnit(element,paramType) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [ParamUnit](./../ParamUnit.md) class.
+Initializes a new instance of the [](./../ParamUnit.md) class.
 
 #### Parameters
 

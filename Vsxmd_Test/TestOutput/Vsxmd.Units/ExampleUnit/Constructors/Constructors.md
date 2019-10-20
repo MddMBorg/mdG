@@ -1,11 +1,11 @@
-<a name='M-Vsxmd-Units-ExampleUnit-#ctor-System-Xml-Linq-XElement-'></a>
+<a name='M-Vsxmd-Units-ExampleUnit-#ctor-System-Xml-Linq-XElement,Vsxmd-Units-MemberName-'></a>
 # ExampleUnit(element) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [ExampleUnit](./../ExampleUnit.md) class.
+Initializes a new instance of the [](./../ExampleUnit.md) class.
 
 #### Parameters
 

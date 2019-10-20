@@ -11,10 +11,4 @@
 
 | Definition | Description |
 |-|-|
-| [Converter(XDocument)](Constructors/Constructors.md) | Initializes a new instance of the [Converter](#) class. |
-
-# Methods
-
-| Definition | Description |
-|-|-|
-| [ToMarkdown](Methods/ToMarkdown.md) |  |
+| [Converter(XDocument)](Constructors/Constructors.md) | Initializes a new instance of the [](#) class. |

@@ -5,10 +5,10 @@
 
 ###### Assembly:  Vsxmd
 
-[IUnit](#) is wrapper to handle XML elements.
+[](#) is wrapper to handle XML elements.
 
 # Methods
 
 | Definition | Description |
 |-|-|
-| [ToMarkdown(FormatKind)](Methods/ToMarkdown.md) | Represent the XML element content as Markdown syntax. |
+| [ToMarkdown(FormatKind, MemberName)](Methods/ToMarkdown.md) | Represent the XML element content as Markdown syntax. |

@@ -1,5 +1,5 @@
-<a name='M-Vsxmd-Units-Extensions-ToReferenceLink-System-String,System-Boolean-'></a>
-# ToReferenceLink(memberName,useShortName) Method
+<a name='M-Vsxmd-Units-Extensions-ToReferenceLink-System-String,Vsxmd-Units-MemberName,System-Boolean,System-String-'></a>
+# ToReferenceLink(memberName,sourceMember,useShortName,alternateName) Method
 
 ###### Namespace:  Vsxmd.Units
 
@@ -13,9 +13,17 @@ Generate the reference link for the `memberName`.
 
 The member name.
 
+`sourceMember`  [MemberName](./../../MemberName/MemberName.md)  
+
+Source member to begin relative uri from.
+
 `useShortName`  [Boolean](https://docs.microsoft.com/dotnet/api/System.Boolean)  
 
 Indicate if use short type name.
+
+`alternateName`  [String](https://docs.microsoft.com/dotnet/api/System.String)  
+
+An override to use when generating the link description.
 
 #### Returns
 

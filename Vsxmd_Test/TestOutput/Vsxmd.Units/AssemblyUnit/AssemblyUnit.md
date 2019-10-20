@@ -11,10 +11,10 @@ Assembly unit.
 
 | Definition | Description |
 |-|-|
-| [AssemblyUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [AssemblyUnit](#) class. |
+| [AssemblyUnit(XElement)](Constructors/Constructors.md) | Initializes a new instance of the [](#) class. |
 
 # Methods
 
 | Definition | Description |
 |-|-|
-| [ToMarkdown(FormatKind)](Methods/ToMarkdown.md) |  |
+| [ToMarkdown(FormatKind, MemberName)](Methods/ToMarkdown.md) |  |

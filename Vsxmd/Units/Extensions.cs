@@ -93,14 +93,16 @@ namespace Vsxmd.Units
         /// Generate the reference link for the <paramref name="memberName"/>.
         /// </summary>
         /// <param name="memberName">The member name.</param>
+        /// <param name="sourceMember">Source member to begin relative uri from.</param>
         /// <param name="useShortName">Indicate if use short type name.</param>
+        /// <param name="alternateName">An override to use when generating the link description.</param>
         /// <returns>The generated reference link.</returns>
         /// <example>
         /// <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
         /// <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
         /// </example>
-        internal static string ToReferenceLink(this string memberName, MemberName sourceMember, bool useShortName = false) =>
-            new MemberName(memberName).ToReferenceLink(sourceMember, useShortName);
+        internal static string ToReferenceLink(this string memberName, MemberName sourceMember, bool useShortName = false, string alternateName = null) =>
+            new MemberName(memberName).ToReferenceLink(sourceMember, useShortName, alternateName);
 
         internal static string ToMemberKindString(this MemberKind kind)
         {
@@ -274,7 +276,7 @@ namespace Vsxmd.Units
                 : $"{x}{y}";
 
         private static string ToSeeTagMarkdownSpan(this XElement seeTag, MemberName sourceMember) =>
-            seeTag.Attribute("cref")?.Value?.ToReferenceLink(sourceMember, useShortName: true) ??
+            seeTag.Attribute("cref")?.Value?.ToReferenceLink(sourceMember, true, seeTag.Value) ??
             seeTag.Attribute("langword")?.Value?.AsCode();
 
         private static string AsSpanMargin(this XNode node)

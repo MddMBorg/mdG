@@ -11,7 +11,7 @@ Gets the first (in document order) child element with the specified `name`.
 
 `name`  [XName](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName)  
 
-The [XName](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName) to match.
+The [](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName) to match.
 
 #### Returns
 
@@ -19,4 +19,4 @@ The [XName](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName) to matc
 
 
 
-A [XName](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName) that matches the specified `name`, or `null`.
+A [](https://docs.microsoft.com/dotnet/api/System.Xml.Linq.XName) that matches the specified `name`, or `null`.

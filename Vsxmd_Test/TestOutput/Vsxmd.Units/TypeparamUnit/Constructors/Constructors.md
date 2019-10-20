@@ -1,11 +1,11 @@
-<a name='M-Vsxmd-Units-TypeparamUnit-#ctor-System-Xml-Linq-XElement-'></a>
+<a name='M-Vsxmd-Units-TypeparamUnit-#ctor-System-Xml-Linq-XElement,Vsxmd-Units-MemberName-'></a>
 # TypeparamUnit(element) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [TypeparamUnit](./../TypeparamUnit.md) class.
+Initializes a new instance of the [](./../TypeparamUnit.md) class.
 
 #### Parameters
 

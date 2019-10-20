@@ -1,5 +1,5 @@
 <a name='T-Vsxmd-Program-TestGenericType`2'></a>
-# TestGenericType\`2 Type
+# TestGenericType<T1, T2, > Type
 
 ###### Namespace:  Vsxmd.Program
 
@@ -23,4 +23,4 @@ Generic type 2.
 
 | Definition | Description |
 |-|-|
-| [TestGenericMethod\`\`2](Methods/TestGenericMethod``2.md) | Test generic method.<br/><br/>See [](./Methods/TestGenericMethod``2.md). |
+| [TestGenericMethod<T1, T2, >](Methods/TestGenericMethod--2.md) | Test generic method.<br/><br/>See [](./Methods/TestGenericMethod--2.md). |

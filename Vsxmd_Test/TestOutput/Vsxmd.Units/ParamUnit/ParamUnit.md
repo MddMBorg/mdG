@@ -11,11 +11,11 @@ Param unit.
 
 | Definition | Description |
 |-|-|
-| [ParamUnit(XElement, String)](Constructors/Constructors.md) | Initializes a new instance of the [ParamUnit](#) class. |
+| [ParamUnit(XElement, String, MemberName)](Constructors/Constructors.md) | Initializes a new instance of the [](#) class. |
 
 # Methods
 
 | Definition | Description |
 |-|-|
-| [ToMarkdown(FormatKind)](Methods/ToMarkdown.md) |  |
-| [ToMarkdown(XElement}, String}, MemberKind)](Methods/ToMarkdown.md) | Convert the param XML element to Markdown safely. |
+| [ToMarkdown(FormatKind, MemberName)](Methods/ToMarkdown.md) |  |
+| [ToMarkdown(XElement}, String}, MemberName)](Methods/ToMarkdown.md) | Convert the param XML element to Markdown safely. |

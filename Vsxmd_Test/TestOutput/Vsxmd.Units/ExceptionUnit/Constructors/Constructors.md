@@ -1,11 +1,11 @@
-<a name='M-Vsxmd-Units-ExceptionUnit-#ctor-System-Xml-Linq-XElement-'></a>
+<a name='M-Vsxmd-Units-ExceptionUnit-#ctor-System-Xml-Linq-XElement,Vsxmd-Units-MemberName-'></a>
 # ExceptionUnit(element) Constructor
 
 ###### Namespace:  Vsxmd.Units
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [ExceptionUnit](./../ExceptionUnit.md) class.
+Initializes a new instance of the [](./../ExceptionUnit.md) class.
 
 #### Parameters
 

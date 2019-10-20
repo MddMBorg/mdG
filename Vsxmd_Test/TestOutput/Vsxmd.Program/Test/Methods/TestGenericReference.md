@@ -7,7 +7,7 @@
 
 Test generic reference type.
 
-See [TestGenericParameter\`\`2](TestGenericParameter``2.md).
+See [](TestGenericParameter--2.md).
 
 #### Returns
 

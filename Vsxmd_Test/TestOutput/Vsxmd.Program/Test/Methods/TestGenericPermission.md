@@ -17,4 +17,4 @@ Nothing.
 
 #### Permissions
 
-| [Vsxmd.Program.Test.TestGenericParameter\`\`2](TestGenericParameter``2.md) | Just for test. |
+| [Vsxmd.Program.Test.TestGenericParameter\`\`2](TestGenericParameter--2.md) | Just for test. |

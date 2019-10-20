@@ -40,6 +40,7 @@ namespace Vsxmd.Units
         /// If element is <value>null</value>, return empty string.
         /// </summary>
         /// <param name="elements">The exception XML element list.</param>
+        /// <param name="parentName">The parent member that this tag is a part of.</param>
         /// <returns>The generated Markdown.</returns>
         internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, MemberName parentName)
         {

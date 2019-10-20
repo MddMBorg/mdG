@@ -15,5 +15,4 @@
 
 | Definition | Description |
 |-|-|
-| [WriteMultipleFiles(Boolean)](Methods/WriteMultipleFiles.md) | Converts the XML to multiple Markdown files (one per type) and writes to the output directory |
-| [WriteSingleFile](Methods/WriteSingleFile.md) | Converts the XML to one Markdown file and writes to the output file |
+| [WriteFiles](Methods/WriteFiles.md) | Converts the XML to multiple Markdown files (one per type) and writes to the output directory |

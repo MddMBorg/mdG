@@ -5,11 +5,11 @@
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [Test](./../Test.md) class.
+Initializes a new instance of the [](./../Test.md) class.
 
 Test constructor without parameters.
 
-See [Test](#).
+See [](#).
 
 #### Permissions
 

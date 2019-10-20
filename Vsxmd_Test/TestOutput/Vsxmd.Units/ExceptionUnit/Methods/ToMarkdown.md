@@ -1,5 +1,5 @@
-<a name='M-Vsxmd-Units-ExceptionUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement}-'></a>
-# ToMarkdown(elements) Method
+<a name='M-Vsxmd-Units-ExceptionUnit-ToMarkdown-System-Collections-Generic-IEnumerable{System-Xml-Linq-XElement},Vsxmd-Units-MemberName-'></a>
+# ToMarkdown(elements,parentName) Method
 
 ###### Namespace:  Vsxmd.Units
 
@@ -13,6 +13,10 @@ If element is `null`, return empty string.
 `elements`  [XElement}](https://docs.microsoft.com/dotnet/api/System.Collections.Generic.IEnumerable)  
 
 The exception XML element list.
+
+`parentName`  [MemberName](./../../MemberName/MemberName.md)  
+
+The parent member that this tag is a part of.
 
 #### Returns
 

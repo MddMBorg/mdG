@@ -15,4 +15,5 @@
 
 | Definition | Description |
 |-|-|
-| [GetUnits(BaseUnit})](Methods/GetUnits.md) | Takes several base units of same type and organises them on page in the specified way according to the formatter. |
+| [GetMarkdownByMember(MemberUnit)](Methods/GetMarkdownByMember.md) | Takes one Member Unit (non class type) and organises it in markdown format as series of strings. |
+| [GetMarkdownByType(MemberUnit})](Methods/GetMarkdownByType.md) | Takes several base units of same type and organises them on page in the specified way. |

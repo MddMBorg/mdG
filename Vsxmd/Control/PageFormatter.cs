@@ -88,7 +88,7 @@ namespace Vsxmd
         /// Takes one Member Unit (non class type) and organises it in markdown format as series of strings.
         /// </summary>
         /// <param name="unit">The unit to format.</param>
-        /// <returns><see cref="IEnumerable{String}"/></returns>
+        /// <returns><see cref="IEnumerable{String}">IEnumerable&lt;string&gt;</see></returns>
         public IEnumerable<string> GetMarkdownByMember(MemberUnit unit)
         {
             return unit.ToMarkdown(FormatKind.MethodDetail, unit.Name);

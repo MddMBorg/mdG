@@ -5,7 +5,7 @@
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [BaseUnit](./../BaseUnit.md) class.
+Initializes a new instance of the [](./../BaseUnit.md) class.
 
 #### Parameters
 

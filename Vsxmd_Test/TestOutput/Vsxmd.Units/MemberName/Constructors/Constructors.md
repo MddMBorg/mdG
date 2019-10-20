@@ -5,7 +5,7 @@
 
 ###### Assembly:  Vsxmd
 
-Initializes a new instance of the [MemberName](./../MemberName.md) class.
+Initializes a new instance of the [](./../MemberName.md) class.
 
 #### Parameters
 

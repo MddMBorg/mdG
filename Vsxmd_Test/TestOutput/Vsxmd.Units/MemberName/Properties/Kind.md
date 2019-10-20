@@ -5,4 +5,4 @@
 
 ###### Assembly:  Vsxmd
 
-Gets the member kind, one of [MemberKind](./../../MemberKind/MemberKind.md).
+Gets the member kind, one of [](./../../MemberKind/MemberKind.md).
