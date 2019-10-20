@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
@@ -102,7 +103,15 @@ namespace mdGExtension
 
             string fileName = proj.FileName;
             XDocument xDoc = XDocument.Load(fileName);
+            string origDoc = xDoc.ToString();
             XElement xEl = xDoc.Root;
+
+            if (!Path.GetExtension(fileName).Equals(".csproj", StringComparison.OrdinalIgnoreCase) && 
+                !Path.GetExtension(fileName).Equals(".vbproj", StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Can only extract documentation from C# or VB projects", "Error", MessageBoxButton.OK);
+                return;
+            }
 
             XElement extTarget = xEl.Elements()
                 .Where(x => x.Name.LocalName == "Target")
@@ -116,7 +125,7 @@ namespace mdGExtension
 
             DataEntryForm form = new DataEntryForm();
             form.XMLPath.Text = xmlProp?.Value;
-            form.OutputPath.Text = extTarget.Descendants().Where(x => x.Name.LocalName == "mDOutput").FirstOrDefault().Value;
+            form.OutputPath.Text = (extTarget != null) ? extTarget.Descendants().Where(x => x.Name.LocalName == "mDOutput").FirstOrDefault()?.Value : "";
             form.GenerateMarkdown.IsChecked = extTarget != null;
             form.ProjDir = Path.GetDirectoryName(fileName);
 
@@ -161,7 +170,8 @@ namespace mdGExtension
             else if (extTarget != null)
                 extTarget.Remove();
 
-            xDoc.Save(proj.FileName);
+            if (origDoc != xDoc.ToString())
+                xDoc.Save(proj.FileName);
         }
 
     }
