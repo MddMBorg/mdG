@@ -31,9 +31,6 @@ namespace mdGInstallerActions
             if (!pathVars.Contains(installDir))
                 Environment.SetEnvironmentVariable("PATH", $"{pathVars};{installDir}", EnvironmentVariableTarget.Machine);
 
-            MessageBox.Show(installDir);
-            MessageBox.Show(pathVars);
-
             if (File.Exists(Path.Combine(installDir, "mdGExtension.vsix")))
                 Process.Start(Path.Combine(installDir, "mdGExtension.vsix"));
 

@@ -101,52 +101,67 @@ namespace mdGExtension
             Project proj = projs.GetValue(0) as Project;
 
             string fileName = proj.FileName;
-            XElement xDoc = XDocument.Load(fileName).Root;
+            XDocument xDoc = XDocument.Load(fileName);
+            XElement xEl = xDoc.Root;
 
-            XElement n = xDoc.Elements()
+            XElement extTarget = xEl.Elements()
                 .Where(x => x.Name.LocalName == "Target")
                 .Where(x => x.Attribute("Name").Value == targetName)
                 .FirstOrDefault();
-            XElement xO = xDoc.Elements()
+            XElement xmlProp = xEl.Elements()
                 .Where(x => x.Name.LocalName == "PropertyGroup")
                 .Elements()
                 .Where(x => x.Name.LocalName == docFile)
                 .FirstOrDefault();
 
             DataEntryForm form = new DataEntryForm();
-            form.XMLPath.Text = xO?.Value;
+            form.XMLPath.Text = xmlProp?.Value;
+            form.OutputPath.Text = extTarget.Descendants().Where(x => x.Name.LocalName == "mDOutput").FirstOrDefault().Value;
+            form.GenerateMarkdown.IsChecked = extTarget != null;
+            form.ProjDir = Path.GetDirectoryName(fileName);
+
             form.ShowDialog();
 
             if (form.GenerateMarkdown.IsChecked ?? false)
             {
+                //using namespace because argh!
+                string ns = xEl.Name.NamespaceName;
+
                 //set xml documentation output folder if not already specified in proj file
-                if (string.IsNullOrWhiteSpace(xO?.Value))
+                if (string.IsNullOrWhiteSpace(xmlProp?.Value))
                 {
-                    if (xO == null)
-                        xDoc.Elements()
+                    if (xmlProp == null)
+                        xEl.Elements()
                             .Where(x => x.Name.LocalName == "PropertyGroup")
                             .FirstOrDefault()
-                            .Add(new XElement(docFile, Path.Combine("\\bin\\Debug", $"{proj.Name}.xml")));
+                            .Add(new XElement($"{{{ns}}}{docFile}", Path.Combine("bin\\Debug", $"{proj.Name}.xml")));
                     else
-                        xO.Value = Path.Combine("\\bin\\Debug", $"{proj.Name}.xml");
+                        xmlProp.Value = Path.Combine("bin\\Debug", $"{proj.Name}.xml");
                 }
 
                 //if the target is not already in the proj file, then add
-                if (n == null)
+                if (extTarget == null)
                 {
-                    //using namespace because argh!
-                    string ns = xDoc.Name.NamespaceName;
                     XElement outX = new XElement($"{{{ns}}}mDOutput", form.OutputPath.Text);
-                    XElement binX = new XElement($"{{{ns}}}mdGBinary", "\"$(MSBuildExtensionsPath)\"");
-                    XElement cmdX = new XElement($"{{{ns}}}mdGExecute", "$(mdGBinary) \"$(DocumentationFile)\" \"$(mDOutput)\"");
-                    XElement propGroup = new XElement($"{{{ns}}}PropertyGroup", outX, binX, cmdX);
+                    XElement cmdX = new XElement($"{{{ns}}}mdGExecute", "Vsxmd \"$(DocumentationFile)\" \"$(mDOutput)\"");
+                    XElement propGroup = new XElement($"{{{ns}}}PropertyGroup", outX, cmdX);
+
                     XElement execX = new XElement($"{{{ns}}}Exec", new XAttribute("Command", "$(mdGExecute)"));
+
                     XElement tElement = new XElement($"{{{ns}}}Target", propGroup, execX);
                     tElement.Add(new XAttribute("Name", targetName));
                     tElement.Add(new XAttribute("AfterTargets", "PostBuildEvent"));
-                    xDoc.Add(tElement);
+
+                    xEl.Add(tElement);
                 }
+                else
+                    extTarget.Descendants().Where(x => x.Name.LocalName == "mDOutput").FirstOrDefault().Value = form.OutputPath.Text;
             }
+            //If user doesn't want md, just remove our target node
+            else if (extTarget != null)
+                extTarget.Remove();
+
+            xDoc.Save(proj.FileName);
         }
 
     }
