@@ -15,7 +15,7 @@ namespace mdGExtension
 {
     public partial class DataEntryForm : Window
     {
-        public string ProjDir { get; set; }
+        public string SolDir { get; set; }
 
         public DataEntryForm()
         {
@@ -25,12 +25,12 @@ namespace mdGExtension
         void _SelectFolder(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog picker = new FolderBrowserDialog();
-            picker.SelectedPath = ProjDir;
+            picker.SelectedPath = SolDir;
             string dir = "";
             if (picker.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 dir = picker.SelectedPath;
-                Uri source = new Uri(ProjDir + (!ProjDir.EndsWith("\\") ? "\\" : ""));
+                Uri source = new Uri(SolDir + (!SolDir.EndsWith("\\") ? "\\" : ""));
                 Uri dest = new Uri(dir + (!dir.EndsWith("\\") ? "\\" : ""));
                 Uri diff = source.MakeRelativeUri(dest);
                 OutputPath.Text = diff.OriginalString;

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:mdGExtension"
              mc:Ignorable="d" Title="Configure Markdown Properties"
-             ResizeMode="NoResize" Height="200" Width="400">
+             ResizeMode="NoResize" Height="150" Width="400">
     <Grid Margin="7">
         
         <Grid VerticalAlignment="Top">
@@ -16,19 +16,16 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             
-            <TextBlock Background="LightGray" VerticalAlignment="Top" Text="XML Output Path:  "/>
-            <TextBlock x:Name="XMLPath" Grid.Column="1" Background="LightGray" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
 
-            <TextBlock Grid.Row="1" VerticalAlignment="Top" Text="Markdown Output Path:  "/>
-            <TextBox x:Name="OutputPath" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"/>
+            <TextBlock Grid.Row="0" VerticalAlignment="Top" Text="Markdown Output Path:  "/>
+            <TextBox x:Name="OutputPath" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top"/>
 
-            <Button Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="3" Click="_SelectFolder">Set Output Path...</Button>
+            <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="3" Click="_SelectFolder">Set Output Path...</Button>
         </Grid>
         
-        <CheckBox x:Name="GenerateMarkdown" HorizontalAlignment="Right" VerticalAlignment="Bottom">Generate Markdown during Post-build</CheckBox>
+        <CheckBox x:Name="GenerateMarkdown" HorizontalAlignment="Right" VerticalAlignment="Bottom">Generate Markdown after Build</CheckBox>
         
     </Grid>
     
