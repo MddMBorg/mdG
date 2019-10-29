@@ -16,13 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vsxmd_Test", "Vsxmd_Test\Vs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mdGExtension", "mdGExtension\mdGExtension.csproj", "{AD243260-D7C7-4441-847B-2D682B7219C5}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "mdGExtensionInstaller", "mdGExtensionInstaller\mdGExtensionInstaller.vdproj", "{8FE5BC1A-80E8-41D6-8FD2-74231BE159CA}"
-	ProjectSection(ProjectDependencies) = postProject
-		{AD243260-D7C7-4441-847B-2D682B7219C5} = {AD243260-D7C7-4441-847B-2D682B7219C5}
-		{64ADF86A-CCC5-4B29-804D-883AE7518C12} = {64ADF86A-CCC5-4B29-804D-883AE7518C12}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mdGInstallerActions", "mdGInstallerActions\mdGInstallerActions.csproj", "{F6610C5F-C002-434D-B7B3-A8ABEC4A0717}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLDocParser", "XMLDocParser\XMLDocParser.csproj", "{D672C1B2-7647-4EC2-81F8-B4C7110E706C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,13 +36,10 @@ Global
 		{AD243260-D7C7-4441-847B-2D682B7219C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD243260-D7C7-4441-847B-2D682B7219C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD243260-D7C7-4441-847B-2D682B7219C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8FE5BC1A-80E8-41D6-8FD2-74231BE159CA}.Debug|Any CPU.ActiveCfg = Debug
-		{8FE5BC1A-80E8-41D6-8FD2-74231BE159CA}.Release|Any CPU.ActiveCfg = Release
-		{8FE5BC1A-80E8-41D6-8FD2-74231BE159CA}.Release|Any CPU.Build.0 = Release
-		{F6610C5F-C002-434D-B7B3-A8ABEC4A0717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6610C5F-C002-434D-B7B3-A8ABEC4A0717}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6610C5F-C002-434D-B7B3-A8ABEC4A0717}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6610C5F-C002-434D-B7B3-A8ABEC4A0717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D672C1B2-7647-4EC2-81F8-B4C7110E706C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D672C1B2-7647-4EC2-81F8-B4C7110E706C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D672C1B2-7647-4EC2-81F8-B4C7110E706C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D672C1B2-7647-4EC2-81F8-B4C7110E706C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

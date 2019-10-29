@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("mdGInstallerActions")]
+[assembly: AssemblyTitle("XMLDocParser")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("mdGInstallerActions")]
+[assembly: AssemblyProduct("XMLDocParser")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f6610c5f-c002-434d-b7b3-a8abec4a0717")]
+[assembly: Guid("d672c1b2-7647-4ec2-81f8-b4c7110e706c")]
 
 // Version information for an assembly consists of the following four values:
 //
