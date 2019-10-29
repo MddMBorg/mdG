@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace XMLDocParser
 {
     public interface IMember
     {
+        XElement ToXML();
+
+        void Commit();
 
     }
 
