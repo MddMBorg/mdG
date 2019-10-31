@@ -12,7 +12,7 @@ namespace XMLDocParser
         public List<MemberID> Implements { get; private set; }
         public List<MemberID> Inherits { get; private set; }
 
-        public TypeMember(XElement element) : base(element)
+        public TypeMember(XElement element, DocManager manager) : base(element, manager)
         {
             Implements = _XML.Attribute("Implements")?.Value?.Split(';')?.Select(x => new MemberID(x)).ToList() ?? new List<MemberID>();
             Inherits = _XML.Attribute("Inherits")?.Value?.Split(';')?.Select(x => new MemberID(x)).ToList() ?? new List<MemberID>();

@@ -11,9 +11,20 @@ namespace XMLDocParser
     {
         protected readonly XElement _XML;
 
-        public BaseMember(XElement element)
+        public readonly MemberID ID;
+
+        public readonly DocManager Manager;
+
+        public string Type => ID.Type;
+
+        public string Assembly => Manager.GetAssembly(_XML);
+
+
+        public BaseMember(XElement element, DocManager manager)
         {
+            Manager = manager;
             _XML = element;
+            ID = new MemberID(_XML.Name.LocalName);
         }
 
         public virtual void Commit()
@@ -21,6 +32,8 @@ namespace XMLDocParser
         }
 
         public XElement ToXML() => _XML;
+
+        public virtual string ToMarkdown(bool summary = false) => ID.ToMarkdown();
 
     }
 
