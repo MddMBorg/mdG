@@ -27,6 +27,7 @@ namespace XMLDocParser
             LoadDoc(document);
 
             return document
+                .Root
                 .Element("members")
                 .Elements("member")
                 .Select(x => CreateMember(x));
@@ -34,12 +35,21 @@ namespace XMLDocParser
 
         internal BaseMember CreateMember(XElement element)
         {
-            switch (element.Name.LocalName.First())
+            switch (element.Attribute("name").Value.First())
             {
                 case 'T':
                     return new TypeMember(element, this);
                 default:
-                    throw new InvalidOperationException($"Unknown member type. Member name : {element.Name.LocalName}");
+                    return new BaseMember(element, this);
+            }
+        }
+
+        internal IEnumerable<BaseMember> AssureTypeMember(IEnumerable<BaseMember> members, XElement elements)
+        {
+            if (!members.Any(x => x is TypeMember))
+            {
+                string typeName = members.First().ID.ToString();
+
             }
         }
 

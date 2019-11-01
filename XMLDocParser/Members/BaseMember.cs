@@ -15,8 +15,6 @@ namespace XMLDocParser
 
         public readonly DocManager Manager;
 
-        public string Type => ID.Type;
-
         public string Assembly => Manager.GetAssembly(_XML);
 
 
@@ -24,7 +22,7 @@ namespace XMLDocParser
         {
             Manager = manager;
             _XML = element;
-            ID = new MemberID(_XML.Name.LocalName);
+            ID = new MemberID(_XML.Attribute("name").Value);
         }
 
         public virtual void Commit()

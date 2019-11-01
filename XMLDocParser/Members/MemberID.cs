@@ -9,15 +9,16 @@ namespace XMLDocParser
     public class MemberID : IMarkdown
     {
         private readonly string _Name;
-
-        public string Type => throw new NotImplementedException();
+        private readonly char _Kind;
+        public readonly string ProperName;
 
         public MemberID(string memberName)
         {
             _Name = memberName;
+            _Kind = _Name.First();
+            ProperName = _Name.Substring(2);
         }
 
-        public override string ToString() => _Name;
 
         public string ToMarkdown(bool summary = false)
         {
@@ -26,6 +27,8 @@ namespace XMLDocParser
 
         public static implicit operator string(MemberID x) => x._Name;
         public static implicit operator MemberID(string x) => new MemberID(x);
+
+        public override string ToString() => ProperName;
 
     }
 
