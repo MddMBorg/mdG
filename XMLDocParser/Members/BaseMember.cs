@@ -15,7 +15,10 @@ namespace XMLDocParser
 
         public readonly DocManager Manager;
 
-        public string Assembly => Manager.GetAssembly(_XML);
+
+        protected string Assembly => Manager.GetAssemblyName(_XML);
+
+        public string Type => ID.Type;
 
 
         public BaseMember(XElement element, DocManager manager)

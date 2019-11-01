@@ -12,6 +12,10 @@ namespace XMLDocParser
         private readonly char _Kind;
         public readonly string ProperName;
 
+        public string Type;
+
+        public string Defintion => ProperName.Split('(').First().Split('.').Last();
+
         public MemberID(string memberName)
         {
             _Name = memberName;
