@@ -69,7 +69,8 @@ namespace XMLDocParser
         {
             //Get a list of all members of this type
             TypeMember typeMem = _Members.OfType<TypeMember>().FirstOrDefault(x => x.Type == member.Type);
-            IEnumerable<MemberID> bases = typeMem.Inherits.Concat(typeMem.Implements);
+            List<MemberID> bases = typeMem.Implements;
+            bases.Add(typeMem.Base);
             IEnumerable<BaseMember> potentials = _Members.Where(x => bases.Any(y => x.Type == y.Type && x.ID.Defintion == y.Defintion));
 
             //If can't find any members of same type with same defintion (method, prop, field etc.), return null and allow calling member to handle.

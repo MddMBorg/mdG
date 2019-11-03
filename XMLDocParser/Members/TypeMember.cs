@@ -10,14 +10,15 @@ namespace XMLDocParser
     public class TypeMember : BaseMember
     {
         public List<MemberID> Implements { get; private set; }
-        public List<MemberID> Inherits { get; private set; }
+        public MemberID Base { get; private set; }
         public string ClassType { get; private set; }
 
 
         public TypeMember(XElement element, DocManager manager) : base(element, manager)
         {
+            string baseStr = _XML.Attribute("Base")?.Value;
+            Base = !string.IsNullOrWhiteSpace(baseStr) ? baseStr : null;
             Implements = _XML.Attribute("Implements")?.Value?.Split(';')?.Select(x => new MemberID(x)).ToList() ?? new List<MemberID>();
-            Inherits = _XML.Attribute("Inherits")?.Value?.Split(';')?.Select(x => new MemberID(x)).ToList() ?? new List<MemberID>();
             ClassType = _XML.Attribute("ClassType")?.Value ?? "Class";
         }
 
@@ -27,39 +28,34 @@ namespace XMLDocParser
             if (_XML.Attribute("Implements")?.Value != impStr)
                 _XML.SetAttributeValue("Implements", string.IsNullOrWhiteSpace(impStr) ? null : impStr);
 
-            string inheritStr = string.Join(";", Inherits.Select(x => $"T:{x}"));
-            if (_XML.Attribute("Inherits")?.Value != inheritStr)
-                _XML.SetAttributeValue("Inherits", string.IsNullOrWhiteSpace(inheritStr) ? null : inheritStr);
+            _XML.SetAttributeValue("Base", Base == null ? null : $"T:{Base}");
 
-            _XML.SetAttributeValue("ClassType", string.IsNullOrWhiteSpace(ClassType) ? null : ClassType);
+            _XML.SetAttributeValue("ClassType", string.IsNullOrWhiteSpace(ClassType ?? "") ? null : ClassType);
         }
 
         #region SafeAdd
         public void AddImplementor(string implementor)
         {
-            if (implementor != typeof(object).FullName && !Implements.Select(x => x.ToString()).Contains(implementor))
+            if (implementor != typeof(object).FullName && !Implements.Select(x => x.ProperName).Contains(implementor))
             {
-                Implements.Add($"T:{implementor}");
-                Commit();
-            }
-        }
-        
-        public void AddInheritor(string inheritor)
-        {
-            if (inheritor != typeof(object).FullName && !Implements.Select(x => x.ToString()).Contains(inheritor))
-            {
-                Implements.Add($"T:{inheritor}");
+                Implements.Add(new MemberID($"T:{implementor}"));
                 Commit();
             }
         }
 
-        public void AddClassType(string type)
+        public void ChangeBaseClass(string baseClass)
         {
-            if (ClassType != type)
+            if (baseClass != typeof(object).FullName)
             {
-                ClassType = type;
+                Base = $"T:{baseClass}";
                 Commit();
             }
+        }
+
+        public void ChangeClassType(string type)
+        {
+            ClassType = type;
+            Commit();
         }
         #endregion
 

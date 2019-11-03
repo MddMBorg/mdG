@@ -29,10 +29,10 @@ namespace XMLDocParser
             return _Name;
         }
 
-        public static implicit operator string(MemberID x) => x._Name;
-        public static implicit operator MemberID(string x) => new MemberID(x);
+        public static implicit operator string(MemberID x) => x?._Name;
+        public static implicit operator MemberID(string x) => !string.IsNullOrWhiteSpace(x) ? new MemberID(x) : null;
 
-        public override string ToString() => ProperName;
+        public override string ToString() => _Name;
 
     }
 

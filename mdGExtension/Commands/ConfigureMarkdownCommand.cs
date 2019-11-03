@@ -133,30 +133,45 @@ namespace mdGExtension
                     foreach (var member in members.OfType<TypeMember>())
                     {
                         CodeType cT = types.Where(x => x.FullName == member.ID.ProperName).FirstOrDefault();
+                        if (cT == null)
+                            continue;
+
+                        var t = string.Join("\n", types.Select(x => x.FullName));
                         switch (cT.Kind)
                         {
                             case vsCMElement.vsCMElementClass:
-                                member.AddClassType("Class");
+                                member.ChangeClassType("Class");
                                 break;
                             case vsCMElement.vsCMElementInterface:
-                                member.AddClassType("Interface");
+                                member.ChangeClassType("Interface");
                                 break;
                             case vsCMElement.vsCMElementEnum:
-                                member.AddClassType("Enum");
+                                member.ChangeClassType("Enum");
                                 break;
                             case vsCMElement.vsCMElementStruct:
-                                member.AddClassType("Struct");
+                                member.ChangeClassType("Struct");
                                 break;
                             case vsCMElement.vsCMElementDelegate:
-                                member.AddClassType("Delegate");
+                                member.ChangeClassType("Delegate");
                                 break;
                         }
 
-                        foreach (CodeElement c in cT.Bases)
-                            if (c.Kind == vsCMElement.vsCMElementInterface)
+                        CodeInterface cI = cT as CodeInterface;
+                        if (cI != null)
+                        {
+                            foreach (CodeInterface c in cI.Bases)
                                 member.AddImplementor(c.FullName);
-                            else
-                                member.AddInheritor(c.FullName);
+                            continue;
+                        }
+
+                        CodeClass cC = cT as CodeClass;
+                        if (cC != null)
+                        {
+                            foreach (CodeElement c in cC.ImplementedInterfaces)
+                                member.AddImplementor(c.FullName);
+                            member.ChangeBaseClass(cC.Bases.Item(1).FullName);
+                            continue;
+                        }
 
                     }
                 }
