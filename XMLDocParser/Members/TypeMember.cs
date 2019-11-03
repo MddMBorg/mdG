@@ -16,39 +16,39 @@ namespace XMLDocParser
 
         public TypeMember(XElement element, DocManager manager) : base(element, manager)
         {
-            Implements = _XML.Attribute("Implements")?.Value?.Split(';')?.Select(x => new MemberID($"T:{x}")).ToList() ?? new List<MemberID>();
-            Inherits = _XML.Attribute("Inherits")?.Value?.Split(';')?.Select(x => new MemberID($"T:{x}")).ToList() ?? new List<MemberID>();
+            Implements = _XML.Attribute("Implements")?.Value?.Split(';')?.Select(x => new MemberID(x)).ToList() ?? new List<MemberID>();
+            Inherits = _XML.Attribute("Inherits")?.Value?.Split(';')?.Select(x => new MemberID(x)).ToList() ?? new List<MemberID>();
             ClassType = _XML.Attribute("ClassType")?.Value ?? "Class";
         }
 
         public override void Commit()
         {
-            string impStr = string.Join(";", Implements);
+            string impStr = string.Join(";", Implements.Select(x => $"T:{x}"));
             if (_XML.Attribute("Implements")?.Value != impStr)
-                _XML.SetAttributeValue("Implements", impStr);
+                _XML.SetAttributeValue("Implements", string.IsNullOrWhiteSpace(impStr) ? null : impStr);
 
-            string inheritStr = string.Join(";", Inherits);
+            string inheritStr = string.Join(";", Inherits.Select(x => $"T:{x}"));
             if (_XML.Attribute("Inherits")?.Value != inheritStr)
-                _XML.SetAttributeValue("Inherits", inheritStr);
+                _XML.SetAttributeValue("Inherits", string.IsNullOrWhiteSpace(inheritStr) ? null : inheritStr);
 
-            _XML.SetAttributeValue("ClassType", ClassType);
+            _XML.SetAttributeValue("ClassType", string.IsNullOrWhiteSpace(ClassType) ? null : ClassType);
         }
 
         #region SafeAdd
         public void AddImplementor(string implementor)
         {
-            if (!Implements.Select(x => x.ToString()).Contains(implementor))
+            if (implementor != typeof(object).FullName && !Implements.Select(x => x.ToString()).Contains(implementor))
             {
-                Implements.Add(implementor);
+                Implements.Add($"T:{implementor}");
                 Commit();
             }
         }
         
         public void AddInheritor(string inheritor)
         {
-            if (!Implements.Select(x => x.ToString()).Contains(inheritor))
+            if (inheritor != typeof(object).FullName && !Implements.Select(x => x.ToString()).Contains(inheritor))
             {
-                Implements.Add(inheritor);
+                Implements.Add($"T:{inheritor}");
                 Commit();
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
@@ -13,6 +14,7 @@ using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Threading;
+using XMLDocParser;
 using Task = System.Threading.Tasks.Task;
 
 namespace mdGExtension
@@ -63,6 +65,9 @@ namespace mdGExtension
         /// </summary>
         private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider => _Package;
 
+        private static DTE _DTE;
+        private static BuildEvents _Events;
+
         /// <summary>
         /// Initializes the singleton instance of the command.
         /// </summary>
@@ -76,8 +81,177 @@ namespace mdGExtension
             OleMenuCommandService commandService = await package.GetServiceAsync((typeof(IMenuCommandService))) as OleMenuCommandService;
             Instance = new ConfigureMarkdownCommand(package, commandService);
 
-            await ManageShell.SetupAsync(package, commandService);
+            _DTE = await package.GetServiceAsync(typeof(SDTE)) as DTE ?? null;
+            _Events = _DTE.Events.BuildEvents;
+
+            ManageShell.DTE = _DTE;
+
+            if (_DTE != null)
+                _Events.OnBuildDone += _OnBuilt;
         }
+
+        static void _OnBuilt(vsBuildScope scope, vsBuildAction action)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            Solution soln = _DTE.Solution;
+            Globals globals = soln.Globals;
+
+            string[] exts = new string[] { ".csproj", ".vbproj" };
+            List<Project> projs = soln.Projects.Cast<Project>()
+                .Where(x => exts.Contains(Path.GetExtension(x.FileName), StringComparer.OrdinalIgnoreCase)).ToList();
+
+            bool mDSet = globals.VariableExists[ManageShell.solnStore];
+            string mDPath = mDSet ? globals[ManageShell.solnStore].ToString() : "";
+
+            if (mDSet)
+            {
+                List<string> markdownPaths = new List<string>();
+                DocManager docManager = new DocManager();
+
+                foreach (Project proj in projs)
+                {
+                    XElement root = XDocument.Load(proj.FileName).Root;
+                    XElement xmlProp = root.Elements()
+                        .Where(x => x.Name.LocalName == "PropertyGroup")
+                        .Elements()
+                        .Where(x => x.Name.LocalName == ManageShell.docVar)
+                        .FirstOrDefault();
+
+                    if (xmlProp == null)
+                        continue;
+
+                    markdownPaths.Add(xmlProp.Value);
+
+                    var doc = XDocument.Load(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value));
+                    var members = docManager.GenerateMembers(doc);
+
+                    var classes = GetItems(proj.ProjectItems).Where(x => x.Name.EndsWith(".cs")).ToList();
+
+                    var types = classes.SelectMany(x => GetClasses(x)).ToList();
+
+                    foreach (var member in members.OfType<TypeMember>())
+                    {
+                        CodeType cT = types.Where(x => x.FullName == member.ID.ProperName).FirstOrDefault();
+                        switch (cT.Kind)
+                        {
+                            case vsCMElement.vsCMElementClass:
+                                member.AddClassType("Class");
+                                break;
+                            case vsCMElement.vsCMElementInterface:
+                                member.AddClassType("Interface");
+                                break;
+                            case vsCMElement.vsCMElementEnum:
+                                member.AddClassType("Enum");
+                                break;
+                            case vsCMElement.vsCMElementStruct:
+                                member.AddClassType("Struct");
+                                break;
+                            case vsCMElement.vsCMElementDelegate:
+                                member.AddClassType("Delegate");
+                                break;
+                        }
+
+                        foreach (CodeElement c in cT.Bases)
+                            if (c.Kind == vsCMElement.vsCMElementInterface)
+                                member.AddImplementor(c.FullName);
+                            else
+                                member.AddInheritor(c.FullName);
+
+                    }
+                }
+
+                List<string> args = new List<string>() { mDPath };
+                args.AddRange(markdownPaths);
+
+                //    Vsxmd.Program.Main(args.ToArray());
+            }
+        }
+
+        private static IEnumerable<ProjectItem> GetItems(ProjectItems items)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            foreach (ProjectItem i in items)
+            {
+                yield return i;
+
+                foreach (ProjectItem p in GetItems(i.SubProject?.ProjectItems ?? i.ProjectItems))
+                    yield return p;
+            }
+        }
+
+        #region GetClasses
+        private static IEnumerable<CodeType> GetClasses(ProjectItem item)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            var codeModel = item.FileCodeModel;
+            if (codeModel == null)
+                yield break;
+
+            foreach (CodeElement element in codeModel.CodeElements)
+            {
+                CodeNamespace nS = element as CodeNamespace;
+                if (nS != null)
+                    foreach (CodeType t in GetClasses(nS))
+                        yield return t;
+
+                CodeType type = element as CodeType;
+                if (type != null)
+                {
+                    foreach (var t in GetClasses(type))
+                        yield return t;
+
+                    yield return type;
+                }
+            }
+        }
+
+        private static IEnumerable<CodeType> GetClasses(CodeNamespace element)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            foreach (CodeElement member in element.Members)
+            {
+                CodeNamespace nS = member as CodeNamespace;
+                if (nS != null)
+                    foreach (CodeType t in GetClasses(nS))
+                        yield return t;
+
+                CodeType type = member as CodeType;
+                if (type != null)
+                {
+                    foreach (var t in GetClasses(type))
+                        yield return t;
+
+                    yield return type;
+                }
+            }
+        }
+
+        private static IEnumerable<CodeType> GetClasses(CodeType element)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            foreach (CodeElement member in element.Members)
+            {
+                CodeNamespace nS = member as CodeNamespace;
+                if (nS != null)
+                    foreach (CodeType t in GetClasses(nS))
+                        yield return t;
+
+                CodeType type = member as CodeType;
+                if (type != null)
+                {
+                    foreach (var t in GetClasses(type))
+                        yield return t;
+
+                    yield return type;
+                }
+            }
+        }
+        #endregion
 
         /// <summary>
         /// This function is the callback used to execute the command when the menu item is clicked.

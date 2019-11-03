@@ -4,6 +4,7 @@
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <UseCodebase>true</UseCodebase>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -22,7 +23,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>mdGExtension</RootNamespace>
     <AssemblyName>mdGExtension</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
     <IncludeDebugSymbolsInVSIXContainer>true</IncludeDebugSymbolsInVSIXContainer>
@@ -195,6 +196,10 @@
     <ProjectReference Include="..\Vsxmd\Vsxmd.csproj">
       <Project>{64adf86a-ccc5-4b29-804d-883ae7518c12}</Project>
       <Name>Vsxmd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XMLDocParser\XMLDocParser.csproj">
+      <Project>{d672c1b2-7647-4ec2-81f8-b4c7110e706c}</Project>
+      <Name>XMLDocParser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
