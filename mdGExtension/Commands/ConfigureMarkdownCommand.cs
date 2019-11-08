@@ -129,14 +129,15 @@ namespace mdGExtension
                     var classes = GetItems(proj.ProjectItems).Where(x => x.Name.EndsWith(".cs")).ToList();
 
                     var types = classes.SelectMany(x => GetClasses(x)).ToList();
+                    var props = GetProperties(types).ToList();
+                    var methods = GetMethods(types).ToList();
 
                     foreach (var member in members.OfType<TypeMember>())
                     {
                         CodeType cT = types.Where(x => x.FullName == member.ID.ProperName).FirstOrDefault();
                         if (cT == null)
                             continue;
-
-                        var t = string.Join("\n", types.Select(x => x.FullName));
+                        
                         switch (cT.Kind)
                         {
                             case vsCMElement.vsCMElementClass:
@@ -263,6 +264,40 @@ namespace mdGExtension
                         yield return t;
 
                     yield return type;
+                }
+            }
+        }
+        #endregion
+
+        #region GetProperties
+        private static IEnumerable<CodeProperty> GetProperties(IEnumerable<CodeType> types)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            foreach (CodeType type in types)
+            {
+                foreach (CodeElement member in type.Members)
+                {
+                    CodeProperty prop = member as CodeProperty;
+                    if (prop != null)
+                        yield return prop;
+                }
+            }
+        }
+        #endregion
+
+        #region GetMethods
+        private static IEnumerable<CodeFunction> GetMethods(IEnumerable<CodeType> types)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            foreach (CodeType type in types)
+            {
+                foreach (CodeElement member in type.Members)
+                {
+                    CodeFunction method = member as CodeFunction;
+                    if (method != null)
+                        yield return method;
                 }
             }
         }

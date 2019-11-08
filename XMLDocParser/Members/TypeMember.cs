@@ -16,21 +16,20 @@ namespace XMLDocParser
 
         public TypeMember(XElement element, DocManager manager) : base(element, manager)
         {
-            string baseStr = _XML.Attribute("Base")?.Value;
-            Base = !string.IsNullOrWhiteSpace(baseStr) ? baseStr : null;
-            Implements = _XML.Attribute("Implements")?.Value?.Split(';')?.Select(x => new MemberID(x)).ToList() ?? new List<MemberID>();
-            ClassType = _XML.Attribute("ClassType")?.Value ?? "Class";
+            Base = _XML.Attribute(nameof(Base))?.Value;
+            Implements = _XML.Attribute(nameof(Implements))?.Value?.Split(';')?.Select(x => new MemberID(x)).ToList() ?? new List<MemberID>();
+            ClassType = _XML.Attribute(nameof(ClassType))?.Value ?? "Class";
         }
 
         public override void Commit()
         {
             string impStr = string.Join(";", Implements.Select(x => $"T:{x}"));
-            if (_XML.Attribute("Implements")?.Value != impStr)
-                _XML.SetAttributeValue("Implements", string.IsNullOrWhiteSpace(impStr) ? null : impStr);
+            if (_XML.Attribute(nameof(Implements))?.Value != impStr)
+                _XML.SetAttributeValue(nameof(Implements), string.IsNullOrWhiteSpace(impStr) ? null : impStr);
 
-            _XML.SetAttributeValue("Base", Base == null ? null : $"T:{Base}");
+            _XML.SetAttributeValue(nameof(Base), Base == null ? null : $"T:{Base}");
 
-            _XML.SetAttributeValue("ClassType", string.IsNullOrWhiteSpace(ClassType ?? "") ? null : ClassType);
+            _XML.SetAttributeValue(nameof(ClassType), string.IsNullOrWhiteSpace(ClassType ?? "") ? null : ClassType);
         }
 
         #region SafeAdd
