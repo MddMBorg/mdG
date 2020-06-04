@@ -64,17 +64,15 @@ namespace mdGExtension
                     XElement xmlProp = root.Elements()
                         .Where(x => x.Name.LocalName == "PropertyGroup")
                         .Elements()
-                        .Where(x => x.Name.LocalName == docVar)
-                        .FirstOrDefault();
+                        .FirstOrDefault(x => x.Name.LocalName == docVar);
 
                     if (string.IsNullOrWhiteSpace(xmlProp?.Value))
                     {
 
                         if (xmlProp == null)
                             root.Elements()
-                                .Where(x => x.Name.LocalName == "PropertyGroup")
-                                .FirstOrDefault()
-                                .Add(new XElement($"{{{root.Name.Namespace}}}{docVar}", Path.Combine("bin\\Debug", $"{proj.Name}.xml")));
+                                .FirstOrDefault(x => x.Name.LocalName == "PropertyGroup")
+                                .Add(new XElement(root.Name.Namespace + $"{docVar}", $"{proj.Name}.xml"));
                         else
                             xmlProp.Value = Path.Combine("bin\\Debug", $"{proj.Name}.xml");
 

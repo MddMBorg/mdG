@@ -37,7 +37,7 @@ namespace mdGExtension
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(ConfigureMarkdownCommandPackage.PackageGuidString)]
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
-    [ProvideAutoLoad(UIContextGuids.SolutionExists)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
     public sealed class ConfigureMarkdownCommandPackage : AsyncPackage
     {
         /// <summary>

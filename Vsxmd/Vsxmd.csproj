@@ -27,6 +27,8 @@
     <GenerateNuspecDependsOn>ExcludeDocumentationFile</GenerateNuspecDependsOn>
     <Company />
     <PackageId>mdG</PackageId>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>

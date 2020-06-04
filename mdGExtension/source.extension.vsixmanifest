@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="mdGExtension.1ba2b1bb-ba65-4ff0-a6d9-159e7d4bf74b" Version="1.0" Language="en-US" Publisher="Mdd M" />
+        <Identity Id="mdGExtension.1ba2b1bb-ba65-4ff0-a6d9-159e7d4bf74b" Version="1.0.0.1" Language="en-US" Publisher="Mdd M" />
         <DisplayName>mdGExtension</DisplayName>
         <Description xml:space="preserve">mdG Extension</Description>
     </Metadata>

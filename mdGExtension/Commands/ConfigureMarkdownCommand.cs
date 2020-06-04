@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
@@ -65,8 +66,8 @@ namespace mdGExtension
         /// </summary>
         private Microsoft.VisualStudio.Shell.IAsyncServiceProvider ServiceProvider => _Package;
 
-        private static DTE _DTE;
-        private static BuildEvents _Events;
+        private DTE _DTE;
+        private BuildEvents _Events;
 
         /// <summary>
         /// Initializes the singleton instance of the command.
@@ -81,16 +82,16 @@ namespace mdGExtension
             OleMenuCommandService commandService = await package.GetServiceAsync((typeof(IMenuCommandService))) as OleMenuCommandService;
             Instance = new ConfigureMarkdownCommand(package, commandService);
 
-            _DTE = await package.GetServiceAsync(typeof(SDTE)) as DTE ?? null;
-            _Events = _DTE.Events.BuildEvents;
+            Instance._DTE = await package.GetServiceAsync(typeof(SDTE)) as DTE ?? null;
+            Instance._Events = Instance._DTE.Events.BuildEvents;
 
-            ManageShell.DTE = _DTE;
+            ManageShell.DTE = Instance._DTE;
 
-            if (_DTE != null)
-                _Events.OnBuildDone += _OnBuilt;
+            if (Instance._DTE != null)
+                Instance._Events.OnBuildDone += Instance._OnBuilt;
         }
 
-        static void _OnBuilt(vsBuildScope scope, vsBuildAction action)
+        void _OnBuilt(vsBuildScope scope, vsBuildAction action)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
@@ -98,8 +99,14 @@ namespace mdGExtension
             Globals globals = soln.Globals;
 
             string[] exts = new string[] { ".csproj", ".vbproj" };
-            List<Project> projs = soln.Projects.Cast<Project>()
-                .Where(x => exts.Contains(Path.GetExtension(x.FileName), StringComparer.OrdinalIgnoreCase)).ToList();
+            //done as a foreach instead of linq to avoid thread safety warnings in lambdas
+            List<Project> projs = new List<Project>();
+            foreach (Project proj in soln.Projects)
+            {
+                var ext = Path.GetExtension(proj.FileName);
+                if (exts.Contains(ext, StringComparer.OrdinalIgnoreCase))
+                    projs.Add(proj);
+            }
 
             bool mDSet = globals.VariableExists[ManageShell.solnStore];
             string mDPath = mDSet ? globals[ManageShell.solnStore].ToString() : "";
@@ -134,7 +141,7 @@ namespace mdGExtension
 
                     foreach (var member in members.OfType<TypeMember>())
                     {
-                        CodeType cT = types.Where(x => x.FullName == member.ID.ProperName).FirstOrDefault();
+                        CodeType cT = types.FirstOrDefault(x => x.FullName == member.ID.ProperName);
                         if (cT == null)
                             continue;
                         
@@ -180,11 +187,11 @@ namespace mdGExtension
                 List<string> args = new List<string>() { mDPath };
                 args.AddRange(markdownPaths);
 
-                //    Vsxmd.Program.Main(args.ToArray());
+                Vsxmd.Program.Main(args.ToArray());
             }
         }
 
-        private static IEnumerable<ProjectItem> GetItems(ProjectItems items)
+        private IEnumerable<ProjectItem> GetItems(ProjectItems items)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
@@ -198,7 +205,7 @@ namespace mdGExtension
         }
 
         #region GetClasses
-        private static IEnumerable<CodeType> GetClasses(ProjectItem item)
+        private IEnumerable<CodeType> GetClasses(ProjectItem item)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
@@ -224,7 +231,7 @@ namespace mdGExtension
             }
         }
 
-        private static IEnumerable<CodeType> GetClasses(CodeNamespace element)
+        private IEnumerable<CodeType> GetClasses(CodeNamespace element)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
@@ -246,7 +253,7 @@ namespace mdGExtension
             }
         }
 
-        private static IEnumerable<CodeType> GetClasses(CodeType element)
+        private IEnumerable<CodeType> GetClasses(CodeType element)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
@@ -270,7 +277,7 @@ namespace mdGExtension
         #endregion
 
         #region GetProperties
-        private static IEnumerable<CodeProperty> GetProperties(IEnumerable<CodeType> types)
+        private IEnumerable<CodeProperty> GetProperties(IEnumerable<CodeType> types)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
@@ -287,7 +294,7 @@ namespace mdGExtension
         #endregion
 
         #region GetMethods
-        private static IEnumerable<CodeFunction> GetMethods(IEnumerable<CodeType> types)
+        private IEnumerable<CodeFunction> GetMethods(IEnumerable<CodeType> types)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 

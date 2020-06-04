@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>mdGExtension</name>
+    </assembly>
+    <members>
+        <member name="T:mdGExtension.ConfigureMarkdownCommand">
+            <summary>
+            Command handler
+            </summary>
+        </member>
+        <member name="F:mdGExtension.ConfigureMarkdownCommand.CommandId">
+            <summary>
+            Command ID.
+            </summary>
+        </member>
+        <member name="F:mdGExtension.ConfigureMarkdownCommand.CommandSet">
+            <summary>
+            Command menu group (command set GUID).
+            </summary>
+        </member>
+        <member name="F:mdGExtension.ConfigureMarkdownCommand._Package">
+            <summary>
+            VS Package that provides this command, not null.
+            </summary>
+        </member>
+        <member name="M:mdGExtension.ConfigureMarkdownCommand.#ctor(Microsoft.VisualStudio.Shell.AsyncPackage,Microsoft.VisualStudio.Shell.OleMenuCommandService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:mdGExtension.ConfigureMarkdownCommand"/> class.
+            Adds our command handlers for menu (commands must exist in the command table file)
+            </summary>
+            <param name="package">Owner package, not null.</param>
+            <param name="commandService">Command service to add command to, not null.</param>
+        </member>
+        <member name="P:mdGExtension.ConfigureMarkdownCommand.Instance">
+            <summary>
+            Gets the instance of the command.
+            </summary>
+        </member>
+        <member name="P:mdGExtension.ConfigureMarkdownCommand.ServiceProvider">
+            <summary>
+            Gets the service provider from the owner package.
+            </summary>
+        </member>
+        <member name="M:mdGExtension.ConfigureMarkdownCommand.InitializeAsync(Microsoft.VisualStudio.Shell.AsyncPackage)">
+            <summary>
+            Initializes the singleton instance of the command.
+            </summary>
+            <param name="package">Owner package, not null.</param>
+        </member>
+        <member name="M:mdGExtension.ConfigureMarkdownCommand.Execute(System.Object,System.EventArgs)">
+            <summary>
+            This function is the callback used to execute the command when the menu item is clicked.
+            See the constructor to see how the menu item is associated with this function using
+            OleMenuCommandService service and MenuCommand class.
+            </summary>
+            <param name="sender">Event sender.</param>
+            <param name="e">Event args.</param>
+        </member>
+        <member name="T:mdGExtension.ConfigureMarkdownCommandPackage">
+            <summary>
+            This is the class that implements the package exposed by this assembly.
+            </summary>
+            <remarks>
+            <para>
+            The minimum requirement for a class to be considered a valid package for Visual Studio
+            is to implement the IVsPackage interface and register itself with the shell.
+            This package uses the helper classes defined inside the Managed Package Framework (MPF)
+            to do it: it derives from the Package class that provides the implementation of the
+            IVsPackage interface and uses the registration attributes defined in the framework to
+            register itself and its components with the shell. These attributes tell the pkgdef creation
+            utility what data to put into .pkgdef file.
+            </para>
+            <para>
+            To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
+            </para>
+            </remarks>
+        </member>
+        <member name="F:mdGExtension.ConfigureMarkdownCommandPackage.PackageGuidString">
+            <summary>
+            ConfigureMarkdownCommandPackage GUID string.
+            </summary>
+        </member>
+        <member name="M:mdGExtension.ConfigureMarkdownCommandPackage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:mdGExtension.ConfigureMarkdownCommandPackage"/> class.
+            </summary>
+        </member>
+        <member name="M:mdGExtension.ConfigureMarkdownCommandPackage.InitializeAsync(System.Threading.CancellationToken,System.IProgress{Microsoft.VisualStudio.Shell.ServiceProgressData})">
+            <summary>
+            Initialization of the package; this method is called right after the package is sited, so this is the place
+            where you can put all the initialization code that rely on services provided by VisualStudio.
+            </summary>
+            <param name="cancellationToken">A cancellation token to monitor for initialization cancellation, which can occur when VS is shutting down.</param>
+            <param name="progress">A provider for progress updates.</param>
+            <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
+        </member>
+        <member name="T:mdGExtension.DataEntryForm">
+            <summary>
+            DataEntryForm
+            </summary>
+        </member>
+        <member name="M:mdGExtension.DataEntryForm.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>
