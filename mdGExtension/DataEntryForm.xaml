@@ -24,7 +24,9 @@
 
             <Button Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="3" Click="_SelectFolder">Set Output Path...</Button>
         </Grid>
-        
+
+		<CheckBox x:Name="AbsoluteUri" HorizontalAlignment="Left" VerticalAlignment="Bottom" Checked="AbsoluteUri_Checked" Unchecked="AbsoluteUri_Unchecked">Absolute Path</CheckBox>
+		
         <CheckBox x:Name="GenerateMarkdown" HorizontalAlignment="Right" VerticalAlignment="Bottom">Generate Markdown after Build</CheckBox>
         
     </Grid>

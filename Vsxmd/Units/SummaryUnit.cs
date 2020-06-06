@@ -29,7 +29,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
-                this.ElementContent(parentName)
+                ElementContent(parentName)
             };
 
         /// <summary>

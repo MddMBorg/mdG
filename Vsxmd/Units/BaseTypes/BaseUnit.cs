@@ -17,6 +17,7 @@ namespace Vsxmd.Units
     {
         protected readonly string _UnitHeader;
 
+        public readonly string Assembly;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseUnit"/> class.
@@ -29,8 +30,9 @@ namespace Vsxmd.Units
             if (element.Name != elementName)
                 throw new ArgumentException("The element name is not expected", nameof(element));
 
-            this.Element = element;
-            this._UnitHeader = elementName.ToUpperInvariant();
+            Element = element;
+            _UnitHeader = elementName.ToUpperInvariant();
+            Assembly = element.GetAssemblyName();
         }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace Vsxmd.Units
         /// Gets the Markdown content representing the element.
         /// </summary>
         /// <value>The Markdown content.</value>
-        protected string ElementContent(MemberName sourceMember) => this.Element.ToMarkdownText(sourceMember);
+        protected string ElementContent(MemberName sourceMember) => Element.ToMarkdownText(sourceMember);
 
         /// <inheritdoc />
         public virtual IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
@@ -51,11 +53,11 @@ namespace Vsxmd.Units
             ? new[]
             {
                 $"#### {_UnitHeader}",
-                this.ElementContent(sourceMember)
+                ElementContent(sourceMember)
             }
             : new[]
             {
-                this.ElementContent(sourceMember)
+                ElementContent(sourceMember)
             };
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace Vsxmd.Units
         /// <param name="name">The <see cref="XName"/> to match.</param>
         /// <returns>A <see cref="XName"/> that matches the specified <paramref name="name"/>, or <value>null</value>.</returns>
         protected XElement GetChild(XName name) =>
-            this.Element.Element(name);
+            Element.Element(name);
 
         /// <summary>
         /// Returns a collection of the child elements of this element or document, in document order.
@@ -73,7 +75,7 @@ namespace Vsxmd.Units
         /// <param name="name">The <see cref="XName"/> to match.</param>
         /// <returns>An <see cref="IEnumerable{XElement}"/> of <see cref="XElement"/> containing the children that have a matching <see cref="XName"/>, in document order.</returns>
         protected IEnumerable<XElement> GetChildren(XName name) =>
-            this.Element.Elements(name);
+            Element.Elements(name);
 
         /// <summary>
         /// Returns the <see cref="XAttribute"/> value of this <see cref="XElement"/> that has the specified <paramref name="name"/>.
@@ -81,7 +83,7 @@ namespace Vsxmd.Units
         /// <param name="name">The <see cref="XName"/> of the <see cref="XAttribute"/> to get.</param>
         /// <returns>An <see cref="XAttribute"/> value that has the specified <paramref name="name"/>; <value>null</value> if there is no attribute with the specified <paramref name="name"/>.</returns>
         protected string GetAttribute(XName name) =>
-            this.Element.Attribute(name).Value;
+            Element.Attribute(name).Value;
     }
 
 }

@@ -110,6 +110,9 @@ namespace mdGExtension
 
             bool mDSet = globals.VariableExists[ManageShell.solnStore];
             string mDPath = mDSet ? globals[ManageShell.solnStore].ToString() : "";
+            Uri mdUri = new Uri(mDPath, UriKind.RelativeOrAbsolute);
+            if (!mdUri.IsAbsoluteUri)
+                mDPath = new Uri(new Uri(soln.FileName), mdUri).LocalPath;
 
             if (mDSet)
             {
@@ -122,13 +125,12 @@ namespace mdGExtension
                     XElement xmlProp = root.Elements()
                         .Where(x => x.Name.LocalName == "PropertyGroup")
                         .Elements()
-                        .Where(x => x.Name.LocalName == ManageShell.docVar)
-                        .FirstOrDefault();
+                        .FirstOrDefault(x => x.Name.LocalName == ManageShell.docVar);
 
                     if (xmlProp == null)
                         continue;
 
-                    markdownPaths.Add(xmlProp.Value);
+                    markdownPaths.Add(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value));
 
                     var doc = XDocument.Load(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value));
                     var members = docManager.GenerateMembers(doc);
@@ -184,10 +186,10 @@ namespace mdGExtension
                     }
                 }
 
-                List<string> args = new List<string>() { mDPath };
-                args.AddRange(markdownPaths);
+                string[] args ={ string.Join(",", markdownPaths), mDPath + 
+                        (mDPath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" : Path.DirectorySeparatorChar.ToString())};
 
-                Vsxmd.Program.Main(args.ToArray());
+                Vsxmd.Program.Main(args);
             }
         }
 

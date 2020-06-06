@@ -39,6 +39,7 @@ namespace mdGExtension
             form.OutputPath.Text = mDPath;
             form.GenerateMarkdown.IsChecked = mDSet;
             form.SolDir = Path.GetDirectoryName(soln.FileName);
+            form.AbsoluteUri.IsChecked = Path.IsPathRooted(form.SolDir);
 
             form.ShowDialog();
 
@@ -74,7 +75,7 @@ namespace mdGExtension
                                 .FirstOrDefault(x => x.Name.LocalName == "PropertyGroup")
                                 .Add(new XElement(root.Name.Namespace + $"{docVar}", $"{proj.Name}.xml"));
                         else
-                            xmlProp.Value = Path.Combine("bin\\Debug", $"{proj.Name}.xml");
+                            xmlProp.Value = $"{proj.Name}.xml";
 
                         root.Document.Save(proj.FileName);
                     }

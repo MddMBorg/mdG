@@ -30,7 +30,7 @@ namespace Vsxmd.Units
             new[]
             {
                 $"# Examples",
-                $"{this.ElementContent(sourceMember)}",
+                $"{ElementContent(sourceMember)}",
             };
 
         /// <summary>

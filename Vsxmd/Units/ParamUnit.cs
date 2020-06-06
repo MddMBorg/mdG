@@ -26,19 +26,19 @@ namespace Vsxmd.Units
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
         internal ParamUnit(XElement element, string paramType, MemberName parentName) : base(element, "param", parentName)
         {
-            this.paramType = paramType;
+            paramType = paramType;
         }
 
-        private string _Name => this.GetAttribute("name");
+        private string _Name => GetAttribute("name");
 
-        private string _Description => this.ElementContent(_ParentName);
+        private string _Description => ElementContent(_ParentName);
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
-                $"{this._Name.AsCode()}  {this.paramType.ToReferenceLink(parentName, true)}  ",
-                this.Element.ToMarkdownText(parentName)
+                $"{_Name.AsCode()}  {paramType.ToReferenceLink(parentName, true)}  ",
+                Element.ToMarkdownText(parentName)
             };
 
         /// <summary>

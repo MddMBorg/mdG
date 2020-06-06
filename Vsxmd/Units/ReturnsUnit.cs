@@ -37,7 +37,7 @@ namespace Vsxmd.Units
                 _ReturnType != null
                 ? $"{_ReturnType.Attribute("cref").Value.ToReferenceLink(parentName, true)}\n\n"
                 : "\n\n",
-                this.ElementContent(parentName)
+                ElementContent(parentName)
             };
 
         /// <summary>

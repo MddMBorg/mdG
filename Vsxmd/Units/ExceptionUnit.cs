@@ -25,14 +25,14 @@ namespace Vsxmd.Units
         {
         }
 
-        private string _Name => this.GetAttribute("cref").ToReferenceLink(_ParentName);
+        private string _Name => GetAttribute("cref").ToReferenceLink(_ParentName);
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
             new[]
             {
-                $"{this._Name}  ",
-                this.Element.ToMarkdownText(sourceMember)
+                $"{_Name}  ",
+                Element.ToMarkdownText(sourceMember)
             };
 
         /// <summary>

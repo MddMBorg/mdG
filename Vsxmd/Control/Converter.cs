@@ -51,10 +51,8 @@ namespace Vsxmd
                 .OrderBy(member => member, MemberUnit.Comparer);
         }
         
-        internal AssemblyUnit Assembly()
-        {
-            return new AssemblyUnit(_Document.Element("assembly"));
-        }
+        internal AssemblyUnit Assembly() =>
+            new AssemblyUnit(_Document.Element("assembly"));
 
     }
 

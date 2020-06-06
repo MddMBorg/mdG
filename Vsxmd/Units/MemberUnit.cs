@@ -33,9 +33,9 @@ namespace Vsxmd.Units
         internal MemberUnit(XElement element) : base(element, "member")
         {
             AssemblyName = element.GetAssemblyName();
-            this.Name = new MemberName(
-                this.GetAttribute("name"),
-                this.GetChildren("param").Select(x => x.Attribute("name").Value));
+            Name = new MemberName(
+                GetAttribute("name"),
+                GetChildren("param").Select(x => x.Attribute("name").Value));
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The the type name.</value>
         /// <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
-        internal string TypeName => this.Name.TypeName;
+        internal string TypeName => Name.TypeName;
 
         internal string TypeNamespace => Name.Namespace;
 
@@ -66,10 +66,10 @@ namespace Vsxmd.Units
         /// Gets the member kind, one of <see cref="MemberKind"/>.
         /// </summary>
         /// <value>The member kind.</value>
-        internal MemberKind Kind => this.Name.Kind;
+        internal MemberKind Kind => Name.Kind;
 
         internal IEnumerable<string> InheritDoc =>
-            this.GetChild("inheritdoc") == null
+            GetChild("inheritdoc") == null
                 ? Enumerable.Empty<string>()
                 : new[]
                 {
@@ -79,69 +79,69 @@ namespace Vsxmd.Units
         internal IEnumerable<string> Namespace =>
             new[]
             {
-                $"###### Namespace:  {this.Name.Namespace}"
+                $"###### Namespace:  {Name.Namespace}"
             };
 
         internal IEnumerable<string> Assembly =>
             new[]
             {
-                $"###### Assembly:  {this.AssemblyName}"
+                $"###### Assembly:  {AssemblyName}"
             };
 
         internal IEnumerable<string> Summary =>
-            SummaryUnit.ToMarkdown(this.GetChild("summary"), Name);
+            SummaryUnit.ToMarkdown(GetChild("summary"), Name);
 
         internal IEnumerable<string> SummarySummary =>
-            SummaryUnit.ToMarkdown(this.GetChild("summary"), new MemberName($"T:{this.TypeName}"));
+            SummaryUnit.ToMarkdown(GetChild("summary"), new MemberName($"T:{TypeName}"));
 
         internal IEnumerable<string> Returns =>
-            ReturnsUnit.ToMarkdown(this.GetChild("returns"), Name);
+            ReturnsUnit.ToMarkdown(GetChild("returns"), Name);
 
         internal IEnumerable<string> Params =>
-            ParamUnit.ToMarkdown(this.GetChildren("param"), Name.GetParamTypes(), Name);
+            ParamUnit.ToMarkdown(GetChildren("param"), Name.GetParamTypes(), Name);
 
         internal IEnumerable<string> Typeparams =>
-            TypeparamUnit.ToMarkdown(this.GetChildren("typeparam"), Name);
+            TypeparamUnit.ToMarkdown(GetChildren("typeparam"), Name);
 
         internal IEnumerable<string> Exceptions =>
-            ExceptionUnit.ToMarkdown(this.GetChildren("exception"), Name);
+            ExceptionUnit.ToMarkdown(GetChildren("exception"), Name);
 
         internal IEnumerable<string> Permissions =>
-            PermissionUnit.ToMarkdown(this.GetChildren("permission"), Name);
+            PermissionUnit.ToMarkdown(GetChildren("permission"), Name);
 
         internal IEnumerable<string> Example =>
-            ExampleUnit.ToMarkdown(this.GetChild("example"), Name);
+            ExampleUnit.ToMarkdown(GetChild("example"), Name);
 
         internal IEnumerable<string> Remarks =>
-            RemarksUnit.ToMarkdown(this.GetChild("remarks"), Name);
+            RemarksUnit.ToMarkdown(GetChild("remarks"), Name);
 
         internal IEnumerable<string> Seealsos =>
-            SeealsoUnit.ToMarkdown(this.GetChildren("seealso"), Name);
+            SeealsoUnit.ToMarkdown(GetChildren("seealso"), Name);
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember)
         {
             if (format == FormatKind.MethodDetail || format == FormatKind.None || Kind == MemberKind.Type)
-                return new[] { this.Caption }
-                    .Concat(this.Namespace)
-                    .Concat(this.Assembly)
-                    .Concat(this.InheritDoc)
-                    .Concat(this.Summary)
-                    .Concat(this.Typeparams)
-                    .Concat(this.Params)
-                    .Concat(this.Exceptions)
-                    .Concat(this.Returns)
-                    .Concat(this.Permissions)
-                    .Concat(this.Example)
-                    .Concat(this.Remarks)
-                    .Concat(this.Seealsos);
+                return new[] { Caption }
+                    .Concat(Namespace)
+                    .Concat(Assembly)
+                    .Concat(InheritDoc)
+                    .Concat(Summary)
+                    .Concat(Typeparams)
+                    .Concat(Params)
+                    .Concat(Exceptions)
+                    .Concat(Returns)
+                    .Concat(Permissions)
+                    .Concat(Example)
+                    .Concat(Remarks)
+                    .Concat(Seealsos);
             else
             {
                 if (Kind == MemberKind.Method ||
                     Kind == MemberKind.Constructor ||
                     Kind == MemberKind.Constants ||
                     Kind == MemberKind.Property)
-                    return new[] { $"| {this.Name.ToSummaryLink(true)} | {this.SummarySummary.Join("").Replace("\n", "<br/>")} |" };
+                    return new[] { $"| {Name.ToSummaryLink(true)} | {SummarySummary.Join("").Replace("\n", "<br/>")} |" };
                 else
                     return new[] { "|  |  |" };
             }

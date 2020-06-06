@@ -16,9 +16,6 @@ namespace Vsxmd.Units
     /// </summary>
     internal static class Extensions
     {
-
-        private static XDocument _XDocument { get; set; }
-
         private static string _AssemblyName { get; set; }
 
         /// <summary>
@@ -29,12 +26,7 @@ namespace Vsxmd.Units
         internal static string GetAssemblyName(this XElement xElement)
         {
             var doc = xElement.Document;
-            if (_XDocument != doc && doc != null)
-            {
-                _XDocument = doc;
-                _AssemblyName = _XDocument.Root.Element("assembly").Element("name").Value;
-            }
-            return _AssemblyName;
+            return doc.Root.Element("assembly").Element("name").Value;
         }
 
         /// <summary>

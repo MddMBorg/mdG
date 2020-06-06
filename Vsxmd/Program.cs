@@ -34,24 +34,27 @@ namespace Vsxmd
         {
             try
             {
-                if (args == null || args.Length < 1)
+                if (args == null || args.Length == 0)
                     return;
 
                 string xmlPath = args[0];
+                string[] paths = xmlPath.Split(',');
                 string markdownPath = args.ElementAtOrDefault(1);
 
                 if (string.IsNullOrWhiteSpace(markdownPath))
                 {
                     // replace extension with `md` extension
-                    markdownPath = Path.ChangeExtension(xmlPath, ".md");
+                    markdownPath = Path.ChangeExtension(paths.First(), ".md");
                 }
 
-                var document = XDocument.Load(xmlPath);
+                foreach (var path in paths)
+                {
+                    var document = XDocument.Load(xmlPath);
+                    MarkdownWriter writer = new MarkdownWriter(document, markdownPath);
+                    writer.WriteFiles();
+                }
 
-                MarkdownWriter writer = new MarkdownWriter(document, markdownPath);
-                writer.WriteFiles();
-
-                string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
+                string vsxmdAutoDeleteXml = args.Last();
                 if (string.IsNullOrWhiteSpace(vsxmdAutoDeleteXml))
                     return;
 

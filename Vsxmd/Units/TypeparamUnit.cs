@@ -25,14 +25,14 @@ namespace Vsxmd.Units
         {
         }
 
-        private string _Name => this.GetAttribute("name");
+        private string _Name => GetAttribute("name");
 
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
-                $"{this._Name.AsCode()}  ",
-                this.Element.ToMarkdownText(parentName)
+                $"{_Name.AsCode()}  ",
+                Element.ToMarkdownText(parentName)
             };
 
         /// <summary>
