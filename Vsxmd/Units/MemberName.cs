@@ -15,7 +15,7 @@ namespace Vsxmd.Units
     /// <summary>
     /// Member name.
     /// </summary>
-    internal class MemberName : IComparable<MemberName>
+    public class MemberName : IComparable<MemberName>
     {
         private readonly string _Name;
 
@@ -23,24 +23,27 @@ namespace Vsxmd.Units
 
         private readonly IEnumerable<string> _ParamNames;
 
+        private readonly string _ClassType;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberName"/> class.
         /// </summary>
         /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
         /// <param name="paramNames">The parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
-        internal MemberName(string name, IEnumerable<string> paramNames)
+        /// <param name="classType">The class type for Type elements, i.e. Interface,Class,Enum etc.</param>
+        public MemberName(string name, IEnumerable<string> paramNames, string classType)
         {
             _Name = name;
             _Type = name.First();
             _ParamNames = paramNames;
+            _ClassType = classType ?? "Class";
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberName"/> class.
         /// </summary>
         /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
-        internal MemberName(string name)
-            : this(name, null)
+        public MemberName(string name) : this(name, null, null)
         {
         }
 
@@ -48,7 +51,7 @@ namespace Vsxmd.Units
         /// Gets the member kind, one of <see cref="MemberKind"/>.
         /// </summary>
         /// <value>The member kind.</value>
-        internal MemberKind Kind =>
+        public MemberKind Kind =>
             _Type == 'T'
             ? MemberKind.Type
             : _Type == 'F'
@@ -65,7 +68,7 @@ namespace Vsxmd.Units
         /// Gets the link pointing to this member unit.
         /// </summary>
         /// <value>The link pointing to this member unit.</value>
-        internal string Link =>
+        public string Link =>
             Kind == MemberKind.Type ||
             Kind == MemberKind.Constants ||
             Kind == MemberKind.Property
@@ -83,14 +86,14 @@ namespace Vsxmd.Units
         /// <para>For <see cref="MemberKind.Type"/>, show as <c>## Vsxmd.Units.MemberName [#](#here) [^](#contents)</c>.</para>
         /// <para>For other kinds, show as <c>### Vsxmd.Units.MemberName.Caption [#](#here) [^](#contents)</c>.</para>
         /// </example>
-        internal string Caption
+        public string Caption
         {
             get
             {
                 string name = ParseGenerics(FriendlyName).Escape();
                 return
                     Kind == MemberKind.Type
-                    ? $"{Href.ToAnchor()}# {name} Type"
+                    ? $"{Href.ToAnchor()}# {name} {_ClassType}"
                     : Kind == MemberKind.Constants
                     ? $"{Href.ToAnchor()}# {name} Field"
                     : Kind == MemberKind.Property
@@ -104,7 +107,7 @@ namespace Vsxmd.Units
         }
 
 
-        internal string ParseGenerics(string name, List<string> types = null)
+        public string ParseGenerics(string name, List<string> types = null)
         {
             if (name.Contains('-'))
             {
@@ -132,7 +135,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The type name.</value>
         /// <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
-        internal string TypeName =>
+        public string TypeName =>
             $"{Namespace}.{TypeShortName}";
 
         /// <summary>
@@ -140,7 +143,7 @@ namespace Vsxmd.Units
         /// </summary>
         /// <value>The namespace name.</value>
         /// <example><c>System</c>, <c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
-        internal string Namespace =>
+        public string Namespace =>
             Kind == MemberKind.Type
             ? NameSegments.TakeAllButLast(1).Join(".")
             : Kind == MemberKind.Constants ||
@@ -150,7 +153,7 @@ namespace Vsxmd.Units
             ? NameSegments.TakeAllButLast(2).Join(".")
             : string.Empty;
 
-        private string TypeShortName =>
+        public string TypeShortName =>
             Kind == MemberKind.Type
             ? NameSegments.Last()
             : Kind == MemberKind.Constants ||
@@ -165,7 +168,7 @@ namespace Vsxmd.Units
         private string StrippedName =>
             _Name.Substring(2);
 
-        private string LongName =>
+        public string LongName =>
             StrippedName.Split('(').First();
 
         private string DocsName =>
@@ -174,7 +177,7 @@ namespace Vsxmd.Units
         private IEnumerable<string> NameSegments =>
             LongName.Split('.');
 
-        private string FriendlyName =>
+        public string FriendlyName =>
             Kind == MemberKind.Type ||
             Kind == MemberKind.Constructor
             ? TypeShortName.Replace('`', '-')
@@ -202,7 +205,7 @@ namespace Vsxmd.Units
         /// It also handle generic type.
         /// <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
         /// </example>
-        internal IEnumerable<string> GetParamTypes()
+        public IEnumerable<string> GetParamTypes()
         {
             if (!_Name.Contains('('))
                 return Enumerable.Empty<string>();
@@ -231,6 +234,7 @@ namespace Vsxmd.Units
             return list.Select(x => x.ToString());
         }
 
+
         /// <summary>
         /// Convert the member name to Markdown reference link.
         /// <para>If then name is under <c>System</c> namespace, the link points to MSDN.</para>
@@ -240,18 +244,18 @@ namespace Vsxmd.Units
         /// <param name="useShortName">Indicate if use short type name.</param>
         /// <param name="alternateName">An override to use for instance when using see tags for the link description.</param>
         /// <returns>The generated Markdown reference link.</returns>
-        internal string ToReferenceLink(MemberName sourceMember, bool useShortName, string alternateName = null) =>
+        public string ToReferenceLink(MemberName sourceMember, bool useShortName, string alternateName = null) =>
             $"[{alternateName ?? GetReferenceName(useShortName).Escape()}]({MemberLink(sourceMember).Replace('`', '-')})";
 
-        internal string ToSummaryLink(bool useShortName) =>
+        public string ToSummaryLink(bool useShortName) =>
             $"[{GetReferenceName(useShortName).Escape()}" +
             $"{(GetParamTypes().Count() > 0 ? $"({GetParamTypes().Select(x => x.Split('.').NthLast(1)).Join(", ")})" : "")}" +
             $"]({Kind.ToMemberKindString()}/{FileName})";
 
-        internal string FormattedHyperLink =>
+        public string FormattedHyperLink =>
             $"/{Namespace}/{FileName}/#{Href}";
 
-        internal string MemberLink(MemberName sourceMember)
+        public string MemberLink(MemberName sourceMember)
         {
             //Use docs.microsoft for references to the System namespace
             if (Namespace.StartsWith("System.", StringComparison.Ordinal) || Namespace.Equals("System", StringComparison.Ordinal))
@@ -296,17 +300,17 @@ namespace Vsxmd.Units
                 return $"{FileName}";
         }
 
-        internal string FileName =>
+        public string FileName =>
             Kind != MemberKind.Constructor
             ? $"{FriendlyName}.md"
             : "Constructors.md";
 
-        internal string DirectoryName =>
+        public string DirectoryName =>
             Kind == MemberKind.Type
             ? Path.Combine(Namespace, TypeShortName)
             : Path.Combine(Namespace, TypeShortName, Kind.ToMemberKindString());
 
-        internal string FullFilePath =>
+        public string FullFilePath =>
             Path.Combine(DirectoryName, FileName);
 
         private string GetReferenceName(bool useShortName) =>

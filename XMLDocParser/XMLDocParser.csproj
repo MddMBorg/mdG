@@ -54,13 +54,18 @@
     <Compile Include="DocManager.cs" />
     <Compile Include="Interfaces\IMarkdown.cs" />
     <Compile Include="Interfaces\IMember.cs" />
-    <Compile Include="Members\MemberID.cs" />
     <Compile Include="Members\PropertyMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Members\TypeMember.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Vsxmd\Vsxmd.csproj">
+      <Project>{64adf86a-ccc5-4b29-804d-883ae7518c12}</Project>
+      <Name>Vsxmd</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Vsxmd.Units;
 
 namespace XMLDocParser
 {
@@ -11,21 +12,21 @@ namespace XMLDocParser
     {
         protected readonly XElement _XML;
 
-        public readonly MemberID ID;
+        public readonly MemberName ID;
 
         public readonly DocManager Manager;
 
 
         protected string Assembly => Manager.GetAssemblyName(_XML);
 
-        public string Type => ID.Type;
+        public string TypeName => ID.TypeName;
 
 
         public BaseMember(XElement element, DocManager manager)
         {
             Manager = manager;
             _XML = element;
-            ID = new MemberID(_XML.Attribute("name").Value);
+            ID = new MemberName(_XML.Attribute("name").Value);
         }
 
         public virtual void Commit()
@@ -34,7 +35,7 @@ namespace XMLDocParser
 
         public XElement ToXML() => _XML;
 
-        public virtual string ToMarkdown(bool summary = false) => ID.ToMarkdown();
+        public virtual string ToMarkdown(bool summary = false) => ID.ToString();
 
     }
 

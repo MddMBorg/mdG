@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Vsxmd.Units;
+using XMLDocParser.Members;
 
 namespace XMLDocParser
 {
@@ -38,12 +40,12 @@ namespace XMLDocParser
             var members = memberElements
                 .Elements("member")
                 .Select(x => CreateMember(x))
-                .GroupBy(x => x.Type)
+                .GroupBy(x => x.TypeName)
                 .Select(x => AssureTypeMember(x, memberElements))
                 .SelectMany(x => x);
 
             //Remove previously cached members with the same names as the ones just generated, then add again.
-            _Members.RemoveAll(x => members.Any(y => y.ID.ProperName == x.ID.ProperName));
+            _Members.RemoveAll(x => members.Any(y => y.ID.TypeName == x.ID.TypeName));
             _Members.AddRange(members);
 
             return members;
@@ -63,15 +65,15 @@ namespace XMLDocParser
 
         internal string GetAssemblyName(XElement element) => GetAssemblyName(element?.Document);
 
-        internal TypeMember GetTypeMember(BaseMember member) => _Members.OfType<TypeMember>().FirstOrDefault(x => x.Type == member.Type);
+        internal TypeMember GetTypeMember(BaseMember member) => _Members.OfType<TypeMember>().FirstOrDefault(x => x.TypeName == member.TypeName);
 
         internal BaseMember GetBase(BaseMember member)
         {
             //Get a list of all members of this type
-            TypeMember typeMem = _Members.OfType<TypeMember>().FirstOrDefault(x => x.Type == member.Type);
-            List<MemberID> bases = typeMem.Implements;
+            TypeMember typeMem = _Members.OfType<TypeMember>().FirstOrDefault(x => x.TypeName == member.TypeName);
+            List<MemberName> bases = typeMem.Implements;
             bases.Add(typeMem.Base);
-            IEnumerable<BaseMember> potentials = _Members.Where(x => bases.Any(y => x.Type == y.Type && x.ID.Defintion == y.Defintion));
+            IEnumerable<BaseMember> potentials = _Members.Where(x => bases.Any(y => x.TypeName == y.TypeName && x.ID.FriendlyName == y.FriendlyName));
 
             //If can't find any members of same type with same defintion (method, prop, field etc.), return null and allow calling member to handle.
             if (potentials.Count() == 0)
@@ -89,6 +91,8 @@ namespace XMLDocParser
             {
                 case 'T':
                     return new TypeMember(element, this);
+                case 'P':
+                    return new PropertyMember(element, this);
                 default:
                     return new BaseMember(element, this);
             }
@@ -105,7 +109,7 @@ namespace XMLDocParser
         {
             if (!members.Any(x => x is TypeMember))
             {
-                XElement memberElement = new XElement("element", new XAttribute("name", $"T:{members.First().Type}"));
+                XElement memberElement = new XElement("member", new XAttribute("name", $"T:{members.First().TypeName}"));
 
                 elements.Add(memberElement);
 

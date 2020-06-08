@@ -16,7 +16,7 @@ namespace Vsxmd.Units
     /// </summary>
     internal class ParamUnit : BaseTag
     {
-        private readonly string paramType;
+        private readonly string _ParamType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParamUnit"/> class.
@@ -26,7 +26,7 @@ namespace Vsxmd.Units
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
         internal ParamUnit(XElement element, string paramType, MemberName parentName) : base(element, "param", parentName)
         {
-            paramType = paramType;
+            _ParamType = paramType;
         }
 
         private string _Name => GetAttribute("name");
@@ -37,7 +37,7 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
-                $"{_Name.AsCode()}  {paramType.ToReferenceLink(parentName, true)}  ",
+                $"{_Name.AsCode()}  {_ParamType.ToReferenceLink(parentName, true)}  ",
                 Element.ToMarkdownText(parentName)
             };
 

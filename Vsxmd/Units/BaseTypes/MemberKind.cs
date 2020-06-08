@@ -9,7 +9,7 @@ namespace Vsxmd.Units
     /// <summary>
     /// The member kind.
     /// </summary>
-    internal enum MemberKind
+    public enum MemberKind
     {
         /// <summary>
         /// Not supported member kind.

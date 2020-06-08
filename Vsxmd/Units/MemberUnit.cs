@@ -35,7 +35,8 @@ namespace Vsxmd.Units
             AssemblyName = element.GetAssemblyName();
             Name = new MemberName(
                 GetAttribute("name"),
-                GetChildren("param").Select(x => x.Attribute("name").Value));
+                GetChildren("param").Select(x => x.Attribute("name").Value),
+                element.Attribute("ClassType")?.Value ?? "Class");
         }
 
         /// <summary>

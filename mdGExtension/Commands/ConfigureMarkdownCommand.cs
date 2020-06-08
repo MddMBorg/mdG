@@ -15,6 +15,7 @@ using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Threading;
+using Vsxmd;
 using XMLDocParser;
 using Task = System.Threading.Tasks.Task;
 
@@ -113,10 +114,11 @@ namespace mdGExtension
             Uri mdUri = new Uri(mDPath, UriKind.RelativeOrAbsolute);
             if (!mdUri.IsAbsoluteUri)
                 mDPath = new Uri(new Uri(soln.FileName), mdUri).LocalPath;
+            mDPath = mDPath + (mDPath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" : Path.DirectorySeparatorChar.ToString());
 
             if (mDSet)
             {
-                List<string> markdownPaths = new List<string>();
+                //List<string> markdownPaths = new List<string>();
                 DocManager docManager = new DocManager();
 
                 foreach (Project proj in projs)
@@ -130,7 +132,7 @@ namespace mdGExtension
                     if (xmlProp == null)
                         continue;
 
-                    markdownPaths.Add(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value));
+                    //markdownPaths.Add(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value));
 
                     var doc = XDocument.Load(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value));
                     var members = docManager.GenerateMembers(doc);
@@ -143,7 +145,7 @@ namespace mdGExtension
 
                     foreach (var member in members.OfType<TypeMember>())
                     {
-                        CodeType cT = types.FirstOrDefault(x => x.FullName == member.ID.ProperName);
+                        CodeType cT = types.FirstOrDefault(x => x.FullName == member.ID.TypeName);
                         if (cT == null)
                             continue;
                         
@@ -182,14 +184,15 @@ namespace mdGExtension
                             member.ChangeBaseClass(cC.Bases.Item(1).FullName);
                             continue;
                         }
-
                     }
+
+                    new MarkdownWriter(doc, mDPath).WriteFiles();
                 }
 
-                string[] args ={ string.Join(",", markdownPaths), mDPath + 
-                        (mDPath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" : Path.DirectorySeparatorChar.ToString())};
+                //string[] args ={ string.Join(",", markdownPaths), mDPath + 
+                //        (mDPath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" : Path.DirectorySeparatorChar.ToString())};
 
-                Vsxmd.Program.Main(args);
+                //Vsxmd.Program.Main(args);
             }
         }
 

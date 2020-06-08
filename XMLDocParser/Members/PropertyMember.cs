@@ -4,28 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Vsxmd.Units;
 
 namespace XMLDocParser.Members
 {
     public class PropertyMember : BaseMember
     {
-        public MemberID ReturnType { get; private set; }
+        public MemberName ReturnType { get; private set; }
 
         public PropertyMember(XElement element, DocManager manager) : base(element, manager)
         {
-            ReturnType = _XML.Attribute(nameof(ReturnType))?.Value;
+            string retAttr = _XML.Attribute(nameof(ReturnType))?.Value;
+            if (!string.IsNullOrEmpty(retAttr))
+                ReturnType = new MemberName(retAttr);
         }
 
 
         public override void Commit()
         {
-            _XML.SetAttributeValue(nameof(ReturnType), ReturnType == null ? null : $"T:{ReturnType}");
+            _XML.SetAttributeValue(nameof(ReturnType), ReturnType == null ? null : $"T:{ReturnType.TypeName}");
         }
 
 
         public void ChangeReturnType(string returnType)
         {
-            ReturnType = $"T:{returnType}";
+            ReturnType = new MemberName($"T:{returnType}");
             Commit();
         }
 

@@ -54,7 +54,7 @@ namespace Vsxmd
                     writer.WriteFiles();
                 }
 
-                string vsxmdAutoDeleteXml = args.Last();
+                string vsxmdAutoDeleteXml = args.ElementAtOrDefault(2);
                 if (string.IsNullOrWhiteSpace(vsxmdAutoDeleteXml))
                     return;
 

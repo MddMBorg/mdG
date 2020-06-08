@@ -12,9 +12,8 @@ namespace Vsxmd
 {
     public class MarkdownWriter
     {
-        private string _OutputPath { get; set; }
-        private Converter _Converter { get; set; }
-        private XDocument _Document { get; set; }
+        private readonly string _OutputPath;
+        private readonly Converter _Converter;
 
         /// <summary>
         /// Ctor for Markdown Writer
@@ -24,7 +23,6 @@ namespace Vsxmd
         public MarkdownWriter(XDocument document, string outputPath)
         {
             _OutputPath = outputPath;
-            _Document = document;
             _Converter = new Converter(document);
         }
 

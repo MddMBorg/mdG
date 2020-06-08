@@ -4,20 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Vsxmd.Units;
 
 namespace XMLDocParser
 {
     public class TypeMember : BaseMember
     {
-        public List<MemberID> Implements { get; private set; }
-        public MemberID Base { get; private set; }
+        public List<MemberName> Implements { get; private set; }
+        public MemberName Base { get; private set; }
         public string ClassType { get; private set; }
 
 
         public TypeMember(XElement element, DocManager manager) : base(element, manager)
         {
-            Base = _XML.Attribute(nameof(Base))?.Value;
-            Implements = _XML.Attribute(nameof(Implements))?.Value?.Split(';')?.Select(x => new MemberID(x)).ToList() ?? new List<MemberID>();
+            string baseAttr = _XML.Attribute(nameof(Base))?.Value;
+            if (!string.IsNullOrEmpty(baseAttr))
+                Base = new MemberName(baseAttr);
+            Implements = _XML.Attribute(nameof(Implements))?.Value?.Split(';')?.Select(x => new MemberName(x)).ToList() ?? new List<MemberName>();
             ClassType = _XML.Attribute(nameof(ClassType))?.Value ?? "Class";
         }
 
@@ -35,9 +38,9 @@ namespace XMLDocParser
         #region SafeAdd
         public void AddImplementor(string implementor)
         {
-            if (implementor != typeof(object).FullName && !Implements.Select(x => x.ProperName).Contains(implementor))
+            if (implementor != typeof(object).FullName && !Implements.Select(x => x.TypeName).Contains(implementor))
             {
-                Implements.Add(new MemberID($"T:{implementor}"));
+                Implements.Add(new MemberName($"T:{implementor}"));
                 Commit();
             }
         }
@@ -46,7 +49,7 @@ namespace XMLDocParser
         {
             if (baseClass != typeof(object).FullName)
             {
-                Base = $"T:{baseClass}";
+                Base = new MemberName($"T:{baseClass}");
                 Commit();
             }
         }
