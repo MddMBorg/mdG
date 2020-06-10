@@ -51,6 +51,39 @@ namespace XMLDocParser
             return members;
         }
 
+        public void SafeAddProperty(XDocument doc, string propName)
+        {
+            if (!_Members.OfType<PropertyMember>().Any(x => x.ID.LongName.Equals(propName.ToXMLType())))
+            {
+                XElement memberElement = new XElement("member", new XAttribute("name", $"P:{propName.ToXMLType()}"));
+                memberElement.Add(new XElement("Inheritdoc"));
+                doc.Root.Element("members").Add(memberElement);
+                _Members.Add(new PropertyMember(memberElement, this) );
+            }
+        }
+
+        public void SafeAddField(XDocument doc, string propName)
+        {
+            if (!_Members.OfType<PropertyMember>().Any(x => x.ID.LongName.Equals(propName.ToXMLType())))
+            {
+                XElement memberElement = new XElement("member", new XAttribute("name", $"F:{propName.ToXMLType()}"));
+                memberElement.Add(new XElement("Inheritdoc"));
+                doc.Root.Element("members").Add(memberElement);
+                _Members.Add(new PropertyMember(memberElement, this));
+            }
+        }
+
+        public void SafeAddType(XDocument doc, string typeName)
+        {
+            if (!_Members.OfType<TypeMember>().Any(x => x.ID.LongName.Equals(typeName.ToXMLType())))
+            {
+                XElement memberElement = new XElement("member", new XAttribute("name", $"T:{typeName.ToXMLType()}"));
+                memberElement.Add(new XElement("Inheritdoc"));
+                doc.Root.Element("members").Add(memberElement);
+                _Members.Add(new PropertyMember(memberElement, this));
+            }
+        }
+
 
         internal string GetAssemblyName(XDocument document)
         {
@@ -92,6 +125,7 @@ namespace XMLDocParser
                 case 'T':
                     return new TypeMember(element, this);
                 case 'P':
+                case 'F':
                     return new PropertyMember(element, this);
                 default:
                     return new BaseMember(element, this);
@@ -110,9 +144,8 @@ namespace XMLDocParser
             if (!members.Any(x => x is TypeMember))
             {
                 XElement memberElement = new XElement("member", new XAttribute("name", $"T:{members.First().TypeName}"));
-
+                memberElement.Add(new XElement("Inheritdoc"));
                 elements.Add(memberElement);
-
                 members = members.Concat(new[] { new TypeMember(memberElement, this) });
             }
             return members;

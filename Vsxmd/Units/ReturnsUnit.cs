@@ -16,10 +16,6 @@ namespace Vsxmd.Units
     /// </summary>
     internal class ReturnsUnit : BaseTag
     {
-
-        private XElement _ReturnType =>
-            Element.Elements("see").FirstOrDefault();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ReturnsUnit"/> class.
         /// </summary>
@@ -33,10 +29,6 @@ namespace Vsxmd.Units
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
-                "#### Returns",
-                _ReturnType != null
-                ? $"{_ReturnType.Attribute("cref").Value.ToReferenceLink(parentName, true)}\n\n"
-                : "\n\n",
                 ElementContent(parentName)
             };
 

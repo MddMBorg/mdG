@@ -12,7 +12,7 @@ namespace XMLDocParser.Members
     {
         public MemberName ReturnType { get; private set; }
 
-        public PropertyMember(XElement element, DocManager manager) : base(element, manager)
+        internal PropertyMember(XElement element, DocManager manager) : base(element, manager)
         {
             string retAttr = _XML.Attribute(nameof(ReturnType))?.Value;
             if (!string.IsNullOrEmpty(retAttr))

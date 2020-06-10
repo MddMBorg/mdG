@@ -14,9 +14,47 @@ namespace Vsxmd.Units
     /// <summary>
     /// Extensions helper.
     /// </summary>
-    internal static class Extensions
+    public static class Extensions
     {
-        private static string _AssemblyName { get; set; }
+        public static string ToXMLType(this string str)
+        {
+            string ret = "";
+            int parseLevel = 0;
+            int genericCount = 0;
+            bool methodGeneric = false;     //method generics have ``, generic types have `
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                char ch = str[i];
+                switch (ch)
+                {
+                    case '<':
+                        parseLevel++;
+                        genericCount++;
+                        break;
+                    case '>':
+                        parseLevel--;
+                        if (parseLevel == 0)
+                        {
+                            if (methodGeneric)
+                                ret += $"``{genericCount}";
+                            else
+                                ret += $"`{genericCount}";
+                        }
+                        methodGeneric = true;
+                        break;
+                    case ',':
+                        if (parseLevel == 1)
+                            genericCount++;
+                        break;
+                    default:
+                        if (parseLevel == 0)
+                            ret += ch.ToString();
+                        break;
+                }
+            }
+            return ret;
+        }
 
         /// <summary>
         /// Probably a lazy way to do this and more implementation should be moved to AssemblyUnit class

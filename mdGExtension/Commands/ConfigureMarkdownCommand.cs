@@ -12,11 +12,14 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using EnvDTE;
+using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Threading;
 using Vsxmd;
+using Vsxmd.Units;
 using XMLDocParser;
+using XMLDocParser.Members;
 using Task = System.Threading.Tasks.Task;
 
 namespace mdGExtension
@@ -118,7 +121,6 @@ namespace mdGExtension
 
             if (mDSet)
             {
-                //List<string> markdownPaths = new List<string>();
                 DocManager docManager = new DocManager();
 
                 foreach (Project proj in projs)
@@ -132,8 +134,6 @@ namespace mdGExtension
                     if (xmlProp == null)
                         continue;
 
-                    //markdownPaths.Add(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value));
-
                     var doc = XDocument.Load(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value));
                     var members = docManager.GenerateMembers(doc);
 
@@ -141,14 +141,41 @@ namespace mdGExtension
 
                     var types = classes.SelectMany(x => GetClasses(x)).ToList();
                     var props = GetProperties(types).ToList();
+                    var fields = GetFields(types).ToList();
                     var methods = GetMethods(types).ToList();
+
+                    foreach (var type in types)
+                    {
+                        string typeName = type.FullName;
+                        docManager.SafeAddType(doc, typeName);      //Make sure all types are added
+                    }
+
+                    foreach (var prop in props)
+                    {
+                        string propName = prop.FullName;
+                        docManager.SafeAddProperty(doc, propName);      //Make sure all props are added
+                    }
+                    foreach (var pair in props.ToDictionary(x => x, x => members.OfType<PropertyMember>().FirstOrDefault(y => x.FullName.ToXMLType().Equals(y.ID.LongName, StringComparison.OrdinalIgnoreCase))))
+                    {
+                        pair.Value?.ChangeReturnType(pair.Key.Type.AsFullName);
+                    }
+
+                    foreach (var field in fields)
+                    {
+                        string fieldName = field.FullName;
+                        docManager.SafeAddField(doc, fieldName);      //Make sure all fields are added
+                    }
+                    foreach (var pair in fields.ToDictionary(x => x, x => members.OfType<PropertyMember>().FirstOrDefault(y => x.FullName.ToXMLType().Equals(y.ID.LongName, StringComparison.OrdinalIgnoreCase))))
+                    {
+                        pair.Value?.ChangeReturnType(pair.Key.Type.AsFullName);
+                    }
 
                     foreach (var member in members.OfType<TypeMember>())
                     {
                         CodeType cT = types.FirstOrDefault(x => x.FullName == member.ID.TypeName);
                         if (cT == null)
                             continue;
-                        
+
                         switch (cT.Kind)
                         {
                             case vsCMElement.vsCMElementClass:
@@ -188,11 +215,6 @@ namespace mdGExtension
 
                     new MarkdownWriter(doc, mDPath).WriteFiles();
                 }
-
-                //string[] args ={ string.Join(",", markdownPaths), mDPath + 
-                //        (mDPath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" : Path.DirectorySeparatorChar.ToString())};
-
-                //Vsxmd.Program.Main(args);
             }
         }
 
@@ -293,6 +315,23 @@ namespace mdGExtension
                     CodeProperty prop = member as CodeProperty;
                     if (prop != null)
                         yield return prop;
+                }
+            }
+        }
+        #endregion
+
+        #region GetFields
+        private IEnumerable<CodeVariable> GetFields(IEnumerable<CodeType> types)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            foreach (CodeType type in types)
+            {
+                foreach (CodeElement member in type.Members)
+                {
+                    CodeVariable field = member as CodeVariable;
+                    if (field != null)
+                        yield return field;
                 }
             }
         }

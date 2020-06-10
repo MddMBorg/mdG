@@ -20,6 +20,8 @@ namespace Vsxmd.Units
 
         internal readonly MemberName Name;
 
+        internal readonly string ReturnTypeBase;
+
         static MemberUnit()
         {
             Comparer = new MemberUnitComparer();
@@ -37,6 +39,7 @@ namespace Vsxmd.Units
                 GetAttribute("name"),
                 GetChildren("param").Select(x => x.Attribute("name").Value),
                 element.Attribute("ClassType")?.Value ?? "Class");
+            ReturnTypeBase = GetAttribute("ReturnType");
         }
 
         /// <summary>
@@ -95,6 +98,15 @@ namespace Vsxmd.Units
         internal IEnumerable<string> SummarySummary =>
             SummaryUnit.ToMarkdown(GetChild("summary"), new MemberName($"T:{TypeName}"));
 
+        internal IEnumerable<string> ReturnType =>
+            Kind == MemberKind.Property ?
+                new string[] { "#### Property Value", ReturnTypeBase?.ToReferenceLink(this.Name, true) ?? "" } :
+            Kind == MemberKind.Constants ?
+                new string[] { "#### Field Value", ReturnTypeBase?.ToReferenceLink(this.Name, true) ?? "" } :
+            Kind == MemberKind.Method ?
+                new string[] { "#### Returns", ReturnTypeBase?.ToReferenceLink(this.Name, true) ?? "" } :
+            Enumerable.Empty<string>();
+
         internal IEnumerable<string> Returns =>
             ReturnsUnit.ToMarkdown(GetChild("returns"), Name);
 
@@ -131,6 +143,7 @@ namespace Vsxmd.Units
                     .Concat(Typeparams)
                     .Concat(Params)
                     .Concat(Exceptions)
+                    .Concat(ReturnType)
                     .Concat(Returns)
                     .Concat(Permissions)
                     .Concat(Example)

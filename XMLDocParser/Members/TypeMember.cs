@@ -15,7 +15,7 @@ namespace XMLDocParser
         public string ClassType { get; private set; }
 
 
-        public TypeMember(XElement element, DocManager manager) : base(element, manager)
+        internal TypeMember(XElement element, DocManager manager) : base(element, manager)
         {
             string baseAttr = _XML.Attribute(nameof(Base))?.Value;
             if (!string.IsNullOrEmpty(baseAttr))
