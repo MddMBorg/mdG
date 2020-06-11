@@ -78,6 +78,7 @@ namespace Vsxmd.Units
             ? $"[{FriendlyName.Escape()}({_ParamNames.Join(", ")})]({FormattedHyperLink})"
             : string.Empty;
 
+
         /// <summary>
         /// Gets the caption representation for this member name.
         /// </summary>
@@ -90,7 +91,7 @@ namespace Vsxmd.Units
         {
             get
             {
-                string name = ParseGenerics(FriendlyName).Escape();
+                string name = FriendlyName.Escape();
                 return
                     Kind == MemberKind.Type
                     ? $"{Href.ToAnchor()}# {name} {_ClassType}"
@@ -104,30 +105,6 @@ namespace Vsxmd.Units
                     ? $"{Href.ToAnchor()}# {name}({_ParamNames.Join(",")}) Method"
                     : string.Empty;
             }
-        }
-
-
-        public string ParseGenerics(string name, List<string> types = null)
-        {
-            if (name.Contains('-'))
-            {
-                if (types == null)
-                {
-                    string tempName = name.Split('-').First() + "<";
-                    if (name.EndsWith("-1"))
-                        tempName += "T";
-                    else
-                    {
-                        int num = Convert.ToInt32(name.Split('-').Last());
-                        for(int i = 1; i <= num; i++)
-                            tempName += $"T{i.ToString()}, ";
-                    }
-                    return tempName += ">";
-                }
-                else
-                    return types[Convert.ToInt32(name.Split('-').Last())];
-            }
-            return name;
         }
 
         /// <summary>
@@ -244,8 +221,14 @@ namespace Vsxmd.Units
         /// <param name="useShortName">Indicate if use short type name.</param>
         /// <param name="alternateName">An override to use for instance when using see tags for the link description.</param>
         /// <returns>The generated Markdown reference link.</returns>
-        public string ToReferenceLink(MemberName sourceMember, bool useShortName, string alternateName = null) =>
-            $"[{alternateName ?? GetReferenceName(useShortName).Escape()}]({MemberLink(sourceMember).Replace('`', '-')})";
+        public string ToReferenceLink(MemberName sourceMember, bool useShortName, string alternateName = null)
+        {
+            string displayName = alternateName ?? GetReferenceName(useShortName);
+            int index = displayName.IndexOf('`');
+            if (index > 0)
+                displayName = displayName.Substring(0, index);
+            return $"[{displayName}]({MemberLink(sourceMember).Replace('`', '-')})";
+        }
 
         public string ToSummaryLink(bool useShortName) =>
             $"[{GetReferenceName(useShortName).Escape()}" +
@@ -315,14 +298,14 @@ namespace Vsxmd.Units
 
         private string GetReferenceName(bool useShortName) =>
             !useShortName
-            ? ParseGenerics(LongName)
+            ? LongName
             : Kind == MemberKind.Type ||
               Kind == MemberKind.Constructor
-            ? ParseGenerics(TypeShortName)
+            ? TypeShortName
             : Kind == MemberKind.Constants ||
               Kind == MemberKind.Property ||
               Kind == MemberKind.Method
-            ? ParseGenerics(FriendlyName)
+            ? FriendlyName
             : string.Empty;
 
     }

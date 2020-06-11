@@ -144,40 +144,41 @@ namespace mdGExtension
                     var fields = GetFields(types).ToList();
                     var methods = GetMethods(types).ToList();
 
-                    foreach (var type in types)
+                    foreach (var type in types.Where(x => x.Access != vsCMAccess.vsCMAccessPrivate))
                     {
                         string typeName = type.FullName;
                         docManager.SafeAddType(doc, typeName);      //Make sure all types are added
                     }
 
-                    foreach (var prop in props)
+                    foreach (var prop in props.Where(x => x.Access != vsCMAccess.vsCMAccessPrivate))
                     {
                         string propName = prop.FullName;
                         docManager.SafeAddProperty(doc, propName);      //Make sure all props are added
                     }
-                    foreach (var pair in props.ToDictionary(x => x, x => members.OfType<PropertyMember>().FirstOrDefault(y => x.FullName.ToXMLType().Equals(y.ID.LongName, StringComparison.OrdinalIgnoreCase))))
+                    foreach (var pair in props.Where(x => x.Access != vsCMAccess.vsCMAccessPrivate).ToDictionary(x => x, x => members.OfType<PropertyMember>().FirstOrDefault(y => x.FullName.ToXMLType().Equals(y.ID.LongName, StringComparison.OrdinalIgnoreCase))))
                     {
                         pair.Value?.ChangeReturnType(pair.Key.Type.AsFullName);
                     }
 
-                    foreach (var field in fields)
+                    foreach (var field in fields.Where(x => x.Access != vsCMAccess.vsCMAccessPrivate))
                     {
                         string fieldName = field.FullName;
                         docManager.SafeAddField(doc, fieldName);      //Make sure all fields are added
                     }
-                    foreach (var pair in fields.ToDictionary(x => x, x => members.OfType<PropertyMember>().FirstOrDefault(y => x.FullName.ToXMLType().Equals(y.ID.LongName, StringComparison.OrdinalIgnoreCase))))
+                    foreach (var pair in fields.Where(x => x.Access != vsCMAccess.vsCMAccessPrivate).ToDictionary(x => x, x => members.OfType<PropertyMember>().FirstOrDefault(y => x.FullName.ToXMLType().Equals(y.ID.LongName, StringComparison.OrdinalIgnoreCase))))
                     {
                         pair.Value?.ChangeReturnType(pair.Key.Type.AsFullName);
                     }
 
-                    foreach (var method in methods)
+                    foreach (var method in methods.Where(x => x.Access != vsCMAccess.vsCMAccessPrivate))
                     {
                         string methodName = method.FullName;
                         docManager.SafeAddMethod(doc, methodName);      //Make sure all methods are added
                     }
-                    foreach (var pair in methods.ToDictionary(x => x, x => members.OfType<MethodMember>().FirstOrDefault(y => x.FullName.ToXMLType().Equals(y.ID.LongName, StringComparison.OrdinalIgnoreCase))))
+                    foreach (var pair in methods.Where(x => x.Access != vsCMAccess.vsCMAccessPrivate).ToDictionary(x => x, x => members.OfType<MethodMember>().FirstOrDefault(y => x.FullName.ToXMLType().Equals(y.ID.LongName, StringComparison.OrdinalIgnoreCase))))
                     {
-                        pair.Value?.ChangeReturnType(pair.Key.Type.AsFullName);
+                        if (pair.Key.Type.AsFullName != typeof(void).FullName)
+                            pair.Value?.ChangeReturnType(pair.Key.Type.AsFullName);
                         pair.Value?.SafeAddParams(pair.Key.Parameters.OfType<CodeParameter>().ToDictionary(x => x.Name, x => x.Type.AsFullName));
                         if (pair.Key.Name.Contains('<'))
                         {

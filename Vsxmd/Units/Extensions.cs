@@ -9,6 +9,7 @@ namespace Vsxmd.Units
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net.NetworkInformation;
     using System.Xml.Linq;
 
     /// <summary>
@@ -69,6 +70,71 @@ namespace Vsxmd.Units
                 ret = ret.Remove(index, type.Length).Insert(index, "#ctor");
             }
             return ret;
+        }
+
+        internal static string TypeToLinks(this string str, MemberName parentName)
+        {
+            if (str == "")
+                return "";
+
+            string typeString = "";
+            string nestStr = "";
+            List<string> genStrs = new List<string>();
+            int nestLevel = 0;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                char ch = str[i];
+                if (ch == '<')
+                {
+                    nestLevel++;
+                    if (nestLevel == 1)         //first generic
+                        nestStr = "";
+                    if (nestLevel > 1)
+                        nestStr += "<";         //if we're in a sub-nest, keep the < ie, the second < in "List<List<int>>" but not the first <
+                }
+                else if (ch == '>')
+                {
+                    nestLevel--;
+                    if (nestLevel > 0)                  //if we're still dealing with the sub-generics, keep the > ie in List<List<int>> keep the > in "List<int>"
+                        nestStr += ">";
+                    else
+                        genStrs.Add(nestStr.TypeToLinks(parentName));       //if we're closing the last >, then add the last generic we recorded
+                }
+                else if (ch == ',' && nestLevel == 1)
+                {
+                    genStrs.Add(nestStr.TypeToLinks(parentName));           //generate our generic type link
+                    nestStr = "";
+                }
+                else if (ch == ' ')
+                { //do nothing, ignore spaces
+                }
+                else
+                {
+                    if (nestLevel == 0)
+                        typeString += ch.ToString();
+                    else
+                        nestStr += ch.ToString();
+                }
+            }
+
+            var item = typeString;
+            if (item.Contains("."))                     //Assume non-generic types such as T, U, Key have at least one '.' in them e.g. System.String...
+            {
+                string name = item;
+                bool anyGenerics = genStrs.Any();
+
+                if (anyGenerics)
+                    name += $"`{genStrs.Count}";
+                string link = new MemberName($"T:{name}").ToReferenceLink(parentName, true);
+
+                if (anyGenerics)
+                    link = $"{link}<{string.Join(",", genStrs)}>";
+
+                return link;
+            }
+            else
+                return item;        //shouldn't be any generics under a type e.g. no T<U>, only List<T>
         }
 
         /// <summary>
@@ -208,8 +274,7 @@ namespace Vsxmd.Units
         /// <param name="source">The source enumerable.</param>
         /// <param name="index">The index for the n-th last.</param>
         /// <returns>The element at the specified position in the <paramref name="source"/> sequence.</returns>
-        internal static TSource NthLast<TSource>(
-            this IEnumerable<TSource> source, int index) =>
+        internal static TSource NthLast<TSource>(this IEnumerable<TSource> source, int index) =>
             source.Reverse().ElementAt(index - 1);
 
         /// <summary>
@@ -219,9 +284,7 @@ namespace Vsxmd.Units
         /// <param name="source">The source enumerable.</param>
         /// <param name="count">The number to except.</param>
         /// <returns>The generated enumerable.</returns>
-        internal static IEnumerable<TSource> TakeAllButLast<TSource>(
-            this IEnumerable<TSource> source,
-            int count) =>
+        internal static IEnumerable<TSource> TakeAllButLast<TSource>(this IEnumerable<TSource> source, int count) =>
             source.Reverse().Skip(count).Reverse();
 
         /// <summary>

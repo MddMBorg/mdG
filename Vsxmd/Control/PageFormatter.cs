@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Vsxmd.Units;
 
 namespace Vsxmd
@@ -87,9 +88,17 @@ namespace Vsxmd
                 return items[0].ToMarkdown(FormatKind.Detail, unit.First().Name);
             else
             {
-                return new [] { items[0].Caption }
+                return new[] { items[0].Caption }
                     .Concat(items[0].Namespace)
                     .Concat(items[0].Assembly)
+                    .Concat(items[0].Summary)
+                    .Concat(new[] { "# Overloads" })
+                    .Concat(new[]
+                    {
+                        "| Signature | Description |\n" +
+                        "|-|-|\n" +
+                        items.Select(x => x.ToMarkdown(FormatKind.Summary, x.Name).Join("")).Join("\n")
+                    })
                     .Concat(items.SelectMany(x => x.ToMarkdown(FormatKind.MultiDetail, x.Name)));
             }
         }

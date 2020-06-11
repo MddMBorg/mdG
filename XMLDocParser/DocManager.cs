@@ -73,7 +73,7 @@ namespace XMLDocParser
             }
         }
 
-        public void SafeAddMethod(XDocument doc, string methodName, List<string> methodParameters)
+        public void SafeAddMethod(XDocument doc, string methodName)
         {
             if (!_Members.OfType<MethodMember>().Any(x => x.ID.LongName.Equals(methodName.ToXMLType())))
             {
