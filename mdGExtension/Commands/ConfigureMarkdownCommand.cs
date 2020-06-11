@@ -170,6 +170,22 @@ namespace mdGExtension
                         pair.Value?.ChangeReturnType(pair.Key.Type.AsFullName);
                     }
 
+                    foreach (var method in methods)
+                    {
+                        string methodName = method.FullName;
+                        docManager.SafeAddMethod(doc, methodName);      //Make sure all methods are added
+                    }
+                    foreach (var pair in methods.ToDictionary(x => x, x => members.OfType<MethodMember>().FirstOrDefault(y => x.FullName.ToXMLType().Equals(y.ID.LongName, StringComparison.OrdinalIgnoreCase))))
+                    {
+                        pair.Value?.ChangeReturnType(pair.Key.Type.AsFullName);
+                        pair.Value?.SafeAddParams(pair.Key.Parameters.OfType<CodeParameter>().ToDictionary(x => x.Name, x => x.Type.AsFullName));
+                        if (pair.Key.Name.Contains('<'))
+                        {
+                            string parSect = pair.Key.Name.Split('.').Last();
+                            pair.Value?.SafeAddTypeParams(parSect.Trim('<', '>').Split(',').ToList());
+                        }
+                    }
+
                     foreach (var member in members.OfType<TypeMember>())
                     {
                         CodeType cT = types.FirstOrDefault(x => x.FullName == member.ID.TypeName);
@@ -349,6 +365,23 @@ namespace mdGExtension
                     CodeFunction method = member as CodeFunction;
                     if (method != null)
                         yield return method;
+                }
+            }
+        }
+        #endregion
+
+        #region GetConstructors
+        private IEnumerable<CodeFunction> GetConstructors(IEnumerable<CodeType> types)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            foreach (CodeType type in types)
+            {
+                foreach (CodeElement member in type.Members)
+                {
+                    CodeFunction ctor = member as CodeFunction;
+                    if (ctor != null)
+                        yield return ctor;
                 }
             }
         }

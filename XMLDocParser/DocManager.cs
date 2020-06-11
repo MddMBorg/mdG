@@ -73,6 +73,17 @@ namespace XMLDocParser
             }
         }
 
+        public void SafeAddMethod(XDocument doc, string methodName, List<string> methodParameters)
+        {
+            if (!_Members.OfType<MethodMember>().Any(x => x.ID.LongName.Equals(methodName.ToXMLType())))
+            {
+                XElement memberElement = new XElement("member", new XAttribute("name", $"M:{methodName.ToXMLType()}"));
+                memberElement.Add(new XElement("Inheritdoc"));
+                doc.Root.Element("members").Add(memberElement);
+                _Members.Add(new MethodMember(memberElement, this));
+            }
+        }
+
         public void SafeAddType(XDocument doc, string typeName)
         {
             if (!_Members.OfType<TypeMember>().Any(x => x.ID.LongName.Equals(typeName.ToXMLType())))
@@ -127,6 +138,8 @@ namespace XMLDocParser
                 case 'P':
                 case 'F':
                     return new PropertyMember(element, this);
+                case 'M':
+                    return new MethodMember(element, this);
                 default:
                     return new BaseMember(element, this);
             }

@@ -19,6 +19,14 @@ namespace Vsxmd.Units
         public static string ToXMLType(this string str)
         {
             string ret = "";
+            bool isCtor = false;
+            string type = "";
+            if (!str.EndsWith(">"))         //if ends with > then either genericType or genericMethod, definitely not ctor
+            {
+                if (str.Contains('<'))      //if contians < then must be type<T>.method, with no method generic params and might be ctor
+                    type = str.Split('<').First().Split('.').Last();
+                isCtor = str.Split('.').Last() == type;
+            }
             int parseLevel = 0;
             int genericCount = 0;
             bool methodGeneric = false;     //method generics have ``, generic types have `
@@ -30,7 +38,8 @@ namespace Vsxmd.Units
                 {
                     case '<':
                         parseLevel++;
-                        genericCount++;
+                        if (parseLevel == 1)
+                            genericCount++;
                         break;
                     case '>':
                         parseLevel--;
@@ -40,6 +49,7 @@ namespace Vsxmd.Units
                                 ret += $"``{genericCount}";
                             else
                                 ret += $"`{genericCount}";
+                            genericCount = 0;           //reset for method generics
                         }
                         methodGeneric = true;
                         break;
@@ -52,6 +62,11 @@ namespace Vsxmd.Units
                             ret += ch.ToString();
                         break;
                 }
+            }
+            if (isCtor)
+            {
+                int index = ret.LastIndexOf(type);
+                ret = ret.Remove(index, type.Length).Insert(index, "#ctor");
             }
             return ret;
         }

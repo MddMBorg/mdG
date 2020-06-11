@@ -54,11 +54,15 @@
     <Compile Include="DocManager.cs" />
     <Compile Include="Interfaces\IMarkdown.cs" />
     <Compile Include="Interfaces\IMember.cs" />
+    <Compile Include="Members\MethodMember.cs" />
     <Compile Include="Members\PropertyMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Members\TypeMember.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Key.snk" />
   </ItemGroup>
   <ItemGroup>

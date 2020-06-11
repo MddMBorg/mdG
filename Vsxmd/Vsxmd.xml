@@ -25,11 +25,6 @@
             Converts the XML to multiple Markdown files (one per type) and writes to the output directory
             </summary>
         </member>
-        <member name="F:Vsxmd.PageFormatter.test">
-            <summary>
-            Test string
-            </summary>
-        </member>
         <member name="M:Vsxmd.PageFormatter.GetMarkdownByType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
             <summary>
             Takes several base units of same type and organises them on page in the specified way.
@@ -37,7 +32,7 @@
             <param name="units">The units of the same type.</param>
             <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
         </member>
-        <member name="M:Vsxmd.PageFormatter.GetMarkdownByMember(Vsxmd.Units.MemberUnit)">
+        <member name="M:Vsxmd.PageFormatter.GetMarkdownByMember(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
             <summary>
             Takes one Member Unit (non class type) and organises it in markdown format as series of strings.
             </summary>
