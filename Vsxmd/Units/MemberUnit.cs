@@ -134,7 +134,7 @@ namespace Vsxmd.Units
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember)
         {
-            if (format == FormatKind.MethodDetail || format == FormatKind.None || Kind == MemberKind.Type)
+            if (format == FormatKind.Detail || format == FormatKind.None || Kind == MemberKind.Type)
                 return new[] { Caption }
                     .Concat(Namespace)
                     .Concat(Assembly)
@@ -142,9 +142,22 @@ namespace Vsxmd.Units
                     .Concat(Summary)
                     .Concat(Typeparams)
                     .Concat(Params)
-                    .Concat(Exceptions)
                     .Concat(ReturnType)
                     .Concat(Returns)
+                    .Concat(Exceptions)
+                    .Concat(Permissions)
+                    .Concat(Example)
+                    .Concat(Remarks)
+                    .Concat(Seealsos);
+            else if (format == FormatKind.MultiDetail)
+                return new[] { Caption }
+                    .Concat(InheritDoc)
+                    .Concat(Summary)
+                    .Concat(Typeparams)
+                    .Concat(Params)
+                    .Concat(ReturnType)
+                    .Concat(Returns)
+                    .Concat(Exceptions)
                     .Concat(Permissions)
                     .Concat(Example)
                     .Concat(Remarks)

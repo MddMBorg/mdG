@@ -49,7 +49,7 @@ namespace Vsxmd.Units
 
         /// <inheritdoc />
         public virtual IEnumerable<string> ToMarkdown(FormatKind format, MemberName sourceMember) =>
-            format == FormatKind.MethodDetail
+            format == FormatKind.Detail
             ? new[]
             {
                 $"#### {_UnitHeader}",

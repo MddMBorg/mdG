@@ -11,8 +11,9 @@ namespace Vsxmd.Units
     /// </summary>
     internal enum FormatKind
     {
-        MethodSummary,
-        MethodDetail,
+        Summary,            //The summary in the class page e.g. the list of properties, methods etc and descriptions
+        Detail,             //The detail page for a method, property etc
+        MultiDetail,        //When a method/ctor has multiple overloads, for printing on a page
         None
     }
 

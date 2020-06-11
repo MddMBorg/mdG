@@ -56,14 +56,12 @@ namespace Vsxmd
                         markdown.Join("\n\n").Suffix("\n"));
                 }
 
-                foreach (var m in n.Where(x => (x as MemberUnit).Kind != MemberKind.Type).GroupBy(x => x.FullFilePath))
+                foreach (var m in n.Where(x => (x as MemberUnit).Kind != MemberKind.Type && (x as MemberUnit).Kind != MemberKind.NotSupported)
+                    .GroupBy(x => x.FullFilePath))
                 {
-                    foreach (var u in (m.Where(x => x.Kind != MemberKind.NotSupported)))
-                    {
-                        var markdown = formatter.GetMarkdownByMember(u);
-                        File.WriteAllText(Path.Combine(directory, u.FullFilePath),
-                            markdown.Join("\n\n").Suffix("\n"));
-                    }
+                    var markdown = formatter.GetMarkdownByMember(m);
+                    File.WriteAllText(Path.Combine(directory, m.First().FullFilePath),
+                        markdown.Join("\n\n").Suffix("\n"));
                 }
 
             }

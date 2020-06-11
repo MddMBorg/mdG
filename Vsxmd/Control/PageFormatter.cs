@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vsxmd.Units;
 
 namespace Vsxmd
 {
     internal class PageFormatter
     {
-
-        /// <summary>
-        /// Test string
-        /// </summary>
-        public string test;
-
         public PageFormatter()
         {
         }
@@ -35,7 +26,7 @@ namespace Vsxmd
 
             IEnumerable<string> formats = new[] { "" };
 
-            formats = classUnit.ToMarkdown(FormatKind.MethodSummary, classUnit.Name);
+            formats = classUnit.ToMarkdown(FormatKind.Summary, classUnit.Name);
 
             if (constructors.Count() > 0)
             {
@@ -44,7 +35,7 @@ namespace Vsxmd
                     {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
-                            constructors.Select(x => x.ToMarkdown(FormatKind.MethodSummary, x.Name).Join("")).Join("\n")
+                            constructors.Select(x => x.ToMarkdown(FormatKind.Summary, x.Name).Join("")).Join("\n")
                     });
             }
 
@@ -55,7 +46,7 @@ namespace Vsxmd
                     {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
-                            constants.Select(x => x.ToMarkdown(FormatKind.MethodSummary, x.Name).Join("")).Join("\n")
+                            constants.Select(x => x.ToMarkdown(FormatKind.Summary, x.Name).Join("")).Join("\n")
                     });
             }
 
@@ -66,7 +57,7 @@ namespace Vsxmd
                     {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
-                            properties.Select(x => x.ToMarkdown(FormatKind.MethodSummary, x.Name).Join("")).Join("\n")
+                            properties.Select(x => x.ToMarkdown(FormatKind.Summary, x.Name).Join("")).Join("\n")
                     });
 
             }
@@ -78,7 +69,7 @@ namespace Vsxmd
                     {
                             "| Definition | Description |\n" +
                             "|-|-|\n" +
-                            methods.Select(x => x.ToMarkdown(FormatKind.MethodSummary, x.Name).Join("")).Join("\n")
+                            methods.Select(x => x.ToMarkdown(FormatKind.Summary, x.Name).Join("")).Join("\n")
                     });
             }
             return formats;
@@ -89,9 +80,18 @@ namespace Vsxmd
         /// </summary>
         /// <param name="unit">The unit to format.</param>
         /// <returns><see cref="IEnumerable{String}">IEnumerable&lt;string&gt;</see></returns>
-        public IEnumerable<string> GetMarkdownByMember(MemberUnit unit)
+        public IEnumerable<string> GetMarkdownByMember(IEnumerable<MemberUnit> unit)
         {
-            return unit.ToMarkdown(FormatKind.MethodDetail, unit.Name);
+            var items = unit.ToList();
+            if (items.Count == 1)
+                return items[0].ToMarkdown(FormatKind.Detail, unit.First().Name);
+            else
+            {
+                return new [] { items[0].Caption }
+                    .Concat(items[0].Namespace)
+                    .Concat(items[0].Assembly)
+                    .Concat(items.SelectMany(x => x.ToMarkdown(FormatKind.MultiDetail, x.Name)));
+            }
         }
 
     }
