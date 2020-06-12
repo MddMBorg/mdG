@@ -371,23 +371,6 @@ namespace mdGExtension
         }
         #endregion
 
-        #region GetConstructors
-        private IEnumerable<CodeFunction> GetConstructors(IEnumerable<CodeType> types)
-        {
-            ThreadHelper.ThrowIfNotOnUIThread();
-
-            foreach (CodeType type in types)
-            {
-                foreach (CodeElement member in type.Members)
-                {
-                    CodeFunction ctor = member as CodeFunction;
-                    if (ctor != null)
-                        yield return ctor;
-                }
-            }
-        }
-        #endregion
-
         /// <summary>
         /// This function is the callback used to execute the command when the menu item is clicked.
         /// See the constructor to see how the menu item is associated with this function using

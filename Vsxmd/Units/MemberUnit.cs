@@ -38,6 +38,8 @@ namespace Vsxmd.Units
             Name = new MemberName(
                 GetAttribute("name"),
                 GetChildren("param").Select(x => x.Attribute("name").Value),
+                GetChildren("param").Select(x => x.Attribute("properType")?.Value).Where(x => x != null),
+                GetChildren("typeparam").Select(x => x.Attribute("name")?.Value ?? ""),
                 element.Attribute("ClassType")?.Value ?? "Class");
             ReturnTypeBase = GetAttribute("ReturnType");
         }
@@ -64,7 +66,6 @@ namespace Vsxmd.Units
         internal string FullFilePath => Name.FullFilePath;
 
         internal string Caption => Name.Caption;
-
 
         /// <summary>
         /// Gets the member kind, one of <see cref="MemberKind"/>.

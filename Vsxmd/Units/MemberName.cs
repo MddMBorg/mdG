@@ -23,6 +23,9 @@ namespace Vsxmd.Units
 
         private readonly IEnumerable<string> _ParamNames;
 
+        private readonly IEnumerable<string> _ParamTypes;
+        private readonly IEnumerable<string> _TypeParamTypes;
+
         private readonly string _ClassType;
 
         /// <summary>
@@ -31,11 +34,15 @@ namespace Vsxmd.Units
         /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
         /// <param name="paramNames">The parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
         /// <param name="classType">The class type for Type elements, i.e. Interface,Class,Enum etc.</param>
-        public MemberName(string name, IEnumerable<string> paramNames, string classType)
+        public MemberName(string name,
+            IEnumerable<string> paramNames, IEnumerable<string> paramTypes, IEnumerable<string> typeparamTypes,
+            string classType)
         {
             _Name = name;
             _Type = name.First();
             _ParamNames = paramNames;
+            _ParamTypes = paramTypes;
+            _TypeParamTypes = typeparamTypes;
             _ClassType = classType ?? "Class";
         }
 
@@ -43,7 +50,7 @@ namespace Vsxmd.Units
         /// Initializes a new instance of the <see cref="MemberName"/> class.
         /// </summary>
         /// <param name="name">The raw member name. For example, <c>T:Vsxmd.Units.MemberName</c>.</param>
-        public MemberName(string name) : this(name, null, null)
+        public MemberName(string name) : this(name, null, null, null, null)
         {
         }
 
@@ -92,6 +99,9 @@ namespace Vsxmd.Units
             get
             {
                 string name = FriendlyName.Escape();
+                int index = name.IndexOf('-');
+                if (index > 0)
+                    name = name.Substring(0, index);
                 return
                     Kind == MemberKind.Type
                     ? $"{Href.ToAnchor()}# {name} {_ClassType}"
@@ -164,6 +174,18 @@ namespace Vsxmd.Units
             ? NameSegments.Last().Replace('`', '-')
             : string.Empty;
 
+        public string StrictTypeName
+        {
+            get
+            {
+                string name = FriendlyName;
+                int index = name.IndexOf('-');
+                if (index > 0)
+                    name = name.Substring(0, index);
+                return name;
+            }
+        }
+
         /// <inheritdoc />
         public int CompareTo(MemberName other) =>
             TypeShortName != other.TypeShortName
@@ -184,33 +206,33 @@ namespace Vsxmd.Units
         /// </example>
         public IEnumerable<string> GetParamTypes()
         {
-            if (!_Name.Contains('('))
+            if (_ParamTypes.Any())
+                return _ParamTypes.Select(x => x.TypeToReferenceName());
+            else if (!_Name.Contains('('))
                 return Enumerable.Empty<string>();
-
-            var paramString = _Name.Split('(').Last().Trim(')');
-
-            var delta = 0;
-            var list = new List<StringBuilder>()
+            else
             {
-                new StringBuilder("T:"),
-            };
+                var paramString = _Name.Split('(').Last().Trim(')');
 
-            foreach (var character in paramString)
-            {
-                if (character == '{')
-                    delta++;
-                else if (character == '}')
-                    delta--;
-                else if (character == ',' && delta == 0)
-                    list.Add(new StringBuilder("T:"));
+                var delta = 0;
+                var list = new List<StringBuilder>() { new StringBuilder("T:") };
 
-                if (character != ',' || delta != 0)
-                    list.Last().Append(character);
+                foreach (var character in paramString)
+                {
+                    if (character == '{')
+                        delta++;
+                    else if (character == '}')
+                        delta--;
+                    else if (character == ',' && delta == 0)
+                        list.Add(new StringBuilder("T:"));
+
+                    if (character != ',' || delta != 0)
+                        list.Last().Append(character);
+                }
+
+                return list.Select(x => x.ToString().Split('.').NthLast(1));
             }
-
-            return list.Select(x => x.ToString());
         }
-
 
         /// <summary>
         /// Convert the member name to Markdown reference link.
@@ -232,7 +254,8 @@ namespace Vsxmd.Units
 
         public string ToSummaryLink(bool useShortName) =>
             $"[{GetReferenceName(useShortName).Escape()}" +
-            $"{(GetParamTypes().Count() > 0 ? $"({GetParamTypes().Select(x => x.Split('.').NthLast(1)).Join(", ")})" : "")}" +
+            $"{(_TypeParamTypes.Any() ? $"<{_TypeParamTypes.Join(", ")}>" : "")}" +         //<T, U>
+            $"{(GetParamTypes().Any() ? $"({GetParamTypes().Join(", ")})" : "")}" +         //(string, int, bool)
             $"]({Kind.ToMemberKindString()}/{FileName})";
 
         public string FormattedHyperLink =>

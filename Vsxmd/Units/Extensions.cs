@@ -10,6 +10,7 @@ namespace Vsxmd.Units
     using System.Collections.Generic;
     using System.Linq;
     using System.Net.NetworkInformation;
+    using System.Runtime.CompilerServices;
     using System.Xml.Linq;
 
     /// <summary>
@@ -71,7 +72,7 @@ namespace Vsxmd.Units
             }
             return ret;
         }
-
+        
         internal static string TypeToLinks(this string str, MemberName parentName)
         {
             if (str == "")
@@ -137,16 +138,78 @@ namespace Vsxmd.Units
                 return item;        //shouldn't be any generics under a type e.g. no T<U>, only List<T>
         }
 
+        internal static string TypeToReferenceName(this string str)
+        {
+            if (str == "")
+                return "";
+
+            string typeString = "";
+            string nestStr = "";
+            List<string> genStrs = new List<string>();
+            int nestLevel = 0;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                char ch = str[i];
+                if (ch == '<')
+                {
+                    nestLevel++;
+                    if (nestLevel == 1)         //first generic
+                        nestStr = "";
+                    if (nestLevel > 1)
+                        nestStr += "<";         //if we're in a sub-nest, keep the < ie, the second < in "List<List<int>>" but not the first <
+                }
+                else if (ch == '>')
+                {
+                    nestLevel--;
+                    if (nestLevel > 0)                  //if we're still dealing with the sub-generics, keep the > ie in List<List<int>> keep the > in "List<int>"
+                        nestStr += ">";
+                    else
+                        genStrs.Add(nestStr.TypeToReferenceName());       //if we're closing the last >, then add the last generic we recorded
+                }
+                else if (ch == ',' && nestLevel == 1)
+                {
+                    genStrs.Add(nestStr.TypeToReferenceName( ));           //generate our generic type link
+                    nestStr = "";
+                }
+                else if (ch == ' ')
+                { //do nothing, ignore spaces
+                }
+                else
+                {
+                    if (nestLevel == 0)
+                        typeString += ch.ToString();
+                    else
+                        nestStr += ch.ToString();
+                }
+            }
+
+            var item = typeString;
+            if (item.Contains("."))                     //Assume non-generic types such as T, U, Key have at least one '.' in them e.g. System.String...
+            {
+                string name = item;
+                bool anyGenerics = genStrs.Any();
+
+                if (anyGenerics)
+                    name += $"`{genStrs.Count}";
+                string link = new MemberName($"T:{name}").StrictTypeName;
+
+                if (anyGenerics)
+                    link = $"{link}<{string.Join(",", genStrs)}>";
+
+                return link;
+            }
+            else
+                return item;        //shouldn't be any generics under a type e.g. no T<U>, only List<T>
+        }
+
         /// <summary>
         /// Probably a lazy way to do this and more implementation should be moved to AssemblyUnit class
         /// </summary>
         /// <param name="xElement">The XElement to get the AssemblyUnit of.</param>
         /// <returns>Assembly unit for the current Xdoc.</returns>
-        internal static string GetAssemblyName(this XElement xElement)
-        {
-            var doc = xElement.Document;
-            return doc.Root.Element("assembly").Element("name").Value;
-        }
+        internal static string GetAssemblyName(this XElement xElement) =>
+            xElement.Document.Root.Element("assembly").Element("name").Value;
 
         /// <summary>
         /// Convert the <see cref="MemberKind"/> to its lowercase name.

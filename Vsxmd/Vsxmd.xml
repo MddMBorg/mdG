@@ -436,7 +436,7 @@
             Member name.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.MemberName.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String},System.String)">
+        <member name="M:Vsxmd.Units.MemberName.#ctor(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.String)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberName"/> class.
             </summary>
