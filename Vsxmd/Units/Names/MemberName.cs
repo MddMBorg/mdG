@@ -10,6 +10,7 @@ namespace Vsxmd.Units
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using System.Text;
 
     /// <summary>
@@ -35,14 +36,14 @@ namespace Vsxmd.Units
         /// <param name="paramNames">The parameter names. It is only used when member kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>.</param>
         /// <param name="classType">The class type for Type elements, i.e. Interface,Class,Enum etc.</param>
         public MemberName(string name,
-            IEnumerable<string> paramNames, IEnumerable<string> paramTypes, IEnumerable<string> typeparamTypes,
+            IEnumerable<string> paramNames, IEnumerable<string> paramTypes, IEnumerable<string> typeparamNames,
             string classType)
         {
             _Name = name;
             _Type = name.First();
             _ParamNames = paramNames;
             _ParamTypes = paramTypes;
-            _TypeParamTypes = typeparamTypes;
+            _TypeParamTypes = typeparamNames;
             _ClassType = classType ?? "Class";
         }
 
@@ -84,7 +85,6 @@ namespace Vsxmd.Units
               Kind == MemberKind.Method
             ? $"[{FriendlyName.Escape()}({_ParamNames.Join(", ")})]({FormattedHyperLink})"
             : string.Empty;
-
 
         /// <summary>
         /// Gets the caption representation for this member name.
@@ -174,18 +174,6 @@ namespace Vsxmd.Units
             ? NameSegments.Last().Replace('`', '-')
             : string.Empty;
 
-        public string StrictTypeName
-        {
-            get
-            {
-                string name = FriendlyName;
-                int index = name.IndexOf('-');
-                if (index > 0)
-                    name = name.Substring(0, index);
-                return name;
-            }
-        }
-
         /// <inheritdoc />
         public int CompareTo(MemberName other) =>
             TypeShortName != other.TypeShortName
@@ -204,33 +192,36 @@ namespace Vsxmd.Units
         /// It also handle generic type.
         /// <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
         /// </example>
-        public IEnumerable<string> GetParamTypes()
+        public IEnumerable<NormalType> GetParamTypes()
         {
-            if (_ParamTypes.Any())
-                return _ParamTypes.Select(x => x.TypeToReferenceName());
-            else if (!_Name.Contains('('))
-                return Enumerable.Empty<string>();
+            if (_ParamTypes.Any())              //using the "new" stuff, get the parameter types from the param tags
+                return _ParamTypes.Select(x => NormalType.CreateNormalType(x));
+            else if (!_Name.Contains('('))      //if there's no parameters (non method/constructor)
+                return Enumerable.Empty<NormalType>();
             else
             {
-                var paramString = _Name.Split('(').Last().Trim(')');
+                string paramString = _Name.Split('(').Last().Trim(')');
 
-                var delta = 0;
-                var list = new List<StringBuilder>() { new StringBuilder("T:") };
+                int delta = 0;
+                string ret = "";
+                var list = new List<string>();
 
-                foreach (var character in paramString)
+                foreach (var ch in paramString)
                 {
-                    if (character == '{')
+                    if (ch == '{')
                         delta++;
-                    else if (character == '}')
+                    else if (ch == '}')
                         delta--;
-                    else if (character == ',' && delta == 0)
-                        list.Add(new StringBuilder("T:"));
-
-                    if (character != ',' || delta != 0)
-                        list.Last().Append(character);
+                    else if (ch != ',' || delta != 0)
+                        ret += ch.ToString();
+                    else if (delta == 0 && ch == ',')
+                    {
+                        list.Add(ret);
+                        ret = "";
+                    }
                 }
 
-                return list.Select(x => x.ToString().Split('.').NthLast(1));
+                return list.Select(x => NormalType.CreateNormalType(x));
             }
         }
 
@@ -255,8 +246,8 @@ namespace Vsxmd.Units
         public string ToSummaryLink(bool useShortName) =>
             $"[{GetReferenceName(useShortName).Escape()}" +
             $"{(_TypeParamTypes.Any() ? $"<{_TypeParamTypes.Join(", ")}>" : "")}" +         //<T, U>
-            $"{(GetParamTypes().Any() ? $"({GetParamTypes().Join(", ")})" : "")}" +         //(string, int, bool)
-            $"]({Kind.ToMemberKindString()}/{FileName})";
+            $"{(GetParamTypes().Any() ? $"({GetParamTypes().Select(x => x.ShortTypeName).Join(", ")})" : "")}" +         //(string, int, bool)
+            $"]({Kind.ToMemberKindString()}/{FileName})";                                   //Methods/file.md etc.
 
         public string FormattedHyperLink =>
             $"/{Namespace}/{FileName}/#{Href}";
@@ -313,8 +304,8 @@ namespace Vsxmd.Units
 
         public string DirectoryName =>
             Kind == MemberKind.Type
-            ? Path.Combine(Namespace, TypeShortName)
-            : Path.Combine(Namespace, TypeShortName, Kind.ToMemberKindString());
+            ? Path.Combine(Namespace, FriendlyName)
+            : Path.Combine(Namespace, FriendlyName, Kind.ToMemberKindString());
 
         public string FullFilePath =>
             Path.Combine(DirectoryName, FileName);

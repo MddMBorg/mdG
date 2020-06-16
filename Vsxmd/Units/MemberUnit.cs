@@ -101,11 +101,11 @@ namespace Vsxmd.Units
 
         internal IEnumerable<string> ReturnType =>
             Kind == MemberKind.Property ?
-                new string[] { "#### Property Value", ReturnTypeBase?.ToReferenceLink(this.Name, true) ?? "" } :
+                new string[] { "#### Property Value", NormalType.CreateNormalType(ReturnTypeBase)?.ToMarkdownLink(Name) ?? "" } :
             Kind == MemberKind.Constants ?
-                new string[] { "#### Field Value", ReturnTypeBase?.ToReferenceLink(this.Name, true) ?? "" } :
+                new string[] { "#### Field Value", NormalType.CreateNormalType(ReturnTypeBase)?.ToMarkdownLink(Name) ?? "" } :
             Kind == MemberKind.Method ?
-                new string[] { "#### Returns", ReturnTypeBase?.ToReferenceLink(this.Name, true) ?? "" } :
+                new string[] { "#### Returns", NormalType.CreateNormalType(ReturnTypeBase)?.ToMarkdownLink(Name) ?? "" } :
             Enumerable.Empty<string>();
 
         internal IEnumerable<string> Returns =>

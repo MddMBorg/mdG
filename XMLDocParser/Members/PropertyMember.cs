@@ -10,25 +10,23 @@ namespace XMLDocParser.Members
 {
     public class PropertyMember : BaseMember
     {
-        public MemberName ReturnType { get; private set; }
+        public string ReturnType { get; private set; }
 
         internal PropertyMember(XElement element, DocManager manager) : base(element, manager)
         {
-            string retAttr = _XML.Attribute(nameof(ReturnType))?.Value;
-            if (!string.IsNullOrEmpty(retAttr))
-                ReturnType = new MemberName(retAttr);
+            ReturnType = _XML.Attribute(nameof(ReturnType))?.Value;
         }
 
 
         public override void Commit()
         {
-            _XML.SetAttributeValue(nameof(ReturnType), ReturnType == null ? null : $"T:{ReturnType.TypeName}");
+            _XML.SetAttributeValue(nameof(ReturnType), ReturnType);
         }
 
 
         public void ChangeReturnType(string returnType)
         {
-            ReturnType = new MemberName($"T:{returnType}");
+            ReturnType = returnType;
             Commit();
         }
 

@@ -168,6 +168,13 @@ namespace Vsxmd
             /// <typeparam name="T4">Generic type 4.</typeparam>
             /// <returns>Nothing.</returns>
             internal string TestGenericMethod<T3, T4>() => null;
+            /// <summary>
+            /// Test generic method.
+            /// </summary>
+            /// <param name="t1">Generic parameter 1.</param>
+            /// <param name="t2">Generic parameter 2.</param>
+            /// <returns>Null.</returns>
+            internal string TestGenericMethodParameters(T1 t1, T2 t2) => null;
         }
 
     }

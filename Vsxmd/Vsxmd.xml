@@ -146,6 +146,14 @@
             <typeparam name="T4">Generic type 4.</typeparam>
             <returns>Nothing.</returns>
         </member>
+        <member name="M:Vsxmd.Program.TestGenericType`2.TestGenericMethodParameters(`0,`1)">
+            <summary>
+            Test generic method.
+            </summary>
+            <param name="t1">Generic parameter 1.</param>
+            <param name="t2">Generic parameter 2.</param>
+            <returns>Null.</returns>
+        </member>
         <member name="T:Vsxmd.Units.AssemblyUnit">
             <summary>
             Assembly unit.
@@ -358,13 +366,6 @@
             <param name="href">The href.</param>
             <returns>The anchor for the <paramref name="href"/>.</returns>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.ToHereLink(System.String)">
-            <summary>
-            Generate "to here" link for the <paramref name="href"/>.
-            </summary>
-            <param name="href">The href.</param>
-            <returns>The "to here" link for the <paramref name="href"/>.</returns>
-        </member>
         <member name="M:Vsxmd.Units.Extensions.ToReferenceLink(System.String,Vsxmd.Units.MemberName,System.Boolean,System.String)">
             <summary>
             Generate the reference link for the <paramref name="memberName"/>.
@@ -430,6 +431,51 @@
             The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
             </code>
             </example>
+        </member>
+        <member name="T:Vsxmd.Units.MemberUnit">
+            <summary>
+            Member unit.
+            </summary>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberUnit"/> class.
+            </summary>
+            <param name="element">The member XML element.</param>
+            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Comparer">
+            <summary>
+            Gets the member unit comparer.
+            </summary>
+            <value>The member unit comparer.</value>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.TypeName">
+            <summary>
+            Gets the type name.
+            </summary>
+            <value>The the type name.</value>
+            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
+        </member>
+        <member name="P:Vsxmd.Units.MemberUnit.Kind">
+            <summary>
+            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
+            </summary>
+            <value>The member kind.</value>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
+            <inheritdoc />
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
+            <summary>
+            Complement a type unit if the member unit <paramref name="group"/> does not have one.
+            One member unit group has the same <see cref="P:Vsxmd.Units.MemberUnit.TypeName"/>.
+            </summary>
+            <param name="group">The member unit group.</param>
+            <returns>The complemented member unit group.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
+            <inheritdoc />
         </member>
         <member name="T:Vsxmd.Units.MemberName">
             <summary>
@@ -512,57 +558,71 @@
             <param name="alternateName">An override to use for instance when using see tags for the link description.</param>
             <returns>The generated Markdown reference link.</returns>
         </member>
-        <member name="T:Vsxmd.Units.MemberUnit">
+        <member name="M:Vsxmd.Units.NormalType.CreateNormalType(System.String)">
             <summary>
-            Member unit.
+            Used to create a NormalType to take advantage of caching (avoid parsing more than once)
+            </summary>
+            <param name="typeString">String representing the CLR type.</param>
+            <returns>A NormalType instance</returns>
+        </member>
+        <member name="M:Vsxmd.Units.NormalType.#ctor(System.String)">
+            <summary>
+            Construct the MemberType class.
+            </summary>
+            <param name="typeString">String representing the CLR type.</param>
+            <remarks>typeString may be of XML format I.e. namespace.type`x{namespace1.type1, ``x}, or normal format 
+            I.e. namespace.type&lt;T&gt;&lt;namespace1.type1, T&gt;</remarks>
+        </member>
+        <member name="P:Vsxmd.Units.NormalType.RawTypeName">
+            <summary>
+            System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => System.Collections.Generic.IEnumerable
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.MemberUnit.#ctor(System.Xml.Linq.XElement)">
+        <member name="P:Vsxmd.Units.NormalType.Namespace">
             <summary>
-            Initializes a new instance of the <see cref="T:Vsxmd.Units.MemberUnit"/> class.
+            System.Collections.Generic.IEnumerable => System.Collections.Generic
             </summary>
-            <param name="element">The member XML element.</param>
-            <exception cref="T:System.ArgumentException">Throw if XML element name is not <c>member</c>.</exception>
         </member>
-        <member name="P:Vsxmd.Units.MemberUnit.Comparer">
+        <member name="P:Vsxmd.Units.NormalType.ShortTypeName">
             <summary>
-            Gets the member unit comparer.
+            System.Collections.Generic.IEnumerable => IEnumerable
             </summary>
-            <value>The member unit comparer.</value>
         </member>
-        <member name="P:Vsxmd.Units.MemberUnit.TypeName">
+        <member name="P:Vsxmd.Units.NormalType.ShortLinkName">
             <summary>
-            Gets the type name.
+            System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => IEnumerable-1
             </summary>
-            <value>The the type name.</value>
-            <example><c>Vsxmd.Program</c>, <c>Vsxmd.Units.TypeUnit</c>.</example>
         </member>
-        <member name="P:Vsxmd.Units.MemberUnit.Kind">
+        <member name="P:Vsxmd.Units.NormalType.FullPath">
             <summary>
-            Gets the member kind, one of <see cref="T:Vsxmd.Units.MemberKind"/>.
+            System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => System.Collections.Generic.IEnumerable-1
+            System.String => System.String
             </summary>
-            <value>The member kind.</value>
         </member>
-        <member name="M:Vsxmd.Units.MemberUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
-            <inheritdoc />
-        </member>
-        <member name="M:Vsxmd.Units.MemberUnit.ComplementType(System.Collections.Generic.IEnumerable{Vsxmd.Units.MemberUnit})">
+        <member name="P:Vsxmd.Units.NormalType._GenericTypeString">
             <summary>
-            Complement a type unit if the member unit <paramref name="group"/> does not have one.
-            One member unit group has the same <see cref="P:Vsxmd.Units.MemberUnit.TypeName"/>.
+            System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => Vsxmd.Units.MemberUnit, Vsxmd.Units.MemberUnit => ""
             </summary>
-            <param name="group">The member unit group.</param>
-            <returns>The complemented member unit group.</returns>
         </member>
-        <member name="M:Vsxmd.Units.MemberUnit.MemberUnitComparer.Compare(Vsxmd.Units.MemberUnit,Vsxmd.Units.MemberUnit)">
-            <inheritdoc />
+        <member name="M:Vsxmd.Units.NormalType.GetBaseUri(Vsxmd.Units.MemberName)">
+            <summary>
+            For a type with generics, gives a link to the base type e.g. Dictionary&lt;int, string&gt; => Dictionary-2
+            </summary>
+            <param name="sourceMember">the source to generate the relative link from.</param>
+        </member>
+        <member name="M:Vsxmd.Units.NormalType.ToMarkdownLink(Vsxmd.Units.MemberName)">
+            <summary>
+            Converts a generic type to a list of links for each type
+            </summary>
+            <param name="sourceMember"></param>
+            <returns></returns>
         </member>
         <member name="T:Vsxmd.Units.ParamUnit">
             <summary>
             Param unit.
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.#ctor(System.Xml.Linq.XElement,System.String,Vsxmd.Units.MemberName)">
+        <member name="M:Vsxmd.Units.ParamUnit.#ctor(System.Xml.Linq.XElement,Vsxmd.Units.NormalType,Vsxmd.Units.MemberName)">
             <summary>
             Initializes a new instance of the <see cref="T:Vsxmd.Units.ParamUnit"/> class.
             </summary>
@@ -573,7 +633,7 @@
         <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(Vsxmd.Units.FormatKind,Vsxmd.Units.MemberName)">
             <inheritdoc />
         </member>
-        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{System.String},Vsxmd.Units.MemberName)">
+        <member name="M:Vsxmd.Units.ParamUnit.ToMarkdown(System.Collections.Generic.IEnumerable{System.Xml.Linq.XElement},System.Collections.Generic.IEnumerable{Vsxmd.Units.NormalType},Vsxmd.Units.MemberName)">
             <summary>
             Convert the param XML element to Markdown safely.
             </summary>

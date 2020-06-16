@@ -133,6 +133,8 @@ namespace mdGExtension
 
                     if (xmlProp == null)
                         continue;
+                    if (!File.Exists(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value)))
+                        continue;
 
                     var doc = XDocument.Load(Path.Combine(Path.GetDirectoryName(proj.FileName), xmlProp.Value));
                     var members = docManager.GenerateMembers(doc);

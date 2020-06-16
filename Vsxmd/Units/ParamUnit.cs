@@ -16,7 +16,7 @@ namespace Vsxmd.Units
     /// </summary>
     internal class ParamUnit : BaseTag
     {
-        private readonly string _ParamType;
+        private readonly NormalType _ParamType;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParamUnit"/> class.
@@ -24,20 +24,18 @@ namespace Vsxmd.Units
         /// <param name="element">The param XML element.</param>
         /// <param name="paramType">The parameter type corresponding to the param XML element.</param>
         /// <exception cref="ArgumentException">Throw if XML element name is not <c>param</c>.</exception>
-        internal ParamUnit(XElement element, string paramType, MemberName parentName) : base(element, "param", parentName)
+        internal ParamUnit(XElement element, NormalType paramType, MemberName parentName) : base(element, "param", parentName)
         {
             _ParamType = paramType;
         }
 
         private string _Name => GetAttribute("name");
 
-        private string _Description => ElementContent(_ParentName);
-
         /// <inheritdoc />
         public override IEnumerable<string> ToMarkdown(FormatKind format, MemberName parentName) =>
             new[]
             {
-                $"{_Name.AsCode()}  { GetAttribute("properType")?.TypeToLinks(parentName) ?? _ParamType.ToReferenceLink(parentName, true)}  ",
+                $"{_Name.AsCode()}  {_ParamType.ToMarkdownLink(parentName)}  ",
                 Element.ToMarkdownText(parentName)
             };
 
@@ -53,7 +51,7 @@ namespace Vsxmd.Units
         /// <para>If parent element kind is <see cref="MemberKind.Constructor"/> or <see cref="MemberKind.Method"/>, it returns a hint about "no parameters".</para>
         /// <para>If parent element kind is not the value mentioned above, it returns an empty string.</para>
         /// </remarks>
-        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, IEnumerable<string> paramTypes, MemberName parentName)
+        internal static IEnumerable<string> ToMarkdown(IEnumerable<XElement> elements, IEnumerable<NormalType> paramTypes, MemberName parentName)
         {
             if (!elements.Any())
                 return Enumerable.Empty<string>();

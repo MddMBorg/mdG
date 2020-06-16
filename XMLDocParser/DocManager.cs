@@ -111,13 +111,15 @@ namespace XMLDocParser
 
         internal TypeMember GetTypeMember(BaseMember member) => _Members.OfType<TypeMember>().FirstOrDefault(x => x.TypeName == member.TypeName);
 
+        //ToDo : Correct
         internal BaseMember GetBase(BaseMember member)
         {
             //Get a list of all members of this type
             TypeMember typeMem = _Members.OfType<TypeMember>().FirstOrDefault(x => x.TypeName == member.TypeName);
-            List<MemberName> bases = typeMem.Implements;
+            List<string> bases = typeMem.Implements;
             bases.Add(typeMem.Base);
-            IEnumerable<BaseMember> potentials = _Members.Where(x => bases.Any(y => x.TypeName == y.TypeName && x.ID.FriendlyName == y.FriendlyName));
+            IEnumerable<BaseMember> potentials = _Members.Where(x => bases.Any(y => x.ID.TypeName == NormalType.CreateNormalType(y).ShortLinkName
+                && x.ID.FriendlyName == NormalType.CreateNormalType(y).ShortLinkName));
 
             //If can't find any members of same type with same defintion (method, prop, field etc.), return null and allow calling member to handle.
             if (potentials.Count() == 0)
