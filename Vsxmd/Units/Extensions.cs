@@ -125,21 +125,6 @@ namespace Vsxmd.Units
         internal static string ToAnchor(this string href) =>
             $"<a name='{href}'></a>\n";
 
-        /// <summary>
-        /// Generate the reference link for the <paramref name="memberName"/>.
-        /// </summary>
-        /// <param name="memberName">The member name.</param>
-        /// <param name="sourceMember">Source member to begin relative uri from.</param>
-        /// <param name="useShortName">Indicate if use short type name.</param>
-        /// <param name="alternateName">An override to use when generating the link description.</param>
-        /// <returns>The generated reference link.</returns>
-        /// <example>
-        /// <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
-        /// <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
-        /// </example>
-        internal static string ToReferenceLink(this string memberName, MemberName sourceMember, bool useShortName = false, string alternateName = null) =>
-            new MemberName(memberName).ToReferenceLink(sourceMember, useShortName, alternateName);
-
         internal static string ToMemberKindString(this MemberKind kind)
         {
             switch (kind)
@@ -221,25 +206,27 @@ namespace Vsxmd.Units
         /// <example>
         /// This method converts the following <c>summary</c> element.
         /// <code>
-        /// <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText(XElement)"/>.</summary>
+        /// <summary>
+        /// The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="ToMarkdownText(XElement, IPage)"/>.
+        /// </summary>
         /// </code>
         /// To the below Markdown content.
         /// <code>
         /// The `element` value is `null`, it throws `ArgumentException`. For more, see `ToMarkdownText`.
         /// </code>
         /// </example>
-        internal static string ToMarkdownText(this XElement element, MemberName sourceMember) =>
+        internal static string ToMarkdownText(this XElement element, IPage sourcePage) =>
             element.Nodes()
-                .Select(x => ToMarkdownSpan(x, sourceMember))
+                .Select(x => ToMarkdownSpan(x, sourcePage))
                 .Aggregate(string.Empty, JoinMarkdownSpan)
                 .Trim();
 
-        private static string ToMarkdownSpan(XNode node, MemberName sourceMember)
+        private static string ToMarkdownSpan(XNode node, IPage sourcePage)
         {
             var text = node as XText;
             if (text != null)
             {
-                return text.Value.Escape().TrimStart(' ').Replace("            ", string.Empty);
+                return text.Value.Escape().TrimStart(' ').Replace("            ", "");
             }
 
             var child = node as XElement;
@@ -248,7 +235,7 @@ namespace Vsxmd.Units
                 switch (child.Name.ToString())
                 {
                     case "see":
-                        return $"{child.ToSeeTagMarkdownSpan(sourceMember)}{child.NextNode.AsSpanMargin()}";
+                        return $"{child.ToSeeTagMarkdownSpan(sourcePage)}{child.NextNode.AsSpanMargin()}";
                     case "paramref":
                     case "typeparamref":
                         return $"{child.Attribute("name")?.Value?.AsCode()}{child.NextNode.AsSpanMargin()}";
@@ -256,7 +243,7 @@ namespace Vsxmd.Units
                     case "value":
                         return $"{child.Value.AsCode()}{child.NextNode.AsSpanMargin()}";
                     case "code":
-                        var lang = child.Attribute("lang")?.Value ?? string.Empty;
+                        var lang = child.Attribute("lang")?.Value ?? "";
 
                         string value = child.Nodes().First().ToString().Replace("\t", "    ");
                         var indexOf = FindIndexOf(value);
@@ -269,30 +256,27 @@ namespace Vsxmd.Units
                         return $"\n\n```{lang}\n{codeblock}\n```\n\n";
                     case "example":
                     case "para":
-                        return $"\n\n{child.ToMarkdownText(sourceMember)}\n\n";
+                        return $"\n\n{child.ToMarkdownText(sourcePage)}\n\n";
                     default:
-                        return string.Empty;
+                        return "";
                 }
             }
 
-            return string.Empty;
+            return "";
         }
 
         private static int FindIndexOf(string node)
         {
             List<int> result = new List<int>();
 
-            foreach (var item in node.Split(Environment.NewLine.ToCharArray())
-                .Where(t => t.Length > 0))
+            foreach (var item in node.Split(Environment.NewLine.ToCharArray()).Where(t => t.Length > 0))
             {
                 result.Add(0);
 
                 for (int i = 0; i < item.Length; i++)
                 {
                     if (item.ToCharArray()[i] != ' ')
-                    {
                         break;
-                    }
 
                     result[result.Count - 1] += 1;
                 }
@@ -308,19 +292,17 @@ namespace Vsxmd.Units
                 ? $"{x.TrimEnd()}{y}"
                 : $"{x}{y}";
 
-        private static string ToSeeTagMarkdownSpan(this XElement seeTag, MemberName sourceMember) =>
-            seeTag.Attribute("cref")?.Value?.ToReferenceLink(sourceMember, true, seeTag.Value) ??
+        private static string ToSeeTagMarkdownSpan(this XElement seeTag, IPage sourcePage) =>
+            seeTag.Attribute("cref")?.Value?.ToReferenceLink(sourcePage, true, seeTag.Value) ??
             seeTag.Attribute("langword")?.Value?.AsCode();
 
         private static string AsSpanMargin(this XNode node)
         {
             var text = node as XText;
             if (text != null && text.Value.StartsWith(" ", StringComparison.Ordinal))
-            {
                 return " ";
-            }
 
-            return string.Empty;
+            return "";
         }
 
     }

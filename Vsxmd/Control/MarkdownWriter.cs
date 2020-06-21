@@ -56,7 +56,7 @@ namespace Vsxmd
                         markdown.Join("\n\n").Suffix("\n"));
                 }
 
-                foreach (var m in n.Where(x => (x as MemberUnit).Kind != MemberKind.Type && (x as MemberUnit).Kind != MemberKind.NotSupported)
+                foreach (var m in n.Where(x => x.Kind != MemberKind.Type && x.Kind != MemberKind.NotSupported)
                     .GroupBy(x => x.FullFilePath))
                 {
                     var markdown = formatter.GetMarkdownByMember(m);

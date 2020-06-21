@@ -61,7 +61,7 @@ namespace Vsxmd.Units
 
         internal string FileName => Name.FileName;
 
-        internal string DirectoryName => Name.DirectoryName;
+        internal string DirectoryName => Name.FullDirectory;
 
         internal string FullFilePath => Name.FullFilePath;
 

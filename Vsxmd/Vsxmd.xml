@@ -366,20 +366,6 @@
             <param name="href">The href.</param>
             <returns>The anchor for the <paramref name="href"/>.</returns>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.ToReferenceLink(System.String,Vsxmd.Units.MemberName,System.Boolean,System.String)">
-            <summary>
-            Generate the reference link for the <paramref name="memberName"/>.
-            </summary>
-            <param name="memberName">The member name.</param>
-            <param name="sourceMember">Source member to begin relative uri from.</param>
-            <param name="useShortName">Indicate if use short type name.</param>
-            <param name="alternateName">An override to use when generating the link description.</param>
-            <returns>The generated reference link.</returns>
-            <example>
-            <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
-            <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
-            </example>
-        </member>
         <member name="M:Vsxmd.Units.Extensions.AsCode(System.String)">
             <summary>
             Wrap the <paramref name="code"/> into Markdown backtick safely.
@@ -414,7 +400,7 @@
             <param name="count">The number to except.</param>
             <returns>The generated enumerable.</returns>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,Vsxmd.Units.MemberName)">
+        <member name="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,Vsxmd.IPage)">
             <summary>
             Convert the inline XML nodes to Markdown text.
             For example, it works for <c>summary</c> and <c>returns</c> elements.
@@ -424,7 +410,9 @@
             <example>
             This method converts the following <c>summary</c> element.
             <code>
-            <summary>The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="!:ToMarkdownText(XElement)"/>.</summary>
+            <summary>
+            The <paramref name="element" /> value is <value>null</value>, it throws <c>ArgumentException</c>. For more, see <see cref="M:Vsxmd.Units.Extensions.ToMarkdownText(System.Xml.Linq.XElement,Vsxmd.IPage)"/>.
+            </summary>
             </code>
             To the below Markdown content.
             <code>
@@ -532,9 +520,6 @@
             <value>The namespace name.</value>
             <example><c>System</c>, <c>Vsxmd</c>, <c>Vsxmd.Units</c>.</example>
         </member>
-        <member name="M:Vsxmd.Units.MemberName.CompareTo(Vsxmd.Units.MemberName)">
-            <inheritdoc />
-        </member>
         <member name="M:Vsxmd.Units.MemberName.GetParamTypes">
             <summary>
             Gets the method parameter type names from the member name.
@@ -547,16 +532,19 @@
             <para>For <c>(System.Collections.Generic.IEnumerable{System.String})</c>, returns <c>["T:System.Collections.Generic.IEnumerable{System.String}"]</c>.</para>
             </example>
         </member>
-        <member name="M:Vsxmd.Units.MemberName.ToReferenceLink(Vsxmd.Units.MemberName,System.Boolean,System.String)">
+        <member name="M:Vsxmd.Units.MemberName.ToReferenceLink(Vsxmd.IPage,System.Boolean,System.String)">
             <summary>
             Convert the member name to Markdown reference link.
             <para>If then name is under <c>System</c> namespace, the link points to MSDN.</para>
             <para>Otherwise, the link points to this page anchor.</para>
             </summary>
-            <param name="sourceMember">Originating member to begin relative reference from e.g. another namespace, class or member type.</param>
+            <param name="sourcePage">Originating member to begin relative reference from e.g. another namespace, class or member type.</param>
             <param name="useShortName">Indicate if use short type name.</param>
             <param name="alternateName">An override to use for instance when using see tags for the link description.</param>
             <returns>The generated Markdown reference link.</returns>
+        </member>
+        <member name="M:Vsxmd.Units.MemberName.CompareTo(Vsxmd.Units.MemberName)">
+            <inheritdoc />
         </member>
         <member name="M:Vsxmd.Units.NormalType.CreateNormalType(System.String)">
             <summary>
@@ -583,20 +571,9 @@
             System.Collections.Generic.IEnumerable => System.Collections.Generic
             </summary>
         </member>
-        <member name="P:Vsxmd.Units.NormalType.ShortTypeName">
+        <member name="P:Vsxmd.Units.NormalType.DisplayTypeName">
             <summary>
-            System.Collections.Generic.IEnumerable => IEnumerable
-            </summary>
-        </member>
-        <member name="P:Vsxmd.Units.NormalType.ShortLinkName">
-            <summary>
-            System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => IEnumerable-1
-            </summary>
-        </member>
-        <member name="P:Vsxmd.Units.NormalType.FullPath">
-            <summary>
-            System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => System.Collections.Generic.IEnumerable-1
-            System.String => System.String
+            System.Collections.Generic.IEnumerable => IEnumerable, System.String[] => String
             </summary>
         </member>
         <member name="P:Vsxmd.Units.NormalType._GenericTypeString">
@@ -604,11 +581,21 @@
             System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => Vsxmd.Units.MemberUnit, Vsxmd.Units.MemberUnit => ""
             </summary>
         </member>
-        <member name="M:Vsxmd.Units.NormalType.GetBaseUri(Vsxmd.Units.MemberName)">
+        <member name="P:Vsxmd.Units.NormalType.ArrayModifiers">
             <summary>
-            For a type with generics, gives a link to the base type e.g. Dictionary&lt;int, string&gt; => Dictionary-2
+            If there's a [] or [][], return this as a string
             </summary>
-            <param name="sourceMember">the source to generate the relative link from.</param>
+        </member>
+        <member name="P:Vsxmd.Units.NormalType.ShortTypeName">
+            <summary>
+            System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => IEnumerable-1
+            </summary>
+        </member>
+        <member name="P:Vsxmd.Units.NormalType.FullFilePath">
+            <summary>
+            System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => System.Collections.Generic.IEnumerable-1
+            System.String => System.String
+            </summary>
         </member>
         <member name="M:Vsxmd.Units.NormalType.ToMarkdownLink(Vsxmd.Units.MemberName)">
             <summary>
@@ -616,6 +603,36 @@
             </summary>
             <param name="sourceMember"></param>
             <returns></returns>
+        </member>
+        <member name="M:Vsxmd.Units.NormalType.ToString(System.String)">
+            <summary>
+            Returns this type object as a formatted string
+            </summary>
+            <param name="format">
+            For example types System.Collections.Generic.Dictionary&lt;System.Int32, System.Collections.Generic.List&lt;System.String&gt;&gt;
+            System.String[]
+            Ns => NameSpace => System.Collections.Generic | System
+            Tn => Type Name => Dictionary | String[]
+            Gc => Generic Count => 2 | ""
+            Am => Array Modifiers => n.a. | []
+            Sg{,,,} => Spool Genrics => System.Int32.ToString(format),,,System.Collections.Generic.List&lt;System.String&gt;.ToString(format)
+            Spool Genrics calls the <see cref="M:Vsxmd.Units.NormalType.ToString(System.String)"/> method on each of the generic parameter types in <see cref="P:Vsxmd.Units.NormalType.SubTypes"/>
+            and joins with the subsequent characters, so Sg{,,,} will join each subcomponent with ,,,
+            </param>
+        </member>
+        <member name="M:Vsxmd.Units.PageExtensions.ToReferenceLink(System.String,Vsxmd.IPage,System.Boolean,System.String)">
+            <summary>
+            Generate the reference link for the <paramref name="memberName"/>.
+            </summary>
+            <param name="memberName">The member name.</param>
+            <param name="sorucePage">Source member to begin relative uri from.</param>
+            <param name="useShortName">Indicate if use short type name.</param>
+            <param name="alternateName">An override to use when generating the link description.</param>
+            <returns>The generated reference link.</returns>
+            <example>
+            <para>For <c>T:Vsxmd.Units.MemberUnit</c>, convert it to <c>[MemberUnit](#T-Vsxmd.Units.MemberUnit)</c>.</para>
+            <para>For <c>T:System.ArgumentException</c>, convert it to <c>[ArgumentException](http://msdn/path/to/System.ArgumentException)</c>.</para>
+            </example>
         </member>
         <member name="T:Vsxmd.Units.ParamUnit">
             <summary>
@@ -784,6 +801,33 @@
             </summary>
             <param name="elements">The param XML element list.</param>
             <returns>The generated Markdown.</returns>
+        </member>
+        <member name="T:Vsxmd.IPage">
+            <summary>
+            Interface to bridge differences in implementation between <see cref="T:Vsxmd.Units.NormalType"/> and <see cref="T:Vsxmd.Units.MemberName"/>
+            Mainly used to find difference between two types/members, for instance.
+            At the very least, any item that will be rendered as MD will have a namespace and type (directory), a subfolder (methods/props etc) and a filename.
+            </summary>
+        </member>
+        <member name="P:Vsxmd.IPage.FullDirectory">
+            <summary>
+            Typically concatenation of <see cref="P:Vsxmd.IPage.Namespace"/>, <see cref="P:Vsxmd.IPage.ShortTypeName"/> and <see cref="P:Vsxmd.IPage.SubFolder"/>
+            </summary>
+        </member>
+        <member name="P:Vsxmd.IPage.FileName">
+            <summary>
+            For <see cref="F:Vsxmd.Units.MemberKind.Type"/>, this should equal <see cref="P:Vsxmd.IPage.ShortTypeName"/> e.g. Type-1.Type-1.md
+            </summary>
+        </member>
+        <member name="P:Vsxmd.IPage.FullFilePath">
+            <summary>
+            Typically concatenation of <see cref="P:Vsxmd.IPage.FullDirectory"/> and <see cref="P:Vsxmd.IPage.FileName"/>
+            </summary>
+        </member>
+        <member name="P:Vsxmd.IPage.DocsName">
+            <summary>
+            Types that point to anything in the System Namespace that can be referenced via docs.
+            </summary>
         </member>
     </members>
 </doc>

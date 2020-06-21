@@ -118,8 +118,8 @@ namespace XMLDocParser
             TypeMember typeMem = _Members.OfType<TypeMember>().FirstOrDefault(x => x.TypeName == member.TypeName);
             List<string> bases = typeMem.Implements;
             bases.Add(typeMem.Base);
-            IEnumerable<BaseMember> potentials = _Members.Where(x => bases.Any(y => x.ID.TypeName == NormalType.CreateNormalType(y).ShortLinkName
-                && x.ID.FriendlyName == NormalType.CreateNormalType(y).ShortLinkName));
+            IEnumerable<BaseMember> potentials = _Members.Where(x => bases.Any(y => x.ID.TypeName == NormalType.CreateNormalType(y).FileName
+                && x.ID.FriendlyName == NormalType.CreateNormalType(y).FileName));
 
             //If can't find any members of same type with same defintion (method, prop, field etc.), return null and allow calling member to handle.
             if (potentials.Count() == 0)

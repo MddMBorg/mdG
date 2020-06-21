@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Vsxmd.Units
 {
-    public class NormalType
+    public class NormalType : IPage
     {
+        #region Generation
         private static readonly Dictionary<string, NormalType> CachedTypes = new Dictionary<string, NormalType>();
 
         /// <summary>
@@ -30,9 +33,10 @@ namespace Vsxmd.Units
                 return ret;
             }
         }
-
+        #endregion
 
         private readonly string _TypeString;
+        public MemberKind Kind => MemberKind.Type;
 
         /// <summary>
         /// Construct the MemberType class.
@@ -42,9 +46,10 @@ namespace Vsxmd.Units
         /// I.e. namespace.type&lt;T&gt;&lt;namespace1.type1, T&gt;</remarks>
         protected NormalType(string typeString)
         {
-            _TypeString = typeString.Replace('{', '<').Replace('}', '>').Replace("``", "");
+            _TypeString = typeString;
         }
 
+        #region NameParts
         /// <summary>
         /// System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => System.Collections.Generic.IEnumerable
         /// </summary>
@@ -56,24 +61,9 @@ namespace Vsxmd.Units
         public string Namespace => RawTypeName.Split('.').TakeAllButLast(1).Join(".");
 
         /// <summary>
-        /// System.Collections.Generic.IEnumerable => IEnumerable
+        /// System.Collections.Generic.IEnumerable => IEnumerable, System.String[] => String
         /// </summary>
-        public string ShortTypeName => RawTypeName.Split('.').Last();
-
-        /// <summary>
-        /// System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => IEnumerable-1
-        /// </summary>
-        public string ShortLinkName => SubTypes.Any() ? $"{ShortTypeName}-{SubTypes.Count()}" : ShortTypeName;
-
-        private string DocsName => $"{RawTypeName}{(SubTypes.Any() ? $"-{SubTypes.Count()}" : "")}";
-
-        internal string TypePath => Path.Combine(Namespace, ShortLinkName);
-
-        /// <summary>
-        /// System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => System.Collections.Generic.IEnumerable-1
-        /// System.String => System.String
-        /// </summary>
-        internal string FullPath => Path.Combine(TypePath, $"{ShortLinkName}.md");
+        public string DisplayTypeName => RawTypeName.Split('.').Last().Split('[').First();
 
         /// <summary>
         /// System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => Vsxmd.Units.MemberUnit, Vsxmd.Units.MemberUnit => ""
@@ -85,9 +75,43 @@ namespace Vsxmd.Units
                 int index = _TypeString.IndexOf('<');
                 if (index <= 0)
                     return "";
-                return _TypeString.Substring(index + 1, (_TypeString.Length - 1) - (index + 1));
+                int last = _TypeString.LastIndexOf('>');
+                return _TypeString.Substring(index + 1, last - (index + 1));
             }
         }
+
+        /// <summary>
+        /// If there's a [] or [][], return this as a string
+        /// </summary>
+        internal string ArrayModifiers
+        {
+            get
+            {
+                string postGenerics = _TypeString.Split('>').Last();
+                int index = postGenerics.IndexOf('[');
+                return index > 0 ? postGenerics.Substring(index) : "";
+            }
+        }
+        #endregion
+
+        #region PathProperties
+        /// <summary>
+        /// System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => IEnumerable-1
+        /// </summary>
+        public string ShortTypeName => SubTypes.Any() ? $"{DisplayTypeName}-{SubTypes.Count()}" : DisplayTypeName;
+        public string SubFolder => "";
+        public string FileName => ShortTypeName;
+
+        public string FullDirectory => Path.Combine(Namespace, ShortTypeName);
+
+        /// <summary>
+        /// System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => System.Collections.Generic.IEnumerable-1
+        /// System.String => System.String
+        /// </summary>
+        public string FullFilePath => Path.Combine(FullDirectory, $"{FileName}.md");
+
+        public string DocsName => $"{RawTypeName}{(SubTypes.Any() ? $"-{SubTypes.Count()}" : "")}";
+        #endregion
 
         private IEnumerable<NormalType> _SubTypes;
         public IEnumerable<NormalType> SubTypes
@@ -138,65 +162,72 @@ namespace Vsxmd.Units
         }
 
         /// <summary>
-        /// For a type with generics, gives a link to the base type e.g. Dictionary&lt;int, string&gt; => Dictionary-2
-        /// </summary>
-        /// <param name="sourceMember">the source to generate the relative link from.</param>
-        public string GetBaseUri(MemberName sourceMember)
-        {
-            //if we're dealing with a generic type i.e. T, Key, etc, then we can't generate a link, so return null
-            if (!_TypeString.Contains("."))
-                return null;
-
-            //Use docs.microsoft for references to the System namespace
-            if (RawTypeName.StartsWith("System.", StringComparison.Ordinal))
-                return $"https://docs.microsoft.com/dotnet/api/{DocsName}";
-
-            string fullFilePath = FullPath;
-            string sourcePath = sourceMember.FullFilePath;
-            string shortTypeLinkName = ShortLinkName;
-
-            //if we're in the same path
-            if (fullFilePath == sourcePath)
-                return "#";
-
-            //We're always a Type kind "T:"
-            //If the namespace is different, go up to the top level and then index into the markdown file
-            if (Namespace != sourceMember.Namespace)
-            {
-                //Need to replace the backslashes since Windows file system is \ vs the web /
-                if (sourceMember.Kind == MemberKind.Type)
-                    return $"./../../{fullFilePath}".Replace('\\', '/');
-                else
-                    return $"./../../../{fullFilePath}".Replace('\\', '/');
-            }
-            //If the type is different, go up to the namespace level
-            else if (shortTypeLinkName != sourceMember.FriendlyName)
-            {
-                if (sourceMember.Kind == MemberKind.Type)
-                    return $"./../{shortTypeLinkName}/{shortTypeLinkName}.md";
-                else
-                    return $"./../../{shortTypeLinkName}/{shortTypeLinkName}.md";
-            }
-            //If using a different kind (method, ctor, class etc), go to the common type level
-            else //if (sourceMember.Kind != MemberKind.Type)
-                return $"./../{shortTypeLinkName}.md";
-        }
-
-        /// <summary>
         /// Converts a generic type to a list of links for each type
         /// </summary>
         /// <param name="sourceMember"></param>
         /// <returns></returns>
         public string ToMarkdownLink(MemberName sourceMember)
         {
-            var link = GetBaseUri(sourceMember);
+            var link = this.GetLink(sourceMember);
             if (link == null)
-                return ShortTypeName;
+                return DisplayTypeName;
 
-            string ret = $"[{ShortTypeName}]({link})";
+            string ret = $"[{DisplayTypeName}]({link})";
             if (SubTypes.Any())
                 ret += $"<{string.Join(", ", SubTypes.Select(x => x.ToMarkdownLink(sourceMember)))}>";
             return ret;
+        }
+
+        private static Dictionary<string, IEnumerable<string>> _FormatCache = new Dictionary<string, IEnumerable<string>>();
+        private static Regex toStringRegex = new Regex("(Ns|Tn|Gc|Am|Sg{.*})");
+        /// <summary>
+        /// Returns this type object as a formatted string
+        /// </summary>
+        /// <param name="format">
+        /// For example types System.Collections.Generic.Dictionary&lt;System.Int32, System.Collections.Generic.List&lt;System.String&gt;&gt;
+        /// System.String[]
+        /// Ns => NameSpace => System.Collections.Generic | System
+        /// Tn => Type Name => Dictionary | String[]
+        /// Gc => Generic Count => 2 | ""
+        /// Am => Array Modifiers => n.a. | []
+        /// Sg{,,,} => Spool Genrics => System.Int32.ToString(format),,,System.Collections.Generic.List&lt;System.String&gt;.ToString(format)
+        /// Spool Genrics calls the <see cref="ToString(string)"/> method on each of the generic parameter types in <see cref="SubTypes"/>
+        /// and joins with the subsequent characters, so Sg{,,,} will join each subcomponent with ,,,
+        /// </param>
+        public string ToString(string format)
+        {
+            IEnumerable<string> parts;
+            _FormatCache.TryGetValue(format, out parts);
+            if (parts == null)
+            {
+                parts = toStringRegex.Split(format);
+                _FormatCache[format] = parts;
+            }
+
+            return _ToString(parts);
+        }
+
+        //Wrapper to make easier re. recalculating format string parts
+        private string _ToString(IEnumerable<string> parts)
+        {
+            string returnString = "";
+
+            foreach (var part in parts)
+            {
+                if (part == "Ns")
+                    returnString += Namespace;
+                else if (part == "Tn")
+                    returnString += DisplayTypeName;
+                else if (part == "Gc")
+                    returnString += SubTypes.Any() ? SubTypes.Count().ToString() : "";
+                else if (part == "Am")
+                    returnString += ArrayModifiers;
+                else if (part.StartsWith("Sg{") && part.EndsWith("}"))
+                    returnString += SubTypes.Select(x => x._ToString(parts)).Join(part.Remove(0, 3).TrimEnd('}'));
+                else
+                    returnString += part;
+            }
+            return returnString;
         }
 
     }
