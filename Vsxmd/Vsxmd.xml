@@ -329,13 +329,6 @@
             <param name="xElement">The XElement to get the AssemblyUnit of.</param>
             <returns>Assembly unit for the current Xdoc.</returns>
         </member>
-        <member name="M:Vsxmd.Units.Extensions.ToLowerString(Vsxmd.Units.MemberKind)">
-            <summary>
-            Convert the <see cref="T:Vsxmd.Units.MemberKind"/> to its lowercase name.
-            </summary>
-            <param name="memberKind">The member kind.</param>
-            <returns>The member kind's lowercase name.</returns>
-        </member>
         <member name="M:Vsxmd.Units.Extensions.Join(System.Collections.Generic.IEnumerable{System.String},System.String)">
             <summary>
             Concatenates the <paramref name="value"/>s with the <paramref name="separator"/>.
