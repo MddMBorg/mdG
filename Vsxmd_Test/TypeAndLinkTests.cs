@@ -18,7 +18,8 @@ namespace Vsxmd_Test
             var norm = NormalType.CreateNormalType(type);
             var subTypes = norm.SubTypes.ToList();
             Assert.AreEqual(subTypes.Count, 2);
-            Assert.AreEqual(norm.ShortTypeName, "Dictionary");
+            Assert.AreEqual(norm.DisplayTypeName, "Dictionary");
+            Assert.AreEqual(norm.ShortTypeName, "Dictionary-2");
             var subSub = subTypes.Last();
             Assert.AreEqual(subSub.SubTypes.Count(), 1);
 

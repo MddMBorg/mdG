@@ -100,7 +100,7 @@ namespace Vsxmd.Units
         /// </summary>
         public string ShortTypeName => SubTypes.Any() ? $"{DisplayTypeName}-{SubTypes.Count()}" : DisplayTypeName;
         public string SubFolder => "";
-        public string FileName => ShortTypeName;
+        public string FileName => $"{ShortTypeName}.md";
 
         public string FullDirectory => Path.Combine(Namespace, ShortTypeName);
 
@@ -108,7 +108,7 @@ namespace Vsxmd.Units
         /// System.Collections.Generic.IEnumerable&lt;Vsxmd.Units.MemberUnit&gt; => System.Collections.Generic.IEnumerable-1
         /// System.String => System.String
         /// </summary>
-        public string FullFilePath => Path.Combine(FullDirectory, $"{FileName}.md");
+        public string FullFilePath => Path.Combine(FullDirectory, FileName);
 
         public string DocsName => $"{RawTypeName}{(SubTypes.Any() ? $"-{SubTypes.Count()}" : "")}";
         #endregion

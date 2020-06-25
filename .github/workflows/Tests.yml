@@ -1,0 +1,37 @@
+name: Run Tests
+
+# Controls when the action will run. Triggers the workflow on push
+on: [push]
+  
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v1
+      name: Checkout Code
+
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
+       
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+   
+    - name: Restore NuGet Packages
+      run: nuget restore Vsxmd.sln
+
+    - name: Build and Test
+      shell: cmd
+      run: |
+        msbuild Vsxmd_Test\Vsxmd_Test.csproj /p:Configuration=Release
+        FOR /F "delims=" %%i IN ('vswhere -property installationPath') DO set install=%%i
+        echo %install%
+        "%install%\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" "Vsxmd_Test\bin\Release\Vsxmd_Test.dll"
+        exit %errorlevel%
+        
+    
+    

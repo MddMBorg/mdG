@@ -1,3 +1,5 @@
+![](https://github.com/MddMBorg/mdG/workflows/Run%20Tests/badge.svg)
+
 # mdG
 
 This is a fork of the [Vsxmd](README.md/#Vsxmd) project described below. The MIT license is preserved for all changes and additions introduced in this fork. The features supported are almost identical, except:

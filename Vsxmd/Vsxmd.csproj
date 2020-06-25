@@ -3,33 +3,17 @@
   <!-- Project Metadata -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <!--<TargetFrameworks Condition=" '$(MSBuildRuntimeType)' == 'Core' ">netcoreapp2.2</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(MSBuildRuntimeType)' != 'Core' ">netcoreapp2.2;net46</TargetFrameworks>-->
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net472</TargetFramework>
     <DocumentationFile>Vsxmd.xml</DocumentationFile>
+	<Deterministic>false</Deterministic>
+	<AssemblyVersion>1.0.0.0</AssemblyVersion>
+	<Version>1.0.0.0</Version>
+	<SignAssembly>true</SignAssembly>
+	<AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
+	<DelaySign>false</DelaySign>
   </PropertyGroup>
   <!-- NuGet Metadata: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
-  <PropertyGroup>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Title>Vsxmd</Title>
-    <Version>0.0.0</Version>
-    <Authors>MddMBorg</Authors>
-    <Description>VS XML documentation -&gt; Markdown syntax.</Description>
-    <Copyright></Copyright>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/MddMBorg/mdG</PackageProjectUrl>
-    <PackageTags>Vsxmd VS XML document Markdown</PackageTags>
-    <BuildOutputTargetFolder>tools</BuildOutputTargetFolder>
-    <DevelopmentDependency>true</DevelopmentDependency>
-    <IncludeBuildOutput>true</IncludeBuildOutput>
-    <IncludeSymbols>true</IncludeSymbols>
-    <IncludeSource>true</IncludeSource>
-    <GenerateNuspecDependsOn>ExcludeDocumentationFile</GenerateNuspecDependsOn>
-    <Company />
-    <PackageId>mdG</PackageId>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
+ 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
@@ -40,22 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\LICENSE" Link="LICENSE" PackagePath="\" />
-    <Content Include="build\Vsxmd.targets" PackagePath="build\" />
-    <Content Include="buildMultiTargeting\Vsxmd.targets" PackagePath="buildMultiTargeting\" />
   </ItemGroup>
-  <Target Name="ExcludeDocumentationFile">
-    <ItemGroup>
-      <!-- The _BuildOutputInPackage item group is declared in NuGet.Build.Tasks.Pack.targets -->
-      <_BuildOutputInPackage Remove="$(MSBuildProjectDirectory)\$(DocumentationFile)" />
-      <_BuildOutputInPackage Remove="$(MSBuildProjectDirectory)\**\$(DocumentationFile)" />
-    </ItemGroup>
-  </Target>
-  <!-- Generate the Markdown file for itself -->
-  <Target Name="VsxmdPreparation" AfterTargets="PostBuildEvent">
-    <PropertyGroup>
-      <VsxmdBinaryDirectory>$(OutputPath)\..</VsxmdBinaryDirectory>
-    </PropertyGroup>
-  </Target>
-  <Import Project="$(MSBuildThisFileDirectory)\build\Vsxmd.targets" />
 
 </Project>

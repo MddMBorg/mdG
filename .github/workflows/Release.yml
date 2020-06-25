@@ -1,0 +1,103 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Release
+
+# Controls when the action will run. Triggers the workflow on push
+on: 
+  push:
+    branches: master
+    tags: V*
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  testVersion:
+    runs-on: windows-latest
+    
+    outputs:
+      ISRELEASE: ${{ steps.Number.outputs.ISRELEASE }}
+      VERSION: ${{ steps.Number.outputs.VERSION }}
+    
+    steps:
+    - name: Get Version Number
+      id: Number
+      shell: bash
+      run: |
+        VERSION=$(echo $GITHUB_REF | awk 'BEGIN {FS = "/V"} ; {print $2}')
+        echo $VERSION
+        echo ::set-output name=VERSION::$VERSION
+        if [ -z $VERSION ]; then echo ::set-output name=ISRELEASE::false; else echo ::set-output name=ISRELEASE::true; fi
+      # split the ref by "/V" and take the second part e.g. 1.2.3.4
+        
+    - name: echo
+      shell: bash
+      run: |
+        echo ${{ steps.Number.outputs.VERSION }}
+        echo ${{ steps.Number.outputs.ISRELEASE }}
+        
+  build:
+    runs-on: windows-latest
+    needs: [testVersion]
+    if: ${{ needs.testVersion.outputs.ISRELEASE == 'true' }}
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v1
+      name: Checkout Code
+    
+    - name: Copy Vars
+      shell: bash
+      run: echo ::set-env name=VERSION::$(echo ${{ needs.testVersion.outputs.VERSION }})
+
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1
+       
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+   
+    - name: Restore NuGet Packages
+      run: nuget restore Vsxmd.sln
+
+    - name: Build and Test
+      shell: cmd
+      run: msbuild Vsxmd.sln /p:Configuration=Release
+    
+    - name: Copy Vsix
+      shell: bash
+      run: |
+        mkdir -p "Extension Repo"
+        cp mdGExtension/bin/Release/mdGExtension.vsix "Extension Repo/mdGExtension.vsix"
+        
+    - name: Create atom feed
+      shell: bash
+      run: |
+        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+        <feed xmlns=\"http://www.w3.org/2005/Atom\">
+          <title type=\"text\">MddM Extension Repo</title>
+          <id>a7baf3e0-ba2e-486b-ae95-d04148d56ca3</id>
+          <updated>`date +%Y-%m-%dT%H:%M:%SZ`</updated>
+          <entry>
+            <id>mdGExtension.1ba2b1bb-ba65-4ff0-a6d9-159e7d4bf74b</id>
+            <title type=\"text\">mdGExtension</title>
+            <summary type=\"text\">Post-build processing to convert C# or VB project XML comments into a navigable series of Markdown documents.</summary>
+            <published>2020-06-25T20:00:00Z</published>
+            <updated>`date +%Y-%m-%dT%H:%M:%SZ`</updated>
+            <author>
+              <name>Mdd M</name>
+            </author>
+          <content type=\"application/octet-stream\" src=\"mdGExtension.vsix\" />
+            <Vsix xmlns=\"http://schemas.microsoft.com/developer/vsx-syndication-schema/2010\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">
+              <Id>mdGExtension.1ba2b1bb-ba65-4ff0-a6d9-159e7d4bf74b</Id>
+              <Version>`$VERSION`</Version>
+            </Vsix>
+          </entry>
+        </feed>" > "Extension Repo/atom.xml"
+        
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v4
+      with:
+        author_name: MddMBorg
+        author_email: email
+        message: "Auto build for Private Extension Repo"
+        add: "Extension Repo"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

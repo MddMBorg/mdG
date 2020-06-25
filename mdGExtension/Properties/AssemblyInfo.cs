@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("mdGExtension")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("MddM")]
 [assembly: AssemblyProduct("mdGExtension")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]

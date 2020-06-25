@@ -187,7 +187,7 @@ namespace Vsxmd.Units
                 ? group
                 : group.Concat(new[] { _Create(group.First().TypeName) });
 
-        private static MemberUnit _Create(string typeName) =>
+        private static MemberUnit _Create(string typeName) =>       //Should be a part of document, not just a radical XElement
             new MemberUnit(
                 new XElement(
                     "member",

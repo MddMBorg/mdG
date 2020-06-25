@@ -3,7 +3,7 @@
     <Metadata>
         <Identity Id="mdGExtension.1ba2b1bb-ba65-4ff0-a6d9-159e7d4bf74b" Version="1.0.0.2" Language="en-US" Publisher="Mdd M" />
         <DisplayName>mdGExtension</DisplayName>
-        <Description xml:space="preserve">Post-build processing to convert C# or VB project XML comments into a navigable series of Markdown documents.Au</Description>
+        <Description xml:space="preserve">Post-build processing to convert C# or VB project XML comments into a navigable series of Markdown documents.</Description>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)" />
