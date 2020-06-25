@@ -490,12 +490,6 @@
             </summary>
             <value>The member kind.</value>
         </member>
-        <member name="P:Vsxmd.Units.MemberName.Link">
-            <summary>
-            Gets the link pointing to this member unit.
-            </summary>
-            <value>The link pointing to this member unit.</value>
-        </member>
         <member name="P:Vsxmd.Units.MemberName.Caption">
             <summary>
             Gets the caption representation for this member name.

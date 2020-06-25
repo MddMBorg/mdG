@@ -72,20 +72,6 @@ namespace Vsxmd.Units
             : MemberKind.NotSupported;
 
         /// <summary>
-        /// Gets the link pointing to this member unit.
-        /// </summary>
-        /// <value>The link pointing to this member unit.</value>
-        public string Link =>
-            Kind == MemberKind.Type ||
-            Kind == MemberKind.Constants ||
-            Kind == MemberKind.Property
-            ? $"[{FriendlyName.Escape()}]({FormattedHyperLink})"
-            : Kind == MemberKind.Constructor ||
-              Kind == MemberKind.Method
-            ? $"[{FriendlyName.Escape()}({_ParamNames.Join(", ")})]({FormattedHyperLink})"
-            : "";
-
-        /// <summary>
         /// Gets the caption representation for this member name.
         /// </summary>
         /// <value>The caption.</value>
@@ -148,6 +134,23 @@ namespace Vsxmd.Units
               Kind == MemberKind.Method
             ? NameSegments.NthLast(2).Replace('`', '-')
             : "";
+
+        public int GenericCount
+        {
+            get
+            {
+                string name = ShortTypeName;
+                int index = name.IndexOf('-');
+                if (index > 0)
+                    try
+                    {
+                        return Convert.ToInt32(name.Substring(index + 1));
+                    }
+                    catch
+                    { return 0; }
+                return 0;
+            }
+        }
 
         private string Href => _Name.ToMarkdownRef();
 

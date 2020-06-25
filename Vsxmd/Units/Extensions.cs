@@ -17,62 +17,7 @@ namespace Vsxmd.Units
     /// Extensions helper.
     /// </summary>
     public static class Extensions
-    {
-        public static string ToXMLType(this string str)
-        {
-            string ret = "";
-            bool isCtor = false;
-            string type = "";
-            if (!str.EndsWith(">"))         //if ends with > then either genericType or genericMethod, definitely not ctor
-            {
-                if (str.Contains('<'))      //if contians < then must be type<T>.method, with no method generic params and might be ctor
-                    type = str.Split('<').First().Split('.').Last();
-                isCtor = str.Split('.').Last() == type;
-            }
-            int parseLevel = 0;
-            int genericCount = 0;
-            bool methodGeneric = false;     //method generics have ``, generic types have `
-
-            for (int i = 0; i < str.Length; i++)
-            {
-                char ch = str[i];
-                switch (ch)
-                {
-                    case '<':
-                        parseLevel++;
-                        if (parseLevel == 1)
-                            genericCount++;
-                        break;
-                    case '>':
-                        parseLevel--;
-                        if (parseLevel == 0)
-                        {
-                            if (methodGeneric)
-                                ret += $"``{genericCount}";
-                            else
-                                ret += $"`{genericCount}";
-                            genericCount = 0;           //reset for method generics
-                        }
-                        methodGeneric = true;
-                        break;
-                    case ',':
-                        if (parseLevel == 1)
-                            genericCount++;
-                        break;
-                    default:
-                        if (parseLevel == 0)
-                            ret += ch.ToString();
-                        break;
-                }
-            }
-            if (isCtor)
-            {
-                int index = ret.LastIndexOf(type);
-                ret = ret.Remove(index, type.Length).Insert(index, "#ctor");
-            }
-            return ret;
-        }
-        
+    {        
         /// <summary>
         /// Probably a lazy way to do this and more implementation should be moved to AssemblyUnit class
         /// </summary>
@@ -80,16 +25,6 @@ namespace Vsxmd.Units
         /// <returns>Assembly unit for the current Xdoc.</returns>
         internal static string GetAssemblyName(this XElement xElement) =>
             xElement.Document.Root.Element("assembly").Element("name").Value;
-
-        /// <summary>
-        /// Convert the <see cref="MemberKind"/> to its lowercase name.
-        /// </summary>
-        /// <param name="memberKind">The member kind.</param>
-        /// <returns>The member kind's lowercase name.</returns>
-        internal static string ToLowerString(this MemberKind memberKind) =>
-#pragma warning disable CA1308 // We use lower case in URL anchor.
-            memberKind.ToString().ToLowerInvariant();
-#pragma warning restore CA1308
 
         /// <summary>
         /// Concatenates the <paramref name="value"/>s with the <paramref name="separator"/>.

@@ -20,6 +20,8 @@ namespace Vsxmd
 
         string ShortTypeName { get; }
 
+        int GenericCount { get; }
+
         string SubFolder { get; }
 
         /// <summary>

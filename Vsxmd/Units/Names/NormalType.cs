@@ -113,6 +113,8 @@ namespace Vsxmd.Units
         public string DocsName => $"{RawTypeName}{(SubTypes.Any() ? $"-{SubTypes.Count()}" : "")}";
         #endregion
 
+        public int GenericCount => SubTypes.Count();
+
         private IEnumerable<NormalType> _SubTypes;
         public IEnumerable<NormalType> SubTypes
         {
