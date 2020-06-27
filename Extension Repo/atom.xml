@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">MddM Extension Repo</title>
+  <id>a7baf3e0-ba2e-486b-ae95-d04148d56ca3</id>
+  <updated>2020-06-27T21:28:00Z</updated>
+  <entry>
+    <id>mdGExtension.1ba2b1bb-ba65-4ff0-a6d9-159e7d4bf74b</id>
+    <title type="text">mdGExtension</title>
+    <summary type="text">Post-build processing to convert C# or VB project XML comments into a navigable series of Markdown documents.</summary>
+    <published>2020-06-25T20:00:00Z</published>
+    <updated>2020-06-27T21:28:00Z</updated>
+    <author>
+      <name>Mdd M</name>
+    </author>
+	<content type="application/octet-stream" src="mdGExtension.vsix" />
+    <Vsix xmlns="http://schemas.microsoft.com/developer/vsx-syndication-schema/2010" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <Id>mdGExtension.1ba2b1bb-ba65-4ff0-a6d9-159e7d4bf74b</Id>
+      <Version>1.0.0.2</Version>
+    </Vsix>
+  </entry>
+</feed>

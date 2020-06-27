@@ -18,7 +18,6 @@ namespace Vsxmd_Test
             DocManager docManager = new DocManager();
             XDocument doc = XDocument.Load($"{resourceDir}\\vsxmd.xml");
             var m = docManager.GenerateMembers(doc).OfType<TypeMember>().ToList();
-            //
         }
 
     }

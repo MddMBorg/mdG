@@ -51,8 +51,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CopyVsixExtensionFiles>True</CopyVsixExtensionFiles>
-    <CopyVsixExtensionLocation>../mdGExtensionInstaller/</CopyVsixExtensionLocation>
+    <CopyVsixExtensionFiles>False</CopyVsixExtensionFiles>
+    <CopyVsixExtensionLocation>
+    </CopyVsixExtensionLocation>
     <DocumentationFile>bin\Release\mdGExtension.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -144,8 +145,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release copy /Y "$(TargetDir)$(TargetName).dll" "$(SolutionDir)Extension Repo\$(TargetName).vsix"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
