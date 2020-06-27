@@ -41,8 +41,8 @@ jobs:
 
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v1
-      name: Checkout Code
+    - name: Checkout Code
+      uses: actions/checkout@v2
     
     - name: Copy Vars
       shell: bash
@@ -57,7 +57,7 @@ jobs:
     - name: Restore NuGet Packages
       run: nuget restore Vsxmd.sln
 
-    - name: Build and Test
+    - name: Build
       shell: cmd
       run: msbuild Vsxmd.sln /p:Configuration=Release
     
@@ -93,10 +93,8 @@ jobs:
         </feed>" > "Extension Repo/atom.xml"
         
     - name: Commit changes
-      uses: EndBug/add-and-commit@v4
+      uses: EndBug/add-and-commit@v4.2.0
       with:
-        author_name: MddMBorg
-        author_email: email
         message: "Auto build for Private Extension Repo"
         add: "Extension Repo"
       env:
