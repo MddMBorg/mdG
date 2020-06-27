@@ -93,9 +93,9 @@ jobs:
         </feed>" > "Extension Repo/atom.xml"
         
     - name: Commit changes
-      uses: EndBug/add-and-commit@v4.2.0
+      uses: github-actions-x/commit@v2.6
       with:
-        message: "Auto build for Private Extension Repo"
-        add: "Extension Repo"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        push-branch: master
+        commit-message: 'Auto build for Private Extension Repo'
+        rebase: 'true' # pull and rebase before commit
